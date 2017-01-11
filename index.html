@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Jack Yan</title>
+        <meta charset="UTF-8">
+		<meta name="description" content="Jack Yan's personal website">
+		<meta name="keywords" content="Jack Yan Web Site Art Portfolio imjackyan programming">
+		<meta name="author" content="Jack Yan">
+
+		<link rel="icon" type="image/png" href="img/icon/J.png">
+        <link rel="stylesheet" href="css/common.css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="css/cube.css" media="screen" charset="utf-8">
+
+		<script src="js/jquery.js"></script>
+        <script src="js/cube.js"></script>
+        <script src="js/greensock/TweenMax.min.js"></script>
+        <script src="js/greensock/TimelineMax.min.js"></script>
+        <script src="js/common.js"></script>
+
+    </head>
+    <body>
+        <style media="screen">
+            h1{
+                color:white;
+            }
+            .page_option{
+                position: absolute;height:100%;top:0;bottom:0;width:60%; z-index:500;
+            }
+            .ver_mid{
+                position: absolute;
+                top:0;bottom:0;margin:auto;
+                width:100%;height:300px;
+            }
+            .page_option h2{
+                font-weight: 100;
+                color:white; font-size:30px;
+            }
+            .page_option p{
+                font-size: 20px;
+                color:white;display:none;
+                width:50%;position:absolute;height:200px;bottom:0;
+            }
+            .page_option .circ{
+                width:50px;height:50px;border:1px solid white;
+                border-radius:50%;bottom:30%;color:white;line-height: 46px; font-size: 25px;font-weight: 100;
+                text-decoration: none; opacity:0.3;transition: 0.3s ease;
+            }
+            .page_option .circ:hover{opacity:1;}
+        </style>
+        <script type="text/javascript">
+            //forces firefox to reload on back-button
+            window.onunload = function(){};
+            //JS :)))))))
+            $(document).ready(function(){
+                //external site links
+                $span = $(".index_header span");
+                $(".index_header li").hover(function(){
+                    $span.html($(this).find('a')[0].id);
+                },function(){
+                    $span.html('jackyanart@gmail.com');
+                });
+
+                //options hover
+                //variable set up
+                var $header = $(".index_header");
+                var $coding = $("#coding"), $art = $("#art");
+                var $grad_rl = $(".grad_rl"), $grad_lr = $(".grad_lr");
+                //hovering left || right sections
+                $(".ver_mid").hover(function(){
+                    if(this.id=='art'){
+                        TweenMax.to($(this).parent(),1,{right:-20});
+                        TweenMax.to($header,1,{marginLeft:'-33%'});
+                        TweenMax.to($coding,1,{right:100});
+                        TweenMax.to($grad_rl,1,{opacity:1});
+                        cubeTranslate(45);
+                    }else{
+                        TweenMax.to($(this).parent(),1,{left:-20});
+                        TweenMax.to($header,1,{marginRight:'-33%'});
+                        TweenMax.to($art,1,{left:100});
+                        TweenMax.to($grad_lr,1,{opacity:1});
+                        cubeTranslate(-45);
+                    }
+                    $(this).find('p').stop(true,true).fadeIn(800);
+                    cubeResize(0.5);
+                },function(){
+                    if(this.id=='art'){
+                        TweenMax.to($(this).parent(),1,{right:'-30%'});
+                        TweenMax.to($header,1,{marginLeft:0});
+                        TweenMax.to($coding,1,{right:0});
+                        TweenMax.to($grad_rl,1,{opacity:0});
+                    }else{
+                        TweenMax.to($(this).parent(),1,{left:'-30%'});
+                        TweenMax.to($header,1,{marginRight:0});
+                        TweenMax.to($art,1,{left:0});
+                        TweenMax.to($grad_lr,1,{opacity:0});
+                    }
+
+                    $(this).find('p').stop(true,true).fadeOut(800);
+                    cubeResize(1);
+                    cubeTranslate(0);
+                });
+                //navigation to ART or CODING page
+                $(".circ").click(function(){
+                    if($(this).hasClass("g_l")){
+                        $("#maindiv").animate({'left':'100%'},500);
+                        setTimeout(function(){window.location.href="coding.html"},500);
+                    }else{
+                        $("#maindiv").animate({'right':'100%'},500);
+                        setTimeout(function(){window.location.href="art.html"},500);
+                    }
+                });
+            });
+        </script>
+        <div id='maindiv' style="width:100%;height:100%;position:absolute;-webkit-perspective:1000;overflow:hidden;">
+            <div class="background" style=''></div>
+            <div class="index_header">
+                <h1 style="font-size:50px;font-weight:100;border-bottom:1px solid white;margin-bottom:5px">JACK YAN</h1>
+                <p style="font-size:20px;color:white;font-weight:100;">
+                    Hello! My name is Jack Yan, a Computer Engineering Student studying at McMaster.
+                </p>
+                <ul class="abs_center" style="top:auto; bottom:10px; z-index:999;">
+                    <li><a id='LinkedIn' href="https://ca.linkedin.com/in/jack-yan-55b046b2" target="_blank">L</a></li>
+                    <li><a id='Deviantart' href="http://imjackyan.deviantart.com" target="_blank">D</a></li>
+                    <li><a id='Github' href="http://github.com/imjackyan" target="_blank">G</a></li>
+                </ul>
+                <span class="abs_center" style="top:auto;bottom:60px">jackyanart@gmail.com</span>
+            </div>
+
+            <div class="page_option" style="right:-30%;">
+                <div class='grad_rl'></div>
+                <div class="ver_mid" id='art' style="left:0;">
+                    <h2 style="left:0;width:50%;position:absolute;">ART</h2>
+                    <p style="left:0">
+                        My masterpieces, mostly drawn digitly in Photoshop.</p>
+                    <a href="javascript:void(0)" class="abs_center circ g_r" style="left:30%">></a>
+                </div>
+            </div>
+            <div class="page_option" style="left:-30%;">
+                <div class='grad_lr'></div>
+                <div class="ver_mid" id='coding' style="right:0;">
+                    <h2 style="right:0;width:50%;position:absolute;">CODING</h2>
+                    <p style="right:0">
+                        My programming projects, and my learning experience with various programming languages.</p>
+                    <a href="javascript:void(0)" class="abs_center circ g_l" style="right:30%"><</a>
+                </div>
+            </div>
+            <div class="abs_center cube" style="z-index:100;">
+            <div class="container3d" data-length='200'>
+				<div class="threedee face" ></div>
+				<div class="threedee face" ></div>
+				<div class="threedee face" ></div>
+				<div class="threedee face" ></div>
+				<div class="threedee face" ></div>
+				<div class="threedee face" ></div>
+			</div>
+            </div>
+        </div>
+    </body>
+</html>

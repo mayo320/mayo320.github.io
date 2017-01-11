@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.jackLoader{
+				width:50px;
+				height:50px;
+				position: absolute;
+				margin:auto;
+				left:0;right:0;top:0;bottom:0;
+			}
+			.jackLoader path{
+				fill:#5F9EA0;
+				animation: loading 2s ease infinite;
+				-webkit-animation: loading 2s ease infinite;
+			}
+			@keyframes loading{				
+				15%{transform: translate3d(40px,-40px,0px);}
+				35%{transform: translate3d(-40px,40px,0px);}
+				50%{transform: translate3d(0px,0px,0px);}
+				100%{transform: translate3d(0px,0px,0px);}
+			}
+			@-webkit-keyframes loading{
+				15%{transform: translate3d(40px,-40px,0px);}
+				35%{transform: translate3d(-40px,40px,0px);}
+				50%{transform: translate3d(0px,0px,0px);}
+				100%{transform: translate3d(0px,0px,0px);}
+			}
+			.jackLoader #block2{animation-delay: 0.2s;-webkit-animation-delay: 0.2s;}
+			.jackLoader #block3{animation-delay: 0.4s;-webkit-animation-delay: 0.4s;}
+			
+		</style>
+	</head>
+	<body>
+		<div class="jackLoader">
+			<svg width='100%' height='100%' viewBox='0 0 100 100' preserveAspectRatio='none' style="overflow:visible;">
+				<path id='block1' d='M0 0 L0 60 L60 0 L0 0 Z'/>
+				<path id='block3' d='M100 100 L40 100 L100 40 L100 100 Z'/>
+				<path id='block2' d='M75 0 L100 0 L100 25 L25 100 L0 100 L0 75 L0 75 Z'/>
+			</svg>
+		</div>		
+		
+	</body>
+</html>

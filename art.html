@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jack Yan</title>
+        <meta charset="UTF-8"/>
+		<meta name="description" content="Jack Yan's personal website"/>
+		<meta name="keywords" content="Jack Yan Web Site Art Portfolio imjackyan programming"/>
+		<meta name="author" content="Jack Yan"/>
+
+		<link rel="icon" type="image/png" href="img/icon/J.png"/>
+        <link rel="stylesheet" href="css/common.css" media="screen" charset="utf-8"/>
+        <link rel="stylesheet" href="css/cube.css" media="screen" charset="utf-8"/>
+
+		<script src="js/jquery.js"></script>
+        <script src="js/cube.js"></script>
+        <script src="js/greensock/TweenMax.min.js"></script>
+        <script src="js/greensock/TimelineMax.min.js"></script>
+        <script src="js/common.js"></script>
+        <script src="js/jquery.nicescroll.min.js"></script>
+    </head>
+    <body style="overflow:scroll;">
+        <style media="screen">
+            h1{color:white;font-weight:100;}
+            p{font-weight:thin;}
+        </style>
+        <script type="text/javascript">
+            var artData;
+            $(document).ready(function(){
+                artData = $.ajax({
+                    crossOrigin: true,
+                    type:'GET',
+                    url:'data/art.json',
+                    dataType:'json',
+                    success:function(data){
+                        artData = artData.responseJSON;
+                        setupImg();
+                    }
+                });
+                var items;
+                function setupImg(){
+                    for(var i=0;i<artData.art.length;i++){
+                        $(".content").append("<li class='project_item' onclick='imagePopup("+i+")'><img alt=''/><div class='des'><h2></h2><h3></h3><p></p></div></li>");
+                    }
+                    items = $(".project_item");
+                    for(var i=0;i<artData.art.length;i++){
+                        item = $(items[i]);
+                        item.find("img").attr("src","");
+                        item.find("img").attr("src",artData.art[i].thumbnail);
+                        item.find("h2").html(artData.art[i].name);
+                        item.find("p").html(artData.art[i].description);
+                    }
+                }
+                //closing the popup
+                $(".image_popup").click(function(e){
+                    if(e.target != $(this).find("img")[0] && $.inArray(e.target, $(this).find(".navigation div"))  == -1 && e.target != $(this).find(".navigation a")[0]){
+                        $(this).fadeOut(300);
+                        $(this).find(".navigation").hide();
+                    }
+                });
+                //navigating on button press
+                $(window).keypress(function(e){
+                    if(e.charCode == 39 || e.keyCode==39) navigate(1);
+                    else if(e.charCode == 37 || e.keyCode==37) navigate(-1);
+                });
+            });
+            var currentImage;
+            function imagePopup(index){
+                currentImage = index;
+                var $imgpopup = $(".image_popup");
+                $imgpopup.find("img").attr("src",artData.art[index].image);
+                $imgpopup.find(".navigation a")[0].href = artData.art[currentImage].image;
+                $imgpopup.fadeIn(300);
+                setTimeout(function(){
+                    $imgpopup.find(".navigation").slideDown();
+                },300);
+            }
+
+            function navigate(dir){
+                currentImage = dir > 0 ? (currentImage + dir < artData.art.length ? currentImage+dir : 0) : (currentImage + dir > 0 ? currentImage+dir : artData.art.length-1);
+                imagePopup(currentImage);
+            }
+
+        </script>
+        <style media="screen">
+            .project_item .des{
+                bottom:-130px;
+            }
+            .project_item img{
+                min-height:110%;
+                width:auto;
+                min-width:320px;
+                top:-5%;
+                position: absolute; right:-10%; left:-10%;
+                margin:0 auto;
+            }
+        </style>
+        <div class="left sidebar">
+            <img src="img/coding.jpg" alt="" style="width:120%;height:120%;;margin:-5% auto auto -5%;opacity:0.5; filter:blur(8px); -webkit-filter:blur(8px);"/>
+            <div class="abs_center description">
+                <h1>ART</h1>
+                <p style="color:white">
+                    I draw digital art mostly, because it's so much easier to manipulate colors..
+                    AND FANTASY, I FRI*CKING LOVE FANTASY.. yeah. hmu if u want some fantasy <span style="text-decoration:line-through">sht</span> stuff drawn (aka commission)
+                </p>
+                <ul>
+                    <li><a href="coding.html">
+                        <div class="circle" data="Coding">C</div>
+                    </a></li>
+                    <li><a href="index.html">
+                        <div class="circle" data="Home">H</div>
+                    </a></li>
+                    <li><a href="https://imjackyan.deviantart.com">
+                        <div class="circle" data="Deviantart">D</div>
+                    </a></li>
+                </ul>
+
+            </div>
+        </div>
+        <div>
+
+            <ul class="left content" style="margin-left:430px;">
+            </ul>
+        </div>
+
+        <div class="image_popup">
+            <div class="container">
+                <img src="" alt="" />
+                <div class="navigation">
+                    <div class="button" onclick="navigate(-1)"><</div><div class="button"> <a target="_blank" href="">Download</a> </div><div class="button" onclick="navigate(1)">></div>
+
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

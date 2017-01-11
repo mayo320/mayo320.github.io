@@ -1,0 +1,36 @@
+.face, .container3d{
+    width:200px;height:200px;
+}
+.face{
+    border:1px solid white;background-color:#f0d6c5;
+    opacity:0.5;
+}
+.face:hover{
+    cursor:pointer;
+}
+.threedee{
+    position: absolute;
+    transform-style: preserve-3d;
+    backface-visibility:visible;
+    transform-origin:50% 50% 0;
+    margin:auto;
+    right:0;left:0;top:0;bottom:0;
+}
+.container3d{
+    transform-style: preserve-3d;
+    margin:auto;position:absolute;
+    right:0;left:0;top:0;bottom:0;
+}
+@keyframes spin{
+    100%{
+        transform: rotateY(360deg) rotateX(360deg);
+    }
+}
+@-webkit-keyframes spin{
+    100%{
+        transform: rotateY(360deg) rotateX(360deg);
+    }
+}
+.spin{
+    animation: spin 4s linear infinite;
+}

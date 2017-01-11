@@ -1,0 +1,87 @@
+{
+    "projects":[{
+            "name":"Path of Bullets",
+            "tag":"HTML CSS Javascript",
+            "medium":"HTML CSS Javascript jQuery",
+            "featured":true,
+            "content":"A game created with JS. Customizable space shooter.",
+            "image":"img/coding/bullethell.jpg"
+        },{
+            "name":"Personal Website",
+            "tag":"HTML CSS Javascript",
+            "medium":"HTML CSS Javascript GASP jQuery",
+            "featured":false,
+            "content":"This website, includes many smaller projects. Check it out!",
+            "image":"img/coding/personalsite.jpg"
+        },{
+            "name":"Photo Gallery",
+            "tag":"HTML CSS Javascript",
+            "medium":"HTML CSS Javascript jQuery",
+            "featured":false,
+            "content":"This is part of my Persnal Website over at the Art section, a photo gallery.",
+            "image":"img/coding/photogallery.jpg"
+        },{
+            "name":"TweetSpace",
+            "tag":"C# XML ASP.NET",
+            "medium":"C# XML ASP.NET",
+            "featured":false,
+            "content":"This hackathon project, DELTA HACKS 2016.",
+            "image":"img/coding/tweetspace.jpg"
+        },{
+            "name":"SuperAsteroid",
+            "tag":"C# Game",
+            "medium":"C#",
+            "featured":false,
+            "image":"img/coding/superasteroid.jpg",
+            "content":"The classic asteroid game modified with some love."
+        }
+    ],
+    "details":[{
+            "content":"A year ago (2015) my friends and I wanted to create a space shooter game together, but never got to it.. This year I've gotten quite familiar with JS and web dev, so I thought to make a game using these tools, and here it is~ <br/> This shoot em up game offers many design innovations that are not present in other shoot em ups. I have taken an inspiration from the game Path of Exile, so this shoot em up game has many flexibilities on how you can mix and match weapons and modifications to produce interesting effects with the way you attack. This is just one of the many other features that it offers.",
+            "featuredbutton":"Check the game out!",
+            "featuredlink":"v2/game/ui.html"
+        },{
+            "content":"Creating this personal site was entertaining, and definately an excellent learning experience! <br/> With that said, I've learned many things from creating this site; and did many sub-projects that together they compose this site. Here is a list of these notable projects. <br/><ul> <li>3D with CSS3: The Cube</li> <li>Sleak item showcase: Projects page (this page)</li> <li>Versitile image placements: Photo Gallery</li> <li>Creative timeline:Learning page</li> </ul>"
+        },{
+            "content":"This is a column oriented photo gallery that includes the following:<br/> <li>Column oriented photo gallery</li> <li>Enter theatre mode on click</li> <li>Can navigate between images in theatre mode (left/right arrow or buttons)</li> <li>Image on hover effects</li> <li>Can either <strong>manually or automatically</strong> set up the positions of the images</li> "
+        },{
+            "content":"This web app aggregates tweets using Twitter API given specific instructions. Created by David Zhang, George Zhang and me."
+        },{
+            "content":"A personal project(game) made with the goal of exercising physics and vectors in a coding environment. As well as OOP principles. (Also jokes on you Jim)"
+        }
+    ],
+    "learning":[{
+            "date":"2016/6/20 - 2016/7/20",
+            "image":"img/learning/kingstone.jpg",
+            "description":"Worked at <a href='https://51kingstone.com'>Kingstone Co.</a> for one month as a front end web developer."
+        },{
+            "date":"2016/1",
+            "image":"img/icon/j.png",
+            "description":"Created the first version of this personal website."
+        },{
+            "date":"2016/1",
+            "image":"img/learning/webdev.png",
+            "description":"Learning HTML/CSS/JS (&jQuery), fell in love with front end web development."
+        },{
+            "date":"2015/9",
+            "image":"img/learning/java.png",
+            "description":"Learning C and Java. The OG."
+        },{
+            "date":"2015/5",
+            "image":"img/learning/csharp.png",
+            "description":"Learning my second programming language C# over the summer~"
+        },{
+            "date":"2014/9",
+            "image":"img/learning/python.png",
+            "description":"Learning my first programming language Python!"
+        },{
+            "date":"2014/9 - 2018/4",
+            "image":"img/learning/mcmaster.png",
+            "description":"Enrolled at McMaster University for Computer Engineering."
+        },{
+            "date":"1996/1",
+            "image":"img/learning/born.jpg",
+            "description":"The legend was born."
+        }
+    ]
+}

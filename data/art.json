@@ -1,0 +1,45 @@
+{
+    "art":[
+        {
+            "name":"Saracen VS Europeans",
+            "description":"The battle between them, inspired by Age of Empires 2. Drawn for Yanyan",
+            "thumbnail":"img/art/saraeuro_t.jpg",
+            "image":"img/art/saraeuro.jpg"
+        },{
+            "name":"Firekeepr's Dance",
+            "description":"Tribute to Dark Souls 3, the elegent firekeeper with her graceful twirl.",
+            "thumbnail":"img/art/firekeeper_t.jpg",
+            "image":"img/art/firekeeper.jpg"
+        },{
+            "name":"Genderbent Gilgamesh",
+            "description":"The famous Gilgamesh from the anime Fate/Stay Night.. The female version of him. Drawn for Hongda",
+            "thumbnail":"img/art/gilg_t.jpg",
+            "image":"img/art/gilg.jpg"
+        },{
+            "name":"Beyond's Invasion",
+            "description":"Fan art of Path of Exile, the beyond demons invading wraeclast.",
+            "thumbnail":"img/art/poebeyondinvasion_t.jpg",
+            "image":"img/art/poebeyondinvasion.jpg"
+        },{
+            "name":"Beyond",
+            "description":"Fan art of Path of Exile, the beyond demons posing for the camera.",
+            "thumbnail":"img/art/poebeyond_t.jpg",
+            "image":"img/art/poebeyond.jpg"
+        },{
+            "name":"Whispering Ice",
+            "description":"The unique whispering ice fighting our Act 4 boss Malachai. From game Path of Exile.",
+            "thumbnail":"img/art/whisperingice_t.jpg",
+            "image":"img/art/whisperingice.jpg"
+        },{
+            "name":"It's time to hunt",
+            "description":"The time when I was addicted to Monster Hunter, the crew that I hunted with. Thanks for the fun times Torgan, Jora, Girin, Vasher, and of course, me -Jack-",
+            "thumbnail":"img/art/mh3u_t.jpg",
+            "image":"img/art/mh3u.jpg"
+        },{
+            "name":"Flying with Zekrom",
+            "description":"The good old Pokemon, doesn't it bring you back some memories? good or bad~",
+            "thumbnail":"img/art/pokemonzekrom_t.jpg",
+            "image":"img/art/pokemonzekrom.jpg"
+        }
+    ]
+}

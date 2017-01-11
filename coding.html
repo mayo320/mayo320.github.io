@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jack Yan</title>
+        <meta charset="UTF-8"/>
+		<meta name="description" content="Jack Yan's personal website"/>
+		<meta name="keywords" content="Jack Yan Web Site Art Portfolio imjackyan programming"/>
+		<meta name="author" content="Jack Yan"/>
+
+		<link rel="icon" type="image/png" href="img/icon/J.png"/>
+        <link rel="stylesheet" href="css/common.css" media="screen" charset="utf-8"/>
+        <link rel="stylesheet" href="css/cube.css" media="screen" charset="utf-8"/>
+
+		<script src="js/jquery.js"></script>
+        <script src="js/cube.js"></script>
+        <script src="js/greensock/TweenMax.min.js"></script>
+        <script src="js/greensock/TimelineMax.min.js"></script>
+        <script src="js/common.js"></script>
+        <script src="js/jquery.nicescroll.min.js"></script>
+
+    </head>
+    <body style="overflow-x:hidden;overflow-y:scroll;">
+        <style media="screen">
+            h1{color:white;font-weight:100;text-shadow:0 0 10px rgba(0,0,0,.6);}
+            p{font-weight:thin;text-shadow:0 0 10px rgba(0,0,0,.6);}
+        </style>
+        <script type="text/javascript">
+            var data;
+            var learn_y;//tab y position
+
+            $(document).ready(function(){
+
+                //set up scrolling thing (chrome doesn't have webkitMovementx thing so exclude it for now)
+                // if(! /chrome/.test(navigator.userAgent.toLowerCase() ) ){
+                //     var nicesx = $("body").niceScroll({touchbehavior:false, cursorcolor:"rgba(54, 73, 108, 0.8)", cursoropacitymax:0.6, cursorwidth:8});
+                //     var nicesy = $(".item_details .box").niceScroll({touchbehavior:false, cursorcolor:"rgba(54, 73, 108, 0.8)", cursoropacitymax:0.6, cursorwidth:8});
+                //
+                //set up project items based on a json
+                //Note that the num of items are fixed, max 3 per row
+                data = $.ajax({
+                    type:'GET',
+                    url:'data/projects.json',
+                    dataType:'json',
+                    success:function(data){
+                        console.log(data.projects);
+                        var length = data.projects.length;
+                        //length += length%3+1;
+                        for(var i=0;i<length;i++){
+                            $(".projects").append("<li class='project_item'><img alt=''/><div class='des'><h2></h2><h3></h3><p></p></div></li>");
+                            // if(i>=data.projects.length){
+                            //     $(".project_item").last().css("visibility","hidden");
+                            // }
+                        }
+                        var $items = $(".project_item");
+                        for(var i=0;i<data.projects.length;i++){
+                            $item = $($items[i]);
+                            $item.find("img").attr("src",data.projects[i].image);
+                            $item.find("h2").html(data.projects[i].name);
+                            $item.find("h3").html(data.projects[i].medium);
+                            $item.find("p").html(data.projects[i].content);
+                            if(data.projects[i].featured){
+                                $item.append("<div class='featured'>Featured!</div>");
+                            }
+                        }
+                        learn_y = $('.learning_history').offset().top;
+                        history_setup(data);
+                        pro_setup();
+                    }
+                });
+                //changing tabs (learning/projects)
+                var clickscroll = false;
+                $tabs = $(".sidebar .tabs li");
+                $tabs.click(function(){
+                    if(!$(this).hasClass("current")){
+                        $tabs.removeClass("current");
+                        $(this).addClass("current");
+
+                        if($(this).attr("data") == "learn"){
+                            $('html, body').stop(true).animate({
+                                scrollTop: learn_y
+                            }, 'slow');
+                        }else{
+                            $('html, body').stop(true).animate({
+                                scrollTop: 0
+                            }, 'slow');
+                        }
+                        clickscroll = true;
+                        setTimeout(function(){clickscroll = false;},500);
+                    }
+                });
+                //on scroll change tabs
+                $(window).scroll(function(){
+                  if(!clickscroll){
+                        if(!$($tabs[1]).hasClass("current") && $(window).scrollTop() >= learn_y - 200){
+                            $($tabs[1]).addClass("current");
+                            $($tabs[0]).removeClass("current");
+                        }else if(!$($tabs[0]).hasClass("current") && $(window).scrollTop() <= learn_y - 400){
+                            $($tabs[0]).addClass("current");
+                            $($tabs[1]).removeClass("current");
+                        }
+                    }
+                });
+
+                //clicking items
+                var current_view_item;
+                function pro_setup(){
+                    var items = $(".project_item");
+                    var $fade = $(".item_details");
+                    var $details = $fade.find(".box");
+
+                    items.click(function(){
+                        var animate_time = 300;
+                        var index = $.inArray(this,items);
+                        current_view_item = index;
+                        //opens up panel
+                        $fade.fadeIn(animate_time);
+                        TweenMax.from($details,animate_time/1000,{bottom:'-70%'}).delay(0.2);
+                        //get data from json
+                        var _data = data.responseJSON;
+                        //assigning data to the details
+                        $details.find(".subbox img").attr("src",_data.projects[index].image);
+                        $details.find("h1").html(_data.projects[index].name);
+                        $details.find("h3").html(_data.projects[index].medium);
+                        if(_data.details[index].content) $details.find(".details").html(_data.details[index].content);
+                        else {$details.find(".details").html(_data.projects[index].content);}
+                        if(_data.projects[index].featured) {
+                            var detailsbutton = $details.find(".detailsButton")
+                            detailsbutton.css("display","inline-block").html(_data.details[index].featuredbutton);
+                            detailsbutton[0].href = _data.details[index].featuredlink;
+                        }
+                        else $details.find(".detailsButton").hide();
+                    });
+                    //closing details
+                    $fade.click(function(e){
+                    	if(e.target == this){
+                    		$(this).fadeOut(300);
+                            current_view_item = null;
+                    	}
+                    });
+                    $(".closebutton").click(function(){$fade.fadeOut(300);current_view_item = null;});
+                }
+
+                //setting up learning history
+                function history_setup(data){
+                    console.log(data);
+                    var history = $(".learning_history ul");
+                    for(var i =0;i<data.learning.length;i++){
+                        history.append("<li> <div style='max-width:120px'><span style='display:inline;'> </span></div> <img src='' alt='' /> <div style='width:60%;text-align:left;'> </div> </li>");
+                    }
+
+                    learning_items = history.find("li");
+                    for(var i = 0;i < learning_items.length; i++){
+                        $item = $(learning_items[i]);
+                        $item.find("span:first").html(data.learning[i].date);
+                        $item.find("img").attr("src",data.learning[i].image);
+                        $item.find("div:last").html(data.learning[i].description);
+                    }
+                }
+
+
+            });
+        </script>
+        <div class="right sidebar">
+            <img src="img/coding.jpg" alt="" style="width:120%;height:120%;;margin:-5% auto auto -5%;opacity:0.5; filter:blur(8px);-webkit-filter:blur(8px);"/>
+            <div class="abs_center description" style="left:auto;right:25px;">
+                <h1>CODING</h1>
+                <div style="color:white">
+                    A list of projects that I have done, also my learning diary (kinda).<br/>
+                     I did these proejcts because it's fun and I enjoy the process of designing and problem solving. Here are the projects that I have done inside and outside of school.
+                </div>
+                <ul>
+                    <li><a href="https://github.com/imjackyan">
+                        <div class="circle" data="Github">G</div>
+                    </a></li>
+                    <li><a href="index.html">
+                        <div class="circle" data="Home">H</div>
+                    </a></li>
+                    <li><a href="art.html">
+                        <div class="circle" data="Art">A</div>
+                    </a></li>
+                </ul>
+            </div>
+            <ul class="abs_center tabs" style="right:auto;">
+                <li class="current" data="proj"><p>
+                    PROJECTS
+                </p></li>
+                <li data = "learn"><p>
+                    LEARNING
+                </p></li>
+            </ul>
+        </div>
+        <div>
+            <ul class="content projects" style="margin-right:430px;">
+            </ul>
+        </div>
+        <div class="item_details" style="right:430px; display:none;">
+            <div class="box" style="overflow:hidden;overflow-y:scroll;">
+                <div class="subbox">
+                    <img src="img/photogallery.jpg" alt="" />
+                    <a href="" class="detailsButton" target="_blank"></a>
+                </div>
+                <div class="subbox">
+                    <h1>123321</h1>
+                    <h3>2222</h3>
+                    <div style="margin:5px 20%;border-top:1px solid white;">
+                        <p class="details" >
+
+                        </p>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" class="closebutton">X</a>
+            </div>
+        </div>
+        <div class="left content learning_history" style="margin-right:430px;">
+            <h1>Learning History</h1>
+            <p style="text-shadow:none;">
+                This is my learning history, my coding life. <br/>
+                What I learned, when I learned it; what I did, when I did it. <br/>
+                If you care, have a look; but this is more of a diary for me, for when I look back.
+            </p>
+            <ul style="text-align: right; padding:10px">
+            </ul>
+        </div>
+    </body>
+</html>
