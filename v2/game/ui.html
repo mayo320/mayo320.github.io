@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Path of Bullets</title>
+        <link rel="stylesheet" href="css/master.css" media="screen" title="no title" charset="utf-8">
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/keymaster.js"></script>
+        <script type="text/javascript" src="js/ui.js"></script>
+
+        <script type="text/javascript" src="js/enemies.js"></script>
+        <script type="text/javascript" src="js/maplevels.js"></script>
+        <script type="text/javascript" src="js/bullets.js"></script>
+        <script type="text/javascript" src="js/drawobjs.js"></script>
+        <script type="text/javascript" src="js/traits.js"></script>
+        <script type="text/javascript" src="js/skills.js"></script>
+        <script type="text/javascript" src="js/game.js"></script>
+
+    </head>
+    <body>
+        <div class="game_container">
+            <div class="main_menu size100 page ">
+                <img src="img/menuship.png" alt="" style="height:350px;position:absolute;top:150px;right:10px;" class="circle"/>
+                <ul class="selection">
+                    <li class="unlocked" onclick="mainmenuPopup('newgame')"><a href="javascript:void(0)">New Game</a></li>
+                    <li><a href="javascript:void(0)">Continue</a></li>
+                    <li onclick="mainmenuPopup('loadgame')"><a href="javascript:void(0)" >Load Game</a></li>
+                    <li class="unlocked" onclick="mainmenuPopup('rules')"><a href="javascript:void(0)" >Rules</a></li>
+                    <li class="unlocked" onclick="mainmenuPopup('credit')"><a href="javascript:void(0)" >Credit</a></li>
+
+                </ul>
+            </div>
+
+            <div class="map_page size100 page hide">
+                <div class="map_select w100" style="background:url('img/mapbg.jpg'); background-position:center;">
+                    <div class="map_nodes">
+
+                    </div>
+                </div>
+
+                <p style="text-align:center;font-size:32px;background:rgba(0, 0, 0, 0.5);padding:10px 0; position:absolute;width:100%;color:white;top:0;left:0;">Map</p>
+
+                <ul class="selection">
+                    <li style="left:0;"><a href="javascript:void(0)" onclick="showCharPage()">Character</a></li>
+                    <li style="right:0;"><a href="javascript:void(0)" onclick="showShop()">Shop</a></li>
+                </ul>
+            </div>
+
+            <div class="character_page size100 page hide">
+                <div class="header w100">
+                    <div class="rel exchange" onclick="changeHero()">
+                        <img style="margin:20px;width:80px;height:80px; padding:10px; border-radius:5px;" src="img/player.png" alt="" />
+                        <img class="abs rotate" style="bottom:30px; right:25px;" src="img/changeicon.png" alt="" />
+                    </div>
+                    <div class="">
+                        <p style="font-size:40px;color:white;margin:15px 20px;">Name</p>
+                        <div class="char_level">
+                            Level: <span class="level">2</span>
+                            <div class="exp_bar" style="width:300px;border:1px solid white; margin:0 10px; height:6px; text-align:left; vertical-align:middle;transition:0.2s;">
+                                <div class="exp h100" style="background:rgba(67, 207, 106, 0.7);width:70%;">
+                                </div>
+                                <span class="exp_values" style="display:none; font-size:14px;text-align:right;">100/200</span>
+                            </div>
+                        </div>
+                        <p class="gold" style="text-align:left;margin-top:10px;">
+                            Credit: <span>1000</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="char_contents">
+                    <ul class="tabs w100">
+                        <li class="current" onclick="showCharTab('stats',this)"><a href="javascript:void(0)">Stats</a>
+                        </li><li onclick="showCharTab('weps',this)"><a href="javascript:void(0)" >Weps</a>
+                        </li><li onclick="showCharTab('skills',this)"><a href="javascript:void(0)" >Skills</a>
+                        </li><li onclick="showCharTab('inventory',this)"><a href="javascript:void(0)" >Inv</a></li>
+                        <li class="cancel" style="display:none; width:100%;
+                        position: absolute; left:0; top:0;" onclick="cancelButton(false)">
+                        Cancel</li>
+                    </ul>
+
+                    <div class="stats content">
+                        <div class="col">
+                            <h3>Stats</h3><hr>
+                            HP: 20
+                        </div><div class="col">
+                            <h3>Modifiers</h3><hr>
+                            HP:<span>100%</span>
+                        </div><div class="col">
+                            <h3>Traits</h3><hr>
+                            <span>Echo</span>
+                        </div>
+                    </div>
+
+                    <div class="weps content hide">
+                        <ul class="w100">
+                            <!-- <li class="">
+                                <div class="weapon">
+                                    <img src="img/player.png" alt="" />
+                                </div>
+                                <div class="mods">
+                                    <div class="mod">
+                                        <img src="img/hongda.png" alt="" />
+                                    </div>
+                                    <div class="mod">
+                                        <img src="img/hongda.png" alt="" />
+                                    </div>
+                                </div>
+                            </li> -->
+                        </ul>
+                    </div>
+
+                    <div class="skills content hide">
+                        <ul class="w100">
+                            <li class="">
+                                <div class="skill">
+                                    <img src="img/player.png" alt="" />
+                                </div>
+                                <div class="skill_desc">
+                                    <span>Skill name</span> / Cooldown: <span>10</span>s<hr>
+                                    <p>
+                                        Skill descriptionsssssssssssssssssssssssssssssssss, dealing 110% damage
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="inventory content hide">
+                        <ul class="w100">
+                        </ul>
+                    </div>
+
+                    <ul class="selection">
+                        <li style="left:0;"><a href="javascript:void(0)" onclick="showMap()">Back</a></li>
+                        <li style="right:0;"><a href="javascript:void(0)" onclick="showShop()">Shop</a></li>
+                    </ul>
+
+                    <div class="popup">
+                        <h3>Name</h3><hr>
+                        <p>
+                            Secondary Info
+                        </p><hr>
+                        <p>
+                            Description
+                        </p>
+                        <ul class="item_options">
+                            <li>Use</li>
+                            <li onclick="equipItem(openedID)">Equip</li>
+                            <li onclick="unequipItem(openedWep[0],openedWep[1])">Unequip</li>
+                            <li onclick="swapItems(openedWep[0],openedWep[1])">Swap</li>
+                            <li onclick="sellItem(openedID)">Sell</li>
+                            <li onclick="showItemInfo('close')">Close</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="shop_page size100 page hide">
+                <ul class="tabs">
+                    <li class="current" onclick="showShop('ship')">Ships
+                    </li><li onclick="showShop('wep')">Weapons
+                    </li><li onclick="showShop('mod')">Mods
+                    </li><li onclick="showShop('misc')">Misc</li>
+                </ul>
+                <p style="color:white;text-align:center;margin:20px 0;background: rgba(23, 73, 148, 0.5)">
+                    Available credit: <span></span>
+                </p>
+                <div class="content">
+                    <ul>
+                        <li class="">
+                            <div class="image">
+                                <img src="img/player.png" alt="" />
+                            </div>
+                            <div class="description">
+                                <span>Item name</span><hr>
+                                <p>
+                                    item descriptionsssssssssssssssssssssssssssssssss, dealing 110% damage.adsfddd dSkill  descriptionsssssssssssssssssssssssssssssssss, dealing 110% damage.adsfdddd
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <ul class="selection">
+                    <li style="left:0;"><a href="javascript:void(0)" onclick="showMap()">Back</a></li>
+                    <li style="right:0;"><a href="javascript:void(0)" onclick="showCharPage()">Character</a></li>
+                </ul>
+            </div>
+
+            <div class="game_page size100 page hide">
+                <canvas id="canvas" width="600" height="730"></canvas>
+
+                <span class="score" style="position: absolute; top:10px;left:10px;color:white">Score: 0</span>
+                <div class="hp-bar" style="position: absolute;right:60px;top:0px;margin:13px;height:15px;width:400px;">
+                    <div class="HP" style="width:100%;background-color:rgba(221, 75, 75, 0.77); height:100%; position:absolute;
+                    bottom:0;">
+                    </div>
+                </div>
+                <img src="img/gear.png" class="pause_gear" alt="" onclick="pauseGame(true)"/>
+                <ul class="skills_bar">
+                    <li><img src="" alt="" /><div class="cooldown"></div></li>
+                    <li><img src="" alt="" /><div class="cooldown"></div></li>
+                    <li><img src="" alt="" /><div class="cooldown"></div></li>
+                </ul>
+
+                <div class="pause_menu" style="position:absolute;width:100%;height:100%;left:0;background-color:rgba(0,0,0,0.7);z-index:500;display:none;top:0;">
+                    <div class="paused" >
+                        <ul class="abs_center" style="width:200px;height:200px;">
+                            <li onclick="pauseGame(false)">Resume</li>
+                            <li onclick="restartGame()">Restart</li>
+                            <li onclick="quitGame()">Quit</li>
+                        </ul>
+                    </div>
+                    <div class="success abs_center " style="width:200px;height:200px;">
+                        <h3>Success!</h3>
+                        <p>
+                            Score: <span>300</span> </br>
+                            Credit: <span>300</span> </br>
+                            Experience: <span>100</span>
+                        </p>
+                        <li onclick="quitGame()" class="disabled">OK</li>
+                    </div>
+                    <div class="failed abs_center" style="width:200px;height:200px;">
+                        <h3>Failed</h3>
+                        <ul>
+                            <li onclick="restartGame(true)">Restart</li>
+                            <li onclick="quitGame()">Quit</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="mainmenu_popup abs size100 page" style="background:rgba(23, 73, 148,0.8);top:0; left:0;color:white;text-align:center;">
+                <div class="abs_center" style="height:150px;width:300px;">
+                    <div class="loadgame" style="display:none;">
+                        <h3>Load Game</h3><hr>
+                        <p>Enter your ID that you used when starting new game.</p><br>
+                        <input type="text" name="loadid" value="">
+                        <button type="button" name="button" onclick="loadGame()">Load</button>
+                        <br><span style="color:red;"></span>
+                    </div>
+                    <div class="newgame" style="display:none;">
+                        <h3>New Game</h3><hr>
+                        <p>Enter your ID. It will be the key to use your game next time! (but i dunno how to do backend YET, so just press Start and go straight into game.. :DDDDD)</p><br>
+                        <input type="text" name="newid" value="">
+                        <a href="javascript:void(0)" class="button" onclick="newGame()">Start</a><a href="javascript:void(0)" class="button" onclick="mainmenuPopup('close')">Cancel</a>
+                        <br><span style="color:red;"></span>
+                    </div>
+                    <div class="credit" style="display:none;">
+                        <h3>Credit</h3><hr>
+                        <p style="margin:10px;">
+                            Team Lead: Jack<br>
+                            Art: Jack <br>
+                            Music: Jack <br>
+                            Developer: Jack<br>
+                            Yeah basically I'm the best
+                        </p>
+                        <a href="javascript:void(0)" class="button" onclick="mainmenuPopup('close')">Yeah you are!</a>
+                        <hr><p>contact me: jackyanart@gmail.com</p>
+                    </div>
+                    <div class="rules" style="display:none;">
+                        <h3>Rules</h3><hr>
+                        <ul style="text-align:left;padding-left:30px;">
+                            <li>Arrow keys to move </li>
+                            <li>Z,X,C to use skills </li>
+                            <li>Combine different modifiers for interesting effects</li>
+                            <li>Weapons uses MULTIPLY modifiers</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="button" onclick="mainmenuPopup('close')">OK GOT IT!</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="image-container">
+            <img id="playership" src="img/playersprite.png" style="height:50px;" alt="" />
+            <img id="rocket" src="img/rocket.png" alt="" />
+
+            <img id="explosion" src="img/explosion.png" alt="" />
+            <img id="blackhole" src="img/skills/blackholeani.png" alt="" />
+
+            <img id="fodder" class="enemySprite" src="img/fodder.png" alt="" />
+            <img id="cluster" class="enemySprite" src="img/cluster.png" alt="" />
+            <img id="spread" class="enemySprite" src="img/spread.png" alt="" />
+            <img id="quick_cluster" class="enemySprite" src="img/quick_cluster.png" alt="" />
+            <img id="spread2" class="enemySprite" src="img/spread2.png" alt="" />
+            <img id="auto" class="enemySprite" src="img/auto.png" alt="" />
+            <img id="boss1" class="enemySprite" src="img/boss1.png" alt="" />
+
+        </div>
+    </body>
+</html>

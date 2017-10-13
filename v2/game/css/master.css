@@ -1,0 +1,161 @@
+* { padding: 0; margin: 0; list-style: none; font-family: "Century Gothic";}
+a{text-decoration: none;color:white;}
+ul{padding-left:0;}
+li{list-style: none;}
+h4{text-shadow:0 0 10px rgba(0,0,0,.6);}
+.tabs li{transition: 0.5s;}
+.h100{height:100%;}
+.w100{width:100%;}
+.size100{height:100%;width:100%;}
+.hide{display:none !important;}
+.show{display:block !important;}
+.abs{position:absolute;}
+.abs_center{position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;}
+.rel{position:relative;}
+.disabled{pointer-events: none;}
+.button{border-radius: 5px;border:1px solid white;padding:5px;margin:5px;display:inline-block;}
+.game_container {
+    display: block; margin: 0 auto; position:absolute;left:0;right:0; width:600px; height:730px; position: relative;
+}
+.game_container canvas{background-image: url("../img/space.jpg");background-size:cover;}
+.image-container{display:none;}
+.rules li{list-style: disc;}
+@keyframes circle{
+    25%{transform:translateX(-5px);}
+    50%{transform:translateX(-5px) translateY(5px);}
+    75%{transform:translateY(5px);}
+}
+@keyframes rotate{
+    100%{transform:rotate(360deg);}
+}
+.circle{
+    animation: circle 1s infinite linear;
+}
+/******************MAIN MENU******************/
+.main_menu{
+    background-image:url("../img/menubg.jpg");background-position: center;
+}
+.main_menu .selection{
+    position: absolute;bottom:0;left:0; width:250px; margin: 10px 0;
+}
+.main_menu .selection li{
+    font-size:30px; margin:10px;display:inline-block; width:220px;transition: 0.5s; background:rgba(102, 102, 102, 0.5); padding:10px; pointer-events: none;
+}
+.main_menu .selection .unlocked{background:rgba(255, 255, 255, 0.5); pointer-events: auto;}
+.main_menu .selection a{
+    color:black;display:block; text-align: right;
+}
+.main_menu .selection li:hover{
+    padding-left:80px;
+}
+.mainmenu_popup{display:none;}
+/******************MAP PAGE******************/
+.map_page .selection,
+.shop_page .selection,
+.character_page .selection{
+    position: absolute;bottom:0;left:0;width:100%;
+}
+.map_page .selection li,
+.shop_page .selection li,
+.character_page .selection li{
+    position:absolute;bottom:0;width:50%;margin:0;padding:0px;; background: rgb(23, 73, 148); transition:0.5s; font-size:30px;text-align:center; height:80px; z-index:50;
+}
+.map_page .selection a,
+.shop_page .selection a,
+.character_page .selection a{
+    color:white; display:block;padding:20px;
+}
+.map_page .selection li:hover,
+.shop_page .selection li:hover,
+.character_page .selection li:hover{
+    background:rgb(55, 117, 209); z-index: 100;
+}
+.map_page .map_select{
+    overflow-y:scroll;height:650px; position: relative;
+}
+.map_page .map_select .map_node{
+    width:100px;height:100px;border-radius:50%;border:1px solid grey; position:absolute; transition:0.5s; color:grey; line-height:100px;text-align: center;background:rgba(0, 0, 0, 0.5);
+}
+.map_page .map_select .unlocked:hover{
+    cursor:pointer;background:rgba(255, 255, 255, 0.5);
+}
+.map_page .map_select .unlocked{
+    color:white;border:1px solid white;
+}
+.map_page .map_select .map_nodes{position: relative;box-sizing:border-box;}
+/******************CHARACTER PAGE******************/
+.character_page .header{
+    background:url("../img/charheaderbg.jpg"); height:150px; border-bottom: 2px solid rgb(23, 73, 148); color:white;
+}
+.character_page .header div{
+    display:inline-block; vertical-align: top; text-align: center;
+}
+.character_page .header .char_level:hover .exp_values{display:block !important;}
+.character_page .header .char_level:hover .exp_bar{height:12px !important;}
+.character_page .header img:hover{cursor:pointer;}
+.character_page .header .rotate{bottom:30px; right:25px; display:none; padding:5px;border-radius:50%;background:rgb(23, 73, 148); width:20px;}
+.character_page .header .exchange:hover .rotate{animation:rotate 2s infinite linear;display:block !important;}
+.character_page .tabs{position: relative;}
+.character_page .tabs li{width:25%;display:inline-block;background:rgb(23, 73, 148); text-align: center; padding:10px 0; font-size:20px;}
+.character_page .tabs li:hover{background:transparent;}
+.character_page .tabs .cancel:hover{background:rgb(55, 117, 209);color:white;cursor:pointer;}
+.tabs .current{background:transparent !important;}
+.character_page .char_contents{width:100%;height:578px;background:url("../img/charbg.jpg"); background-size: cover;}
+.character_page .char_contents .content,
+.shop_page .content{
+    width:90%;height:55%;position:absolute;left:5%;top:30%;background:rgba(23, 73, 148,0.7); color:white;
+}
+.character_page .char_contents .col{display:inline-block;width:29%;padding:2%; color:white; vertical-align: top;}
+.character_page .char_contents .weps{overflow-y:scroll;}
+.character_page .char_contents .content ul li,
+.shop_page .content ul li{padding:10px;}
+.character_page .char_contents .content ul li:hover,
+.shop_page .content ul li:hover{background:rgba(55, 117, 209,0.5);}
+.character_page .char_contents .weapon,
+.character_page .char_contents .skill,
+.shop_page .content ul li .image{background:rgba(0,0,0,0.2);border-radius:5px; margin:0px 20px; padding:5px;display:inline-block; width:80px;height:80px;vertical-align: top;}
+.character_page .char_contents .weapon img,
+.character_page .char_contents .skill img,
+.shop_page .content ul li .image img{width:100%;height:100%;}
+.character_page .char_contents .mods,
+.character_page .char_contents .skill_desc,
+.shop_page .content ul li .description{height:80px;display:inline-block;padding:5px; width:350px;}
+.character_page .char_contents .mod{vertical-align: top;margin:0 10px;;display:inline-block; width:60px; text-align:center;background:rgba(0,0,0,0.2);border-radius:5px;}
+.character_page .char_contents .mod img{display:inline-block;width:50px;height:50px;padding:5px; }
+.character_page .char_contents .weapon:hover,
+.character_page .char_contents .mod:hover{
+    cursor:pointer; background:rgba(255,255,255,0.2);
+}
+.character_page .char_contents .inventory{overflow-y:scroll;}
+.character_page .char_contents .inventory li{width:50px;height:50px;margin:7px;display:inline-block;}
+.character_page .char_contents .inventory img{width:50px;height:50px;}
+.character_page .char_contents .inventory li:hover{cursor:pointer;}
+
+
+.character_page .char_contents .popup{display:none; width:75%;height:30%;margin:auto; left:0;right:0; background:rgba(31, 78, 149, 1);position:absolute; color:white; padding:2%; border:1px solid rgb(55, 117, 209); z-index: 300;}
+.character_page .char_contents .popup .item_options{position: absolute;bottom:0;padding:10px;left:0;}
+.character_page .char_contents .popup .item_options li{display:inline-block;padding:5px 10px; color:white;}
+.character_page .char_contents .popup .item_options li:hover{ background:rgb(55, 117, 209);cursor:pointer;}
+/******************GAME PAGE******************/
+.game_page .skills_bar{position: absolute;width:50px;height:180px;left:0;bottom:0;margin:10px;}
+.game_page .skills_bar li{width:50px;height:50px; background: rgba(255, 255, 255, 0.5); margin:5px;border-radius:50%;position: relative;line-height: 50px;text-align: center;color:white;}
+.game_page .skills_bar li img{width:40px; padding:5px;}
+.game_page .skills_bar li .cooldown{background:black; opacity:0.7; width:100%; height:0%; position: absolute;bottom:0;right:0; margin:0;}
+.game_page .pause_gear{position:absolute;top:10px;right:10px;transition:0.5s;width:50px;}
+.game_page .pause_gear:hover{transform:rotate(180deg);cursor:pointer;}
+.game_page .pause_menu{text-align: center;}
+.game_page .pause_menu div{display:none;}
+.game_page .pause_menu li{color:white;margin:10px;border:1px solid white;border-radius:5px; text-align:center;font-size:25px;padding:5px;transition:0.5s;}
+.game_page .pause_menu li:hover{cursor:pointer;padding:10px;margin:0px;}
+.game_page .pause_menu h3{color:white;font-size:30px;}
+.game_page .pause_menu p{color:white;font-size:20px;}
+/******************SHOP PAGE******************/
+.shop_page{background:url("../img/charbg.jpg");background-size:cover;}
+.shop_page .tabs{width:100%;position: relative;}
+.shop_page .tabs li{width:21%;display:inline-block;background:rgb(23, 73, 148); font-size:20px;color:white;text-align:center;padding:2%;}
+.shop_page .tabs li:hover{cursor:pointer;background:transparent;}
+.shop_page .content{height:70%;top:auto;bottom:15%;overflow-y:scroll; }
+.shop_page .content ul li .description{height:120px;position: relative;}
+.shop_page .content ul li .image a{position: absolute;bottom:-40px;right:0px;left:0px; border-radius:5px;border:1px solid lightgrey;padding:5px;color:lightgrey;text-align: center;}
+.shop_page .content ul li .image a:hover{border:1px solid white;color:white;}
+.shop_page .content ul li .image{margin:3px 20px; position: relative;}

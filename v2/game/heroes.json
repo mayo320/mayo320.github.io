@@ -1,0 +1,219 @@
+{
+    "heroes":[
+        {
+            "name":"Jack",
+            "movementspeed":5,
+            "fullhp":20,
+            "hp":20,
+            "hpmod":1,
+            "x":0,
+            "y":0,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/jack.png",
+            "bulletTypes":{
+                "spread": 0, "cluster": 0, "auto":0
+            },
+            "beam":false,
+            "traits":["Ricochet","Laser","Homing"],
+            "skills":["Spray & Pray", "Machine Gun", "Homing Sphere"],
+            "APS":1.5,
+            "APSmod":1,
+            "damage":2,
+            "damagemod":1,
+            "bulletspeedmod":1
+        },{
+            "name":"Hongda",
+            "movementspeed":5,
+            "fullhp":26,
+            "hp":26,
+            "hpmod":1,
+            "x":0,
+            "y":0,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/hongda.png",
+            "bulletTypes":{
+                "spread": 4, "cluster": 0, "auto":0
+            },
+            "traits":["Thick Skinned","Splash"],
+            "skills":["Seeking Dragon", "Umbrella", "Homing Sphere"],
+            "APS":1,
+            "APSmod":1,
+            "damage":3,
+            "damagemod":1,
+            "bulletspeedmod":1
+        },{
+            "name":"Harry",
+            "movementspeed":9,
+            "fullhp":20,
+            "hpmod":1,
+            "hp":20,
+            "x":0,
+            "y":0,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/player.png",
+            "bulletTypes":{
+                "spread": 0, "cluster": 2, "auto":0
+            },
+            "traits":["Vampire","Pierce"],
+            "skills":["Spray & Pray", "Umbrella", "Homing Sphere"],
+            "APS":1,
+            "APSmod":1,
+            "damage":3,
+            "damagemod":1,
+            "bulletspeedmod":1
+        },{
+            "name":"George",
+            "movementspeed":5,
+            "fullhp":17,
+            "hp":17,
+            "hpmod":1,
+            "x":0,
+            "y":0,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/player.png",
+            "bulletTypes":{
+                "spread": 0, "cluster": 0, "auto":2
+            },
+            "traits":["Fast", "Light"],
+            "skills":["Spray & Pray", "Machine Gun", "Homing Sphere"],
+            "APS":1.2,
+            "APSmod":1,
+            "damage":3,
+            "damagemod":1,
+            "bulletspeedmod":1
+        },{
+            "name":"Jim",
+            "movementspeed":5,
+            "fullhp":21,
+            "hp":21,
+            "hpmod":1,
+            "x":0,
+            "y":0,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/player.png",
+            "bulletTypes":{
+                "spread": 0, "cluster": 0, "auto":0
+            },
+            "traits":["Clueless","Small"],
+            "skills":["Spray & Pray", "Seeking Dragon", "Homing Sphere"],
+            "APS":1,
+            "APSmod":1,
+            "damage":4,
+            "damagemod":1,
+            "bulletspeedmod":1
+        },{
+            "name":"Jordan",
+            "movementspeed":5,
+            "fullhp":21,
+            "hp":23,
+            "hpmod":1,
+            "x":0,
+            "y":0,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/player.png",
+            "bulletTypes":{
+                "spread": 0, "cluster": 2, "auto":0
+            },
+            "traits":["Hulk","Divine"],
+            "skills":["Spray & Pray", "Umbrella", "Homing Sphere"],
+            "APS":1.2,
+            "APSmod":1,
+            "damage":4,
+            "damagemod":1,
+            "bulletspeedmod":1
+        },{
+            "name":"Test",
+            "movementspeed":5,
+            "fullhp":21,
+            "hp":23,
+            "hpmod":1,
+            "x":0,
+            "y":0,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/player.png",
+            "bulletTypes":{
+                "spread": 0, "cluster": 2, "auto":2
+            },
+            "traits":["Homing","Slow&Steady"],
+            "skills":["Spray & Pray", "Umbrella", "Homing Sphere"],
+            "APS":1.2,
+            "APSmod":1,
+            "damage":4,
+            "damagemod":1,
+            "bulletspeedmod":1
+        }
+    ],
+    "skills":[{
+            "name":"Spray & Pray",
+            "abrev":"S&P",
+            "image":"img/skills/spraypray.png",
+            "cooldown":10000
+        },{
+            "name":"Seeking Dragon",
+            "abrev":"SD",
+            "image":"img/skills/seekingdragon.png",
+            "cooldown":10000
+        },{
+            "name":"Umbrella",
+            "abrev":"U",
+            "image":"img/skills/umbrella.png",
+            "cooldown":10000
+        },{
+            "name":"Homing Sphere",
+            "abrev":"HS",
+            "image":"img/skills/homingsphere.png",
+            "cooldown":10000
+        },{
+            "name":"Machine Gun",
+            "abrev":"MG",
+            "image":"img/skills/homingsphere.png",
+            "cooldown":10000
+        }
+    ],
+    "mapnodes":[{
+            "name":"Beginning",
+            "x":100,
+            "y":50,
+            "unlocked":true
+        },{
+            "name":"Weapons",
+            "x":400,
+            "y":200,
+            "unlocked":false
+        },{
+            "name":"Traits",
+            "x":100,
+            "y":350,
+            "unlocked":false
+        },{
+            "name":"Monsters",
+            "x":400,
+            "y":500,
+            "unlocked":false
+        },{
+            "name":"Boss",
+            "x":100,
+            "y":650,
+            "unlocked":false
+        },{
+            "name":"ShowME!@@",
+            "x":400,
+            "y":800,
+            "unlocked":false
+        }
+    ]
+}

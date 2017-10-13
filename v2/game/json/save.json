@@ -1,0 +1,39 @@
+{
+    "id":"12345",
+    "hero":{
+        "name":"Player",
+        "id":107,
+        "level":1,
+        "exp":0,
+        "levelexp":100,
+        "type":"ship",
+        "description":"",
+        "tier":2,
+        "price":4,
+        "growth":{"hp":3,"damage":2,"APS":1},
+        "movementspeed":5,
+        "wepslots":2,
+        "fullhp":23,
+        "hp":23,
+        "hpmod":1,
+        "x":0,
+        "y":0,
+        "dx":0,"dy":0,
+        "width":20,
+        "height":20,
+        "image":"img/player.png",
+        "bulletTypes":{
+            "spread": 0, "cluster": 2, "auto":2
+        },
+        "traits":[""],
+        "skills":[211, 210, 212],
+        "APS":1.2,
+        "APSmod":1,
+        "damage":4,
+        "damagemod":1,
+        "bulletspeedmod":1,
+        "weapons":[3401]
+    },
+    "inventory":[4301,102,101,103,104,105,106,107,3501,3502,4101,4201,4301,4401,4402,4501,4502, 3202, 3201,3401,3101,3203,3402,4504,4304,3503],
+    "credit":1000
+}

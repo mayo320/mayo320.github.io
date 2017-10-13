@@ -1,0 +1,116 @@
+* { padding: 0; margin: 0; list-style: none; font-family: "Century Gothic";}
+a{text-decoration: none;}
+.game-container {
+    display: block; margin: 0 auto; position:absolute;left:0;right:0;
+    box-sizing:border-box;width:600px;
+}
+.game-container canvas{background-image: url("../img/space.jpg");}
+.hp-bar{
+    position: absolute;right:0px;top:0px;margin:10px;height:15px;width:450px;
+}
+.HP{
+    width:100%;background-color:rgba(221, 75, 75, 0.77); height:100%; position:absolute;
+    bottom:0;
+}
+.hp-value{
+    position: absolute;bottom:0;right:0;padding:10px;
+}
+.score{
+    position: absolute; top:10px;left:10px;
+}
+.gameover{
+    position: absolute;margin:auto;top:0;left:0;bottom:0;right:0;display:none;
+    width:250px;height:180px;text-align: center; background:rgba(0, 0, 0, 0.7);border-radius:5px;
+}
+.gameover a{
+    font-size:25px;color:lightgrey;padding:1px 5px;border:1px solid lightgrey;border-radius:5px;
+}
+.gameover a:hover{
+    border:1px solid white; color:white;
+}
+.game-container .information{
+    position: absolute;right:0;top:100%;height:130px;width:100%; display:none; margin-top:-5px;
+}
+.game-container .information .playerinfo{
+    position: absolute;right:0;bottom:0;height:100%;width:100%;
+     background-image: url("../img/infobg.jpg"); margin:0;
+}
+.game-container .information div{
+    margin:0px 10px; display:inline-block; vertical-align: top;
+}
+.game-container .information h3{
+    color:white;font-size:15px; text-decoration: underline;
+}
+.game-container .information .playerinfo span{
+    width:100%; font-weight:bold;
+}
+.game-container .information .specialskills{float:right;}
+.game-container .information .specialskill{
+    width:45px;height:90px; margin:5px; display:inline-block; position:relative;
+}
+.game-container .information .specialskill .cooldown{
+    background:black; opacity:0.4; width:100%; height:0%; position: absolute;bottom:0;right:0; margin:0;
+}
+.game-container .information .specialskill img{
+    position: absolute; left:0;top:20px;right:0;margin:auto;
+}
+.game-container .information .specialskill .abrev{
+    position: absolute; bottom:0; background:rgba(255, 255, 255, 0.5);width:45px;text-align: center; margin:0;
+}
+.image-container{display:none;}
+.abs_center{position: absolute;right:0;bottom:0;top:0;left:0;margin:auto;}
+.niceButton{
+    background-color:rgb(133, 145, 186);
+    border-radius:10px; border:none; height:30px; width:100px;
+}
+
+/***************HERO SELECTION***************/
+.hero_selection{
+    overflow-x:hidden;overflow-y:scroll;
+    height:80%;
+}
+.hero_selection li{
+    height:150px;width:100%;
+    background-color:rgba(68, 110, 236, 0.6);
+    border-radius:10px;
+    overflow:hidden;
+    text-align: left;
+    margin:10px 0;
+}
+.hero_selection h2{
+    width:100%;background-color:rgba(0, 0, 0,0.5);color:white; margin-bottom:5px; text-align: center;
+}
+.hero_selection img{
+    background-color:white;border-radius:10px;padding:5px;margin:5px;
+    display:inline-block; height:80px;width:80px;
+}
+.hero_selection .hero_description{
+    vertical-align: top;
+    width:420px;
+    text-align: right;
+    display:inline-block;
+}
+.hero_description p{
+    width:30%;height:100%;
+    display:inline-block;
+    vertical-align: top;
+    text-align: left;
+}
+.hero_description p span{
+    border-bottom: 1px solid white; color:white;
+}
+/***************PAUSE MENU***************/
+.pause_menu h2,.pause_menu a{
+    color:white;margin:10px;
+}
+.purcahse_items li{
+    margin:5px;
+}
+.purchase_items li:hover{
+    color:white;background-color:rgba(83, 59, 226, 0.72); cursor:pointer;
+}
+.pause_item{display:none;}
+.pause_menu p{
+    margin:10px;text-align:center;background-color:rgba(255, 255, 255, 0.59);padding:10px;
+}
+.rules li{list-style:disc;margin:5px 0px 5px 20px;}

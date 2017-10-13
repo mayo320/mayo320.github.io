@@ -1,0 +1,753 @@
+{
+    "heroes":[
+        {
+            "name":"Jack",
+            "id":101,
+            "level":1,
+            "exp":0,
+            "levelexp":100,
+            "type":"ship",
+            "description":"The creator of all, and the end of all that is.",
+            "tier":5,
+            "price":999999,
+            "growth":{"hp":2,"damage":5,"APS":3},
+            "movementspeed":5,
+            "wepslots":3,
+            "fullhp":20,
+            "hp":20,
+            "hpmod":1,
+            "APS":1.5,
+            "APSmod":1,
+            "damage":2,
+            "damagemod":1,
+            "bulletspeedmod":1,
+            "x":300,
+            "y":600,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/jack.png",
+            "sprite":"img/jack.png",
+            "bulletTypes":{
+                "spread": 0, "cluster": 0, "auto":0
+            },
+            "beam":false,
+            "traits":[],
+            "skills":[209,210,208],
+            "weapons":[]
+        },{
+            "name":"Hongda",
+            "id":102,
+            "level":1,
+            "exp":0,
+            "levelexp":100,
+            "type":"ship",
+            "description":"Uh.. not very useful",
+            "tier":2,
+            "price":400,
+            "growth":{"hp":3,"damage":2,"APS":1},
+            "movementspeed":5,
+            "wepslots":2,
+            "fullhp":26,
+            "hp":26,
+            "hpmod":1,
+            "x":0,
+            "y":0,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/hongda.png",
+            "sprite":"img/hongda.png",
+            "bulletTypes":{
+                "spread": 4, "cluster": 0, "auto":0
+            },
+            "traits":["Thick Skinned"],
+            "skills":[204, 205, 206],
+            "APS":1,
+            "APSmod":1,
+            "damage":3,
+            "damagemod":1,
+            "bulletspeedmod":1,
+            "weapons":[]
+        },{
+            "name":"Harry",
+            "id":103,
+            "level":1,
+            "exp":0,
+            "levelexp":100,
+            "type":"ship",
+            "description":"ship kil many shippo",
+            "tier":4,
+            "price":40000,
+            "growth":{"hp":3,"damage":4,"APS":1},
+            "movementspeed":9,
+            "wepslots":2,
+            "fullhp":20,
+            "hpmod":1,
+            "hp":20,
+            "x":0,
+            "y":0,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/harry.png",
+            "sprite":"img/harry.png",
+            "bulletTypes":{
+                "spread": 0, "cluster": 2, "auto":0
+            },
+            "traits":[],
+            "skills":[202,203,208],
+            "APS":1,
+            "APSmod":1,
+            "damage":3,
+            "damagemod":1,
+            "bulletspeedmod":1,
+            "weapons":[]
+        },{
+            "name":"George",
+            "id":104,
+            "level":1,
+            "exp":0,
+            "levelexp":100,
+            "type":"ship",
+            "description":"A seasoned voyager which has set sail for many exotic ports. Kantai collection pls",
+            "tier":3,
+            "price":4000,
+            "growth":{"hp":2,"damage":2,"APS":3},
+            "movementspeed":5,
+            "wepslots":2,
+            "fullhp":17,
+            "hp":17,
+            "hpmod":1,
+            "x":0,
+            "y":0,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/player.png",
+            "sprite":"img/playersprite.png",
+            "bulletTypes":{
+                "spread": 0, "cluster": 0, "auto":2
+            },
+            "traits":["Fast"],
+            "skills":[204, 205, 206],
+            "APS":1.2,
+            "APSmod":1,
+            "damage":3,
+            "damagemod":1,
+            "bulletspeedmod":1,
+            "weapons":[]
+        },{
+            "name":"Jim",
+            "id":105,
+            "level":1,
+            "exp":0,
+            "levelexp":100,
+            "type":"ship",
+            "description":"Uh.. not very useful",
+            "tier":1,
+            "price":4,
+            "growth":{"hp":2,"damage":2,"APS":1},
+            "movementspeed":5,
+            "wepslots":1,
+            "fullhp":21,
+            "hp":21,
+            "hpmod":1,
+            "x":0,
+            "y":0,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/player.png",
+            "sprite":"img/playersprite.png",
+            "bulletTypes":{
+                "spread": 0, "cluster": 0, "auto":0
+            },
+            "traits":["Clueless","Small"],
+            "skills":[204, 205, 206],
+            "APS":1,
+            "APSmod":1,
+            "damage":4,
+            "damagemod":1,
+            "bulletspeedmod":1,
+            "weapons":[]
+        },{
+            "name":"Jordan",
+            "id":106,
+            "level":1,
+            "exp":0,
+            "levelexp":100,
+            "type":"ship",
+            "description":"Uh.. not very useful",
+            "tier":3,
+            "price":4200,
+            "growth":{"hp":3,"damage":3,"APS":1},
+            "movementspeed":5,
+            "wepslots":2,
+            "fullhp":21,
+            "hp":23,
+            "hpmod":1,
+            "x":0,
+            "y":0,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/player.png",
+            "sprite":"img/playersprite.png",
+            "bulletTypes":{
+                "spread": 0, "cluster": 2, "auto":0
+            },
+            "traits":["Hulk","Divine"],
+            "skills":[204, 205, 206],
+            "APS":1.2,
+            "APSmod":1,
+            "damage":4,
+            "damagemod":1,
+            "bulletspeedmod":1,
+            "weapons":[]
+        },{
+            "name":"Young",
+            "id":107,
+            "level":1,
+            "exp":0,
+            "levelexp":100,
+            "type":"ship",
+            "description":"Uh.. not very useful",
+            "tier":2,
+            "price":1000,
+            "growth":{"hp":3,"damage":2,"APS":1},
+            "movementspeed":5,
+            "wepslots":2,
+            "fullhp":21,
+            "hp":23,
+            "hpmod":1,
+            "x":0,
+            "y":0,
+            "dx":0,"dy":0,
+            "width":20,
+            "height":20,
+            "image":"img/player.png",
+            "sprite":"img/playersprite.png",
+            "bulletTypes":{
+                "spread": 0, "cluster": 2, "auto":2
+            },
+            "traits":["Slow&Steady"],
+            "skills":[204, 205, 207],
+            "APS":1.2,
+            "APSmod":1,
+            "damage":4,
+            "damagemod":1,
+            "bulletspeedmod":1,
+            "weapons":[]
+        }
+    ],
+    "skills":[{
+            "name":"Spray & Pray",
+            "id":201,
+            "abrev":"S&P",
+            "image":"img/skills/spraypray.png",
+            "cooldown":10000,
+            "lastused":0,
+            "description":"Sprays spiral of bullets, dealing 200% damage."
+        },{
+            "name":"FoShan Clap",
+            "id":202,
+            "abrev":"FSC",
+            "image":"img/skills/foshanclap.png",
+            "cooldown":2000,
+            "lastused":0,
+            "description":"Thunderous clap by the great FO."
+        },{
+            "name":"Laser Frenzy",
+            "id":203,
+            "abrev":"LF",
+            "image":"img/skills/laserfrenzy.png",
+            "cooldown":7000,
+            "lastused":0,
+            "description":"Screen full of lasers, 2gud"
+        },{
+            "name":"Seeking Dragon",
+            "id":204,
+            "abrev":"SD",
+            "image":"img/skills/seekingdragon.png",
+            "cooldown":20000,
+            "lastused":0,
+            "description":"Firing like 20 bullets that seeks out enemies."
+        },{
+            "name":"Umbrella",
+            "id":205,
+            "abrev":"U",
+            "image":"img/skills/umbrella.png",
+            "cooldown":10000,
+            "lastused":0,
+            "description":"Firing like a lot of bullets forward, then they explode after a period, firing bullets backwards."
+        },{
+            "name":"Homing Sphere",
+            "id":206,
+            "abrev":"HS",
+            "image":"img/skills/homingsphere.png",
+            "cooldown":20000,
+            "lastused":0,
+            "description":"A circle of bullets that seeks out enemies"
+        },{
+            "name":"Machine Gun",
+            "id":207,
+            "abrev":"MG",
+            "image":"img/skills/machinegun.png",
+            "cooldown":4000,
+            "lastused":0,
+            "description":"Machine gun that aims and sprays at an enemy.. some of them might hit o-o"
+        },{
+            "name":"Barrage",
+            "id":208,
+            "abrev":"B",
+            "image":"img/skills/barrage.png",
+            "cooldown":4000,
+            "lastused":0,
+            "description":"Shoots a bunch of lasers"
+        },{
+            "name":"Lightning Storm",
+            "id":209,
+            "abrev":"LS",
+            "image":"img/skills/lightningstorm.png",
+            "cooldown":5500,
+            "lastused":0,
+            "description":"Puts down a tesla with 150 radius in front of you, lasting 5 seconds, hitting 3 max targets."
+        },{
+            "name":"Black Hole",
+            "id":210,
+            "abrev":"BH",
+            "image":"img/skills/blackhole.png",
+            "cooldown":2500,
+            "lastused":0,
+            "description":"Create a black hole in front of you, sucking and damaging all enemies in range also slowing them down to 0, lasting 6 seconds"
+        },{
+            "name":"Sacred Space",
+            "id":211,
+            "abrev":"SS",
+            "image":"img/skills/sacredspace.png",
+            "cooldown":10000,
+            "lastused":0,
+            "description":"Created a sacred bubble around you that lasts 2 seconds. All bullets that passes through this bubble are cleansed."
+        },{
+            "name":"Death Parade",
+            "id":212,
+            "abrev":"DP",
+            "image":"img/skills/deathparade.png",
+            "cooldown":10000,
+            "lastused":0,
+            "description":"Shoots a shit ton of missiles"
+        }
+    ],
+    "weapons":[
+        {
+            "name":"Shooter",
+            "id":3101,
+            "image":"img/weps/shooter.png",
+            "type":"weapon",
+            "tier":1,
+            "description":"Beginner weapon yo",
+            "price":200,
+            "bulletTypes":{
+                "spread":0, "cluster":0, "auto":0, "nova":0
+            },
+            "damagemod": 1,
+            "APSmod":1,
+            "lastFired":0,
+            "bulletspeedmod":1,
+            "modslots": 1,
+            "mods":[]
+        },{
+            "name":"Laser",
+            "id":3201,
+            "image":"img/weps/laser.png",
+            "type":"weapon",
+            "tier":2,
+            "description":"Beginner laser weapon yo",
+            "price":600,
+            "bulletTypes":{
+                "spread":0, "cluster":0, "auto":0, "nova":0, "beam":true
+            },
+            "damagemod": 1.7,
+            "APSmod":1,
+            "lastFired":0,
+            "bulletspeedmod":1,
+            "modslots": 1,
+            "mods":[]
+        },{
+            "name":"Destroyer",
+            "id":3501,
+            "image":"img/weps/destroyer.png",
+            "type":"weapon",
+            "tier":5,
+            "description":"a very op weapon, got like 8 spread 5 cluster 6 auto and 8 nova. DAM",
+            "price":50000,
+            "bulletTypes":{
+                "spread":8, "cluster":4, "auto":6, "nova":8
+            },
+            "damagemod": 1.5,
+            "APSmod":1,
+            "lastFired":0,
+            "bulletspeedmod":1,
+            "modslots": 3,
+            "mods":[]
+        },{
+            "name":"Piercing Spear",
+            "id":3502,
+            "image":"img/weps/piercing_spear.png",
+            "type":"weapon",
+            "tier":5,
+            "description":"This is a laser weapon, no bullets, just beams~",
+            "price":50000,
+            "bulletTypes":{
+                "spread":0, "cluster":0, "auto":0, "nova":0, "beam":true
+            },
+            "damagemod": 5,
+            "APSmod":2,
+            "lastFired":0,
+            "bulletspeedmod":1,
+            "modslots": 2,
+            "mods":[]
+        },{
+            "name":"Basic Blaster",
+            "id":3202,
+            "image":"img/weps/blaster.png",
+            "type":"weapon",
+            "tier":2,
+            "description":"Beginner blaster weapon yo",
+            "price":600,
+            "bulletTypes":{
+                "spread":0, "cluster":0, "auto":0, "nova":0
+            },
+            "damagemod": 0.18,
+            "APSmod":10,
+            "lastFired":0,
+            "bulletspeedmod":3,
+            "modslots": 1,
+            "mods":[]
+        },{
+            "name":"Zeus' Wrath",
+            "id":3401,
+            "image":"img/weps/zeuswrath.png",
+            "type":"weapon",
+            "tier":4,
+            "description":"Divine punishment to any foes that dare come near you. (radius: 300, max target: 5)",
+            "price":18000,
+            "bulletTypes":{
+                "spread":0, "cluster":0, "auto":0, "nova":0, "tesla":{"radius":300,"targets":5}
+            },
+            "damagemod": 0.2,
+            "APSmod":10,
+            "critChance":0.1,
+            "critMult":2,
+            "lastFired":0,
+            "bulletspeedmod":1,
+            "modslots": 2,
+            "mods":[]
+        },{
+            "name":"Basic Rocket",
+            "id":3203,
+            "image":"img/weps/basicrocket.png",
+            "type":"weapon",
+            "tier":2,
+            "description":"Fires one missile",
+            "price":700,
+            "bulletTypes":{
+                "spread":0, "cluster":0, "auto":0, "nova":0, "rocket":1
+            },
+            "damagemod": 5,
+            "APSmod":0.2,
+            "lastFired":0,
+            "bulletspeedmod":1,
+            "modslots": 1,
+            "mods":[]
+        },{
+            "name":"Lightning Rod",
+            "id":3301,
+            "image":"img/weps/lightningrod.png",
+            "type":"weapon",
+            "tier":3,
+            "description":"Zaps any enemy in your vicinity (radius: 200, max target: 1)",
+            "price":4000,
+            "bulletTypes":{
+                "spread":0, "cluster":0, "auto":0, "nova":0, "tesla":{"radius":200,"targets":1}
+            },
+            "damagemod": 0.3,
+            "APSmod":7,
+            "lastFired":0,
+            "bulletspeedmod":1,
+            "modslots": 2,
+            "mods":[]
+        },{
+            "name":"Agni's Meteors",
+            "id":3402,
+            "image":"img/weps/agnimeteors.png",
+            "type":"weapon",
+            "tier":4,
+            "description":"The firery breath of Agni, firing three missiles that explode dealing blast damage on impact.",
+            "price":18000,
+            "bulletTypes":{
+                "spread":0, "cluster":0, "auto":0, "nova":0, "rocket":3,  "blast":{"radius":70,"targets":30}
+            },
+            "damagemod": 2,
+            "APSmod":0.3,
+            "lastFired":0,
+            "bulletspeedmod":1,
+            "modslots": 2,
+            "mods":[]
+        },{
+            "name":"One for All",
+            "id":3503,
+            "image":"img/weps/oneforall.png",
+            "type":"weapon",
+            "tier":5,
+            "description":"Bet everything onto this one, it may surprise you!",
+            "price":50000,
+            "bulletTypes":{
+                "spread":0, "cluster":0, "auto":0, "nova":0, "rocket":1,  "blast":{"radius":300,"targets":100}
+            },
+            "damagemod": 1,
+            "critChance": 0.5,
+            "critMult": 20,
+            "APSmod":0.3,
+            "lastFired":0,
+            "bulletspeedmod":1,
+            "modslots": 2,
+            "mods":[]
+        }
+    ],
+    "mods":[
+        {
+            "name":"Homing",
+            "id":4501,
+            "damagemod":0.7,
+            "image":"img/weps/mods/homing.png",
+            "type":"mod",
+            "tier":5,
+            "description":"Travels towards enemies.",
+            "price":30000
+        },{
+            "name":"Pierce",
+            "id":4301,
+            "damagemod":1,
+            "image":"img/weps/mods/pierce.png",
+            "type":"mod",
+            "tier":3,
+            "description":"Pierces through enemies.",
+            "price":3000
+        },{
+            "name":"Splash",
+            "id":4201,
+            "damagemod":1,
+            "image":"img/weps/mods/splash.png",
+            "type":"mod",
+            "tier":2,
+            "description":"Splits into 8 bullets upon impact.",
+            "price":300
+        },{
+            "name":"Light",
+            "id":4101,
+            "damagemod":1,
+            "image":"img/weps/mods/light.png",
+            "type":"mod",
+            "tier":1,
+            "description":"Bullet speed increased by 50%",
+            "price":100
+        },{
+            "name":"Echo",
+            "id":4502,
+            "damagemod":0.8,
+            "image":"img/weps/mods/echo.png",
+            "type":"mod",
+            "tier":5,
+            "description":"Fires an additional time.",
+            "price":30000
+        },{
+            "name":"Ricochet",
+            "id":4401,
+            "damagemod":0.8,
+            "image":"img/weps/mods/ricochet.png",
+            "type":"mod",
+            "tier":4,
+            "description":"Your attack will bounce off walls",
+            "price":10000
+        },{
+            "name":"Vampire",
+            "id":4402,
+            "damagemod":1,
+            "image":"img/weps/mods/vampire.png",
+            "type":"mod",
+            "tier":4,
+            "description":"Your attacks will heal you 40% of damage dealt on enemy impact.",
+            "price":10000
+        },{
+            "name":"Empower I",
+            "id":4102,
+            "damagemod":1.1,
+            "image":"img/weps/mods/empower.png",
+            "type":"mod",
+            "tier":1,
+            "description":"Attacks deal 10% more damage",
+            "price":200
+        },{
+            "name":"Empower II",
+            "id":4202,
+            "damagemod":1.2,
+            "image":"img/weps/mods/empower.png",
+            "type":"mod",
+            "tier":2,
+            "description":"Attacks deal 20% more damage",
+            "price":600
+        },{
+            "name":"Empower III",
+            "id":4302,
+            "damagemod":1.3,
+            "image":"img/weps/mods/empower.png",
+            "type":"mod",
+            "tier":3,
+            "description":"Attacks deal 30% more damage",
+            "price":2000
+        },{
+            "name":"Empower IV",
+            "id":4403,
+            "damagemod":1.4,
+            "image":"img/weps/mods/empower.png",
+            "type":"mod",
+            "tier":4,
+            "description":"Attacks deal 40% more damage",
+            "price":6000
+        },{
+            "name":"Empower V",
+            "id":4503,
+            "damagemod":1.5,
+            "image":"img/weps/mods/empower.png",
+            "type":"mod",
+            "tier":5,
+            "description":"Attacks deal 50% more damage",
+            "price":20000
+        },{
+            "name":"Spread I",
+            "id":4103,
+            "damagemod":1,
+            "bulletTypes":{
+                "spread":2
+            },
+            "image":"img/weps/mods/spread.png",
+            "type":"mod",
+            "tier":1,
+            "description":"Add 2 spread bullets",
+            "price":200
+        },{
+            "name":"Spread II",
+            "id":4303,
+            "damagemod":0.9,
+            "bulletTypes":{
+                "spread":4
+            },
+            "image":"img/weps/mods/spread.png",
+            "type":"mod",
+            "tier":3,
+            "description":"Add 4 spread bullets",
+            "price":2000
+        },{
+            "name":"Spread III",
+            "id":4404,
+            "damagemod":1,
+            "bulletTypes":{
+                "spread":6
+            },
+            "image":"img/weps/mods/spread.png",
+            "type":"mod",
+            "tier":4,
+            "description":"Add 6 spread bullets",
+            "price":13000
+        },{
+            "name":"Cluster I",
+            "id":4203,
+            "damagemod":1,
+            "bulletTypes":{
+                "cluster":2
+            },
+            "image":"img/weps/mods/cluster.png",
+            "type":"mod",
+            "tier":2,
+            "description":"Add 2 cluster bullets",
+            "price":1700
+        },{
+            "name":"Cluster II",
+            "id":4405,
+            "damagemod":1,
+            "bulletTypes":{
+                "cluster":4
+            },
+            "image":"img/weps/mods/cluster.png",
+            "type":"mod",
+            "tier":4,
+            "description":"Add 4 cluster bullets",
+            "price":12000
+        },{
+            "name":"Faster Reload I",
+            "id":4304,
+            "damagemod":1,
+            "APSmod":1.2,
+            "image":"img/weps/mods/fasterreload.png",
+            "type":"mod",
+            "tier":3,
+            "description":"20% more APS",
+            "price":3500
+        },{
+            "name":"Faster Reload II",
+            "id":4504,
+            "damagemod":1,
+            "APSmod":1.4,
+            "image":"img/weps/mods/fasterreload.png",
+            "type":"mod",
+            "tier":5,
+            "description":"40% more APS",
+            "price":27000
+        }
+    ],
+    "mapnodes":[{
+            "name":"Beginning",
+            "x":100,
+            "y":50,
+            "unlocked":true
+        },{
+            "name":"Weapons",
+            "x":400,
+            "y":200,
+            "unlocked":false
+        },{
+            "name":"Traits",
+            "x":100,
+            "y":350,
+            "unlocked":false
+        },{
+            "name":"Monsters",
+            "x":400,
+            "y":500,
+            "unlocked":false
+        },{
+            "name":"Boss",
+            "x":100,
+            "y":650,
+            "unlocked":false
+        },{
+            "name":"ShowME!@@",
+            "x":400,
+            "y":800,
+            "unlocked":false
+        }
+    ],
+    "SFX":{
+        "explosion":{
+            "type":1,"x":0,"y":0, "animation":{"frame":1, "frameSize": {"width":50,"height":50}, "totalFrames":10, "frameDuration":50}
+        },
+        "blackhole":{
+            "type":2,"x":0,"y":0, "animation":{"frame":1, "frameSize": {"width":100,"height":100}, "totalFrames":5, "frameDuration":50, "loop":5}
+        },
+        "generalAOE":{
+            "type":3, "animation":{}, "frame":30, "totalFrames":30, "radius":0, "color":"0,0,0"
+        }
+    }
+}

@@ -1,0 +1,163 @@
+{
+    "library":{
+        "fodder":{
+            "width":30,"height":50,"dy":0,"dx":0, "speedmod":1,"speed":70, "hp":10, "damage":3,  "APS":1,  "lastFired":0, "score": 10, "aim":false
+        },
+        "cluster":{
+            "width":40,"height":30,"dy":0,"dx":0, "speedmod":1,"speed":70, "hp":20, "damage":4,  "APS":1,  "lastFired":0, "score": 30
+        },
+        "spread":{
+            "width":40,"height":30,"dy":0,"dx":0, "speedmod":1,"speed":70, "hp":20, "damage":4, "APS":2, "lastFired":0, "score": 30
+        },
+        "quick_cluster":{
+            "width":10,"height":50,"dy":0,"dx":0, "speedmod":1,"speed":70, "hp":20, "damage":3, "APS":1.2, "lastFired":0, "score": 40
+        },
+        "spread2":{
+            "width":40,"height":30,"dy":0,"dx":0, "speedmod":1,"speed":70, "hp":25, "damage":4, "APS":0.7, "lastFired":0, "score": 40
+        },
+        "auto":{
+            "width":20,"height":50,"dy":0,"dx":0,  "speedmod":1,"speed":70, "hp":25, "damage":2, "APS":1.2, "lastFired":0, "score": 40
+        },
+        "boss1": {
+            "width":80,"height":80,"dy":0,"dx":0, "speedmod":1,"speed":70, "hp":200, "damage":2, "APS":1, "lastFired":0, "score": 200,
+            "animation":{
+                "frame":1, "frameSize":{"width":90,"height":115}, "totalFrames":3, "frameDuration":300, "loop":true
+            }
+        }
+    },
+    "levels":[
+        {
+            "level":0,
+            "progress":0,
+            "waves":[
+                {
+                    "time":0,
+                    "enemy":"fodder",
+                    "hpmod":1,
+                    "dmgmod":1,
+                    "bullets":[{"angle":45,"dx":5,"dy":5,"speed":150},{"angle":135,"dx":5,"dy":5,"speed":150}],
+                    "moveset": [{"applied":false,"x":-50,"y":100},{"applied":false,"x":320,"y":400},{"applied":false,"x":650,"y":100}],
+                    "amount":5,
+                    "interval":1000,
+                    "lastspawn":0,
+                    "bossbattle":false
+                },{
+                    "time":7800,
+                    "enemy":"fodder",
+                    "hpmod":1,
+                    "dmgmod":1,
+                    "bullets":[{"angle":45,"dx":5,"dy":5,"speed":150},{"angle":135,"dx":5,"dy":5,"speed":150}],
+                    "moveset": [{"applied":false,"x":-50,"y":100}, {"applied":false,"x":650,"y":400}],
+                    "amount":5,
+                    "interval":3000,
+                    "lastspawn":0,
+                    "bossbattle":false
+                },{
+                    "time":7800,
+                    "enemy":"fodder",
+                    "hpmod":1,
+                    "dmgmod":1,
+                    "bullets":[{"angle":45,"dx":5,"dy":5,"speed":150},{"angle":135,"dx":5,"dy":5,"speed":150}],
+                    "moveset": [{"applied":false,"x":650,"y":100}, {"applied":false,"x":-50,"y":400}],
+                    "amount":5,
+                    "interval":3000,
+                    "lastspawn":0,
+                    "bossbattle":false
+                },{
+                    "time":25000,
+                    "enemy":"spread2",
+                    "hpmod":3,
+                    "dmgmod":1,
+                    "bulletSets":[
+                        [
+                            {"angle":45,"dx":5,"dy":5,"speed":150},{"angle":135,"dx":5,"dy":5,"speed":150},{"angle":60,"dx":5,"dy":5,"speed":150},{"angle":120,"dx":5,"dy":5,"speed":150},{"angle":75,"dx":5,"dy":5,"speed":150},{"angle":105,"dx":5,"dy":5,"speed":150},{"angle":90,"dx":5,"dy":5,"speed":150}
+                        ],
+                        [
+                            {"angle":90,"dx":5,"dy":5,"speed":500, "aim":1}, {"angle":90,"dx":5,"dy":5,"speed":400, "aim":1}, {"angle":90,"dx":5,"dy":5,"speed":50, "aim":1}
+                        ],[
+                            {"angle":90,"dx":5,"dy":5,"speed":50, "aim":1}, {"angle":90,"dx":5,"dy":5,"speed":75, "aim":1}, {"angle":90,"dx":5,"dy":5,"speed":500, "aim":1}
+                        ]
+
+                    ],
+                    "setIndex":0,
+                    "moveset":[{"applied":false,"x":300,"y":-50}, {"applied":false,"x":300,"y":300}],
+                    "amount":5,
+                    "interval":3000,
+                    "lastspawn":0,
+                    "bossbattle":true
+                }
+            ]
+        },{
+            "level":1,
+            "waves":[
+                {
+                    "time":0,
+                    "enemy":"fodder",
+                    "hpmod":1,
+                    "dmgmod":2,
+                    "bullets":[{"angle":45,"dx":5,"dy":5,"speed":150},{"angle":135,"dx":5,"dy":5,"speed":150},{"angle":90,"dx":5,"dy":5,"speed":150}],
+                    "moveset": [{"applied":false,"x":650,"y":100}, {"applied":false,"x":300,"y":400}, {"applied":false,"x":-50,"y":100}],
+                    "amount":10,
+                    "interval":600,
+                    "lastspawn":0,
+                    "bossbattle":false
+                },{
+                    "time":5000,
+                    "enemy":"fodder",
+                    "hpmod":1,
+                    "dmgmod":2,
+                    "bullets":[{"angle":45,"dx":5,"dy":5,"speed":150},{"angle":135,"dx":5,"dy":5,"speed":150},{"angle":90,"dx":5,"dy":5,"speed":150}],
+                    "moveset": [{"applied":false,"x":-50,"y":100}, {"applied":false,"x":300,"y":400}, {"applied":false,"x":650,"y":100}],
+                    "amount":10,
+                    "interval":600,
+                    "lastspawn":0,
+                    "bossbattle":false
+                },{
+                    "time":12500,
+                    "enemy":"quick_cluster",
+                    "hpmod":2,
+                    "dmgmod":1,
+                    "bullets":[{"angle":80,"dx":5,"dy":5,"speed":50},{"angle":100,"dx":5,"dy":5,"speed":50},{"angle":90,"dx":5,"dy":5,"speed":250}],
+                    "moveset": [{"applied":false,"x":250,"y":-50}, {"applied":false,"x":250,"y":400}, {"applied":false,"x":-50,"y":100}],
+                    "amount":3,
+                    "interval":1500,
+                    "lastspawn":0,
+                    "bossbattle":false
+                },{
+                    "time":13000,
+                    "enemy":"quick_cluster",
+                    "hpmod":2,
+                    "dmgmod":1,
+                    "bullets":[{"angle":80,"dx":5,"dy":5,"speed":50},{"angle":100,"dx":5,"dy":5,"speed":50},{"angle":90,"dx":5,"dy":5,"speed":250}],
+                    "moveset": [{"applied":false,"x":350,"y":-50}, {"applied":false,"x":350,"y":400}, {"applied":false,"x":650,"y":100}],
+                    "amount":3,
+                    "interval":1500,
+                    "lastspawn":0,
+                    "bossbattle":false
+                },{
+                    "time":24000,
+                    "enemy":"auto",
+                    "hpmod":4,
+                    "dmgmod":2,
+                    "bulletSets":[
+                        [
+                            {"angle":45,"dx":5,"dy":5,"speed":150},{"angle":135,"dx":5,"dy":5,"speed":150},{"angle":60,"dx":5,"dy":5,"speed":150},{"angle":120,"dx":5,"dy":5,"speed":150},{"angle":75,"dx":5,"dy":5,"speed":150},{"angle":105,"dx":5,"dy":5,"speed":150},{"angle":90,"dx":5,"dy":5,"speed":150}
+                        ],
+                        [
+                            {"angle":90,"dx":5,"dy":5,"speed":500, "aim":1}, {"angle":90,"dx":5,"dy":5,"speed":400, "aim":1}, {"angle":90,"dx":5,"dy":5,"speed":50, "aim":1}
+                        ],[
+                            {"angle":90,"dx":5,"dy":5,"speed":50, "aim":1}, {"angle":90,"dx":5,"dy":5,"speed":75, "aim":1}, {"angle":90,"dx":5,"dy":5,"speed":500, "aim":1}
+                        ]
+
+                    ],
+                    "setIndex":0,
+                    "moveset": [{"applied":false,"x":300,"y":-50}, {"applied":false,"x":300,"y":300}],
+                    "amount":3,
+                    "interval":1500,
+                    "lastspawn":0,
+                    "bossbattle":true
+                }
+            ]
+        }
+    ]
+}

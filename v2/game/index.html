@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script type="text/javascript" src="js/jquery.js"></script>
+
+        <script type="text/javascript" src="js/bullets.js"></script>
+        <script type="text/javascript" src="js/drawobjs.js"></script>
+        <script type="text/javascript" src="js/enemies.js"></script>
+        <script type="text/javascript" src="js/traits.js"></script>
+        <script type="text/javascript" src="js/skills.js"></script>
+        <script type="text/javascript" src="js/game.js"></script>
+
+
+        <link rel="stylesheet" href="css/gamepage.css" media="screen" title="no title" charset="utf-8">
+    </head>
+    <body>
+        <script type="text/javascript">
+            var data;
+            var selected_hero;
+            var skillbut;
+            $(document).ready(function(){
+                var heroes;
+                data = $.ajax({
+                    type:'GET',
+                    url:'heroes.json',
+                    dataType:'json',
+                    success:function(data){
+                        console.log(data);
+                        var $hero_menu = $(".hero_selection");
+                        for(var i = 0; i< data.heroes.length; i++){
+                            $hero_menu.append("<li> <h2></h2> <img alt=''/> <div class='hero_description'> <p></p> <p></p> <p></p> </div> </li>");
+                        }
+                        heroes = $hero_menu.find("li");
+                        for(var i = 0; i< heroes.length; i++){
+                            $(heroes[i]).find("h2").html(data.heroes[i].name);
+                            $(heroes[i]).find("img").attr("src",data.heroes[i].image);
+                            $($(heroes[i]).find("p")[0]).html( "<span>Stats</span><br/>HP: " + data.heroes[i].hp + "<br/> Damage: " + data.heroes[i].damage + "<br/> APS: " + data.heroes[i].APS + "<br/> Move: " + data.heroes[i].movementspeed);
+                            $($(heroes[i]).find("p")[1]).html( "<span>Unique Traits</span>");
+                            for(var j = 0;j<data.heroes[i].traits.length;j++){
+                                $($(heroes[i]).find("p")[1]).append("<br/>" + data.heroes[i].traits[j]);
+                            }
+                            $b_types = $($(heroes[i]).find("p")[2]);
+                            $b_types.html( "<span>Bullet Types</span>");
+                            if(data.heroes[i].bulletTypes.spread) $b_types.append("<br/>Spread: " + data.heroes[i].bulletTypes.spread);
+                            if(data.heroes[i].bulletTypes.cluster) $b_types.append("<br/>Cluster: " + data.heroes[i].bulletTypes.cluster);
+                            if(data.heroes[i].bulletTypes.auto) $b_types.append("<br/>Automatic: " + data.heroes[i].bulletTypes.auto);
+                        }
+                        click_setup();
+                    }
+                });
+                function click_setup(){
+                    $(".hero_selection li").click(function(){
+                        $(".hero_selection li").css("background-color","rgba(68, 110, 236, 0.5)");
+                        $(this).css("background-color","rgba(68, 110, 236, 1)");
+                        selected_hero = $.inArray(this,heroes);
+                        console.log(selected_hero);
+
+                        $("button[name='startGame']").attr("disabled",false);
+
+
+                    });
+                }
+
+                //hover price
+                $price = $(".price");
+                $(".purchase_items li").hover(function(){
+                    $price.html($(this).attr("price"));
+                },function(){
+                    $price.html("0");
+                });
+
+                $(".purchase_items li").click(function(){
+                    price = parseInt($(this).attr("price"));
+                    if(score >= price){
+                        type = $(this).attr("type");
+                        if(type == "spread") {players[0].bulletTypes.spread += 2;}
+                        else if(type == "cluster") {players[0].bulletTypes.cluster += 2;}
+                        else if(type == "auto") {players[0].bulletTypes.auto += 2;}
+                        else if(type == "hp") {players[0].hpmod += 0.2;}
+                        else if(type == "damage") {players[0].damagemod += 0.2;}
+                        else if(type == "APS") {players[0].APSmod += 0.2;}
+                        else if(type == "traits"){
+                            //if player already has all traits
+                            if(players[0].traits.length == traits.length){alert("you already got all the traits dude");return;}
+                            var trait = "";
+                            //if player already has trait
+                            do{
+                                var id = getRandomInt(0,traits.length);
+                                trait = traits[id];
+                            }while($.inArray(trait,players[0].traits) != -1);
+
+                            if(confirm("You rolled trait: " + trait + ". Do you want it?")){
+                                players[0].traits.push(trait);
+                                applyTrait(players[0],players[0].traits.length-1);
+                            }
+                        }
+                        updateInfo(players[0]);
+
+                        score -= price;
+                        $(".score").html("Score: "+ score);
+                        $(this).attr("price",price*2);
+
+                    }else{alert("Not enough points :(");}
+
+
+                });
+            });
+
+            function prepareGame(){
+                var hero = data.responseJSON.heroes[selected_hero];
+                var skills = data.responseJSON.skills;
+                num_enemies = 0; //beginning at
+                updateTraits(hero);
+                player_speed = hero.movementspeed;
+                hero.y = canvas.height - 100;
+                hero.x = canvas.width/2;
+
+                $("#playership").attr("src",hero.image);
+
+                //setting up skills
+                var id;
+                skillbut = $(".specialskill");
+                console.log(skillbut);
+                for(var j = 0; j<skillbut.length;j++){
+                    id = findSkillID(skills,hero.skills[j]);
+                    $(skillbut[j]).find("img").attr("src",skills[id].image);
+                    $(skillbut[j]).find(".abrev").html(skills[id].abrev);
+                    $(skillbut[j]).attr("index",id);
+                    cooldown[j] = skills[id].cooldown;
+                }
+                //set up INFO screen at game stage
+                updateInfo(hero);
+
+
+                players[0] = hero;
+                startGame();
+
+            }
+            function findSkillID(skills,skillname){
+                for(var i = 0; i<skills.length; i++){
+                    if(skills[i].name == skillname) {console.log(i);return i;}
+                }
+                return -1;
+            }
+
+            function showShop(){
+                $(".pause_item").hide();
+                $(".shop").show();
+            }
+            function showRules(){
+                $(".pause_item").hide();
+                $(".rules").show();
+            }
+
+        </script>
+        <p style="text-align:center">Press "P" to pause game or to buy stuff</p>
+
+        <div class="image-container">
+            <img id="playership" src="img/player.png" style="width:50px;height:50px;" alt="" />
+
+            <img id="fodder" class="enemySprite" src="img/fodder.png" alt="" />
+            <img id="cluster" class="enemySprite" src="img/cluster.png" alt="" />
+            <img id="spread" class="enemySprite" src="img/spread.png" alt="" />
+            <img id="quick_cluster" class="enemySprite" src="img/quick_cluster.png" alt="" />
+            <img id="spread2" class="enemySprite" src="img/spread2.png" alt="" />
+            <img id="auto" class="enemySprite" src="img/auto.png" alt="" />
+            <img id="boss1" class="enemySprite" src="img/boss1_frame1.png" alt="" />
+        </div>
+        <div class="game-container">
+            <div class="start_menu" style="position:absolute;width:100%;height:100%;background-color:white;z-index:100;">
+                <h1>Hero Selection</h1><br/>
+                <ul class="hero_selection">
+                </ul>
+
+
+                <button type="button" name="startGame" onclick="prepareGame()" class="abs_center niceButton" style="top:auto;" disabled="true">START GAME</button>
+            </div>
+
+            <div class="pause_menu" style="position:absolute;width:100%;height:100%;left:0;background-color:rgba(0,0,0,0.75);z-index:100;display:none">
+                <div class="abs_center" style="height:500px;">
+                    <h2>Paused</h2>
+                    <a href="javascript:void(0)" style="" onclick="showShop(this)">Shop</a>
+                    <a href="javascript:void(0)" style="" onclick="showRules(this)">Rules</a>
+                    <a href="javascript:void(0)" onclick="startGame()">Resume</a>
+                    <a href="javascript:void(0)" onclick="restartGame()">Restart</a>
+                    <a href="javascript:void(0)">Quit</a>
+                    <hr>
+                    <div class="pause_item shop" style="display:block;">
+                        <p>
+                            Shop
+                        </p>
+                        <ul class="purchase_items" style="margin:10px;padding:10px;background-color:rgba(255, 255, 255, 0.59);">
+                            <li price="100" type="spread" >+2 Spread</li>
+                            <li price="130" type="cluster" >+2 Cluster</li>
+                            <li price="150" type="auto" >+2 Automatic</li>
+                            <li price="100" type="hp" >20% increased HP</li>
+                            <li price="100" type="damage" >20% increased damage</li>
+                            <li price="100" type="APS" >20% increased APS</li>
+                            <li price="200" type="traits" >Unique Trait</li>
+                        </ul>
+                        <p style="margin:0 10px">Costs: <span class="price" style="color:rgb(81, 91, 21);">0</span> points</p>
+                    </div>
+                    <div class="pause_item rules">
+                        <p>
+                            Rules
+                        </p>
+                        <ul style="margin:10px;padding:10px;background-color:rgba(255, 255, 255, 0.59);overflow-y:scroll">
+                            <li>
+                                You destroy enemy ships to get points, then you use points to get upgrades. Then you keep desroying enemies to get more points to get more upgrades. FUCK YEAH
+                            </li>
+                            <li>
+                                You can buy upgrades from shop, the price of upgrade doubles as you purchase more of that item.
+                            </li>
+                            <li>
+                                You can buy unique traits from shop, but it's a gamble on what trait you get.
+                            </li>
+                            <li>
+                                Press Z,X,C for special skills (no cooldown atm) little cheat i guess
+                            </li>
+                            <li>There are some OP combos for traits.. for example Homing + Splash</li>
+                            <li>Press P to pause.. O-O</li>
+                            <li>Beams deal 2 times of normal bullet damage, but Bullet Types do not apply to beam types, and some Unique Traits do not work either.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <canvas id="canvas" width="600" height="600">
+            </canvas>
+            <div class="hp-bar">
+                <div class="HP">
+                </div>
+            </div>
+            <div class="information">
+
+                <div class="playerinfo">
+                    <div>
+                        <h3>Stats</h3>
+                        HP: <span></span> <br/>
+                        Damage: <span></span> <br/>
+                        APS: <span></span> <br/>
+                        Move: <span></span>
+                    </div>
+                    <div>
+                        <h3>Bullet Types</h3>
+                    </div>
+                    <div>
+                        <h3>Unique Traits</h3>
+                    </div>
+                    <ul class="specialskills">
+                        <li class="specialskill">
+                            Z
+                            <img src="" alt="" />
+                            <p class="abrev">
+
+                            </p>
+                            <div class="cooldown">
+
+                            </div>
+                        </li>
+                        <li class="specialskill">
+                            X
+                            <img src="" alt="" />
+                            <p class="abrev">
+
+                            </p>
+                            <div class="cooldown">
+
+                            </div>
+                        </li>
+                        <li class="specialskill">
+                            C
+                            <img src="" alt="" />
+                            <p class="abrev">
+
+                            </p>
+                            <div class="cooldown">
+
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <span class="score">Score: 0</span>
+
+            <div class="gameover">
+                <h1 style="color:white;">GAME OVER</h1>
+                </br>
+                <a href="javascript:void(0)" onclick="restartGame(true)">Restart</a></br></br>
+                <a href="mailto:jackyanart@gmail.com">Contact Me :D</a>
+            </div>
+        </div>
+    </body>
+</html>
