@@ -1,5 +1,13 @@
 {
-    "projects":[{
+    "projects":[
+        {
+            "name":"Amazon Oracle",
+            "tag":"React React-Native Javascript Django Python",
+            "medium":"Python React Javascript",
+            "featured":true,
+            "content":"2018 Hackathon project. An android app that predicts price of an item with a picture.",
+            "image":"https://raw.githubusercontent.com/zhangh87/AmazonOracle/master/react-native/AmazonOracle/img/Screenshots/example.png"
+        },{
             "name":"Path of Bullets",
             "tag":"HTML CSS Javascript",
             "medium":"HTML CSS Javascript jQuery",
@@ -36,7 +44,12 @@
             "content":"The classic asteroid game modified with some love."
         }
     ],
-    "details":[{
+    "details":[
+        {   
+            "content":"Given an image of an item, Amazon Oracle returns the predicted category and price of that item, and visually similar items currently being sold on Amazon.",
+            "featuredbutton":"Repository",
+            "featuredlink":"https://github.com/zhangh87/AmazonOracle"
+        },{
             "content":"A year ago (2015) my friends and I wanted to create a space shooter game together, but never got to it.. This year I've gotten quite familiar with JS and web dev, so I thought to make a game using these tools, and here it is~ <br/> This shoot em up game offers many design innovations that are not present in other shoot em ups. I have taken an inspiration from the game Path of Exile, so this shoot em up game has many flexibilities on how you can mix and match weapons and modifications to produce interesting effects with the way you attack. This is just one of the many other features that it offers.",
             "featuredbutton":"Check the game out!",
             "featuredlink":"v2/game/ui.html"
@@ -53,7 +66,7 @@
     "learning":[{
             "date":"2017/5/1 - 2018/8/20",
             "image":"http://www.valuewalk.com/wp-content/uploads/2017/01/AMD.png",
-            "description":"Worked at <a href='https://www.amd.com/en/home'>AMD</a> as a Software Dev intern for 16 months."
+            "description":"Worked at <a href='https://www.amd.com/en/home'>Advanced Micro Devices (AMD)</a> as a Software Dev intern for 16 months."
         },{
             "date":"2016/6/20 - 2016/7/20",
             "image":"img/learning/kingstone.jpg",
