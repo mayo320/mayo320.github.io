@@ -51,6 +51,10 @@
         }
     ],
     "learning":[{
+            "date":"2017/5/1 - 2018/8/20",
+            "image":"http://www.valuewalk.com/wp-content/uploads/2017/01/AMD.png",
+            "description":"Worked at <a href='https://www.amd.com/en/home'>AMD</a> as a Software Dev intern for 16 months."
+        },{
             "date":"2016/6/20 - 2016/7/20",
             "image":"img/learning/kingstone.jpg",
             "description":"Worked at <a href='https://51kingstone.com'>Kingstone Co.</a> for one month as a front end web developer."
