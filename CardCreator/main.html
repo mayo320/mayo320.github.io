@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Card Creator</title>
+	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+	<script src="data.js"></script>
+	<script src="main.js"></script>
+	<meta charset="utf-8">
+</head>
+<body>
+	<style type="text/css">
+		body {
+			font-family: Trebuchet MS, sans-serif;
+			line-height: 1.25;
+			button {
+				font-size: 24px;
+				padding: 6px;
+				background: white;
+				border: 1px solid gray;
+				border-radius: 5px;
+			}
+			button:hover {
+				cursor: pointer;
+				background: cyan !important;
+			}
+		}
+		.hidden {
+			display: none !important;
+		}
+		.card {
+			width: calc(100% - 70px);
+			height: calc(100% - 70px);
+			margin: 35px;
+		}
+		.block {
+			position: absolute;
+		}
+		.block.top {
+			top: 0;	
+		}
+		.block.bottom {
+			bottom: 0;
+		}
+		.block.left {
+			left: 0;	
+		}
+		.block.right {
+			right: 0;
+		}
+		.item {
+			display: inline-block;
+			position: relative;
+			vertical-align: middle;
+			margin: 0px 15px;
+		}
+		.Celestial, .celestial {
+			color: white;
+			font-style: italic;
+			text-shadow: 0 0 10px #FC0;
+		}
+		.Chaos, .chaos {
+			color: white;
+			font-style: italic;
+			text-shadow: 0 0 10px purple;
+		}
+		.Order, .order {
+			color: white;
+			font-style: italic;
+			text-shadow: 0 0 10px cyan;
+		}
+		.Construct, .construct {
+			color: white;
+			font-style: italic;
+			text-shadow: 0 0 10px brown;
+		}
+		.Nature, .nature {
+			color: white;
+			font-style: italic;
+			text-shadow: 0 0 10px green;
+		}
+		.action {
+			padding: 2px 8px;
+			border-radius: 5px;
+			font-size: 24px;
+			margin: 6px 4px;
+			.type {
+				opacity: 0.7;
+				font-weight: normal;
+				font-size: 20px;
+				width: 80px;
+    			display: inline-block;
+			}
+			.content {
+				display: inline-block;
+				vertical-align: top;
+				text-align: left;
+				color: gainsboro;
+				max-width: 500px;
+				.sp {
+					padding: 0 4px;
+					border-radius: 6px;
+					text-transform: capitalize;
+					color:white;
+				}
+				.action {
+					text-decoration: underline;
+					padding: 0;
+				}
+				.stealth, .fog-of-war {
+					background: dimgray;
+					color: black;
+					font-weight: bold;
+					font-style: italic;
+				}
+				.reveal {
+					background: gold;
+					color: black;
+					font-weight: bold;
+					font-style: italic;
+				}
+				.killing-blow {
+					color: pink;
+				}
+				.mind-control {
+					background: violet;
+					color: black;
+					font-weight: bold;
+					font-style: italic;
+				}
+				.poison {
+					font-style: italic;
+					background: darkgreen;
+				}
+				.burn {
+					font-style: italic;
+					background: darkred;
+				}
+				.stun {
+					font-style: italic;
+					background: dimgray;
+				}
+				.chill {
+					font-style: italic;
+					background: darkblue;
+				}
+				.freeze {
+					font-style: italic;
+					background: steelblue;
+				}
+				.true-dmg {
+					text-shadow: 0 0 8px red;
+				}
+				.adv {
+					color: orange;
+					text-shadow: 0 0 8px purple;
+				}
+				.atk {
+					color: orange;
+				}
+				.def {
+					color: lightblue;
+				}
+				.heal {
+					color: lightgreen;
+				}
+				.revive {
+					color: white;
+					text-shadow: 0 0 8px gold;
+				}
+				.cleanse {
+					color: lightgreen;
+					text-shadow: 0 0 8px teal;
+				}
+				.hp {
+					color: pink;
+				}
+				.haste, .empower {
+					background: cyan;
+					color: darkblue;
+				}
+				.melee {
+					color: white;
+				}
+				.vp {
+					text-shadow: 0 0 8px purple;
+					font-weight: bold;
+				}
+				.ap {
+					text-shadow: 0 0 8px blue;
+					font-weight: bold;
+				}
+				.g {
+					text-shadow: 0 0 8px gold;
+					font-weight: bold;
+				}
+				.no-g {
+					text-shadow: 0 0 8px red;
+					font-weight: bold;
+					.g {
+						text-shadow: 0 0 8px red;
+					}
+				}
+				.phase {
+					font-weight: bold;
+				}
+				.immunity {
+					border: 1px solid gray;
+				    padding: 0;
+				    padding-left: 4px;
+				}
+				.immunity:before {
+					content: 'Immune ';
+					font-size: 20px;
+					color: gray;
+				}
+				.persistent {
+					background: lightblue;
+					color: darkblue;
+					font-size: 20px;
+      				text-transform: uppercase;
+				}
+				.once {
+					background: darkorange;
+					color: darkred;
+					font-size: 20px;
+      				text-transform: uppercase;
+				}
+				.draw-card::before {
+					content: '\01F590 ';
+				}
+				.rng::before {
+					content: '\02B8F ';
+					color: gray;
+				}
+				.aoe::before {
+					content: '\0233E ';
+					color: gray;
+				}
+			}
+		}
+		.class-Level img {display: none;}
+		.class-Level.c1 {
+			.level-star.c1 {display: block;}
+		}
+		.class-Level.c2 {
+			.level-star.c2 {display: block;}
+		}
+		.class-Level.c3 {
+			.level-star.c3 {display: block;}
+		}
+		.level-star {
+			font-size: 90px;
+			color: white;
+			text-shadow: 0 0 10px gold;
+			margin-top: 0px;
+			display: none;
+			position: relative;
+			line-height: 0.9;
+		}
+		.faction-bg {
+			width: 100%;
+			height: 100%;
+			div {
+				width: 100%;
+				height: 100%;
+			}
+			.img {
+				width: auto;
+				background-repeat: no-repeat;
+				background-position-x: center;
+				background-size: contain;
+				opacity: 0.1;
+				display: none;
+			}
+			.class-Faction.Chaos .chaos {display:block;}
+			.class-Faction.Celestial .celestial {display:block;}
+			.class-Faction.Order .order {display:block;}
+			.class-Faction.Nature .nature {display:block;}
+			.class-Faction.Construct .construct {display:block;}
+		}
+
+		#card-list {
+			display: inline-block;
+			max-height: 1200px;
+			padding-right: 10px;
+			overflow: scroll;
+			button {
+				width: 300px;
+				display: block;
+			}
+			.c1 {background: lightgreen;}
+			.c2 {background: lightblue;}
+			.c3 {background: pink;}
+		}
+	</style>
+
+	<!-- List -->
+	<div id="card-list" class="">
+		
+	</div>
+
+	<!-- Actual card -->
+	<div id="card-cont" style="display: inline-block;
+	vertical-align: top; position: relative; width: 825px; height: 1125px; background: black;">
+		<div class="card" style="background: black; position: relative; overflow: hidden;">
+			<!-- Unit art -->
+			<img style="width: 100%;" class="top block img-Img" src="https://ideogram.ai/assets/image/lossless/response/wmCkuBYqQD2bIf24HgRsQA" alt="img"/>
+
+			<!-- Top block -->
+			<div class="top block" style="width: 100%;">
+				<!-- Gradient top -->
+				<div style="background: linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);; height: 100px; width: 100%;"></div>
+
+				<!-- Cost -->
+				<div class="block" style="top: 20px; right: 20px">
+					<div class="block top right" style="margin: 0px 14px; font-size: 80px; color: white; font-weight: bold; text-shadow: #FC0 0px 0 20px;">
+						<span class="text-Cost">5</span>
+					</div>
+				</div>
+
+				<!-- Level badge -->
+				<div class="block" style="top: 30px; left: 20px">
+					<div class="class-Level">
+						<div class="level-star c1">
+							&#x1F7C6;
+						</div>
+						<div class="level-star c2">
+							&#x1F7CA; <br> &#x1F7CA;
+						</div>
+						<div class="level-star c3">
+							&#x1F7CC; <br> &#x1F7CC; <br> &#x1F7CC;
+						</div>
+					</div>
+				</div>
+				<!-- Name -->
+				<h1 class="class-Faction" style="text-align: center; color: white; font-size: 65px; margin: 0; margin-top: -100px; padding-top: 20px; border:none; font-family: Georgia, serif;">
+					<span class="text-Name">
+						Mist Lord
+					</span>
+				</h1>
+				<!-- Faction -->
+				<!-- <h3 class="class-Faction" style="text-align: center; font-size: 26px; margin: 0px; font-family: Georgia, serif; position: absolute; left: 0; right: 0;">
+					<span class="text-Faction">Chaos</span>
+				</h3> -->
+			</div>
+
+			<!-- Bottom block -->
+			<div class="bottom block" style="width: 100%; min-height: 300px; background: black; color: white; text-align: center;">
+				<!-- background -->
+				<div class="faction-bg block top left">
+					<div class="class-Faction">
+						<div class="img chaos" style="background-image: url('assets/icons/chaos.png')"></div>
+						<div class="img celestial" style="background-image: url('assets/icons/celestial.png')"></div>
+						<div class="img order" style="background-image: url('assets/icons/order.png')"></div>
+						<div class="img nature" style="background-image: url('assets/icons/nature.png')"></div>
+						<div class="img construct" style="background-image: url('assets/icons/construct.png')"></div>
+					</div>
+				</div>
+
+				<!-- Gradient to top -->
+				<div class="" style="width: 100%; margin-top: -149px; height: 150px; background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(194,245,255,0) 100%); border:none;"></div>
+
+				<!-- Name -->
+				<!-- <h1 class="class-Faction" style="text-align: center; color: white; font-size: 69px; margin: 0; margin-top: -100px; padding-top: 20px; border:none; font-family: Georgia, serif;">
+					<span class="text-Name">
+						Mist Lord
+					</span>
+				</h1> -->
+
+				<!-- Faction -->
+				<h3 class="class-Faction" style="text-align: center; font-size: 26px; margin: 0; margin-top: -100px; font-family: Georgia, serif;">
+					<span class="text-Faction">Chaos</span>
+				</h3>
+
+				<!-- Stats -->
+				<div style="text-align: center;">
+					<div class="item" style="">
+						<span class="text-HP" style="font-size: 60px; vertical-align: middle; text-shadow: red 0px 0 9px;">
+							6
+						</span>
+						<img src="assets/icons/hp.png" width=60 style=" vertical-align: middle;">
+					</div>
+					<div class="item if-DEF">
+						<span class="text-DEF" style="font-size: 60px; vertical-align: middle; text-shadow: blue 0px 0 9px;">
+							3
+						</span>
+						<img src="assets/icons/def.png" width=60 style="vertical-align: middle;">
+					</div>
+					<div class="item">
+						<span class="text-SPD" style="font-size: 60px; vertical-align: middle; text-shadow: green 0px 0 9px;">
+							4
+						</span>
+						<img src="assets/icons/spd.png" width=60 style=" vertical-align: middle;">
+					</div>
+				</div>
+
+				<!-- Faction -->
+				<!-- <h3 class="class-Faction" style="text-align: center; font-size: 26px; margin: 0px; font-family: Georgia, serif;">
+					<span class="text-Faction">Chaos</span>
+				</h3> -->
+
+				<!-- Actions -->
+				<div style="margin: 10px 20px 30px 20px; padding-bottom: 10px; background: rbga(0,0,0,0.8); text-align: left; display: inline-block; max-width: 90%;">
+					<div class="action if-Tactic" style="">
+						<span class="type">Tactic</span>
+						<span class="content text-Tactic process">
+							<span class="sp fog-of-war">Fog of War</span> on all allies
+						</span>
+					</div>
+
+					<div class="action if-Deploy" style="">
+						<span class="type">Deploy</span>
+						<span class="content text-Deploy process">
+							<span class="sp stealth">Stealth 2</span> <br>
+						 	<span class="sp fog-of-war">Fog of War</span> on self & all <span class="sp chaos">Chaos</span> allies
+						 </span>
+					</div>
+
+					<div class="action if-Act" style="">
+						<span class="type">Act</span>
+						<span class="content text-Act process"><span class="sp melee">Melee</span> <span class="sp atk">ATK 4</span> <span class="sp poison">poison</span>, if in <span class="sp stealth">Stealth</span>, gain <span class="sp adv">ADV</span></span>
+					</div>
+
+					<div class="action if-Defend" style="">
+						<span class="type">Defend</span>
+						<span class="content text-Defend process">IMM stun/chill/freeze</span>
+					</div>
+
+					<div class="action if-Defeat" style="">
+						<span class="type">Defeat</span>
+						<span class="content text-Defeat process">AOE 2 <span class="sp poison">Poison</span></span>
+					</div>
+
+					<div class="action if-Win" style="">
+						<span class="type">Win</span>
+						<span class="content text-Win process">3VP 2G</span>
+					</div>
+				</div>
+			</div>
+			<div class="block" style="width: 100%; text-align: center; color: white; bottom: 10px">
+				v0.1
+			</div>
+		</div>
+
+		<!-- Card back -->
+		<div class="block top left hidden" style="background: black; width: 100%; height: 100%;">
+			<div class="class-Level" style="position: absolute; inset: 0; margin: auto; text-align: center; height: 250px; opacity: 0.7;">
+				<div class="level-star" style="display: block;">
+					&#x1F7C6; <br>
+					&#x1F7CA; <br>
+					&#x1F7CC;
+				</div>
+			</div>
+		</div>
+
+		<!-- Instruction -->
+		<style type="text/css">
+			#instructions {
+				color: white;
+				h1 {font-size: 50px; text-shadow: 0 0 10px gold;}
+				h2 {font-size: 30px;}
+				p {
+					font-size: 26px; padding-left: 20px;
+				}
+			}
+		</style>
+		<div class="block top left hidden" id='instructions' style="background: black; width: 100%; height: 100%;">
+			<div style="padding: 35px 90px;">
+				<h1 style="text-align: center;">Instructions</h1>
+				<h2 style="text-shadow: 0 0 10px lightgreen;">Shop Phase</h2>
+				<p>
+					1. Get 2*L gold coins <br>
+					2. Buy 0 or 1 unit from Shop <br>
+					This ends when all parties agree it ends
+				</p>
+				<h2 style="text-shadow: 0 0 10px cyan;">Preparation Phase</h2>
+				<p>
+					1. Draw 1+L cards from your Deck <br>
+					2. Perform below in any order <br>
+					<span style="margin-left: 20px; display: inline-block;">
+						a. Use Tactics <br>
+						b. Deploy 1 unit <br>
+					</span> <br>
+					3. Discard with hand limit of 5 <br>
+					This ends when both players have used up their army points
+				</p>
+				<h2 style="text-shadow: 0 0 10px red;">War Phase</h2>
+				<p>
+					Ordered by each unit's SPD, perform their Act. <br>
+					This ends when one side's units are all defeated. <br>
+					<br>
+					Then: <br>
+					1. Resolve Win conditions on living units <br>
+					2. Move them to Discard <br>
+					3. Increment Round Tracker <br>
+					Start from Shop Phase if game has not ended.
+				</p>
+			</div>
+		</div>
+
+		<!-- Overlay -->
+		<img style="width: 100%;" id="overlay" class="top block" style="z-index: 9" src="https://www.thegamecrafter.com/overlays/pokerdeck.png" alt="img"/>
+	</div>
+	<div style="display: inline-block; vertical-align: top;">
+		<button style="min-width: 200px" onclick="document.querySelector('#overlay').classList.toggle('hidden')">Toggle overlay</button> <br> <br>
+
+		<button style="min-width: 200px" onclick="loadUnit(current_index - 1)">Previous</button>
+		<br>
+		<button style="min-width: 200px" onclick="loadUnit(current_index + 1)">Next</button>
+		<br>
+		<br>
+		<button style="min-width: 200px; font-weight: bold" onclick="download()">Download</button> <br><br>
+		<button style="min-width: 200px; font-weight: bold; background: pink" onclick="bulkExport()">Bulk Export</button>
+	</div>
+
+	<br>
+	<hr>
+	<br>
+
+	<style type="text/css">
+		.chit-cont {
+			display: inline-block;
+			vertical-align: top;
+			position: relative; width: 300px; height: 300px; background: black;
+			text-align: center;
+			color:white;
+
+			background: black;
+
+			.chit {
+				font-size: 100px;
+				height: 100%;
+				position: absolute; inset: 0; margin: auto;
+				line-height: 0.4;
+				padding-top: 220px;
+				.text {
+					font-size: 35px;
+					font-family: Trebuchet MS, sans-serif;
+					font-style: italic;
+					text-transform: capitalize;
+			      	max-width: 160px;
+				      display: inline-block;
+				      line-height: 1;
+				      text-align: center;
+				      text-shadow: 0 0 10px;
+				}
+				.chill, .freeze {
+					text-shadow: 0 0 50px cyan;
+				}
+				.poison {
+					text-shadow: 0 0 50px lightgreen;
+				}
+				.burn {
+					text-shadow: 0 0 50px pink;
+				}
+				.stun {
+					text-shadow: 0 0 50px white;
+				}
+				.haste {
+					text-shadow: 0 0 50px teal;
+				}
+				.empower {
+					text-shadow: 0 0 50px red;
+				}
+				.stealth {
+					text-shadow: 0 0 50px gray;
+				}
+				.mind {
+					text-shadow: 0 0 50px pink;
+				}
+			}
+		}
+		#chit-btns {
+			button {
+				width: 150px;
+			}
+		}
+	</style>
+
+	<div class='chit-cont'>
+		<div class='chit'>
+		</div>
+		<!-- Overlay -->
+		<img id='chit-overlay' src="https://www.thegamecrafter.com/overlays/mediumcirclechit.png"/>
+	</div>
+
+	<div style="display: inline-block; vertical-align: top;">
+		<div id='chit-btns'></div>
+		<br>
+		<button style="background: lightgray" onclick="exportChit(document.querySelector('.chit-cont'))">DOWNLOAD</button>
+	</div>
+</body>
+</html>
