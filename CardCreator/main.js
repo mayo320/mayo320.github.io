@@ -5,6 +5,17 @@ var data = [];
 var current_index = 0;
 var outfile_name = '';
 
+
+function init() {
+	data = parseCsv();
+	createUnitList();
+	loadUnit(0);
+	setChitButtons();
+	setChit('Poison');
+}
+
+
+
 function exportCard(element) {
 	// Draw element on canvas
 	var html = element.innerHTML.trim();
@@ -47,11 +58,11 @@ function parseCsv() {
 function processAct(text) {
 	var matches = [
 		['(tactic|act|defend)', 'action'],
-		['(\\d* ?HP)', 'HP'],
+		['((?:\\d+/)?\\d* ?HP)', 'HP'],
 		['(melee)', 'melee'],
 		['(rng(?: \\d+)?)', 'rng'],
-		['(aoe(?: \\d+)?[RC]?)', 'aoe'],
-		['(ATK(?: \\d+)?)', 'atk'],
+		['(aoe(?: [RC\\d+])?)', 'aoe'],
+		['(ATK(?: [\\d+X])?)', 'atk'],
 		['((?:\\d+ )?def(?: \\d+))', 'def'],
 		['((?:\\d+ )?true (?:damage|dmg))', 'true-dmg'],
 		['(ADV)', 'adv'],
@@ -152,11 +163,7 @@ function loadUnit(index) {
 }
 
 window.onload = function(){
-	data = parseCsv();
-	createUnitList();
-	loadUnit(0);
-	console.log(data)
-	setChitButtons();
+	init();
 }
 
 function download() {
@@ -233,3 +240,14 @@ function exportChit(element) {
 		overlay.classList.remove('hidden');
 	});
 }
+
+function toggleCreator(pg) {
+	document.querySelectorAll('.creator').forEach((x) => x.classList.add('hidden'));
+	document.querySelector(pg).classList.remove('hidden');
+	init();
+}
+
+// Potential list of emojis https://www.unicode.org/emoji/charts/full-emoji-list.html
+// U+1F5E3
+// U+1F464
+// U+1F465

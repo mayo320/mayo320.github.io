@@ -6,6 +6,8 @@
 	<script src="data.js"></script>
 	<script src="main.js"></script>
 	<meta charset="utf-8">
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
 	<style type="text/css">
@@ -84,11 +86,23 @@
 			font-size: 24px;
 			margin: 6px 4px;
 			.type {
-				opacity: 0.7;
+				/*opacity: 0.7;*/
 				font-weight: normal;
-				font-size: 20px;
-				width: 80px;
+				width: 30px;
     			display: inline-block;
+    			text-shadow: 0 0 10px aqua;
+    			i {
+    				font-size: 30px;
+    			}
+			}
+			.type.Tactic {
+    			text-shadow: 0 0 10px orange;
+			}
+			.type.Defeat {
+    			text-shadow: 0 0 10px red;
+			}
+			.type.Win {
+    			text-shadow: 0 0 10px lightgreen;
 			}
 			.content {
 				display: inline-block;
@@ -269,7 +283,7 @@
 				background-repeat: no-repeat;
 				background-position-x: center;
 				background-size: contain;
-				opacity: 0.1;
+				opacity: 0.08;
 				display: none;
 			}
 			.class-Faction.Chaos .chaos {display:block;}
@@ -281,7 +295,7 @@
 
 		#card-list {
 			display: inline-block;
-			max-height: 1200px;
+			max-height: 1100px;
 			padding-right: 10px;
 			overflow: scroll;
 			button {
@@ -294,300 +308,316 @@
 		}
 	</style>
 
-	<!-- List -->
-	<div id="card-list" class="">
-		
+	<div class="nav" style="padding: 10px; background: lightgray; margin-bottom: 10px; border-radius: 10px;">
+		<style type="text/css">
+			.nav button {
+				font-weight: bold;
+			}
+		</style>
+		<button onclick="toggleCreator('#card-creator')">Card (Units) Creator</button>
+		<button onclick="toggleCreator('#chit-creator')">Chit (Status) Creator</button>
 	</div>
 
-	<!-- Actual card -->
-	<div id="card-cont" style="display: inline-block;
-	vertical-align: top; position: relative; width: 825px; height: 1125px; background: black;">
-		<div class="card" style="background: black; position: relative; overflow: hidden;">
-			<!-- Unit art -->
-			<img style="width: 100%;" class="top block img-Img" src="https://ideogram.ai/assets/image/lossless/response/wmCkuBYqQD2bIf24HgRsQA" alt="img"/>
-
-			<!-- Top block -->
-			<div class="top block" style="width: 100%;">
-				<!-- Gradient top -->
-				<div style="background: linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);; height: 100px; width: 100%;"></div>
-
-				<!-- Cost -->
-				<div class="block" style="top: 20px; right: 20px">
-					<div class="block top right" style="margin: 0px 14px; font-size: 80px; color: white; font-weight: bold; text-shadow: #FC0 0px 0 20px;">
-						<span class="text-Cost">5</span>
-					</div>
-				</div>
-
-				<!-- Level badge -->
-				<div class="block" style="top: 30px; left: 20px">
-					<div class="class-Level">
-						<div class="level-star c1">
-							&#x1F7C6;
-						</div>
-						<div class="level-star c2">
-							&#x1F7CA; <br> &#x1F7CA;
-						</div>
-						<div class="level-star c3">
-							&#x1F7CC; <br> &#x1F7CC; <br> &#x1F7CC;
-						</div>
-					</div>
-				</div>
-				<!-- Name -->
-				<h1 class="class-Faction" style="text-align: center; color: white; font-size: 65px; margin: 0; margin-top: -100px; padding-top: 20px; border:none; font-family: Georgia, serif;">
-					<span class="text-Name">
-						Mist Lord
-					</span>
-				</h1>
-				<!-- Faction -->
-				<!-- <h3 class="class-Faction" style="text-align: center; font-size: 26px; margin: 0px; font-family: Georgia, serif; position: absolute; left: 0; right: 0;">
-					<span class="text-Faction">Chaos</span>
-				</h3> -->
-			</div>
-
-			<!-- Bottom block -->
-			<div class="bottom block" style="width: 100%; min-height: 300px; background: black; color: white; text-align: center;">
-				<!-- background -->
-				<div class="faction-bg block top left">
-					<div class="class-Faction">
-						<div class="img chaos" style="background-image: url('assets/icons/chaos.png')"></div>
-						<div class="img celestial" style="background-image: url('assets/icons/celestial.png')"></div>
-						<div class="img order" style="background-image: url('assets/icons/order.png')"></div>
-						<div class="img nature" style="background-image: url('assets/icons/nature.png')"></div>
-						<div class="img construct" style="background-image: url('assets/icons/construct.png')"></div>
-					</div>
-				</div>
-
-				<!-- Gradient to top -->
-				<div class="" style="width: 100%; margin-top: -149px; height: 150px; background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(194,245,255,0) 100%); border:none;"></div>
-
-				<!-- Name -->
-				<!-- <h1 class="class-Faction" style="text-align: center; color: white; font-size: 69px; margin: 0; margin-top: -100px; padding-top: 20px; border:none; font-family: Georgia, serif;">
-					<span class="text-Name">
-						Mist Lord
-					</span>
-				</h1> -->
-
-				<!-- Faction -->
-				<h3 class="class-Faction" style="text-align: center; font-size: 26px; margin: 0; margin-top: -100px; font-family: Georgia, serif;">
-					<span class="text-Faction">Chaos</span>
-				</h3>
-
-				<!-- Stats -->
-				<div style="text-align: center;">
-					<div class="item" style="">
-						<span class="text-HP" style="font-size: 60px; vertical-align: middle; text-shadow: red 0px 0 9px;">
-							6
-						</span>
-						<img src="assets/icons/hp.png" width=60 style=" vertical-align: middle;">
-					</div>
-					<div class="item if-DEF">
-						<span class="text-DEF" style="font-size: 60px; vertical-align: middle; text-shadow: blue 0px 0 9px;">
-							3
-						</span>
-						<img src="assets/icons/def.png" width=60 style="vertical-align: middle;">
-					</div>
-					<div class="item">
-						<span class="text-SPD" style="font-size: 60px; vertical-align: middle; text-shadow: green 0px 0 9px;">
-							4
-						</span>
-						<img src="assets/icons/spd.png" width=60 style=" vertical-align: middle;">
-					</div>
-				</div>
-
-				<!-- Faction -->
-				<!-- <h3 class="class-Faction" style="text-align: center; font-size: 26px; margin: 0px; font-family: Georgia, serif;">
-					<span class="text-Faction">Chaos</span>
-				</h3> -->
-
-				<!-- Actions -->
-				<div style="margin: 10px 20px 30px 20px; padding-bottom: 10px; background: rbga(0,0,0,0.8); text-align: left; display: inline-block; max-width: 90%;">
-					<div class="action if-Tactic" style="">
-						<span class="type">Tactic</span>
-						<span class="content text-Tactic process">
-							<span class="sp fog-of-war">Fog of War</span> on all allies
-						</span>
-					</div>
-
-					<div class="action if-Deploy" style="">
-						<span class="type">Deploy</span>
-						<span class="content text-Deploy process">
-							<span class="sp stealth">Stealth 2</span> <br>
-						 	<span class="sp fog-of-war">Fog of War</span> on self & all <span class="sp chaos">Chaos</span> allies
-						 </span>
-					</div>
-
-					<div class="action if-Act" style="">
-						<span class="type">Act</span>
-						<span class="content text-Act process"><span class="sp melee">Melee</span> <span class="sp atk">ATK 4</span> <span class="sp poison">poison</span>, if in <span class="sp stealth">Stealth</span>, gain <span class="sp adv">ADV</span></span>
-					</div>
-
-					<div class="action if-Defend" style="">
-						<span class="type">Defend</span>
-						<span class="content text-Defend process">IMM stun/chill/freeze</span>
-					</div>
-
-					<div class="action if-Defeat" style="">
-						<span class="type">Defeat</span>
-						<span class="content text-Defeat process">AOE 2 <span class="sp poison">Poison</span></span>
-					</div>
-
-					<div class="action if-Win" style="">
-						<span class="type">Win</span>
-						<span class="content text-Win process">3VP 2G</span>
-					</div>
-				</div>
-			</div>
-			<div class="block" style="width: 100%; text-align: center; color: white; bottom: 10px">
-				v0.1
-			</div>
+	<!-- Card creator -->
+	<div id='card-creator' class='creator'>
+		<!-- List -->
+		<div id="card-list" class="">
 		</div>
 
-		<!-- Card back -->
-		<div class="block top left hidden" style="background: black; width: 100%; height: 100%;">
-			<div class="class-Level" style="position: absolute; inset: 0; margin: auto; text-align: center; height: 250px; opacity: 0.7;">
-				<div class="level-star" style="display: block;">
-					&#x1F7C6; <br>
-					&#x1F7CA; <br>
-					&#x1F7CC;
+		<!-- Actual card -->
+		<div id="card-cont" style="display: inline-block;
+		vertical-align: top; position: relative; width: 825px; height: 1125px; background: black;">
+			<div class="card" style="background: black; position: relative; overflow: hidden;">
+				<!-- Unit art -->
+				<img style="width: 100%;" class="top block img-Img" src="https://ideogram.ai/assets/image/lossless/response/wmCkuBYqQD2bIf24HgRsQA" alt="img"/>
+
+				<!-- Top block -->
+				<div class="top block" style="width: 100%;">
+					<!-- Gradient top -->
+					<div style="background: linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);; height: 100px; width: 100%;"></div>
+
+					<!-- Cost -->
+					<div class="block" style="top: 20px; right: 20px">
+						<div class="block top right" style="margin: 0px 14px; font-size: 80px; color: white; font-weight: bold; text-shadow: #FC0 0px 0 20px;">
+							<span class="text-Cost">5</span>
+						</div>
+					</div>
+
+					<!-- Level badge -->
+					<div class="block" style="top: 30px; left: 20px">
+						<div class="class-Level">
+							<div class="level-star c1">
+								&#x1F7C6;
+							</div>
+							<div class="level-star c2">
+								&#x1F7CA; <br> &#x1F7CA;
+							</div>
+							<div class="level-star c3">
+								&#x1F7CC; <br> &#x1F7CC; <br> &#x1F7CC; <br>
+							</div>
+						</div>
+					</div>
+					<!-- Name -->
+					<h1 class="class-Faction" style="text-align: center; color: white; font-size: 65px; margin: 0; margin-top: -100px; padding-top: 20px; border:none; font-family: Georgia, serif;">
+						<span class="text-Name">
+							Mist Lord
+						</span>
+					</h1>
+				</div>
+
+				<!-- Bottom block -->
+				<div class="bottom block" style="width: 100%; min-height: 300px; background: black; color: white; text-align: center;">
+					<!-- background -->
+					<div class="faction-bg block top left">
+						<div class="class-Faction">
+							<div class="img chaos" style="background-image: url('assets/icons/chaos.png')"></div>
+							<div class="img celestial" style="background-image: url('assets/icons/celestial.png')"></div>
+							<div class="img order" style="background-image: url('assets/icons/order.png')"></div>
+							<div class="img nature" style="background-image: url('assets/icons/nature.png')"></div>
+							<div class="img construct" style="background-image: url('assets/icons/construct.png')"></div>
+						</div>
+					</div>
+
+					<!-- Gradient to top -->
+					<div class="" style="width: 100%; margin-top: -149px; height: 150px; background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(194,245,255,0) 100%); border:none;"></div>
+
+					<!-- Faction -->
+					<h3 class="class-Faction" style="text-align: center; font-size: 26px; margin: 0; margin-top: -100px; font-family: Georgia, serif;">
+						<span class="text-Faction">Chaos</span>
+					</h3>
+
+					<!-- Stats -->
+					<div style="text-align: center;">
+						<div class="item" style="">
+							<span class="text-HP" style="font-size: 60px; vertical-align: middle; text-shadow: red 0px 0 9px;">
+								6
+							</span>
+							<i class="material-icons" style="vertical-align: middle; font-size: 60px; text-shadow: red 0px 0 9px;">favorite</i>
+						</div>
+						<div class="item if-DEF">
+							<span class="text-DEF" style="font-size: 60px; vertical-align: middle; text-shadow: blue 0px 0 9px;">
+								3
+							</span>
+							<i class="material-icons" style="vertical-align: middle; font-size: 60px; text-shadow: blue 0px 0 9px;">shield</i>
+						</div>
+						<div class="item">
+							<span class="text-SPD" style="font-size: 60px; vertical-align: middle; text-shadow: green 0px 0 9px;">
+								4
+							</span>
+							<i class="material-icons" style="vertical-align: middle; font-size: 60px; text-shadow: green 0px 0 9px;">tornado</i>
+						</div>
+					</div>
+
+					<!-- Actions -->
+					<div style="margin: 10px 20px 30px 20px; padding-bottom: 10px; background: rbga(0,0,0,0.8); text-align: left; display: inline-block; max-width: 90%;">
+						<div class="action if-Tactic" style="">
+							<span class="type Tactic"><i class="material-icons">psychology</i></span>
+							<span class="content text-Tactic process">
+								<span class="sp fog-of-war">Fog of War</span> on all allies
+							</span>
+						</div>
+
+						<div class="action if-Deploy" style="">
+							<span class="type Deploy"><i class="material-icons">person_add</i></span>
+							<span class="content text-Deploy process">
+								<span class="sp stealth">Stealth 2</span> <br>
+							 	<span class="sp fog-of-war">Fog of War</span> on self & all <span class="sp chaos">Chaos</span> allies
+							 </span>
+						</div>
+
+						<div class="action if-Act" style="">
+							<span class="type Act"><i class="material-icons">electric_bolt</i></span>
+							<span class="content text-Act process"><span class="sp melee">Melee</span> <span class="sp atk">ATK 4</span> <span class="sp poison">poison</span>, if in <span class="sp stealth">Stealth</span>, gain <span class="sp adv">ADV</span></span>
+						</div>
+
+						<div class="action if-Defend" style="">
+							<span class="type Defend"><i class="material-icons">security</i></span>
+							<span class="content text-Defend process">IMM stun/chill/freeze</span>
+						</div>
+
+						<div class="action if-Defeat" style="">
+							<span class="type Defeat"><i class="material-icons">cancel</i></span>
+							<span class="content text-Defeat process">AOE 2 <span class="sp poison">Poison</span></span>
+						</div>
+
+						<div class="action if-Win" style="">
+							<span class="type Win"><i class="material-icons">check_circle</i></span>
+							<span class="content text-Win process">3VP 2G</span>
+						</div>
+
+						<div class="if-Flavor" style="color: lightgray; font-style: italic; font-size: 20px; text-align: center; font-family: Georgia, serif;">
+							<span class="text-Flavor">
+								Some flavor text..
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="block" style="width: 100%; text-align: center; color: white; bottom: 10px">
+					v0.2
 				</div>
 			</div>
-		</div>
 
-		<!-- Instruction -->
+			<!-- Card back -->
+			<div id='card-back' class="block top left hidden" style="background: black; width: 100%; height: 100%;">
+				<div class="class-Level" style="position: absolute; inset: 0; margin: auto; text-align: center; height: 250px; opacity: 0.7;">
+					<div class="level-star" style="display: block;">
+						&#x1F7C6; <br>
+						&#x1F7CA; <br>
+						&#x1F7CC;
+					</div>
+				</div>
+			</div>
+
+			<!-- Instruction -->
+			<style type="text/css">
+				#instructions {
+					color: white;
+					h1 {font-size: 50px; text-shadow: 0 0 10px gold;}
+					h2 {font-size: 30px;}
+					p {
+						font-size: 26px; padding-left: 20px;
+					}
+				}
+			</style>
+			<div class="block top left hidden" id='instructions' style="background: black; width: 100%; height: 100%;">
+				<div style="padding: 35px 90px;">
+					<h1 style="text-align: center;">Instructions</h1>
+					<h2 style="text-shadow: 0 0 10px lightgreen;">Shop Phase</h2>
+					<p>
+						1. Get 2*L gold coins <br>
+						2. Buy 0 or 1 unit from Shop <br>
+						This ends when all parties agree it ends
+					</p>
+					<h2 style="text-shadow: 0 0 10px cyan;">Preparation Phase</h2>
+					<p>
+						1. Draw 1+L cards from your Deck <br>
+						2. Perform below in any order <br>
+						<span style="margin-left: 20px; display: inline-block;">
+							a. Use Tactics <br>
+							b. Deploy 1 unit <br>
+						</span> <br>
+						3. Discard with hand limit of 5 <br>
+						This ends when both players have used up their army points
+					</p>
+					<h2 style="text-shadow: 0 0 10px red;">War Phase</h2>
+					<p>
+						Ordered by each unit's SPD, perform their Act. <br>
+						This ends when one side's units are all defeated. <br>
+						<br>
+						Then: <br>
+						1. Resolve Win conditions on living units <br>
+						2. Move them to Discard <br>
+						3. Increment Round Tracker <br>
+						Start from Shop Phase if game has not ended.
+					</p>
+				</div>
+			</div>
+
+			<!-- Overlay -->
+			<img style="width: 100%;" id="overlay" class="top block" style="z-index: 9" src="https://www.thegamecrafter.com/overlays/pokerdeck.png" alt="img"/>
+		</div>
+		<div style="display: inline-block; vertical-align: top;">
+			<span>Toggles</span> <br>
+			<button style="min-width: 200px" onclick="document.querySelector('#overlay').classList.toggle('hidden')">Overlay</button> <br>
+			<button style="min-width: 200px" onclick="document.querySelector('#card-back').classList.toggle('hidden')">Back</button>
+			<br>
+			<button style="min-width: 200px" onclick="document.querySelector('#instructions').classList.toggle('hidden')">Instructions</button> 
+
+			<br> <br>
+			<span>Navigation</span> <br>
+			<button style="min-width: 200px" onclick="loadUnit(current_index - 1)">Previous</button>
+			<br>
+			<button style="min-width: 200px" onclick="loadUnit(current_index + 1)">Next</button>
+			<br>
+			<br>
+
+			<span>Export</span> <br>
+			<button style="min-width: 200px; height: 90px; font-weight: bold; background: gainsboro;" onclick="download()">
+				<i class="material-icons" style="vertical-align: middle; font-size: 30px;">download</i>
+				Download
+			</button> <br>
+			<button style="min-width: 200px; font-weight: bold; background: pink" onclick="bulkExport()">Bulk Download</button>
+		</div>
+	</div>
+
+	<!-- Chit creator -->
+	<div id='chit-creator' class='creator hidden'>
 		<style type="text/css">
-			#instructions {
-				color: white;
-				h1 {font-size: 50px; text-shadow: 0 0 10px gold;}
-				h2 {font-size: 30px;}
-				p {
-					font-size: 26px; padding-left: 20px;
+			.chit-cont {
+				display: inline-block;
+				vertical-align: top;
+				position: relative; width: 300px; height: 300px; background: black;
+				text-align: center;
+				color:white;
+				overflow: hidden;
+				background: black;
+
+				.chit {
+					font-size: 100px;
+					height: 100%;
+					position: absolute; inset: 0; margin: auto;
+					line-height: 0.4;
+					padding-top: 220px;
+					.text {
+						font-size: 35px;
+						font-family: Trebuchet MS, sans-serif;
+						font-style: italic;
+						text-transform: capitalize;
+				      	max-width: 160px;
+					      display: inline-block;
+					      line-height: 1;
+					      text-align: center;
+					      text-shadow: 0 0 10px;
+					}
+					.chill, .freeze {
+						text-shadow: 0 0 50px cyan;
+					}
+					.poison {
+						text-shadow: 0 0 50px lightgreen;
+					}
+					.burn {
+						text-shadow: 0 0 50px pink;
+					}
+					.stun {
+						text-shadow: 0 0 50px white;
+					}
+					.haste {
+						text-shadow: 0 0 50px teal;
+					}
+					.empower {
+						text-shadow: 0 0 50px red;
+					}
+					.stealth {
+						text-shadow: 0 0 50px gray;
+					}
+					.mind {
+						text-shadow: 0 0 50px pink;
+					}
+				}
+			}
+			#chit-btns {
+				button {
+					width: 150px;
 				}
 			}
 		</style>
-		<div class="block top left hidden" id='instructions' style="background: black; width: 100%; height: 100%;">
-			<div style="padding: 35px 90px;">
-				<h1 style="text-align: center;">Instructions</h1>
-				<h2 style="text-shadow: 0 0 10px lightgreen;">Shop Phase</h2>
-				<p>
-					1. Get 2*L gold coins <br>
-					2. Buy 0 or 1 unit from Shop <br>
-					This ends when all parties agree it ends
-				</p>
-				<h2 style="text-shadow: 0 0 10px cyan;">Preparation Phase</h2>
-				<p>
-					1. Draw 1+L cards from your Deck <br>
-					2. Perform below in any order <br>
-					<span style="margin-left: 20px; display: inline-block;">
-						a. Use Tactics <br>
-						b. Deploy 1 unit <br>
-					</span> <br>
-					3. Discard with hand limit of 5 <br>
-					This ends when both players have used up their army points
-				</p>
-				<h2 style="text-shadow: 0 0 10px red;">War Phase</h2>
-				<p>
-					Ordered by each unit's SPD, perform their Act. <br>
-					This ends when one side's units are all defeated. <br>
-					<br>
-					Then: <br>
-					1. Resolve Win conditions on living units <br>
-					2. Move them to Discard <br>
-					3. Increment Round Tracker <br>
-					Start from Shop Phase if game has not ended.
-				</p>
+
+		<!-- List -->
+		<div style="display: inline-block; vertical-align: top;">
+			<div id='chit-btns'></div>
+			<br>
+			<button style="background: lightgray" onclick="exportChit(document.querySelector('.chit-cont'))">DOWNLOAD</button>
+		</div>
+
+		<!-- Container -->
+		<div class='chit-cont'>
+			<div class='chit'>
 			</div>
+			<!-- Overlay -->
+			<img id='chit-overlay' src="https://www.thegamecrafter.com/overlays/mediumcirclechit.png"/>
 		</div>
 
-		<!-- Overlay -->
-		<img style="width: 100%;" id="overlay" class="top block" style="z-index: 9" src="https://www.thegamecrafter.com/overlays/pokerdeck.png" alt="img"/>
-	</div>
-	<div style="display: inline-block; vertical-align: top;">
-		<button style="min-width: 200px" onclick="document.querySelector('#overlay').classList.toggle('hidden')">Toggle overlay</button> <br> <br>
-
-		<button style="min-width: 200px" onclick="loadUnit(current_index - 1)">Previous</button>
-		<br>
-		<button style="min-width: 200px" onclick="loadUnit(current_index + 1)">Next</button>
-		<br>
-		<br>
-		<button style="min-width: 200px; font-weight: bold" onclick="download()">Download</button> <br><br>
-		<button style="min-width: 200px; font-weight: bold; background: pink" onclick="bulkExport()">Bulk Export</button>
 	</div>
 
-	<br>
-	<hr>
-	<br>
-
-	<style type="text/css">
-		.chit-cont {
-			display: inline-block;
-			vertical-align: top;
-			position: relative; width: 300px; height: 300px; background: black;
-			text-align: center;
-			color:white;
-
-			background: black;
-
-			.chit {
-				font-size: 100px;
-				height: 100%;
-				position: absolute; inset: 0; margin: auto;
-				line-height: 0.4;
-				padding-top: 220px;
-				.text {
-					font-size: 35px;
-					font-family: Trebuchet MS, sans-serif;
-					font-style: italic;
-					text-transform: capitalize;
-			      	max-width: 160px;
-				      display: inline-block;
-				      line-height: 1;
-				      text-align: center;
-				      text-shadow: 0 0 10px;
-				}
-				.chill, .freeze {
-					text-shadow: 0 0 50px cyan;
-				}
-				.poison {
-					text-shadow: 0 0 50px lightgreen;
-				}
-				.burn {
-					text-shadow: 0 0 50px pink;
-				}
-				.stun {
-					text-shadow: 0 0 50px white;
-				}
-				.haste {
-					text-shadow: 0 0 50px teal;
-				}
-				.empower {
-					text-shadow: 0 0 50px red;
-				}
-				.stealth {
-					text-shadow: 0 0 50px gray;
-				}
-				.mind {
-					text-shadow: 0 0 50px pink;
-				}
-			}
-		}
-		#chit-btns {
-			button {
-				width: 150px;
-			}
-		}
-	</style>
-
-	<div class='chit-cont'>
-		<div class='chit'>
-		</div>
-		<!-- Overlay -->
-		<img id='chit-overlay' src="https://www.thegamecrafter.com/overlays/mediumcirclechit.png"/>
-	</div>
-
-	<div style="display: inline-block; vertical-align: top;">
-		<div id='chit-btns'></div>
-		<br>
-		<button style="background: lightgray" onclick="exportChit(document.querySelector('.chit-cont'))">DOWNLOAD</button>
-	</div>
 </body>
 </html>
