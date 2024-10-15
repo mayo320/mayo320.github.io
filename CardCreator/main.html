@@ -189,8 +189,14 @@
 					color: pink;
 				}
 				.haste, .empower {
-					background: cyan;
-					color: darkblue;
+					/*background: cyan;*/
+					/*color: cyan;*/
+				}
+				.haste {
+					border: 1px solid cyan;
+				}
+				.empower {
+					border: 1px solid orangered;
 				}
 				.melee {
 					color: white;
@@ -470,17 +476,26 @@
 
 			<!-- Instruction -->
 			<style type="text/css">
-				#instructions {
+				#instructions, #instructions2 {
 					color: white;
 					h1 {font-size: 50px; text-shadow: 0 0 10px gold;}
 					h2 {font-size: 30px;}
 					p {
 						font-size: 26px; padding-left: 20px;
 					}
+					.content {
+						/*margin: 4px 2px;*/
+						padding: 6px 4px;
+						margin-left: -8px;
+						margin-top: -1px;
+						display: inline-block;
+						max-width: none;
+						border: 1px solid gray;
+					}
 				}
 			</style>
 			<div class="block top left hidden" id='instructions' style="background: black; width: 100%; height: 100%;">
-				<div style="padding: 35px 90px;">
+				<div style="padding: 40px 90px;">
 					<h1 style="text-align: center;">Instructions</h1>
 					<h2 style="text-shadow: 0 0 10px lightgreen;">Shop Phase</h2>
 					<p>
@@ -513,6 +528,96 @@
 				</div>
 			</div>
 
+			<div class="block top left hidden" id='instructions2' style="background: black; width: 100%; height: 100%;">
+				<div style="padding: 35px 70px;" class="action">
+					<h2 style="text-align: center; text-shadow: 0 0 10px cyan;">Glossary</h2>
+					<div class="content">
+						<span class="sp melee">Melee</span>
+						<span>Target units directly in front of it; if none, target someone else on the same row.</span>
+					</div>
+					<div class="content">
+						<span class="sp rng">RNG X</span>
+						<span>Target units up to X tiles away.</span>
+					</div>
+					<div class="content">
+						<span class="sp far">FAR</span>
+						<span>Target furthest.</span>
+					</div>
+					<div class="content">
+						<span class="sp aoe">AOE X</span>
+						<span>Area spanning X away from unit; except R=row, C=column.</span>
+					</div>
+					<div class="content">
+						<span class="sp empower">Empower X</span>
+						<span>Grant ATK/token.</span>
+					</div>
+					<div class="content">
+						<span class="sp haste">Haste X</span>
+						<span>Grant SPD/token.</span>
+					</div>
+					<div class="content">
+						<span class="sp adv">ADV X</span>
+						<span>Reroll any number of dice during ATK/DEF (once).</span>
+					</div>
+					<div class="content">
+						<span class="sp poison">poison X</span>
+						<span>Deal 1 true damage per poison token whenever the target unit acts; also reduce 1 SPD/token.</span>
+					</div>
+					<div class="content">
+						<span class="sp burn">burn X</span>
+						<span>Deal 1 damage whenever any unit acts.</span>
+					</div>
+					<div class="content">
+						<span class="sp chill">chill X</span>
+						<span>Reduce 1 SPD/token.</span>
+					</div>
+					<div class="content">
+						<span class="sp freeze">Freeze</span>
+						<span>Skip turn. (Can't stack)</span>
+					</div>
+					<div class="content">
+						<span class="sp stun">stun</span>
+						<span>Skip turn; also reduce DEF by 1. (Can't stack)</span>
+					</div>
+					<div class="content">
+						<span class="sp cleanse">cleanse X</span>
+						<span>Remove X debuff tokens.</span>
+					</div>
+					<div class="content">
+						<span class="sp heal">heal X</span>
+						<span>Heal X HP.</span>
+					</div>
+					<div class="content">
+						<span class="sp stealth">Stealth X</span>
+						<span>Cannot be targeted until X Acts.</span>
+					</div>
+					<div class="content">
+						<span class="sp fog-of-war">Fog of War</span>
+						<span>Unrevealed until War Phase starts.</span>
+					</div>
+					<div class="content">
+						<span class="sp reveal">Reveal X</span>
+						<span>Reveal unit with Fog of War, and remove X stealth.</span>
+					</div>
+					<div class="content">
+						<span class="sp mind-control">Mind Control X</span>
+						<span>Change alignment if Mind Control tokens # >= HP; remove L tokens after each Act; once tokens # is 0, change back alignment.</span>
+					</div>
+					<div class="content">
+						<span class="sp once">Once</span>
+						<span>Can only be triggered once per round.</span>
+					</div>
+					<div class="content">
+						<span class="sp persistent">persistent</span>
+						<span>Ongoing effect, cannot discard unit while active.</span>
+					</div>
+					<div class="content">
+						<span class="sp true-dmg">true damage</span>
+						<span>Bypasses DEF, absolute damage.</span>
+					</div>
+				</div>
+			</div>
+
 			<!-- Overlay -->
 			<img style="width: 100%;" id="overlay" class="top block" style="z-index: 9" src="https://www.thegamecrafter.com/overlays/pokerdeck.png" alt="img"/>
 		</div>
@@ -521,9 +626,10 @@
 			<button style="min-width: 200px" onclick="document.querySelector('#overlay').classList.toggle('hidden')">Overlay</button> <br>
 			<button style="min-width: 200px" onclick="document.querySelector('#card-back').classList.toggle('hidden')">Back</button>
 			<br>
-			<button style="min-width: 200px" onclick="document.querySelector('#instructions').classList.toggle('hidden')">Instructions</button> 
+			<button style="min-width: 200px" onclick="document.querySelector('#instructions').classList.toggle('hidden')">Instructions (F)</button> <br>
+			<button style="min-width: 200px" onclick="document.querySelector('#instructions2').classList.toggle('hidden')">Instructions (B)</button> <br>
 
-			<br> <br>
+			<br>
 			<span>Navigation</span> <br>
 			<button style="min-width: 200px" onclick="loadUnit(current_index - 1)">Previous</button>
 			<br>
