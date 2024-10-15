@@ -155,11 +155,11 @@
 				}
 				.chill {
 					font-style: italic;
-					background: darkblue;
+					background: steelblue;
 				}
 				.freeze {
 					font-style: italic;
-					background: steelblue;
+					background: darkcyan;
 				}
 				.true-dmg {
 					text-shadow: 0 0 8px red;
@@ -366,7 +366,7 @@
 				</div>
 
 				<!-- Bottom block -->
-				<div class="bottom block" style="width: 100%; min-height: 300px; background: black; color: white; text-align: center;">
+				<div class="bottom block" style="width: 100%; min-height: 300px; color: white; text-align: center; background: black">
 					<!-- background -->
 					<div class="faction-bg block top left">
 						<div class="class-Faction">
@@ -445,11 +445,11 @@
 							<span class="content text-Win process">3VP 2G</span>
 						</div>
 
-						<div class="if-Flavor" style="color: lightgray; font-style: italic; font-size: 20px; text-align: center; font-family: Georgia, serif;">
+						<!-- <div class="if-Flavor" style="color: lightgray; font-style: italic; font-size: 20px; text-align: center; font-family: Georgia, serif;">
 							<span class="text-Flavor">
 								Some flavor text..
 							</span>
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<div class="block" style="width: 100%; text-align: center; color: white; bottom: 10px">
@@ -597,7 +597,7 @@
 			}
 			#chit-btns {
 				button {
-					width: 150px;
+					width: 300px;
 				}
 			}
 		</style>
@@ -606,7 +606,9 @@
 		<div style="display: inline-block; vertical-align: top;">
 			<div id='chit-btns'></div>
 			<br>
-			<button style="background: lightgray" onclick="exportChit(document.querySelector('.chit-cont'))">DOWNLOAD</button>
+			<button style="background: lightgray" onclick="exportChit(document.querySelector('.chit-cont'))">
+				<i class="material-icons" style="vertical-align: middle; font-size: 30px;">download</i>
+			DOWNLOAD</button>
 		</div>
 
 		<!-- Container -->

@@ -209,7 +209,7 @@ function setChitButtons() {
 	var cont = document.querySelector('#chit-btns');
 	var html = '';
 	for (k in CHIT_DATA) {
-		html += `<button onclick="setChit('` + k + `')">` + k + `</button><br> `
+		html += `<button onclick="setChit('${k}')">${k} (${CHIT_DATA[k][0]})</button><br>`;
 	}
 	cont.innerHTML = html;
 }
