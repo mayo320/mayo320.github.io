@@ -14,7 +14,7 @@ function UnzipBase64EncodedString(data) {
 
 function loadCsvFromUri() {
   const urlParams = new URLSearchParams(window.location.search)
-  const data = urlParams.get(param);
+  const data = urlParams.get('csv');
 
   if (data) {
     const csv = UnzipBase64EncodedString(data);
