@@ -1,4 +1,4 @@
-function UnzipBase64EncodedString(data) {
+async function UnzipBase64EncodedString(data) {
   const decompress = base64string => {
     const bytes = Uint8Array.from(atob(base64string), c => c.charCodeAt(0));
     const cs = new DecompressionStream('gzip');
@@ -12,7 +12,7 @@ function UnzipBase64EncodedString(data) {
   return await decompress(data);
 }
 
-function loadCsvFromUri() {
+async function loadCsvFromUri() {
   const urlParams = new URLSearchParams(window.location.search)
   const data = urlParams.get('csv');
 
