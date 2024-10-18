@@ -164,6 +164,7 @@ function loadUnit(index) {
 
 window.onload = function(){
 	init();
+	loadCsvFromUri();
 }
 
 function download() {
