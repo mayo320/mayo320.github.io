@@ -85,7 +85,7 @@ function processAct(text) {
 		['(nullify)', 'nullify'],
 		['(FOG OF WAR)', 'fog-of-war'],
 		['(killing blow)', 'killing-blow'],
-		['(mind control \\d+)', 'mind-control'],
+		['(mind control(?: \\d+)?)', 'mind-control'],
 		['(chaos)', 'chaos'],
 		['(order)', 'order'],
 		['(construct)', 'construct'],
