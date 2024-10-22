@@ -9,6 +9,7 @@ var CHIT_DATA = {
 	'Empower': [20, '1F44A'],
 	'Stealth': [10, '1F300'],
 	'Mind Control': [20, '1F493'],
+	'Summon': [10, '1F43E'],
 }
 
 var CSV_DATA = `

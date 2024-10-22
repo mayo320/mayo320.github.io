@@ -92,6 +92,7 @@ function processAct(text) {
 		['(celestial)', 'celestial'],
 		['(nature)', 'nature'],
 		['(draw \\d+ cards?)', 'draw-card'],
+		['(spawn|summon)', 'action'],
 		['(\\d+VP)', 'vp'],
 		['(\\d+ap)', 'ap'],
 		['(-\\d+G)', 'no-g'], // above G
