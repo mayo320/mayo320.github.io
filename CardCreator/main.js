@@ -204,7 +204,11 @@ function setChit(name) {
 	var data = CHIT_DATA[name];
 	var chit = document.querySelector('.chit');
 	var html = '<span class="'+name.toLowerCase()+'">&#x'+data[1]+';';
-	html += '<br><span class="text">'+name+'</span></span>';
+	html += `<br><span class="text">${name}</span>`;
+	if (data[2]) {
+		html += `<br><span class="subtext">${data[2]}</span>`;
+	}
+	html += '</span>';
 	chit.innerHTML = html;
 	current_chit = name;
 }

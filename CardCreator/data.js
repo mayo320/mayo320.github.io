@@ -1,15 +1,15 @@
 
 var CHIT_DATA = {
-	'Stun': [10, '1F4AB'],
-	'Poison': [20, '1F480'],
-	'Burn': [20, '1F525'],
-	'Chill': [20, '2744'],
-	'Shock': [20, '26A1'],
-	'Regen': [20, '1F49A'],
-	'Empower': [20, '1F44A'],
-	'Stealth': [10, '1F300'],
-	'Charm': [20, '1F493'],
-	'Summon': [10, '1F43E'],
+	'Poison': [18, '1F480', '1 ATK'],
+	'Burn': [18, '1F525', '1 True Dmg'],
+	'Chill': [18, '2744', '-1 ATK'],
+	'Shock': [18, '26A1', '-1 DEF'],
+	'Regen': [18, '1F49A', '1 Heal'],
+	'Empower': [18, '1F44A', '+1 ATK'],
+	'Charm': [18, '1F493', ''],
+	'Stealth': [8, '1F300', ''],
+	'Stun': [8, '1F4AB', ''],
+	'Summon': [8, '1F43E', ''],
 }
 
 var CSV_DATA = `
