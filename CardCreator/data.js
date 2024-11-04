@@ -1,14 +1,14 @@
 
 var CHIT_DATA = {
-	'Poison': [20, '1F480'],
-	'Burn': [10, '1F525'],
-	'Chill': [20, '1F537'],
-	'Freeze': [10, '26C4'],
 	'Stun': [10, '1F4AB'],
-	'Haste': [20, '1F4A8'],
+	'Poison': [20, '1F480'],
+	'Burn': [20, '1F525'],
+	'Chill': [20, '2744'],
+	'Shock': [20, '26A1'],
+	'Regen': [20, '1F49A'],
 	'Empower': [20, '1F44A'],
 	'Stealth': [10, '1F300'],
-	'Mind Control': [20, '1F493'],
+	'Charm': [20, '1F493'],
 	'Summon': [10, '1F43E'],
 }
 
