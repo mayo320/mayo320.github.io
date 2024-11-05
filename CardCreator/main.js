@@ -56,6 +56,9 @@ function parseCsv() {
 }
 
 function processAct(text) {
+	if (text.length === 0) {
+		return '';
+	}
 	var matches = [
 		['(tactic|act|defend)', 'action'],
 		['((?:\\d+/)?\\d* ?HP)', 'HP'],
