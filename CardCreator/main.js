@@ -56,7 +56,7 @@ function parseCsv() {
 }
 
 function processAct(text) {
-	if (text.length === 0) {
+	if (text === undefined || text.length === 0) {
 		return '';
 	}
 	var matches = [
