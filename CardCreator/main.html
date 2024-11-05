@@ -163,9 +163,9 @@
 					font-style: italic;
 					background: steelblue;
 				}
-				.freeze {
+				.shock {
 					font-style: italic;
-					background: darkcyan;
+					background: darkgoldenrod;
 				}
 				.true-dmg {
 					text-shadow: 0 0 8px red;
@@ -194,11 +194,7 @@
 				.hp {
 					color: pink;
 				}
-				.haste, .empower, .regen {
-					/*background: cyan;*/
-					/*color: cyan;*/
-				}
-				.hastem .regen{
+				.regen{
 					border: 1px solid cyan;
 				}
 				.empower {
@@ -211,7 +207,7 @@
 					text-shadow: 0 0 8px purple;
 					font-weight: bold;
 				}
-				.ap {
+				.ap, .free {
 					text-shadow: 0 0 8px blue;
 					font-weight: bold;
 				}
@@ -452,7 +448,7 @@
 
 						<div class="action if-Defend" style="">
 							<span class="type Defend"><i class="material-icons">security</i></span>
-							<span class="content text-Defend process">IMM stun/chill/freeze</span>
+							<span class="content text-Defend process">IMM stun/chill</span>
 						</div>
 
 						<div class="action if-Defeat" style="">
@@ -515,15 +511,15 @@
 			<div class="block top left hidden" id='instructions' style="background: black; width: 100%; height: 100%;">
 				<div style="padding: 40px 90px;">
 					<h1 style="text-align: center;">Instructions</h1>
-					<h2 style="text-shadow: 0 0 10px lightgreen;">Recruit Phase</h2>
+					<h2 style="text-shadow: 0 0 10px lightgreen;">&#x1F37A; Recruit Phase</h2>
 					<p>
-						1. Get 1 + 2*L gold coins <br>
+						1. Get 3 * L gold coins <br>
 						2. Recruit 0 or 1 unit <br>
 						This ends when all parties agree it ends, then shuffle your deck
 					</p>
-					<h2 style="text-shadow: 0 0 10px cyan;">Deploy Phase</h2>
+					<h2 style="text-shadow: 0 0 10px cyan;">&#x1F465; Deploy Phase</h2>
 					<p>
-						1. Draw 1+L cards from your Deck <br>
+						1. Draw 2+L cards from your Deck <br>
 						2. Perform below in any order <br>
 						<span style="margin-left: 20px; display: inline-block;">
 							a. <i class="material-icons" style="text-shadow: 0 0 10px orange;">psychology</i> Use 0 or more Tactic(s) <br>
@@ -532,7 +528,7 @@
 						3. Discard with hand limit of 5 <br>
 						This ends when both players have used up their AP or run out of cards.
 					</p>
-					<h2 style="text-shadow: 0 0 10px red;">War Phase</h2>
+					<h2 style="text-shadow: 0 0 10px red;">&#x2694; War Phase</h2>
 					<p>
 						Ordered by each unit's <i class="material-icons" style="text-shadow: green 0px 0 10px;">tornado</i>SPD, perform their <i class="material-icons" style="text-shadow: 0 0 10px aqua;">electric_bolt</i>Act. <br>
 						This ends when one side's units are all defeated. <br>
@@ -555,11 +551,15 @@
 					</div>
 					<div class="content">
 						<span class="sp rng">RNG X</span>
-						<span>Target units up to X tiles away.</span>
+						<span>Target nearest units up to X tiles away.</span>
 					</div>
 					<div class="content">
 						<span class="sp far">FAR</span>
 						<span>Target furthest.</span>
+					</div>
+					<div class="content">
+						<span class="sp far">Any</span>
+						<span>Target any unit in range.</span>
 					</div>
 					<div class="content">
 						<span class="sp aoe">AOE X</span>
@@ -570,8 +570,8 @@
 						<span>Grant ATK/token.</span>
 					</div>
 					<div class="content">
-						<span class="sp haste">Haste X</span>
-						<span>Grant SPD/token.</span>
+						<span class="sp regen">Regen X</span>
+						<span>Heal 1/token on Act, then remove 1 token.</span>
 					</div>
 					<div class="content">
 						<span class="sp adv">ADV X</span>
@@ -579,30 +579,30 @@
 					</div>
 					<div class="content">
 						<span class="sp poison">poison X</span>
-						<span>Deal ATK X whenever the target unit acts; also reduce 1 SPD/token.</span>
+						<span>Deal ATK X on Act.</span>
 					</div>
 					<div class="content">
 						<span class="sp burn">burn X</span>
-						<span>Deal 1 true damage whenever the target unit acts.</span>
+						<span>Deal 1 true damage on Act, then remove 1 token.</span>
 					</div>
 					<div class="content">
 						<span class="sp chill">chill X</span>
-						<span>Reduce 1 SPD/token.</span>
+						<span>Reduce 1 ATK/token.</span>
 					</div>
 					<div class="content">
-						<span class="sp freeze">Freeze</span>
-						<span>Skip turn. (Can't stack)</span>
+						<span class="sp shock">Shock</span>
+						<span>Reduce 1 DEF/token.</span>
 					</div>
 					<div class="content">
 						<span class="sp stun">stun</span>
-						<span>Skip turn; also reduce DEF by 1. (Can't stack)</span>
+						<span>Skip turn. (Can't stack)</span>
 					</div>
 					<div class="content">
 						<span class="sp cleanse">cleanse X</span>
 						<span>Remove X debuff tokens.</span>
 					</div>
 					<div class="content">
-						<span class="sp heal">heal X</span>
+						<span class="sp heal">Heal X</span>
 						<span>Heal X HP.</span>
 					</div>
 					<div class="content">
@@ -632,6 +632,10 @@
 					<div class="content">
 						<span class="sp true-dmg">true damage</span>
 						<span>Bypasses DEF, absolute damage.</span>
+					</div>
+					<div class="free">
+						<span class="sp free">Free X</span>
+						<span>Next X/self allies do not cost AP to deploy.</span>
 					</div>
 				</div>
 			</div>
@@ -698,7 +702,7 @@
 						opacity: 0.8;
 						line-height: 1;
 					}
-					.chill, .freeze {
+					.chill {
 						text-shadow: 0 0 50px cyan;
 					}
 					.poison {
@@ -713,7 +717,7 @@
 					.stun {
 						text-shadow: 0 0 50px white;
 					}
-					.haste {
+					.regen {
 						text-shadow: 0 0 50px teal;
 					}
 					.regen {
