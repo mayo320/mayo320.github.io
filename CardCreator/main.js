@@ -99,7 +99,7 @@ function processAct(text) {
 		['(-\\d+G)', 'no-g'], // above G
 		['(\\d+G)', 'g'],
 		['(\\w+ Phase)', 'phase'],
-		['(free(?: \\d+|self)?)', 'free'],
+		['(free(?: \\d+| self)?)', 'free'],
 	];
 	text = text.replace(';', '\n<br>');
 	matches.forEach((pattern) => {
