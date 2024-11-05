@@ -158,7 +158,7 @@ function loadUnit(index) {
 		// If exists
 		var ifs = document.querySelectorAll('.if-' + k);
 		ifs.forEach((ele) => {
-			if (unit[k].length > 0) {
+			if (unit[k] !== undefined || unit[k].length > 0) {
 				ele.classList.remove('hidden');
 			} else {
 				ele.classList.add('hidden');
