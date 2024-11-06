@@ -171,6 +171,20 @@ function loadUnit(index) {
 window.onload = function(){
 	init();
 	loadCsvFromUri();
+
+	// Arrow keys to navigate
+	document.onkeydown = (e) => {
+	  e = e || window.event;
+	  if (e.keyCode === 38) {
+	    loadUnit(current_index - 1);
+	  } else if (e.keyCode === 40) {
+	    loadUnit(current_index + 1);
+	  } else if (e.keyCode === 37) {
+	    loadUnit(current_index - 1);
+	  } else if (e.keyCode === 39) {
+	    loadUnit(current_index + 1);
+	  }
+	}
 }
 
 function download() {
@@ -212,6 +226,11 @@ function setChit(name) {
 	if (data[2]) {
 		html += `<div class="subtext">${data[2]}</div>`;
 	}
+	// html += `<div class="icons">`
+	// for (let i in data[3]) {
+	// 	html += `<i class="material-icons">${data[3][i]}</i><br>`;
+	// }
+	// html += `</div>`
 	html += '</span>';
 	chit.innerHTML = html;
 	current_chit = name;
