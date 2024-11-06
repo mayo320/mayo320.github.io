@@ -356,7 +356,7 @@
 				<!-- Top block -->
 				<div class="top block" style="width: 100%;">
 					<!-- Gradient top -->
-					<div style="background: linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);; height: 100px; width: 100%;"></div>
+					<div style="background: linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%); height: 100px; width: 100%;"></div>
 
 					<!-- Cost -->
 					<div class="block" style="top: 20px; right: 20px">
@@ -499,14 +499,32 @@
 					p {
 						font-size: 26px; padding-left: 20px;
 					}
+					.action {
+						font-style: italic;
+					}
 					.content {
 						/*margin: 4px 2px;*/
 						padding: 6px 4px;
 						margin-left: -8px;
-						margin-top: -1px;
+						margin-top: 2px;
 						display: inline-block;
 						max-width: none;
-						border: 1px solid gray;
+						/*border: 1px solid gray;*/
+						font-size: 24px;
+						font-style: italic;
+						.sp {
+							font-style: normal;
+						}
+						.action {
+							font-size: 26px;
+						}
+						.action .material-icons {
+							font-size: 30px;
+						}
+
+						/**/
+						background: linear-gradient(90deg, rgb(62, 53, 60) 0%, rgba(0,0,0,0) 150px);
+						border-radius: 4px;
 					}
 					.material-icons, i {
 						font-size: 26px;
@@ -549,8 +567,25 @@
 			</div>
 
 			<div class="block top left hidden" id='instructions2' style="background: black; width: 100%; height: 100%;">
-				<div style="padding: 35px 70px; font-size: 24px;" class="action">
-					<h2 style="text-align: center; text-shadow: 0 0 10px cyan;">Glossary</h2>
+				<div style="padding: 65px 70px; font-size: 24px;" class="action">
+					<div class="content">
+						<span class="sp action">Tactic<i class="material-icons" style="text-shadow: 0 0 10px orange;"> psychology</i></span>
+					</div>
+					<div class="content">
+						<span class="sp action">Deploy<i class="material-icons" style="text-shadow: 0 0 10px orange;"> person_add</i></span>
+					</div>
+					<div class="content">
+						<span class="sp action">Act<i class="material-icons" style="text-shadow: 0 0 10px cyan;"> electric_bolt</i></span>
+					</div>
+					<div class="content">
+						<span class="sp action">Defend<i class="material-icons" style="text-shadow: 0 0 10px cyan;"> security</i></span>
+					</div>
+					<div class="content">
+						<span class="sp action">Defeat<i class="material-icons" style="text-shadow: 0 0 10px red;"> cancel</i></span>
+					</div>
+					<div class="content">
+						<span class="sp action">Win<i class="material-icons" style="text-shadow: 0 0 10px green;"> check_circle</i></span>
+					</div>
 					<div class="content">
 						<span class="sp melee">Melee</span>
 						<span>Target units directly in front of it; if none, target someone else on the same row.</span>
