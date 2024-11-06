@@ -210,7 +210,7 @@ function setChit(name) {
 	var html = `<span class="${name.toLowerCase()}"><span class="emoji">&#x${data[1]};</span>`;
 	html += `<br><span class="text">${name}</span>`;
 	if (data[2]) {
-		html += `<br><span class="subtext">${data[2]}</span>`;
+		html += `<div class="subtext">${data[2]}</div>`;
 	}
 	html += '</span>';
 	chit.innerHTML = html;
