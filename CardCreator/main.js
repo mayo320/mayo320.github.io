@@ -207,7 +207,7 @@ var current_chit = '';
 function setChit(name) {
 	var data = CHIT_DATA[name];
 	var chit = document.querySelector('.chit');
-	var html = '<span class="'+name.toLowerCase()+'">&#x'+data[1]+';';
+	var html = `<span class="${name.toLowerCase()}"><span class="emoji">&#x${data[1]};</span>`;
 	html += `<br><span class="text">${name}</span>`;
 	if (data[2]) {
 		html += `<br><span class="subtext">${data[2]}</span>`;

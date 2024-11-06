@@ -5,7 +5,7 @@ var CHIT_DATA = {
 	'Chill': [18, '2744', '-1 ATK'],
 	'Shock': [18, '26A1', '-1 DEF'],
 	'Fortify': [18, '1F6E1', '+1 DEF'],
-	'Empower': [18, '1F5E1', '+1 ATK'],
+	'Empower': [18, '2694', '+1 ATK'],
 	'Charm': [18, '1F493', ''],
 	'Stealth': [8, '1F300', ''],
 	'Stun': [8, '1F4AB', ''],
