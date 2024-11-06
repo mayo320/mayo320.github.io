@@ -74,7 +74,7 @@ function processAct(text) {
 		['(heal(?: \\d+)?)', 'heal'],
 		['(cleanse(?: \\d+)?)', 'cleanse'],
 		['(empower(?: \\d+)?)', 'empower'],
-		['(regen(?: \\d+)?)', 'regen'],
+		['(fortify(?: \\d+)?)', 'fortify'],
 		['(poison(?: \\d+)?)', 'poison'],
 		['(burn(?: \\d+)?)', 'burn'],
 		['(stun(?: \\d+)?)', 'stun'],
