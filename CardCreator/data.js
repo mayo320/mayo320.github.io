@@ -9,7 +9,7 @@ var CHIT_DATA = {
 	'Charm': [18, '1F493', ''],
 	'Stealth': [8, '1F300', ''],
 	'Stun': [8, '1F4AB', ''],
-	'Summon': [8, '1F43E', ''],
+	'Summon': [8, '265F', ''],
 }
 
 var CSV_DATA = `
