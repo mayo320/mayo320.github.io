@@ -75,6 +75,7 @@ function processAct(text) {
 		['(cleanse(?: \\d+)?)', 'cleanse'],
 		['(empower(?:ed)?(?: \\d+)?)', 'empower'],
 		['(fortif(?:y|ied)(?: \\d+)?)', 'fortify'],
+		['(all debuffs)', 'all-debuffs'],
 		['(poison(?:ed)?(?: \\d+)?)', 'poison'],
 		['(burn(?:t)?(?: \\d+)?)', 'burn'],
 		['(stun(?:ed)?(?: \\d+)?)', 'stun'],
