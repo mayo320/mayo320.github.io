@@ -88,7 +88,7 @@ function processAct(text) {
 		['(nullify)', 'nullify'],
 		['(FOG OF WAR)', 'fog-of-war'],
 		['(killing blow)', 'killing-blow'],
-		['(charm(?: \\d+)?)', 'charm'],
+		['(charm(?:ed)?(?: \\d+)?)', 'charm'],
 		['(chaos)', 'chaos'],
 		['(order)', 'order'],
 		['(construct)', 'construct'],
