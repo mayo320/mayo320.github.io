@@ -63,7 +63,7 @@ function processAct(text) {
 		['(tactic|act|defend)', 'action'],
 		['((?:\\d+/)?\\d* ?HP)', 'HP'],
 		['(melee)', 'melee'],
-		['(rng(?: \\d+)?)', 'rng'],
+		['(rng(?: \\d+))', 'rng'],
 		['(aoe(?: [RC\\d+])?)', 'aoe'],
 		['(ATK(?: [\\d+X])?)', 'atk'],
 		['((?:\\d+ )?def(?: \\d+))', 'def'],
