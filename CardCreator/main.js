@@ -235,7 +235,7 @@ function bulkExport() {
 
 var a4_count = 0
 function exportA4() {
-	current_index = -1;
+	current_index -= 1;
 
 	function exportUnitA4() {
 		current_index += 1;
@@ -246,7 +246,7 @@ function exportA4() {
 
 		if (a4_count + count > 9) {
 			// export paper
-			outfile_name = `a4-${current_index}`;
+			outfile_name = `a4-${current_index - 1}`;
 			exportCard(document.getElementById('a4'));
 
 			current_index -= 1;
@@ -268,9 +268,23 @@ function exportA4() {
 					exportUnitA4();
 				}, 1300);
 			} else {
-				// export paper
-				outfile_name = `a4-${current_index}`;
-				exportCard(document.getElementById('a4'));
+				// export last paper
+				setTimeout(() => {
+					// Instructions front
+					document.querySelector('#instructions').classList.remove('hidden');
+					exportCardAddA4(document.getElementById('card-cont'), 2);
+
+					// Instructions back
+					setTimeout(() => {
+						document.querySelector('#instructions2').classList.remove('hidden');
+						exportCardAddA4(document.getElementById('card-cont'), 2);
+					}, 300);
+
+					setTimeout(() => {
+						outfile_name = `a4-${current_index}`;
+						exportCard(document.getElementById('a4'));
+					}, 1300);
+				}, 1300);
 			}
 		}
 
