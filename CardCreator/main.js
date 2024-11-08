@@ -1,6 +1,3 @@
-HEIGHT = 1125;
-WIDTH = 825;
-
 var data = [];
 var current_index = 0;
 var outfile_name = '';
@@ -15,15 +12,14 @@ function init() {
 }
 
 
-
 function exportCard(element) {
 	// Draw element on canvas
 	var html = element.innerHTML.trim();
 
 	html2canvas(element, {
 		useCORS: true,
-		width: WIDTH,
-		height: HEIGHT,
+		width: element.clientWidth,
+		height: element.clientHeight,
 		scale: 1
 	}).then(function (canvas) {
 		// document.body.appendChild(canvas);
@@ -277,6 +273,10 @@ function toggleCreator(pg) {
 	document.querySelectorAll('.creator').forEach((x) => x.classList.add('hidden'));
 	document.querySelector(pg).classList.remove('hidden');
 	init();
+}
+
+function hideViews() {
+	document.querySelectorAll('.view').forEach((x) => x.classList.add('hidden'));
 }
 
 // Potential list of emojis https://www.unicode.org/emoji/charts/full-emoji-list.html
