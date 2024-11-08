@@ -71,6 +71,7 @@ function processAct(text) {
 		['(ADV)', 'adv'],
 		['(SPD ?\\d+)', 'spd'],
 		['IMM( .*);?', 'immunity'], // imm should be above statuses
+		['resist( .*);?', 'resist'], // imm should be above statuses
 		['(heal(?: \\d+)?)', 'heal'],
 		['(cleanse(?: \\d+)?)', 'cleanse'],
 		['(empower(?:ed)?(?: \\d+)?)', 'empower'],

@@ -235,7 +235,7 @@
 				.phase {
 					font-weight: bold;
 				}
-				.immunity {
+				.immunity, .resist {
 					border: 1px solid gray;
 				    padding: 0;
 				    padding-left: 4px;
@@ -243,6 +243,10 @@
 				}
 				.immunity:before {
 					content: 'Immune ';
+					color: gray;
+				}
+				.resist:before {
+					content: 'Resist ';
 					color: gray;
 				}
 				.persistent {
