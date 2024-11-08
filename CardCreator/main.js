@@ -11,6 +11,27 @@ function init() {
 	setChit('Poison');
 }
 
+function exportCardAddA4(element, count) {
+	// Draw element on canvas
+	var html = element.innerHTML.trim();
+
+	html2canvas(element, {
+		useCORS: true,
+		width: element.clientWidth,
+		height: element.clientHeight,
+		scale: 1
+	}).then(function (canvas) {
+		for (var i = 0; i < count; i++) {
+			var destCanvas = document.createElement('canvas');
+			destCanvas.width = canvas.width;
+			destCanvas.height = canvas.height;
+			var dest = destCanvas.getContext('2d');
+			dest.drawImage(canvas, 0, 0);
+
+			document.getElementById('a4').appendChild(destCanvas);
+		}
+	});
+}
 
 function exportCard(element) {
 	// Draw element on canvas
@@ -22,7 +43,7 @@ function exportCard(element) {
 		height: element.clientHeight,
 		scale: 1
 	}).then(function (canvas) {
-		// document.body.appendChild(canvas);
+		document.body.appendChild(canvas);
 
 		var img = canvas.toDataURL('image/png');
 		var link = document.createElement('a');
@@ -212,6 +233,51 @@ function bulkExport() {
 	exportUnit();
 }
 
+var a4_count = 0
+function exportA4() {
+	current_index = -1;
+
+	function exportUnitA4() {
+		current_index += 1;
+		loadUnit(current_index);
+
+		var unit = data[current_index];
+		var count = Number(unit['Count']);
+
+		if (a4_count + count > 9) {
+			// export paper
+			outfile_name = `a4-${current_index}`;
+			exportCard(document.getElementById('a4'));
+
+			current_index -= 1;
+			setTimeout(() => {
+				a4_count = 0;
+				document.getElementById('a4').innerHTML = '';
+				exportUnitA4();
+			}, 1300);
+		} else {
+			setTimeout(() => {
+				document.querySelector('#overlay').classList.add('hidden');
+				exportCardAddA4(document.getElementById('card-cont'), count);
+			}, 300);
+
+			a4_count += count;
+
+			if (current_index < data.length - 1) {
+				setTimeout(() => {
+					exportUnitA4();
+				}, 1300);
+			} else {
+				// export paper
+				outfile_name = `a4-${current_index}`;
+				exportCard(document.getElementById('a4'));
+			}
+		}
+
+	}
+
+	exportUnitA4();
+}
 
 
 // CHIT

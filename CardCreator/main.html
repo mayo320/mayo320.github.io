@@ -52,6 +52,14 @@
 				margin: 0;
 			}
 		}
+		#a4 {
+			width: 2268px;
+			height: 3167px;
+			border: 1px solid black;
+			canvas {
+				margin: -3px 1px 0 0;
+			}
+		}
 		.block {
 			position: absolute;
 		}
@@ -725,6 +733,8 @@
 			<!-- Overlay -->
 			<img style="width: 100%;" id="overlay" class="top block" style="z-index: 9" src="https://www.thegamecrafter.com/overlays/pokerdeck.png" alt="img"/>
 		</div>
+
+		<!-- Action bottons -->
 		<div style="display: inline-block; vertical-align: top;">
 			<span>Toggles</span> <br>
 			<button style="min-width: 200px" onclick="document.querySelector('#card-cont').classList.toggle('compress')">Borderless</button> <br>
@@ -750,8 +760,13 @@
 				<i class="material-icons" style="vertical-align: middle; font-size: 30px;">download</i>
 				Download
 			</button> <br>
-			<button style="min-width: 200px; font-weight: bold; background: pink" onclick="bulkExport()">Bulk Download</button>
+			<button style="min-width: 200px; font-weight: bold; background: pink" onclick="bulkExport()">Bulk Download</button> <br>
+			<button style="min-width: 200px; font-weight: bold; background: gold" onclick="exportA4()">Export A4</button> <br>
 		</div>
+
+		<span>A4 Paper</span> <br>
+		<!-- A4 exports -->
+		<div id="a4"></div>
 	</div>
 
 	<!-- Chit creator -->
