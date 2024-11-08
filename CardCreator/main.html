@@ -171,6 +171,12 @@
 					font-style: italic;
 					background: darkgoldenrod;
 				}
+				.all-debuffs {
+					font-style: italic;
+					background: linear-gradient(90deg, darkred 0%, darkgreen 20%, dimgray 40%, steelblue 60%, darkgoldenrod 80%, violet 100%);
+					padding: 0 10px;
+					text-shadow: 0 0 5px gold;
+				}
 				.true-dmg {
 					text-shadow: 0 0 8px red;
 				}
@@ -229,15 +235,25 @@
 				.phase {
 					font-weight: bold;
 				}
-				.immunity {
+				.immunity, .resist {
 					border: 1px solid gray;
 				    padding: 0;
 				    padding-left: 4px;
+					border-radius: 8px;
 				    display: inline-block;
+					.sp {
+						display: inline-block;
+					}
 				}
 				.immunity:before {
 					content: 'Immune ';
 					color: gray;
+					font-size: 26px;
+				}
+				.resist:before {
+					content: 'Resist ';
+					color: gray;
+					font-size: 26px;
 				}
 				.persistent {
 					background: lightblue;
@@ -639,6 +655,10 @@
 						<span>Skip turn. (Can't stack)</span>
 					</div>
 					<div class="content">
+						<span class="sp charm">Charm X</span>
+						<span>Change alignment if Charm tokens # >= current HP, effect ends if # = 0; End of Act: remove L tokens.</span>
+					</div>
+					<div class="content">
 						<span class="sp cleanse">cleanse X</span>
 						<span>Remove X debuff tokens.</span>
 					</div>
@@ -659,16 +679,12 @@
 						<span>Reveal unit with Fog of War, and remove X Stealth.</span>
 					</div>
 					<div class="content">
-						<span class="sp charm">Charm X</span>
-						<span>Change alignment if Charm tokens # >= HP; remove L tokens after each Act; once tokens # is 0, change back alignment.</span>
-					</div>
-					<div class="content">
 						<span class="sp once">Once</span>
 						<span>Can only be triggered once per round.</span>
 					</div>
 					<div class="content">
 						<span class="sp persistent">persistent</span>
-						<span>Ongoing effect, cannot discard unit while active.</span>
+						<span>Ongoing effect, cannot discard while active.</span>
 					</div>
 					<div class="content">
 						<span class="sp true-dmg">true damage</span>
@@ -677,6 +693,18 @@
 					<div class="content">
 						<span class="sp free">Free X/Self</span>
 						<span>Next X/self allies do not cost AP to deploy.</span>
+					</div>
+					<div class="content">
+						<span class="sp revive">Revive</span>
+						<span>Revive unit, remove all status tokens.</span>
+					</div>
+					<div class="content">
+						<span class="sp immunity">X</span>
+						<span>Immunity to X.</span>
+					</div>
+					<div class="content">
+						<span class="sp resist">X</span>
+						<span>End of Act: remove 1 X.</span>
 					</div>
 				</div>
 			</div>
