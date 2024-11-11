@@ -516,7 +516,7 @@
 					</div>
 				</div>
 				<div class="block" style="width: 100%; text-align: center; color: white; bottom: 10px">
-					v0.2
+					v0.3
 				</div>
 			</div>
 
@@ -540,9 +540,12 @@
 					p {
 						font-size: 26px; padding-left: 20px;
 					}
-					.action {
-						font-style: italic;
+					.material-icons, i {
+						font-size: 26px;
+						vertical-align: middle;
 					}
+				}
+				#instructions2 {
 					.content {
 						/*margin: 4px 2px;*/
 						padding: 6px 4px;
@@ -558,6 +561,7 @@
 						}
 						.action {
 							font-size: 26px;
+							font-style: italic;
 						}
 						.action .material-icons {
 							font-size: 30px;
@@ -567,41 +571,43 @@
 						background: linear-gradient(90deg, rgb(62, 53, 60) 0%, rgba(0,0,0,0) 150px);
 						border-radius: 4px;
 					}
-					.material-icons, i {
-						font-size: 26px;
-						vertical-align: middle;
-					}
 				}
 			</style>
-			<div class="view block top left hidden" id='instructions' style="background: black;">
-				<div style="padding: 5px 60px;">
+			<div class="view block top left hidden action" id='instructions' style="background: black;">
+				<div style="padding: 5px 60px;" class="content">
 					<h1 style="text-align: center;">Instructions</h1>
 					<h2 style="text-shadow: 0 0 10px lightgreen;"><span class="emoji">&#x1F37A;</span> Recruit Phase</h2>
 					<p>
-						1. Get 3xL gold coins <br>
-						2. Recruit 0 or 1 unit <br>
+						Players A -> B -> .. take turns doing:
+						<span style="margin-left: 20px; display: block;">
+							1. Get <span class="sp g">3xL gold coins</span> <br>
+							2. Recruit 0 or 1 unit <br>
+						</span>
 						This ends when all parties agree it ends, then shuffle your deck
 					</p>
 					<h2 style="text-shadow: 0 0 10px cyan;"><span class="emoji">&#x1F9E9;</span> Deploy Phase</h2>
 					<p>
-						1. Draw 2+L cards from your Deck <br>
-						2. Perform below in any order <br>
-						<span style="margin-left: 20px; display: inline-block;">
-							a. <i class="material-icons" style="text-shadow: 0 0 10px orange;">psychology</i> Use 0 or more Tactic(s) <br>
-							b. <i class="material-icons" style="text-shadow: 0 0 10px aqua;">person_add</i> Deploy 1 unit <br>
-						</span> <br>
-						3. Discard with hand limit of 5 <br>
-						This ends when both players have used up their AP or run out of cards.
+						Players  A -> B -> .. take 4 turns performing:
+						<span style="margin-left: 20px; display: block;">
+							1. <span class="sp draw-card">Draw 2+L cards</span> from your Deck <br>
+							2. Perform below in any order <br>
+							<span style="margin-left: 20px; display: inline-block;">
+								a. <i class="material-icons" style="text-shadow: 0 0 10px orange;">psychology</i> Use 0 or more Tactic(s) <br>
+								b. <i class="material-icons" style="text-shadow: 0 0 10px aqua;">person_add</i> Deploy up to 1 unit <br>
+							</span> <br>
+							3. Discard with hand limit of 3 <br>
+						</span>
 					</p>
 					<h2 style="text-shadow: 0 0 10px red;"><span class="emoji">&#x1F5E1;</span> War Phase</h2>
 					<p>
-						Ordered by each unit's <i class="material-icons" style="text-shadow: green 0px 0 10px;">tornado</i>SPD, resolve their <i class="material-icons" style="text-shadow: 0 0 10px aqua;">electric_bolt</i>Act / <i class="material-icons" style="text-shadow: 0 0 10px aqua;">security</i>Defend / <i class="material-icons" style="text-shadow: 0 0 10px red;">cancel</i>Defeat.
-						This ends when one side's units are all defeated. <br>
-						<br>
+						Ordered by each unit's <i class="material-icons" style="text-shadow: green 0px 0 10px;">tornado</i>SPD, resolve their <i class="material-icons" style="text-shadow: 0 0 10px aqua;">electric_bolt</i>Act or Move, <i class="material-icons" style="text-shadow: 0 0 10px aqua;">security</i>Defend, <i class="material-icons" style="text-shadow: 0 0 10px red;">cancel</i>Defeat.
+						This ends when one side's units are all defeated. 
+						<br> <br>
 						Then: <br>
-						1. Resolve <i class="material-icons" style="text-shadow: green 0px 0 9px;">check_circle</i>Win conditions on living units <br>
-						2. Move them to Discard <br>
-						3. Increment Round Tracker <br>
+						<span style="margin-left: 20px; display: block;">
+							1. Resolve <i class="material-icons" style="text-shadow: green 0px 0 9px;">check_circle</i>Win conditions on living units <br>
+							3. Increment Round Tracker <br>
+						</span>
 						Start from Recruit Phase if game has not ended.
 					</p>
 				</div>
