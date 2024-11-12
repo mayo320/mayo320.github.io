@@ -190,7 +190,7 @@ function loadUnit(index) {
 			if (ele.classList.contains('process')) {
 				ele.innerHTML = processAct(unit[k]);
 				var score = calculateScore(unit[k]);
-				ele.innerHTML += `<span class="score">${score[0]} = ${score[1]}</score>`;
+				ele.innerHTML += `<span class="score hidden">${score[0]} = ${score[1]}</score>`;
 				total_score += score[0];
 			} else {
 				ele.innerHTML = unit[k];
