@@ -86,16 +86,15 @@ function calculateActScore(text) {
 	}
 	var min = Math.min;
 	// Order matters, top ones are calculated first
+	// Format of [regex, accumulator]
 	var matches = [
 		// General
 		[/(\d+)VP/gi, (v) => `+${v}`],
 		[/(\d+)G/gi, (v) => `+${v}`],
-		// Attacks
+		// Attacks & RNG
 		[/ATK (\d+)/gi, (v) => `+${v}`],
 		[/DEF (\d+)/gi, (v) => `+${v}`],
-		[/AOE (\d+)/gi, (v) => `*${min(v * 2, 5)}`],
-		[/AOE R/gi, (v) => `*2`],
-		[/AOE C/gi, (v) => `*2`],
+		[/Melee/gi, (v) => `*1`],
 		[/RNG (\d+)/gi, (v) => `+${min(v - 1, 3)}`],
 		[/ADV/gi, (v) => `*1.25`],
 		// Targetting
@@ -116,7 +115,9 @@ function calculateActScore(text) {
 		[/reveal ?(\d+)?/gi, (v) => `+${v | 1}`],
 		[/stealth ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
 		[/fog of war/gi, (v) => `+3`],
-		[/free ?(\d+|self)?/gi, (v) => `${(v | 1) * 3}`],
+		[/free ?(\d+)?(?:self)?/gi, (v) => `${(v | 1) * 3}`],
+		[/nullify/gi, (v) => `+3`],
+		[/transfer debuffs/gi, (v) => `+1`],
 		// Cards
 		[/draw (\d+) cards?/gi, (v) => `+${v * 2}`],
 		[/discard (\d+) cards?/gi, (v) => `-${v}`],
@@ -128,6 +129,14 @@ function calculateActScore(text) {
 		[/per.*ally/gi, (v) => `*1`],
 		[/per.*(chaos|celestial|nature|construct|order).*ally/gi, (v) => `*0.6`],
 		[/once.*/gi, (v) => `*0.8`],
+		// Act again
+		[/(perform|trigger).*(act|defend)/gi, (v) => `+4`],
+		// Multiple targets
+		[/AOE (\d+)/gi, (v) => `*${min(v * 2, 5)}`],
+		[/AOE R/gi, (v) => `*2`],
+		[/AOE C/gi, (v) => `*2`],
+		[/all allies/gi, (v) => `*2`],
+		[/all (chaos|celestial|nature|construct|order) allies/gi, (v) => `*1.5`],
 	];
 	var texts = text.split(';');
 	var score = 0;
