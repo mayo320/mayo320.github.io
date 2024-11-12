@@ -97,6 +97,7 @@ function calculateActScore(text) {
 		[/(?:AOE R)/gi, (v) => `*2`],
 		[/(?:AOE C)/gi, (v) => `*2`],
 		[/(?:RNG) (\d+)/gi, (v) => `+${min(v - 1, 3)}`],
+		[/ADV/gi, (v) => `*1.25`],
 		// Targetting
 		[/(?:FAR)/gi, (v) => `+1`],
 		// Supports
@@ -115,7 +116,10 @@ function calculateActScore(text) {
 		[/(?:reveal) ?(\d+)?/gi, (v) => `+${v | 1}`],
 		[/(?:stealth) ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
 		[/(?:fog of war)/gi, (v) => `+3`],
-
+		// Conditional
+		[/(reflect)/gi, (v) => `*0.75`],
+		[/(if|when).*:.*/gi, (v) => `*0.5`],
+		[/(may).*/gi, (v) => `*1.2`],
 	];
 	var texts = text.split(';');
 	var score = 0;
