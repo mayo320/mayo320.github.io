@@ -72,6 +72,21 @@ function parseCsv() {
 	return ret;
 }
 
+function calculateScore(text) {
+	if (text === undefined || text.length === 0) {
+		return '';
+	}
+	var matches = [
+		['(?:ATK|DEF|poison|burn|chill|shock|charm|empower|fortify) ?(\d+)?', '+$1']
+	];
+	var score = '';
+	matches.forEach((pattern) => {
+		var regex = RegExp(pattern[0], 'gi');
+		score += text.replace(regex, pattern[1]); 
+	});
+	return score;
+}
+
 function processAct(text) {
 	if (text === undefined || text.length === 0) {
 		return '';
