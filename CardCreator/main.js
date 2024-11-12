@@ -72,7 +72,15 @@ function parseCsv() {
 	return ret;
 }
 
-function calculateScore(text) {
+function calculateStatScore(hp, def, spd, cost) {
+	var score = 0;
+	score += hp * 1;
+	score += def * 1;
+	score += spd * 1;
+	return score;
+}
+
+function calculateActScore(text) {
 	if (text === undefined || text.length === 0) {
 		return 0;
 	}
@@ -206,7 +214,7 @@ function loadUnit(index) {
 	}
 
 	current_index = index;
-	var total_score = 0;
+	var total_score = calculateStatScore(unit['HP'], unit['DEF'], unit['SPD'], unit['Cost']);
 	var unit = data[index];
 	outfile_name = unit['Name'] + '[face,'+unit['Count']+']'
 	for (let k in unit) {
@@ -221,7 +229,7 @@ function loadUnit(index) {
 		texts.forEach((ele) => {
 			if (ele.classList.contains('process')) {
 				ele.innerHTML = processAct(unit[k]);
-				var score = calculateScore(unit[k]);
+				var score = calculateActScore(unit[k]);
 				ele.innerHTML += `<span class="score">${score}</score>`;
 				total_score += score;
 			} else {
