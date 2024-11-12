@@ -88,38 +88,45 @@ function calculateActScore(text) {
 	// Order matters, top ones are calculated first
 	var matches = [
 		// General
-		[/(\d+)(?:VP)/gi, (v) => `+${v}`],
-		[/(\d+)(?:G)/gi, (v) => `+${v}`],
+		[/(\d+)VP/gi, (v) => `+${v}`],
+		[/(\d+)G/gi, (v) => `+${v}`],
 		// Attacks
-		[/(?:ATK) (\d+)/gi, (v) => `+${v}`],
-		[/(?:DEF) (\d+)/gi, (v) => `+${v}`],
-		[/(?:AOE) (\d+)/gi, (v) => `*${min(v * 2, 5)}`],
-		[/(?:AOE R)/gi, (v) => `*2`],
-		[/(?:AOE C)/gi, (v) => `*2`],
-		[/(?:RNG) (\d+)/gi, (v) => `+${min(v - 1, 3)}`],
+		[/ATK (\d+)/gi, (v) => `+${v}`],
+		[/DEF (\d+)/gi, (v) => `+${v}`],
+		[/AOE (\d+)/gi, (v) => `*${min(v * 2, 5)}`],
+		[/AOE R/gi, (v) => `*2`],
+		[/AOE C/gi, (v) => `*2`],
+		[/RNG (\d+)/gi, (v) => `+${min(v - 1, 3)}`],
 		[/ADV/gi, (v) => `*1.25`],
 		// Targetting
-		[/(?:FAR)/gi, (v) => `+1`],
+		[/FAR/gi, (v) => `+1`],
 		// Supports
-		[/(?:heal) (\d+)/gi, (v) => `+${v}`],
-		[/(?:cleanse) (\d+)/gi, (v) => `+${v}`],
+		[/heal (\d+)/gi, (v) => `+${v}`],
+		[/cleanse (\d+)/gi, (v) => `+${v}`],
 		// Statuses
-		[/(?:poison) ?(\d+)?/gi, (v) => `+${v | 1}`],
-		[/(?:burn) ?(\d+)?/gi, (v) => `+${v | 1}`],
-		[/(?:chill) ?(\d+)?/gi, (v) => `+${v | 1}`],
-		[/(?:shock) ?(\d+)?/gi, (v) => `+${v | 1}`],
-		[/(?:charm) ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
-		[/(?:empower) ?(\d+)?/gi, (v) => `+${v | 1}`],
-		[/(?:fortify) ?(\d+)?/gi, (v) => `+${v | 1}`],
-		[/(?:immune)/gi, (v) => `*1`],
-		[/(?:resist)/gi, (v) => `*0.5`],
-		[/(?:reveal) ?(\d+)?/gi, (v) => `+${v | 1}`],
-		[/(?:stealth) ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
-		[/(?:fog of war)/gi, (v) => `+3`],
+		[/poison ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/burn ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/chill ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/shock ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/charm ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
+		[/empower ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/fortify ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/immune/gi, (v) => `*1`],
+		[/resist/gi, (v) => `*0.5`],
+		[/reveal ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/stealth ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
+		[/fog of war/gi, (v) => `+3`],
+		[/free ?(\d+|self)?/gi, (v) => `${(v | 1) * 3}`],
+		// Cards
+		[/draw (\d+) cards?/gi, (v) => `+${v * 2}`],
+		[/discard (\d+) cards?/gi, (v) => `-${v}`],
 		// Conditional
 		[/(reflect)/gi, (v) => `*0.75`],
 		[/(if|when).*:.*/gi, (v) => `*0.5`],
 		[/(may).*/gi, (v) => `*1.2`],
+		[/per.*ally/gi, (v) => `*1`],
+		[/per.*(chaos|celestial|nature|construct|order).*ally/gi, (v) => `*0.6`],
+		[/once.*/gi, (v) => `*0.8`],
 	];
 	var texts = text.split(';');
 	var score = 0;
