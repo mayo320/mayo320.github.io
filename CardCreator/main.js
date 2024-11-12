@@ -74,8 +74,8 @@ function parseCsv() {
 
 function calculateStatScore(hp, def, spd, cost) {
 	var score = 0;
-	score += hp * (1 + (def / 4));
-	score += spd;
+	score += (Number(hp) * (1 + (Number(def) / 4)));
+	score += Number(spd);
 	return score;
 }
 
