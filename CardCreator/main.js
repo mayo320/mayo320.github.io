@@ -207,7 +207,7 @@ window.onload = function(){
 }
 
 function download() {
-	// document.querySelector('#card-cont').classList.remove('compress');
+	document.querySelector('#card-cont').classList.remove('compress');
 	document.querySelector('#overlay').classList.add('hidden');
 	exportCard(document.getElementById('card-cont'))
 	document.querySelector('#overlay').classList.remove('hidden');
