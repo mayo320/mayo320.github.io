@@ -85,6 +85,7 @@ function calculateActScore(text) {
 		return 0;
 	}
 	var min = Math.min;
+	// Order matters, top ones are calculated first
 	var matches = [
 		// General
 		[/(\d+)(?:VP)/gi, (v) => `+${v}`],
@@ -92,10 +93,10 @@ function calculateActScore(text) {
 		// Attacks
 		[/(?:ATK) (\d+)/gi, (v) => `+${v}`],
 		[/(?:DEF) (\d+)/gi, (v) => `+${v}`],
-		[/(?:RNG) (\d+)/gi, (v) => `+${min(v - 1, 4)}`],
 		[/(?:AOE) (\d+)/gi, (v) => `*${min(v * 2, 5)}`],
 		[/(?:AOE R)/gi, (v) => `*2`],
 		[/(?:AOE C)/gi, (v) => `*2`],
+		[/(?:RNG) (\d+)/gi, (v) => `+${min(v - 1, 3)}`],
 		// Targetting
 		[/(?:FAR)/gi, (v) => `+1`],
 		// Supports
@@ -217,6 +218,8 @@ function loadUnit(index) {
 	current_index = index;
 	var unit = data[index];
 	var total_score = calculateStatScore(unit['HP'], unit['DEF'], unit['SPD'], unit['Cost']);
+	document.querySelector('.text-statscore').innerHTML = total_score;
+
 	outfile_name = unit['Name'] + '[face,'+unit['Count']+']'
 	for (let k in unit) {
 		// Mutate images
