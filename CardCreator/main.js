@@ -239,7 +239,7 @@ function loadUnit(index) {
 	current_index = index;
 	var unit = data[index];
 	var total_score = calculateStatScore(unit['HP'], unit['DEF'], unit['SPD'], unit['Cost']);
-	document.querySelector('.text-statscore').innerHTML = total_score;
+	document.querySelector('.text-statscore').innerHTML = total_score.toFixed(2);
 
 	outfile_name = unit['Name'] + '[face,'+unit['Count']+']'
 	for (let k in unit) {
@@ -254,7 +254,7 @@ function loadUnit(index) {
 		texts.forEach((ele) => {
 			if (ele.classList.contains('process')) {
 				ele.innerHTML = processAct(unit[k]);
-				var score = calculateActScore(unit[k]);
+				var score = calculateActScore(unit[k]).toFixed(2);
 				ele.innerHTML += `<span class="score">${score}</score>`;
 				total_score += score;
 			} else {
@@ -279,7 +279,7 @@ function loadUnit(index) {
 		});
 
 	}
-	document.querySelector('.text-score').innerHTML = total_score;
+	document.querySelector('.text-score').innerHTML = total_score.toFixed(2);
 }
 
 window.onload = function(){
