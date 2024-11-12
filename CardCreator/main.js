@@ -77,12 +77,22 @@ function calculateScore(text) {
 		return '';
 	}
 	var matches = [
-		['(?:ATK|DEF|poison|burn|chill|shock|charm|empower|fortify) ?(\d+)?', '+$1']
+		[/(?:ATK|DEF) (\d+)/gi, (v) => `+${v}`],
+		[/(?:RNG) (\d+)/gi, (v) => `+${v - 1}`],
+		[/(?:AOE) (\d+)/gi, (v) => `+${v * 2}`],
+		[/(?:poison|burn|chill|shock|charm|empower|fortify) ?(\d+)?/gi, (v) => `+${v | 1}`],
 	];
 	var score = '';
 	matches.forEach((pattern) => {
-		var regex = RegExp(pattern[0], 'gi');
-		score += text.replace(regex, pattern[1]); 
+		var operator = pattern[1];
+		var regex = pattern[0].exec(text);
+		if (regex) {
+			if (regex.length > 1) {
+				score = operator(Number(regex[1])) + score;
+			} else {
+				score = operator(undefined) + score;
+			}
+		}
 	});
 	return score;
 }
@@ -91,6 +101,7 @@ function processAct(text) {
 	if (text === undefined || text.length === 0) {
 		return '';
 	}
+	var score = calculateScore(text);
 	var matches = [
 		['(tactic|act|defend)', 'action'],
 		['((?:\\d+/)?\\d* ?HP)', 'HP'],
@@ -143,6 +154,7 @@ function processAct(text) {
 		var regex = RegExp(pattern[0], 'gi');
 		text = text.replace(regex, "<span class='sp " + pattern[1].toLowerCase() + "'>$1</span>"); 
 	});
+	text += `<span class="score">${score}</span>`;
 	return text;
 }
 
