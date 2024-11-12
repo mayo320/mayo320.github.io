@@ -139,7 +139,9 @@ function calculateActScore(text) {
 		[/AOE R/gi, (v) => `*2`],
 		[/AOE C/gi, (v) => `*2`],
 		[/all allies/gi, (v) => `*2`],
+		[/all (enemies|foes)/gi, (v) => `*2`],
 		[/all (chaos|celestial|nature|construct|order) allies/gi, (v) => `*1.5`],
+		[/all (chaos|celestial|nature|construct|order) (enemies|foes)/gi, (v) => `*1.5`],
 	];
 	var texts = text.split(';');
 	var score = 0;
@@ -259,7 +261,7 @@ function loadUnit(index) {
 				ele.innerHTML = processAct(unit[k]);
 				var score = calculateActScore(unit[k]);
 				ele.innerHTML += `<span class="score">${score}</score>`;
-				total_score += score;
+				total_score += Number(score);
 			} else {
 				ele.innerHTML = unit[k];
 			}
