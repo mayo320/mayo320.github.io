@@ -52,6 +52,12 @@
 				margin: 0;
 			}
 		}
+		#card-cont .score {
+			display: none;
+		}
+		#card-cont.show-score .score {
+			display: block;
+		}
 		#a4 {
 			width: 2268px;
 			height: 3167px;
@@ -789,7 +795,7 @@
 			<hr>
 			<span>Unit Score</span> <br>
 			<span>Total: <span class="text-score"></span></span> <br>
-			<button style="min-width: 200px" onclick="document.querySelectorAll('.score').forEach((x)=>x.classList.toggle('hidden'))">Toggle Scores</button> <br>
+			<button style="min-width: 200px" onclick="document.querySelector('#card-cont').classList.toggle('show-score')">Toggle Scores</button> <br>
 		</div>
 
 		<!-- A4 exports -->
