@@ -74,27 +74,36 @@ function parseCsv() {
 
 function calculateScore(text) {
 	if (text === undefined || text.length === 0) {
-		return '';
+		return 0;
 	}
 	var matches = [
+		[/(?:VP)(\d+)/gi, (v) => `+${v}`],
 		[/(?:ATK|DEF) (\d+)/gi, (v) => `+${v}`],
 		[/(?:RNG) (\d+)/gi, (v) => `+${v - 1}`],
-		[/(?:AOE) (\d+)/gi, (v) => `+${v * 2}`],
+		[/(?:AOE) (\d+)/gi, (v) => `*${v * 2}`],
 		[/(?:poison|burn|chill|shock|charm|empower|fortify) ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/(?:immune)/gi, (v) => `*1`],
 	];
-	var score = '';
-	matches.forEach((pattern) => {
-		var operator = pattern[1];
-		var regex = pattern[0].exec(text);
-		if (regex) {
-			if (regex.length > 1) {
-				score = operator(Number(regex[1])) + score;
-			} else {
-				score = operator(undefined) + score;
+	var texts = text.split(';');
+	var score = 0;
+	texts.forEach((txt) => {
+		matches.forEach((pattern) => {
+			var operator = pattern[1];
+			var regex = pattern[0].exec(txt);
+			if (regex) {
+				var s = '';
+				if (regex.length > 1) {
+					s = operator(Number(regex[1]));
+				} else {
+					s = operator(undefined);
+				}
+				txt = txt.replace(pattern[0], s);
+				var result = eval(`${score} ${s}`);
+				score = isNaN(result) ? score : result;
 			}
-		}
+		});
 	});
-	return [eval(score), score];
+	return score;
 }
 
 function processAct(text) {
@@ -190,8 +199,8 @@ function loadUnit(index) {
 			if (ele.classList.contains('process')) {
 				ele.innerHTML = processAct(unit[k]);
 				var score = calculateScore(unit[k]);
-				ele.innerHTML += `<span class="score hidden">${score[0]} = ${score[1]}</score>`;
-				total_score += score[0];
+				ele.innerHTML += `<span class="score hidden">${score}</score>`;
+				total_score += score;
 			} else {
 				ele.innerHTML = unit[k];
 			}
