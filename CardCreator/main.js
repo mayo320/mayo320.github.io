@@ -108,8 +108,8 @@ function calculateActScore(text) {
 		[/chill ?(\d+)?/gi, (v) => `+${v | 1}`],
 		[/shock ?(\d+)?/gi, (v) => `+${v | 1}`],
 		[/charm ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
-		[/empower ?(\d+)?/gi, (v) => `+${v | 1}`],
-		[/fortify ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/empower ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
+		[/fortify ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
 		[/stun/gi, (v) => `+2`],
 		[/immune/gi, (v) => `*1`],
 		[/resist/gi, (v) => `*0.5`],
@@ -241,8 +241,8 @@ function loadUnit(index) {
 
 	current_index = index;
 	var unit = data[index];
-	var total_score = calculateStatScore(unit['HP'], unit['DEF'], unit['SPD'], unit['Cost']);
-	document.querySelector('.text-statscore').innerHTML = total_score.toFixed(2);
+	var total_score = calculateStatScore(unit['HP'], unit['DEF'], unit['SPD'], unit['Cost']).toFixed(2);
+	document.querySelector('.text-statscore').innerHTML = total_score;
 
 	outfile_name = unit['Name'] + '[face,'+unit['Count']+']'
 	for (let k in unit) {
