@@ -74,9 +74,8 @@ function parseCsv() {
 
 function calculateStatScore(hp, def, spd, cost) {
 	var score = 0;
-	score += hp * 1;
-	score += def * 1;
-	score += spd * 1;
+	score += hp * (1 + (def / 4));
+	score += spd;
 	return score;
 }
 
@@ -101,8 +100,8 @@ function calculateActScore(text) {
 		// Targetting
 		[/FAR/gi, (v) => `+1`],
 		// Supports
-		[/heal (\d+)/gi, (v) => `+${v}`],
-		[/cleanse (\d+)/gi, (v) => `+${v}`],
+		[/heal ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/cleanse ?(\d+)?/gi, (v) => `+${v | 1}`],
 		// Statuses
 		[/poison ?(\d+)?/gi, (v) => `+${v | 1}`],
 		[/burn ?(\d+)?/gi, (v) => `+${v | 1}`],
@@ -111,7 +110,7 @@ function calculateActScore(text) {
 		[/charm ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
 		[/empower ?(\d+)?/gi, (v) => `+${v | 1}`],
 		[/fortify ?(\d+)?/gi, (v) => `+${v | 1}`],
-		[/stun/gi, (v) => `+1.5`],
+		[/stun/gi, (v) => `+2`],
 		[/immune/gi, (v) => `*1`],
 		[/resist/gi, (v) => `*0.5`],
 		[/reveal ?(\d+)?/gi, (v) => `+${v | 1}`],
@@ -120,6 +119,7 @@ function calculateActScore(text) {
 		[/free (\d+)?(?:self)?/gi, (v) => `${(v | 1) * 3}`],
 		[/nullify/gi, (v) => `+3`],
 		[/transfer debuffs/gi, (v) => `+1`],
+		[/spawn.*(\d+) HP/gi, (v) => `+${v}`],
 		// Cards
 		[/draw (\d+) cards?/gi, (v) => `+${v * 2}`],
 		[/discard (\d+) cards?/gi, (v) => `-${v}`],
