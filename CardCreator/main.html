@@ -115,6 +115,10 @@
 			text-shadow: 0 0 10px green;
 			font-family: Georgia, serif;
 		}
+		.text-score {
+			font-size: 26px;
+			color: black;
+		}
 		.action {
 			padding: 2px 8px;
 			border-radius: 5px;
@@ -147,7 +151,11 @@
 				max-width: 600px;
 				.score {
 					position: absolute;
-					left: 500px;
+					left: 0;
+					background: gray;
+					padding: 0 5px;
+					border-radius: 5px;
+					display: none;
 				}
 				.sp {
 					padding: 0 4px;
@@ -158,6 +166,7 @@
 				.action {
 					text-decoration: underline;
 					padding: 0;
+					position: relative;
 				}
 				.stealth, .fog-of-war {
 					background: dimgray;
@@ -777,6 +786,11 @@
 			</button> <br>
 			<button style="min-width: 200px; font-weight: bold; background: pink" onclick="bulkExport()">Bulk Download</button> <br>
 			<button style="min-width: 200px; font-weight: bold; background: gold" onclick="exportA4()">Export A4</button> <br>
+
+			<hr>
+			<span>Unit Score</span> <br>
+			<span>Total: <span class="text-score"></span></span>
+			<button style="min-width: 200px" onclick="document.querySelectorAll('.score').forEach((x)=>x.classList.toggle('hidden'))">Toggle Scores</button> <br>
 		</div>
 
 		<!-- A4 exports -->

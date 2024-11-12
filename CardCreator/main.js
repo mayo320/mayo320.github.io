@@ -94,14 +94,13 @@ function calculateScore(text) {
 			}
 		}
 	});
-	return score;
+	return [eval(score), score];
 }
 
 function processAct(text) {
 	if (text === undefined || text.length === 0) {
 		return '';
 	}
-	var score = calculateScore(text);
 	var matches = [
 		['(tactic|act|defend)', 'action'],
 		['((?:\\d+/)?\\d* ?HP)', 'HP'],
@@ -154,7 +153,6 @@ function processAct(text) {
 		var regex = RegExp(pattern[0], 'gi');
 		text = text.replace(regex, "<span class='sp " + pattern[1].toLowerCase() + "'>$1</span>"); 
 	});
-	text += `<span class="score">${score}</span>`;
 	return text;
 }
 
@@ -176,6 +174,7 @@ function loadUnit(index) {
 	}
 
 	current_index = index;
+	var total_score = 0;
 	var unit = data[index];
 	outfile_name = unit['Name'] + '[face,'+unit['Count']+']'
 	for (let k in unit) {
@@ -190,6 +189,9 @@ function loadUnit(index) {
 		texts.forEach((ele) => {
 			if (ele.classList.contains('process')) {
 				ele.innerHTML = processAct(unit[k]);
+				var score = calculateScore(text);
+				ele.innerHTML += `<span class="score">${score[0]} = ${score[1]}</score>`;
+				total_score += score[0];
 			} else {
 				ele.innerHTML = unit[k];
 			}
@@ -212,6 +214,7 @@ function loadUnit(index) {
 		});
 
 	}
+	document.querySelector('.text-score').innerHTML = total_score;
 }
 
 window.onload = function(){
