@@ -77,12 +77,35 @@ function calculateScore(text) {
 		return 0;
 	}
 	var matches = [
-		[/(?:VP)(\d+)/gi, (v) => `+${v}`],
-		[/(?:ATK|DEF) (\d+)/gi, (v) => `+${v}`],
+		// General
+		[/(\d+)(?:VP)/gi, (v) => `+${v}`],
+		[/(\d+)(?:G)/gi, (v) => `+${v}`],
+		// Attacks
+		[/(?:ATK) (\d+)/gi, (v) => `+${v}`],
+		[/(?:DEF) (\d+)/gi, (v) => `+${v}`],
 		[/(?:RNG) (\d+)/gi, (v) => `+${v - 1}`],
 		[/(?:AOE) (\d+)/gi, (v) => `*${v * 2}`],
-		[/(?:poison|burn|chill|shock|charm|empower|fortify) ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/(?:AOE R)/gi, (v) => `*2`],
+		[/(?:AOE C)/gi, (v) => `*2`],
+		// Targetting
+		[/(?:FAR)/gi, (v) => `+1`],
+		// Supports
+		[/(?:heal) (\d+)/gi, (v) => `+${v}`],
+		[/(?:cleanse) (\d+)/gi, (v) => `+${v}`],
+		// Statuses
+		[/(?:poison) ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/(?:burn) ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/(?:chill) ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/(?:shock) ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/(?:charm) ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
+		[/(?:empower) ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/(?:fortify) ?(\d+)?/gi, (v) => `+${v | 1}`],
 		[/(?:immune)/gi, (v) => `*1`],
+		[/(?:resist)/gi, (v) => `*0.5`],
+		[/(?:reveal) ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/(?:stealth) ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
+		[/(?:fog of war)/gi, (v) => `+3`],
+
 	];
 	var texts = text.split(';');
 	var score = 0;
