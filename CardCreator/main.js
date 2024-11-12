@@ -94,8 +94,9 @@ function calculateActScore(text) {
 		// Attacks & RNG
 		[/ATK (\d+)/gi, (v) => `+${v}`],
 		[/DEF (\d+)/gi, (v) => `+${v}`],
+		[/(\d+) True (?:dmg|damage)/gi, (v) => `+${2 * v}`],
 		[/Melee/gi, (v) => `*1`],
-		[/RNG (\d+)/gi, (v) => `+${min(v - 1, 3)}`],
+		[/RNG (\d+)/gi, (v) => `+${min(v, 3) - 1}`],
 		[/ADV/gi, (v) => `*1.25`],
 		// Targetting
 		[/FAR/gi, (v) => `+1`],
@@ -110,12 +111,13 @@ function calculateActScore(text) {
 		[/charm ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
 		[/empower ?(\d+)?/gi, (v) => `+${v | 1}`],
 		[/fortify ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/stun/gi, (v) => `+1.5`],
 		[/immune/gi, (v) => `*1`],
 		[/resist/gi, (v) => `*0.5`],
 		[/reveal ?(\d+)?/gi, (v) => `+${v | 1}`],
 		[/stealth ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
 		[/fog of war/gi, (v) => `+3`],
-		[/free ?(\d+)?(?:self)?/gi, (v) => `${(v | 1) * 3}`],
+		[/free (\d+)?(?:self)?/gi, (v) => `${(v | 1) * 3}`],
 		[/nullify/gi, (v) => `+3`],
 		[/transfer debuffs/gi, (v) => `+1`],
 		// Cards
@@ -128,6 +130,7 @@ function calculateActScore(text) {
 		[/(may).*/gi, (v) => `*1.2`],
 		[/per.*ally/gi, (v) => `*1`],
 		[/per.*(chaos|celestial|nature|construct|order).*ally/gi, (v) => `*0.6`],
+		[/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (v) => `*1.5`],
 		[/once.*/gi, (v) => `*0.8`],
 		// Act again
 		[/(perform|trigger).*(act|defend)/gi, (v) => `+4`],
