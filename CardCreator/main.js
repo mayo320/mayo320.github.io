@@ -102,8 +102,8 @@ function calculateActScore(text, unit, print) {
 		[/RNG (\d+)/gi, (v) => `+${(min(v, 3) - 1) * 0.8}`],
 		[/ADV/gi, (v) => `*1.25`],
 		// Targetting
-		[/FAR/gi, (v) => `+1`],
-		[/ANY/gi, (v) => `+2.5`],
+		[/RNG (\d+) FAR/gi, (v) => `+1`],
+		[/RNG (\d+) ANY/gi, (v) => `+2.5`],
 		// Supports
 		[/heal ?(\d+)?/gi, (v) => `+${(v || 1) * 0.7}`],
 		[/cleanse ?(\d+)?/gi, (v) => `+${(v || 1) * 0.7}`],
@@ -153,6 +153,8 @@ function calculateActScore(text, unit, print) {
 		[/(chaos|celestial|nature|construct|order)/gi, (v) => `*0.7`],
 		[/(vanguard)/gi, (v) => `*0.7`],
 		[/ or /gi, (v) => `*2`],
+		[/(L1 )/gi, (v) => `*0.5`],
+		[/(L1\/L2 )/gi, (v) => `*0.8`],
 	];
 	// Things that affect the whole line
 	var line_matches = [
