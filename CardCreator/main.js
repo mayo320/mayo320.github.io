@@ -87,7 +87,7 @@ function calculateActScore(text, print) {
 	var min = Math.min;
 	// Order matters, top ones are calculated first
 	// Format of [regex, accumulator]
-	var matches = [
+	var part_matches = [
 		// General
 		[/(\d+)VP/gi, (v) => `+${v}`],
 		[/([+-]?\d+)G/gi, (v) => `+${v}`],
@@ -144,38 +144,51 @@ function calculateActScore(text, print) {
 		[/persistent.*/gi, (v) => `*1.4`],
 		// Act again
 		[/(perform|trigger).*(act|defend)/gi, (v) => `+4`],
+		// Faction restricted
+		[/(chaos|celestial|nature|construct|order)/gi, (v) => `*0.7`],
+	];
+	// Things that affect the whole line
+	var line_matches = [
 		// Multiple targets
+		[/.*/gi, (v) => `+1`], // start with 1
 		[/AOE (\d+)/gi, (v) => `*${min(v, 2.5) + 1}`],
 		[/AOE R/gi, (v) => `*1.8`],
 		[/AOE C/gi, (v) => `*1.8`],
 		[/all.*allies/gi, (v) => `*2`],
 		[/all.*(enemies|foes)/gi, (v) => `*2`],
-		// Faction restricted
-		[/(chaos|celestial|nature|construct|order)/gi, (v) => `*0.7`],
 	];
-	var texts = text.split(/[;,]/);
+	var texts = text.split(';');
 	var score = 0;
-	texts.forEach((txt) => {
-		var line_score = 0;
-		matches.forEach((pattern) => {
-			var operator = pattern[1];
-			pattern[0].lastIndex = 0;
-			var regex = pattern[0].exec(txt);
-			if (regex) {
-				var s = '';
-				if (regex.length > 1 && regex[1] !== undefined) {
-					s = operator(Number(regex[1]));
-				} else {
-					s = operator(undefined);
+	texts.forEach((line) => {
+		const eval_fn = (matches, txt) => {
+			var eval_score = 0;
+			matches.forEach((pattern) => {
+				var operator = pattern[1];
+				pattern[0].lastIndex = 0;
+				var regex = pattern[0].exec(txt);
+				if (regex) {
+					var s = '';
+					if (regex.length > 1) {
+						s = operator(Number(regex[1]));
+					} else {
+						s = operator(undefined);
+					}
+					var result = eval(`${eval_score}${s}`);
+					eval_score = isNaN(result) ? eval_score : result;
+					if (print) {
+						console.log(txt, pattern[0], '\nop:', s, ' | ', eval_score);
+					}
 				}
-				var result = eval(`${line_score}${s}`);
-				line_score = isNaN(result) ? line_score : result;
-				if (print) {
-					console.log(txt, pattern[0], '\nop:', s, ' | ', line_score);
-				}
-			}
+			});
+			return eval_score;
+		}
+		var multiplier = eval_fn(line_matches, line);
+
+		var parts = line.split(',');
+		parts.forEach((part) => {
+			var part_score = eval_fn(part_matches, part);
+			score += (part_score * multiplier);
 		});
-		score += line_score;
 	});
 	return score;
 }
