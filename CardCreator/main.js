@@ -75,7 +75,7 @@ function parseCsv() {
 function calculateStatScore(hp, def, spd, cost) {
 	var score = 0;
 	score += (Number(hp) * (1 + (Number(def) / 4))) * 1.3;
-	score += Number(spd);
+	score += (Number(spd));
 	score -= Number(cost);
 	return score;
 }
@@ -121,7 +121,7 @@ function calculateActScore(text, print) {
 		[/reveal ?(\d+)?/gi, (v) => `+${v || 1}`],
 		[/stealth ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
 		[/fog of war/gi, (v) => `+3`],
-		[/free (\d+)?(?:self)?/gi, (v) => `+${(v || 1) * 3}`],
+		[/free (\d+)?(?:self)?/gi, (v) => `+${(v || 1) * 3.5}`],
 		[/nullify/gi, (v) => `+3`],
 		[/transfer debuffs/gi, (v) => `+1`],
 		[/spawn.*(\d+) HP/gi, (v) => `+${v}`],
