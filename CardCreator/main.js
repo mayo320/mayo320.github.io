@@ -116,7 +116,8 @@ function calculateActScore(text, print) {
 		[/self (?:poison|burn|chill|shock|charm|stun)/gi, (v) => `*0.2`], // w/a for self inflicting debuffs
 		[/empower ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
 		[/fortify ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
-		[/(any debuff|all debuff)s?/gi, (v) => `+6`],
+		[/(any debuff)s?/gi, (v) => `+3`],
+		[/(all debuff)s?/gi, (v) => `+6`],
 		[/immune/gi, (v) => `*1`],
 		[/resist/gi, (v) => `*0.75`],
 		[/reveal ?(\d+)?/gi, (v) => `+${v || 1}`],
@@ -126,26 +127,30 @@ function calculateActScore(text, print) {
 		[/nullify/gi, (v) => `+3`],
 		[/transfer debuffs/gi, (v) => `+1`],
 		[/spawn.*(\d+) HP/gi, (v) => `+${v}`],
-		[/revive/gi, (v) => `+5`],
+		[/revive.*(\d+) HP/gi, (v) => `+${v + 1}`],
+		[/revive.*full HP/gi, (v) => `+6`],
 		// Cards
 		[/draw (\d+) cards?/gi, (v) => `+${v * 2}`],
 		[/discard (\d+) cards?/gi, (v) => `-${v}`],
 		// Other
-		[/takes (\d+) damage at most per attack.*/gi, (v) => `+${4 / v}`],
+		[/takes (\d+) damage at most per attack.*/gi, (v) => `+${12 / (v + 2)}`],
 		[/(perform|trigger).*(act|defend)/gi, (v) => `+4`],
 		// Conditional
 		[/(on deploy)/gi, (v) => `*1.9`],
-		[/(at the end)/gi, (v) => `*1.9`],
+		[/(after.*act)/gi, (v) => `*2.5`],
+		[/(before.*act)/gi, (v) => `*2.5`],
 		[/(reflect)/gi, (v) => `*0.75`],
 		[/against (?:melee) attack/gi, (v) => `*0.75`],
 		[/(if|when).*:.*/gi, (v) => `*0.5`],
 		[/(may).*/gi, (v) => `*1.2`],
 		[/per.*ally/gi, (v) => `*1.5`],
 		[/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (v) => `*1.5`],
-		[/once.*/gi, (v) => `*0.8`],
+		[/once.*/gi, (v) => `*0.75`],
 		[/persistent.*/gi, (v) => `*1.4`],
-		// Faction restricted
+		// Faction/position restricted
 		[/(chaos|celestial|nature|construct|order)/gi, (v) => `*0.7`],
+		[/(vanguard)/gi, (v) => `*0.7`],
+		[/ or /gi, (v) => `*2`],
 	];
 	// Things that affect the whole line
 	var line_matches = [
@@ -154,8 +159,8 @@ function calculateActScore(text, print) {
 		[/AOE (\d+)/gi, (v) => `*${min(v, 2.5) + 1}`],
 		[/AOE R/gi, (v) => `*1.8`],
 		[/AOE C/gi, (v) => `*1.8`],
-		[/all.*allies/gi, (v) => `*2`],
-		[/all.*(enemies|foes)/gi, (v) => `*2`],
+		[/all.*allies/gi, (v) => `*2.5`],
+		[/all.*(enemies|foes)/gi, (v) => `*2.5`],
 	];
 	var texts = text.split(';');
 	var score = 0;
@@ -173,7 +178,7 @@ function calculateActScore(text, print) {
 					} else {
 						s = operator(undefined);
 					}
-					var result = eval(`${eval_score}${s}`);
+					var result = eval(`${eval_score} ${s}`);
 					eval_score = isNaN(result) ? eval_score : result;
 					if (print) {
 						console.log(txt, pattern[0], '\nop:', s, ' | ', eval_score);
