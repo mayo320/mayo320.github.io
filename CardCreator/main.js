@@ -134,6 +134,7 @@ function calculateActScore(text) {
 		[/per.*ally/gi, (v) => `*1.5`],
 		[/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (v) => `*1.5`],
 		[/once.*/gi, (v) => `*0.8`],
+		[/persistent.*/gi, (v) => `*1.4`],
 		// Act again
 		[/(perform|trigger).*(act|defend)/gi, (v) => `+4`],
 		// Multiple targets
