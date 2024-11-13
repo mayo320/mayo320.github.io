@@ -76,7 +76,7 @@ function calculateStatScore(hp, def, spd, cost) {
 	var score = 0;
 	score += (Number(hp) * (1 + (Number(def) / 4))) * 1.3;
 	score += (Number(spd));
-	score -= Number(cost);
+	score -= Number(cost) * 1.2;
 	return score;
 }
 
