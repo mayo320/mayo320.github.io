@@ -141,9 +141,9 @@ function calculateActScore(text) {
 		// Act again
 		[/(perform|trigger).*(act|defend)/gi, (v) => `+4`],
 		// Multiple targets
-		[/AOE (\d+)/gi, (v) => `*${min(v * 2, 5)}`],
-		[/AOE R/gi, (v) => `*2`],
-		[/AOE C/gi, (v) => `*2`],
+		[/AOE (\d+)/gi, (v) => `*${min(v, 2.5) + 1}`],
+		[/AOE R/gi, (v) => `*1.8`],
+		[/AOE C/gi, (v) => `*1.8`],
 		[/all.*allies/gi, (v) => `*2`],
 		[/all.*(enemies|foes)/gi, (v) => `*2`],
 		// Faction restricted
