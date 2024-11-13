@@ -126,7 +126,10 @@ function calculateActScore(text) {
 		// Cards
 		[/draw (\d+) cards?/gi, (v) => `+${v * 2}`],
 		[/discard (\d+) cards?/gi, (v) => `-${v}`],
+		// Other
+		[/takes (\d+) damage at most per attack.*/gi, (v) => `+${4 / v}`],
 		// Conditional
+		[/(on deploy)/gi, (v) => `*1.4`],
 		[/(reflect)/gi, (v) => `*0.75`],
 		[/against (?:melee) attack/gi, (v) => `*0.75`],
 		[/(if|when).*:.*/gi, (v) => `*0.5`],
