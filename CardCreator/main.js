@@ -149,7 +149,7 @@ function calculateActScore(text) {
 		// Faction restricted
 		[/(chaos|celestial|nature|construct|order)/gi, (v) => `*0.7`],
 	];
-	var texts = text.split(/;,/);
+	var texts = text.split(/[;,]/);
 	var score = 0;
 	texts.forEach((txt) => {
 		matches.forEach((pattern) => {
@@ -157,7 +157,7 @@ function calculateActScore(text) {
 			var regex = pattern[0].exec(txt);
 			if (regex) {
 				var s = '';
-				if (regex.length > 1) {
+				if (regex.length > 1 && regex[1] !== undefined) {
 					s = operator(Number(regex[1]));
 				} else {
 					s = operator(undefined);
