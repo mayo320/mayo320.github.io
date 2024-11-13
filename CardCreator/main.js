@@ -89,7 +89,7 @@ function calculateActScore(text) {
 	var matches = [
 		// General
 		[/(\d+)VP/gi, (v) => `+${v}`],
-		[/(\d+)G/gi, (v) => `+${v}`],
+		[/([+-]?\d+)G/gi, (v) => `+${v}`],
 		// Attacks & RNG
 		[/ATK (\d+)/gi, (v) => `+${v}`],
 		[/DEF (\d+)/gi, (v) => `+${v}`],
@@ -113,7 +113,7 @@ function calculateActScore(text) {
 		[/stun/gi, (v) => `+2`],
 		[/(any debuff|all debuff)s?/gi, (v) => `+6`],
 		[/immune/gi, (v) => `*1`],
-		[/resist/gi, (v) => `*0.5`],
+		[/resist/gi, (v) => `*0.75`],
 		[/reveal ?(\d+)?/gi, (v) => `+${v | 1}`],
 		[/stealth ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
 		[/fog of war/gi, (v) => `+3`],
