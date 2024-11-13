@@ -99,7 +99,7 @@ function calculateActScore(text, print) {
 		[/DEF (\d+)/gi, (v) => `+${v}`],
 		[/(\d+) True (?:dmg|damage)/gi, (v) => `+${2 * v}`],
 		[/Melee/gi, (v) => `*1`],
-		[/RNG (\d+)/gi, (v) => `+${min(v, 3) - 1}`],
+		[/RNG (\d+)/gi, (v) => `+${(min(v, 3) - 1) * 0.8}`],
 		[/ADV/gi, (v) => `*1.25`],
 		// Targetting
 		[/FAR/gi, (v) => `+1`],
