@@ -91,6 +91,7 @@ function calculateActScore(text) {
 		// General
 		[/(\d+)VP/gi, (v) => `+${v}`],
 		[/([+-]?\d+)G/gi, (v) => `+${v}`],
+		[/max (\d+)G/gi, (v) => `*${v * 0.5}`], // w/a for gaining gold as Act
 		[/Foe gain/gi, (v) => `*-1`], // w/a for giving opponent gold
 		// Attacks & RNG
 		[/ATK (\d+)/gi, (v) => `+${v}`],
