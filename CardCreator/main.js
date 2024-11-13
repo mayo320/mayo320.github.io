@@ -130,7 +130,7 @@ function calculateActScore(text) {
 		[/against (?:melee) attack/gi, (v) => `*0.75`],
 		[/(if|when).*:.*/gi, (v) => `*0.5`],
 		[/(may).*/gi, (v) => `*1.2`],
-		[/per.*ally/gi, (v) => `*1`],
+		[/per.*ally/gi, (v) => `*1.5`],
 		[/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (v) => `*1.5`],
 		[/once.*/gi, (v) => `*0.8`],
 		// Act again
