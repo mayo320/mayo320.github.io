@@ -180,13 +180,13 @@ function processAct(text) {
 		['(tactic|act|defend)', 'action'],
 		['((?:\\d+/)?\\d* ?HP)', 'HP'],
 		['(melee)', 'melee'],
-		['(+?rng(?: \\d+))', 'rng'],
+		['(\\+?rng(?: \\d+))', 'rng'],
 		['(aoe(?: [RC\\d+])?)', 'aoe'],
-		['(+?ATK(?: [\\d+X])?)', 'atk'],
-		['(+?(?:\\d+ )?def(?: \\d+))', 'def'],
+		['(\\+?ATK(?: [\\d+X])?)', 'atk'],
+		['(\\+?(?:\\d+ )?def(?: \\d+))', 'def'],
 		['((?:\\d+ )?true (?:damage|dmg))', 'true-dmg'],
 		['(ADV)', 'adv'],
-		['(+?SPD ?\\d+)', 'spd'],
+		['(\\+?SPD ?\\d+)', 'spd'],
 		['IMM( .*);?', 'immunity'], // imm should be above statuses
 		['resist( .*);?', 'resist'], // imm should be above statuses
 		['(heal(?: \\d+)?)', 'heal'],
