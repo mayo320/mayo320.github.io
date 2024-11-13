@@ -131,7 +131,6 @@ function calculateActScore(text) {
 		[/(if|when).*:.*/gi, (v) => `*0.5`],
 		[/(may).*/gi, (v) => `*1.2`],
 		[/per.*ally/gi, (v) => `*1`],
-		[/per.*(chaos|celestial|nature|construct|order).*ally/gi, (v) => `*0.6`],
 		[/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (v) => `*1.5`],
 		[/once.*/gi, (v) => `*0.8`],
 		// Act again
@@ -140,10 +139,10 @@ function calculateActScore(text) {
 		[/AOE (\d+)/gi, (v) => `*${min(v * 2, 5)}`],
 		[/AOE R/gi, (v) => `*2`],
 		[/AOE C/gi, (v) => `*2`],
-		[/all allies/gi, (v) => `*2`],
-		[/all (enemies|foes)/gi, (v) => `*2`],
-		[/all (chaos|celestial|nature|construct|order) allies/gi, (v) => `*1.5`],
-		[/all (chaos|celestial|nature|construct|order) (enemies|foes)/gi, (v) => `*1.5`],
+		[/all.*allies/gi, (v) => `*2`],
+		[/all.*(enemies|foes)/gi, (v) => `*2`],
+		// Faction restricted
+		[/(chaos|celestial|nature|construct|order)/gi, (v) => `*0.7`],
 	];
 	var texts = text.split(';');
 	var score = 0;
