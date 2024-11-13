@@ -80,7 +80,7 @@ function calculateStatScore(hp, def, spd, cost) {
 	return score;
 }
 
-function calculateActScore(text) {
+function calculateActScore(text, print) {
 	if (text === undefined || text.length === 0) {
 		return 0;
 	}
@@ -112,7 +112,7 @@ function calculateActScore(text) {
 		[/shock ?(\d+)?/gi, (v) => `+${v || 1}`],
 		[/charm ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
 		[/stun/gi, (v) => `+2`],
-		[/self (poison|burn|chill|shock|charm)/gi, (v) => `*0.2`], // w/a for self inflicting debuffs
+		[/self (?:poison|burn|chill|shock|charm|stun)/gi, (v) => `*0.2`], // w/a for self inflicting debuffs
 		[/empower ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
 		[/fortify ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
 		[/(any debuff|all debuff)s?/gi, (v) => `+6`],
@@ -155,8 +155,10 @@ function calculateActScore(text) {
 	var texts = text.split(/[;,]/);
 	var score = 0;
 	texts.forEach((txt) => {
+		var line_score = 0;
 		matches.forEach((pattern) => {
 			var operator = pattern[1];
+			pattern[0].lastIndex = 0;
 			var regex = pattern[0].exec(txt);
 			if (regex) {
 				var s = '';
@@ -165,11 +167,14 @@ function calculateActScore(text) {
 				} else {
 					s = operator(undefined);
 				}
-				txt = txt.replace(pattern[0], s);
-				var result = eval(`${score} ${s}`);
-				score = isNaN(result) ? score : result;
+				var result = eval(`${line_score}${s}`);
+				line_score = isNaN(result) ? line_score : result;
+				if (print) {
+					console.log(txt, pattern[0], '\nop:', s, ' | ', line_score);
+				}
 			}
 		});
+		score += line_score;
 	});
 	return score;
 }
@@ -253,7 +258,7 @@ function loadUnit(index) {
 	current_index = index;
 	var unit = data[index];
 	var total_score = calculateStatScore(unit['HP'], unit['DEF'], unit['SPD'], unit['Cost']);
-	document.querySelector('.text-statscore').innerHTML = total_score;
+	document.querySelector('.text-statscore').innerHTML = Number(total_score).toFixed(2);
 
 	outfile_name = unit['Name'] + '[face,'+unit['Count']+']'
 	for (let k in unit) {
@@ -268,8 +273,8 @@ function loadUnit(index) {
 		texts.forEach((ele) => {
 			if (ele.classList.contains('process')) {
 				ele.innerHTML = processAct(unit[k]);
-				var score = calculateActScore(unit[k]);
-				ele.innerHTML += `<span class="score">${score}</score>`;
+				var score = calculateActScore(unit[k], false);
+				ele.innerHTML += `<span class="score">${Number(score).toFixed(2)}</score>`;
 				total_score += Number(score);
 			} else {
 				ele.innerHTML = unit[k];
