@@ -80,7 +80,7 @@ function calculateStatScore(hp, def, spd, cost) {
 	return score;
 }
 
-function calculateActScore(text, print) {
+function calculateActScore(text, unit, print) {
 	if (text === undefined || text.length === 0) {
 		return 0;
 	}
@@ -103,6 +103,7 @@ function calculateActScore(text, print) {
 		[/ADV/gi, (v) => `*1.25`],
 		// Targetting
 		[/FAR/gi, (v) => `+1`],
+		[/ANY/gi, (v) => `+2.5`],
 		// Supports
 		[/heal ?(\d+)?/gi, (v) => `+${(v || 1) * 0.7}`],
 		[/cleanse ?(\d+)?/gi, (v) => `+${(v || 1) * 0.7}`],
@@ -133,7 +134,7 @@ function calculateActScore(text, print) {
 		[/draw (\d+) cards?/gi, (v) => `+${v * 2}`],
 		[/discard (\d+) cards?/gi, (v) => `-${v}`],
 		// Other
-		[/takes (\d+) damage at most per attack.*/gi, (v) => `+${12 / (v + 2)}`],
+		[/takes (\d+) damage at most per attack.*/gi, (v) => `+${(6 / (v + 2) * unit['HP'])}`],
 		[/(perform|trigger).*(act|defend)/gi, (v) => `+4`],
 		// Conditional
 		[/(on deploy)/gi, (v) => `*1.9`],
@@ -141,12 +142,13 @@ function calculateActScore(text, print) {
 		[/(before.*act)/gi, (v) => `*2.5`],
 		[/(reflect)/gi, (v) => `*0.75`],
 		[/against (?:melee) attack/gi, (v) => `*0.75`],
-		[/(if|when).*:.*/gi, (v) => `*0.5`],
+		[/(if|when).*:.*/gi, (v) => `*0.65`],
 		[/(may).*/gi, (v) => `*1.2`],
 		[/per.*ally/gi, (v) => `*1.5`],
 		[/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (v) => `*1.5`],
 		[/once.*/gi, (v) => `*0.75`],
 		[/persistent.*/gi, (v) => `*1.4`],
+		[/(X = current HP|per current HP)/gi, (v) => `*${unit['HP'] / 2}`],
 		// Faction/position restricted
 		[/(chaos|celestial|nature|construct|order)/gi, (v) => `*0.7`],
 		[/(vanguard)/gi, (v) => `*0.7`],
@@ -292,7 +294,7 @@ function loadUnit(index) {
 		texts.forEach((ele) => {
 			if (ele.classList.contains('process')) {
 				ele.innerHTML = processAct(unit[k]);
-				var score = calculateActScore(unit[k], false);
+				var score = calculateActScore(unit[k], unit, false);
 				ele.innerHTML += `<span class="score">${Number(score).toFixed(2)}</score>`;
 				total_score += Number(score);
 			} else {
