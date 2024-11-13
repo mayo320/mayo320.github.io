@@ -111,7 +111,7 @@ function calculateActScore(text) {
 		[/empower ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
 		[/fortify ?(\d+)?/gi, (v) => `+${(v | 1) * 1.5}`],
 		[/stun/gi, (v) => `+2`],
-		[/(any debuffs|all debuffs)/gi, (v) => `+6`],
+		[/(any debuff|all debuff)s?/gi, (v) => `+6`],
 		[/immune/gi, (v) => `*1`],
 		[/resist/gi, (v) => `*0.5`],
 		[/reveal ?(\d+)?/gi, (v) => `+${v | 1}`],
@@ -121,6 +121,7 @@ function calculateActScore(text) {
 		[/nullify/gi, (v) => `+3`],
 		[/transfer debuffs/gi, (v) => `+1`],
 		[/spawn.*(\d+) HP/gi, (v) => `+${v}`],
+		[/revive/gi, (v) => `+5`],
 		// Cards
 		[/draw (\d+) cards?/gi, (v) => `+${v * 2}`],
 		[/discard (\d+) cards?/gi, (v) => `-${v}`],
