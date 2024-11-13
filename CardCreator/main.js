@@ -251,7 +251,7 @@ function loadUnit(index) {
 	current_index = index;
 	var unit = data[index];
 	var total_score = calculateStatScore(unit['HP'], unit['DEF'], unit['SPD'], unit['Cost']);
-	document.querySelector('.text-statscore').innerHTML = Math.round(total_score * 100) / 100;
+	document.querySelector('.text-statscore').innerHTML = Math.round(total_score);
 
 	outfile_name = unit['Name'] + '[face,'+unit['Count']+']'
 	for (let k in unit) {
