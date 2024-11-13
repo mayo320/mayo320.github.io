@@ -326,7 +326,14 @@ function loadUnit(index) {
 
 window.onload = function(){
 	init();
-	loadCsvFromUri();
+
+	const data = getUriParam('csv');
+	if (data) {
+		loadCsvFromData(getUriParam('csv'));	
+	}
+	else {
+		loadCsvFromData(CSV_ENCODED_DATA);
+	}
 
 	// Arrow keys to navigate
 	document.onkeydown = (e) => {

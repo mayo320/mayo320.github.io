@@ -12,13 +12,13 @@ async function UnzipBase64EncodedString(data) {
   return await decompress(data);
 }
 
-async function loadCsvFromUri() {
+function getUriParam(key) {
   const urlParams = new URLSearchParams(window.location.search)
-  const data = urlParams.get('csv');
+  return urlParams.get('csv');
+}
 
-  if (data) {
-    const csv = await UnzipBase64EncodedString(data);
-    CSV_DATA = csv.replaceAll('\\t', '\t').replaceAll('\t\\n\t', '\n');
-    init();
-  }
+async function loadCsvFromData(data) {
+  const csv = await UnzipBase64EncodedString(data);
+  CSV_DATA = csv.replaceAll('\\t', '\t').replaceAll('\t\\n\t', '\n');
+  init();
 }
