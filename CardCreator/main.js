@@ -122,7 +122,7 @@ function calculateActScore(text, print) {
 		[/reveal ?(\d+)?/gi, (v) => `+${v || 1}`],
 		[/stealth ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
 		[/fog of war/gi, (v) => `+3`],
-		[/free (\d+)?(?:self)?/gi, (v) => `+${(v || 1) * 3.5}`],
+		[/free (\d+)?(?:self)?/gi, (v) => `+${(v || 1) * 5}`],
 		[/nullify/gi, (v) => `+3`],
 		[/transfer debuffs/gi, (v) => `+1`],
 		[/spawn.*(\d+) HP/gi, (v) => `+${v}`],
@@ -132,8 +132,10 @@ function calculateActScore(text, print) {
 		[/discard (\d+) cards?/gi, (v) => `-${v}`],
 		// Other
 		[/takes (\d+) damage at most per attack.*/gi, (v) => `+${4 / v}`],
+		[/(perform|trigger).*(act|defend)/gi, (v) => `+4`],
 		// Conditional
 		[/(on deploy)/gi, (v) => `*1.9`],
+		[/(at the end)/gi, (v) => `*1.9`],
 		[/(reflect)/gi, (v) => `*0.75`],
 		[/against (?:melee) attack/gi, (v) => `*0.75`],
 		[/(if|when).*:.*/gi, (v) => `*0.5`],
@@ -142,8 +144,6 @@ function calculateActScore(text, print) {
 		[/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (v) => `*1.5`],
 		[/once.*/gi, (v) => `*0.8`],
 		[/persistent.*/gi, (v) => `*1.4`],
-		// Act again
-		[/(perform|trigger).*(act|defend)/gi, (v) => `+4`],
 		// Faction restricted
 		[/(chaos|celestial|nature|construct|order)/gi, (v) => `*0.7`],
 	];
