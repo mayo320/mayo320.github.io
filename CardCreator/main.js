@@ -251,7 +251,7 @@ function loadUnit(index) {
 	current_index = index;
 	var unit = data[index];
 	var total_score = calculateStatScore(unit['HP'], unit['DEF'], unit['SPD'], unit['Cost']);
-	document.querySelector('.text-statscore').innerHTML = Math.round(total_score);
+	document.querySelector('.text-statscore').innerHTML = total_score;
 
 	outfile_name = unit['Name'] + '[face,'+unit['Count']+']'
 	for (let k in unit) {
@@ -291,7 +291,7 @@ function loadUnit(index) {
 		});
 
 	}
-	document.querySelector('.text-score').innerHTML = total_score;
+	document.querySelector('.text-score').innerHTML = Math.round(total_score);
 }
 
 window.onload = function(){
