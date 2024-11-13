@@ -126,7 +126,7 @@ function calculateActScore(text, unit, print) {
 		[/fog of war/gi, (v) => `+3`],
 		[/free (\d+)?(?:self)?/gi, (v) => `+${(v || 1) * 5}`],
 		[/nullify/gi, (v) => `+3`],
-		[/transfer debuffs/gi, (v) => `+1`],
+		[/transfer debuffs/gi, (v) => `+1.3`],
 		[/spawn.*(\d+) HP/gi, (v) => `+${v}`],
 		[/revive.*(\d+) HP/gi, (v) => `+${v + 1}`],
 		[/revive.*full HP/gi, (v) => `+6`],
