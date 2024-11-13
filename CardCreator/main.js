@@ -109,9 +109,10 @@ function calculateActScore(text) {
 		[/chill ?(\d+)?/gi, (v) => `+${v || 1}`],
 		[/shock ?(\d+)?/gi, (v) => `+${v || 1}`],
 		[/charm ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
+		[/stun/gi, (v) => `+2`],
+		[/self (poison|burn|chill|shock|charm)/gi, (v) => `*0.2`], // w/a for self inflicting debuffs
 		[/empower ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
 		[/fortify ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
-		[/stun/gi, (v) => `+2`],
 		[/(any debuff|all debuff)s?/gi, (v) => `+6`],
 		[/immune/gi, (v) => `*1`],
 		[/resist/gi, (v) => `*0.75`],
