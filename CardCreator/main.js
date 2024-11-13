@@ -133,7 +133,7 @@ function calculateActScore(text, print) {
 		// Other
 		[/takes (\d+) damage at most per attack.*/gi, (v) => `+${4 / v}`],
 		// Conditional
-		[/(on deploy)/gi, (v) => `*1.4`],
+		[/(on deploy)/gi, (v) => `*1.9`],
 		[/(reflect)/gi, (v) => `*0.75`],
 		[/against (?:melee) attack/gi, (v) => `*0.75`],
 		[/(if|when).*:.*/gi, (v) => `*0.5`],
