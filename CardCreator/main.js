@@ -100,8 +100,8 @@ function calculateActScore(text) {
 		// Targetting
 		[/FAR/gi, (v) => `+1`],
 		// Supports
-		[/heal ?(\d+)?/gi, (v) => `+${v | 1}`],
-		[/cleanse ?(\d+)?/gi, (v) => `+${v | 1}`],
+		[/heal ?(\d+)?/gi, (v) => `+${(v | 1) * 0.7}`],
+		[/cleanse ?(\d+)?/gi, (v) => `+${(v | 1) * 0.7}`],
 		// Statuses
 		[/poison ?(\d+)?/gi, (v) => `+${v | 1}`],
 		[/burn ?(\d+)?/gi, (v) => `+${v | 1}`],
@@ -144,7 +144,7 @@ function calculateActScore(text) {
 		// Faction restricted
 		[/(chaos|celestial|nature|construct|order)/gi, (v) => `*0.7`],
 	];
-	var texts = text.split(';');
+	var texts = text.split(/;,/);
 	var score = 0;
 	texts.forEach((txt) => {
 		matches.forEach((pattern) => {
