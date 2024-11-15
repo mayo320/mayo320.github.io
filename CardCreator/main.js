@@ -72,39 +72,63 @@ function parseCsv() {
 	return ret;
 }
 
-function calculateUnitScores(index) {
-	var unit = data[index];
-	var scores = {};
-	var score_total = 0;
+function calculateUnitScores(index, print=false) {
+	const unit = data[index];
 
-	const calcAct = (key) => {
+	const hp = Number(unit['HP']);
+	const def = Number(unit['DEF']);
+	const spd = Number(unit['SPD']);
+
+	var scores = {
+		'offense': 0,
+		'dot': 0,
+		'defense': (hp * (1 + (def / 4))) * 1.3,
+		'support': 0,
+		'buff': 0,
+		'debuff': 0,
+		'utility': 0,
+		'resource': 0,
+		'cost': -Number(unit['Cost']),
+	};
+	var spd_multi = spd / 10;
+	var def_multi = (def / 10) + (hp / 15);
+
+	const calcAct = (key, multiplier = 1) => {
 		if (!unit[key]) {
 			return;
 		}
-		var score = calculateActScore(unit[key], unit, false);
-		var tag = score[1];
-		if (!(tag in scores)) {
-			scores[tag] = 0;
-		}
-		scores[tag] += score[0];
-		unit[`score-${key}`] = score[0].toFixed(2);
+		var texts = unit[key].split(';');
+		texts.forEach((txt) => {
+			var res = calculateActScore(txt, unit, print);
+			var score = res[0] * multiplier;
+			var tag = res[1];
 
-		score_total += score[0];
+			if (tag == 'defense') {
+				score *= (1 + def_multi);
+			}
+
+			scores[tag] += score;
+			unit[`score-${key}`] = score.toFixed(2);
+		});
 	}
 
 	calcAct('Tactic');
 	calcAct('Deploy');
-	calcAct('Act');
+	calcAct('Act', 1 + spd_multi);
 	calcAct('Defend');
-	calcAct('Defeat');
+	calcAct('Defeat', 1 + (spd_multi * 0.3));
 	calcAct('Win');
 
+	var score_total = 0;
 	for (let i in scores) {
-		unit[`score-${i}`] = scores[i].toFixed(2);
+		if (scores[i] > 0 || scores[i] < 0) {
+			unit[`score-${i}`] = scores[i].toFixed(2);
+			score_total += scores[i];
+		} else {
+			unit[`score-${i}`] = '';
+		}
 	}
-	unit['score-BST'] = calculateStatScore(unit['HP'], unit['DEF'], unit['SPD'], unit['Cost']).toFixed(2);
 
-	score_total += Number(unit['score-BST']);
 	unit['score-Total'] = Math.round(score_total);
 }
 
@@ -155,7 +179,7 @@ function calculateActScore(text, unit, print) {
 		[/fortify ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`, 'buff'],
 		[/(any debuff)s?/gi, (v) => `+3`],
 		[/(all debuff)s?/gi, (v) => `+6`],
-		[/immune/gi, (v) => `*1`, 'defese'],
+		[/(immune|IMM)/gi, (v) => `*1`, 'defese'],
 		[/resist/gi, (v) => `*0.75`, 'defese'],
 		[/reveal ?(\d+)?/gi, (v) => `+${v || 1}`, 'offense'],
 		[/stealth ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`, 'defense'],
@@ -223,6 +247,10 @@ function calculateActScore(text, unit, print) {
 					eval_score = isNaN(result) ? eval_score : result;
 					if (print) {
 						console.log(txt, pattern[0], '\nop:', s, ' | ', eval_score);
+
+						if (pattern.length > 2) {
+							console.log(pattern[2]);
+						}
 					}
 					if (pattern.length > 2) {
 						tag = pattern[2];
@@ -307,7 +335,13 @@ function createUnitList() {
 	for (let i in data) {
 		calculateUnitScores(i);
 		var unit = data[i];
-		html += '<button class="c'+unit['Level']+' c'+unit['Faction']+'" onclick="loadUnit('+i+')">'+unit['Name']+'</button>'
+		html += `
+			<button class="c${unit['Level']} c${unit['Faction']}" onclick="loadUnit(${i})">
+				<span class="subtext">${i}:</span>
+				${unit['Name']}
+				<span class="subtext">(${unit['score-Total']})</span>
+			</button>
+		`;
 	}
 	cont.innerHTML = html;
 }

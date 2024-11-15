@@ -31,6 +31,12 @@
 				background: cyan !important;
 			}
 		}
+		.subtext {
+			font-size: 20px;
+			color: black;
+			opacity: 0.7;
+			vertical-align: middle;
+		}
 		.hidden {
 			display: none !important;
 		}
@@ -131,9 +137,10 @@
 			text-shadow: 0 0 10px green;
 			font-family: Georgia, serif;
 		}
-		.text-score-Total {
-			font-size: 26px;
+		.unit-scores {
+			font-size: 20px;
 			color: black;
+			padding-left: 4px;
 		}
 		.action {
 			padding: 2px 8px;
@@ -490,9 +497,6 @@
 							</span>
 							<i class="material-icons" style="vertical-align: middle; font-size: 70px; text-shadow: green 0px 0 9px;">tornado</i>
 						</div>
-						<span class="score" style="left: 0;
-  font-size: 30px; right: 0; margin: auto; max-width: 150px; top: -70px;">						BST: <span class="text-score-BST"></span>
-						</span>
 					</div>
 
 					<!-- Actions -->
@@ -801,8 +805,23 @@
 
 			<hr>
 			<span>Unit Score</span> <br>
-			<span>Total: <span class="text-score-Total"></span></span> <br>
-			<button style="min-width: 200px" onclick="document.querySelector('#card-cont').classList.toggle('show-score')">Toggle Scores</button> <br>
+
+			<button style="min-width: 200px" onclick="document.querySelector('#card-cont').classList.toggle('show-score')">Toggle Details</button> <br> <br>
+
+			<div class="unit-scores">
+				<div style="font-size: 26px; font-weight: bold; background: lightgreen; padding: 2px 6px; border-radius: 6px;">Total: <span class="text-score-Total"></span></div>
+				<div>offense: <span class="text-score-offense"></span></div>
+				<div>dot: <span class="text-score-dot"></span></div>
+				<div>defense: <span class="text-score-defense"></span></div>
+				<div>support: <span class="text-score-support"></span></div>
+				<div>buff: <span class="text-score-buff"></span></div>
+				<div>debuff: <span class="text-score-debuff"></span></div>
+				<div>utility: <span class="text-score-utility"></span></div>
+				<div>resource: <span class="text-score-resource"></span></div>
+				<div>cost: <span class="text-score-cost"></span></div>
+			</div>
+			
+
 		</div>
 
 		<!-- A4 exports -->
