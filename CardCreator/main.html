@@ -131,7 +131,7 @@
 			text-shadow: 0 0 10px green;
 			font-family: Georgia, serif;
 		}
-		.text-score {
+		.text-score-Total {
 			font-size: 26px;
 			color: black;
 		}
@@ -491,7 +491,7 @@
 							<i class="material-icons" style="vertical-align: middle; font-size: 70px; text-shadow: green 0px 0 9px;">tornado</i>
 						</div>
 						<span class="score" style="left: 0;
-  font-size: 30px; right: 0; margin: auto; max-width: 150px; top: -70px;">						BST: <span class="text-statscore"></span>
+  font-size: 30px; right: 0; margin: auto; max-width: 150px; top: -70px;">						BST: <span class="text-score-BST"></span>
 						</span>
 					</div>
 
@@ -499,37 +499,38 @@
 					<div style="margin: 10px 20px 30px 20px; padding-bottom: 10px; background: rbga(0,0,0,0.8); text-align: left; display: inline-block; max-width: 90%;">
 						<div class="action if-Tactic" style="">
 							<span class="type Tactic"><i class="material-icons">psychology</i></span>
-							<span class="content text-Tactic process">
-								<span class="sp fog-of-war">Fog of War</span> on all allies
-							</span>
+							<span class="content text-Tactic process"></span>
+							<span class="score text-score-Tactic"></span>
 						</div>
 
 						<div class="action if-Deploy" style="">
 							<span class="type Deploy"><i class="material-icons">person_add</i></span>
-							<span class="content text-Deploy process">
-								<span class="sp stealth">Stealth 2</span> <br>
-							 	<span class="sp fog-of-war">Fog of War</span> on self & all <span class="sp chaos">Chaos</span> allies
-							 </span>
+							<span class="content text-Deploy process"></span>
+							<span class="score text-score-Deploy"></span>
 						</div>
 
 						<div class="action if-Act" style="">
 							<span class="type Act"><i class="material-icons">electric_bolt</i></span>
-							<span class="content text-Act process"><span class="sp melee">Melee</span> <span class="sp atk">ATK 4</span> <span class="sp poison">poison</span>, if in <span class="sp stealth">Stealth</span>, gain <span class="sp adv">ADV</span></span>
+							<span class="content text-Act process"></span>
+							<span class="score text-score-Act"></span>
 						</div>
 
 						<div class="action if-Defend" style="">
 							<span class="type Defend"><i class="material-icons">security</i></span>
-							<span class="content text-Defend process">IMM stun/chill</span>
+							<span class="content text-Defend process"></span>
+							<span class="score text-score-Defend"></span>
 						</div>
 
 						<div class="action if-Defeat" style="">
 							<span class="type Defeat"><i class="material-icons">cancel</i></span>
-							<span class="content text-Defeat process">AOE 2 <span class="sp poison">Poison</span></span>
+							<span class="content text-Defeat process"></span>
+							<span class="score text-score-Defeat"></span>
 						</div>
 
 						<div class="action if-Win" style="">
 							<span class="type Win"><i class="material-icons">check_circle</i></span>
-							<span class="content text-Win process">3VP 2G</span>
+							<span class="content text-Win process"></span>
+							<span class="score text-score-Win"></span>
 						</div>
 
 						<!-- <div class="if-Flavor" style="color: lightgray; font-style: italic; font-size: 20px; text-align: center; font-family: Georgia, serif;">
@@ -800,7 +801,7 @@
 
 			<hr>
 			<span>Unit Score</span> <br>
-			<span>Total: <span class="text-score"></span></span> <br>
+			<span>Total: <span class="text-score-Total"></span></span> <br>
 			<button style="min-width: 200px" onclick="document.querySelector('#card-cont').classList.toggle('show-score')">Toggle Scores</button> <br>
 		</div>
 

@@ -72,6 +72,42 @@ function parseCsv() {
 	return ret;
 }
 
+function calculateUnitScores(index) {
+	var unit = data[index];
+	var scores = {};
+	var score_total = 0;
+
+	const calcAct = (key) => {
+		if (!unit[key]) {
+			return;
+		}
+		var score = calculateActScore(unit[key], unit, false);
+		var tag = score[1];
+		if (!(tag in scores)) {
+			scores[tag] = 0;
+		}
+		scores[tag] += score[0];
+		unit[`score-${key}`] = score[0].toFixed(2);
+
+		score_total += score[0];
+	}
+
+	calcAct('Tactic');
+	calcAct('Deploy');
+	calcAct('Act');
+	calcAct('Defend');
+	calcAct('Defeat');
+	calcAct('Win');
+
+	for (let i in scores) {
+		unit[`score-${i}`] = scores[i].toFixed(2);
+	}
+	unit['score-BST'] = calculateStatScore(unit['HP'], unit['DEF'], unit['SPD'], unit['Cost']).toFixed(2);
+
+	score_total += Number(unit['score-BST']);
+	unit['score-Total'] = Math.round(score_total);
+}
+
 function calculateStatScore(hp, def, spd, cost) {
 	var score = 0;
 	score += (Number(hp) * (1 + (Number(def) / 4))) * 1.3;
@@ -89,15 +125,15 @@ function calculateActScore(text, unit, print) {
 	// Format of [regex, accumulator]
 	var part_matches = [
 		// General
-		[/(\d+)VP/gi, (v) => `+${v}`],
-		[/([+-]?\d+)G/gi, (v) => `+${v}`],
+		[/(\d+)VP/gi, (v) => `+${v}`, 'resource'],
+		[/([+-]?\d+)G/gi, (v) => `+${v}`, 'resource'],
 		[/max (\d+)G/gi, (v) => `*${v * 0.5}`], // w/a for gaining gold as Act
 		[/Steal.*G/gi, (v) => `*2`], // w/a for stealing gold
 		[/Foe gain/gi, (v) => `*-1`], // w/a for giving opponent gold
 		// Attacks & RNG
-		[/ATK (\d+)/gi, (v) => `+${v}`],
-		[/DEF (\d+)/gi, (v) => `+${v}`],
-		[/(\d+) True (?:dmg|damage)/gi, (v) => `+${2 * v}`],
+		[/ATK (\d+)/gi, (v) => `+${v}`, 'offense'],
+		[/DEF (\d+)/gi, (v) => `+${v}`, 'defese'],
+		[/(\d+) True (?:dmg|damage)/gi, (v) => `+${2 * v}`, 'offense'],
 		[/Melee/gi, (v) => `*1`],
 		[/RNG (\d+)/gi, (v) => `+${(min(v, 3) - 1) * 0.8}`],
 		[/ADV/gi, (v) => `*1.25`],
@@ -105,37 +141,37 @@ function calculateActScore(text, unit, print) {
 		[/RNG (\d+) FAR/gi, (v) => `+1`],
 		[/RNG (\d+) ANY/gi, (v) => `+2.5`],
 		// Supports
-		[/heal ?(\d+)?/gi, (v) => `+${(v || 1) * 0.7}`],
-		[/cleanse ?(\d+)?/gi, (v) => `+${(v || 1) * 0.7}`],
+		[/heal ?(\d+)?/gi, (v) => `+${(v || 1) * 0.7}`, 'support'],
+		[/cleanse ?(\d+)?/gi, (v) => `+${(v || 1) * 0.7}`, 'support'],
 		// Statuses
-		[/poison ?(\d+)?/gi, (v) => `+${v || 1}`],
-		[/burn ?(\d+)?/gi, (v) => `+${v || 1}`],
-		[/chill ?(\d+)?/gi, (v) => `+${v || 1}`],
-		[/shock ?(\d+)?/gi, (v) => `+${v || 1}`],
-		[/charm ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
-		[/stun/gi, (v) => `+2`],
+		[/poison ?(\d+)?/gi, (v) => `+${v || 1}`, 'dot'],
+		[/burn ?(\d+)?/gi, (v) => `+${v || 1}`, 'dot'],
+		[/chill ?(\d+)?/gi, (v) => `+${v || 1}`, 'debuff'],
+		[/shock ?(\d+)?/gi, (v) => `+${v || 1}`, 'debuff'],
+		[/charm ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`, 'debuff'],
+		[/stun/gi, (v) => `+2`, 'debuff'],
 		[/self (?:poison|burn|chill|shock|charm|stun)/gi, (v) => `*0.2`], // w/a for self inflicting debuffs
-		[/empower ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
-		[/fortify ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
+		[/empower ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`, 'buff'],
+		[/fortify ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`, 'buff'],
 		[/(any debuff)s?/gi, (v) => `+3`],
 		[/(all debuff)s?/gi, (v) => `+6`],
-		[/immune/gi, (v) => `*1`],
-		[/resist/gi, (v) => `*0.75`],
-		[/reveal ?(\d+)?/gi, (v) => `+${v || 1}`],
-		[/stealth ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`],
-		[/fog of war/gi, (v) => `+3`],
-		[/free (\d+)?(?:self)?/gi, (v) => `+${(v || 1) * 5}`],
-		[/nullify/gi, (v) => `+3`],
-		[/transfer debuffs/gi, (v) => `+1.3`],
-		[/spawn.*(\d+) HP/gi, (v) => `+${v}`],
-		[/revive.*(\d+) HP/gi, (v) => `+${v + 1}`],
-		[/revive.*full HP/gi, (v) => `+6`],
+		[/immune/gi, (v) => `*1`, 'defese'],
+		[/resist/gi, (v) => `*0.75`, 'defese'],
+		[/reveal ?(\d+)?/gi, (v) => `+${v || 1}`, 'offense'],
+		[/stealth ?(\d+)?/gi, (v) => `+${(v || 1) * 1.5}`, 'defense'],
+		[/fog of war/gi, (v) => `+3`, 'defense'],
+		[/free (\d+)?(?:self)?/gi, (v) => `+${(v || 1) * 5}`, 'utility'],
+		[/nullify/gi, (v) => `+3`, 'defense'],
+		[/transfer debuffs/gi, (v) => `+1.3`, 'debuff'],
+		[/spawn.*(\d+) HP/gi, (v) => `+${v}`, 'defense'],
+		[/revive.*(\d+) HP/gi, (v) => `+${v + 1}`, 'defense'],
+		[/revive.*full HP/gi, (v) => `+6`, 'defense'],
 		// Cards
-		[/draw (\d+) cards?/gi, (v) => `+${v * 2}`],
+		[/draw (\d+) cards?/gi, (v) => `+${v * 2}`, 'utility'],
 		[/discard (\d+) cards?/gi, (v) => `-${v}`],
 		// Other
-		[/takes (\d+) damage at most per attack.*/gi, (v) => `+${(6 / (v + 2) * unit['HP'])}`],
-		[/(perform|trigger).*(act|defend)/gi, (v) => `+4`],
+		[/takes (\d+) damage at most per attack.*/gi, (v) => `+${(6 / (v + 2) * unit['HP'])}`, 'defense'],
+		[/(perform|trigger).*(act|defend)/gi, (v) => `+4`, 'utility'],
 		// Conditional
 		[/(on deploy)/gi, (v) => `*1.9`],
 		[/(after.*act)/gi, (v) => `*2.5`],
@@ -168,6 +204,7 @@ function calculateActScore(text, unit, print) {
 	];
 	var texts = text.split(';');
 	var score = 0;
+	var tag = '';
 	texts.forEach((line) => {
 		const eval_fn = (matches, txt) => {
 			var eval_score = 0;
@@ -187,6 +224,9 @@ function calculateActScore(text, unit, print) {
 					if (print) {
 						console.log(txt, pattern[0], '\nop:', s, ' | ', eval_score);
 					}
+					if (pattern.length > 2) {
+						tag = pattern[2];
+					}
 				}
 			});
 			return eval_score;
@@ -199,7 +239,7 @@ function calculateActScore(text, unit, print) {
 			score += (part_score * multiplier);
 		});
 	});
-	return score;
+	return [score, tag];
 }
 
 function processAct(text) {
@@ -265,6 +305,7 @@ function createUnitList() {
 	var cont = document.querySelector('#card-list');
 	var html = ''
 	for (let i in data) {
+		calculateUnitScores(i);
 		var unit = data[i];
 		html += '<button class="c'+unit['Level']+' c'+unit['Faction']+'" onclick="loadUnit('+i+')">'+unit['Name']+'</button>'
 	}
@@ -280,9 +321,6 @@ function loadUnit(index) {
 
 	current_index = index;
 	var unit = data[index];
-	var total_score = calculateStatScore(unit['HP'], unit['DEF'], unit['SPD'], unit['Cost']);
-	document.querySelector('.text-statscore').innerHTML = Number(total_score).toFixed(2);
-
 	outfile_name = unit['Name'] + '[face,'+unit['Count']+']'
 	for (let k in unit) {
 		// Mutate images
@@ -296,9 +334,6 @@ function loadUnit(index) {
 		texts.forEach((ele) => {
 			if (ele.classList.contains('process')) {
 				ele.innerHTML = processAct(unit[k]);
-				var score = calculateActScore(unit[k], unit, false);
-				ele.innerHTML += `<span class="score">${Number(score).toFixed(2)}</score>`;
-				total_score += Number(score);
 			} else {
 				ele.innerHTML = unit[k];
 			}
@@ -321,7 +356,6 @@ function loadUnit(index) {
 		});
 
 	}
-	document.querySelector('.text-score').innerHTML = Math.round(total_score);
 }
 
 window.onload = function(){
