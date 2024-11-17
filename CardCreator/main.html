@@ -59,10 +59,12 @@
 				margin: 0;
 			}
 		}
-		#card-cont .score {
+		#card-creator .score,
+		#card-creator .score-detail {
 			display: none;
 		}
-		#card-cont.show-score .score {
+		#card-creator.show-score .score,
+		#card-creator.show-score .score-detail {
 			display: block;
 		}
 		.score {
@@ -142,6 +144,35 @@
 			font-size: 20px;
 			color: black;
 			padding-left: 4px;
+
+			.score-total {
+				font-size: 26px;
+				font-weight: bold;
+				background: black;
+				color: white;
+				padding: 2px 6px;
+				border-radius: 6px;
+			}
+			.score-category {
+				background: lightgray;
+				border-radius: 6px;
+				padding: 4px 6px;
+				margin: 1px;
+				margin-left: 10px;
+
+				.score-type {
+					font-size: 20px;
+					font-weight: bold;
+				}
+				.score-detail {
+					padding-left: 12px;
+					opacity: 0.6;
+				}
+			}
+			.score-category.defense {background: lightblue;}
+			.score-category.offense {background: pink;}
+			.score-category.resource {background: gold;}
+			.score-category.support {background: lightgreen;}
 		}
 		.action {
 			padding: 2px 8px;
@@ -807,19 +838,12 @@
 			<hr>
 			<span>Unit Score</span> <br>
 
-			<button style="min-width: 200px" onclick="document.querySelector('#card-cont').classList.toggle('show-score')">Toggle Details</button> <br> <br>
+			<button style="min-width: 200px" onclick="document.querySelector('#card-creator').classList.toggle('show-score')">Toggle Details</button> <br> <br>
 
 			<div class="unit-scores">
-				<div style="font-size: 26px; font-weight: bold; background: lightgreen; padding: 2px 6px; border-radius: 6px;">Total: <span class="text-score-Total"></span></div>
-				<div>offense: <span class="text-score-offense"></span></div>
-				<div>dot: <span class="text-score-dot"></span></div>
-				<div>defense: <span class="text-score-defense"></span></div>
-				<div>support: <span class="text-score-support"></span></div>
-				<div>buff: <span class="text-score-buff"></span></div>
-				<div>debuff: <span class="text-score-debuff"></span></div>
-				<div>utility: <span class="text-score-utility"></span></div>
-				<div>resource: <span class="text-score-resource"></span></div>
-				<div>cost: <span class="text-score-cost"></span></div>
+				<div class="detail-scores">
+					
+				</div>
 			</div>
 			
 

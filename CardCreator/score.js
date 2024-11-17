@@ -10,90 +10,115 @@ class ScoreCritera {
         var tag = this.type;
         var regex = this.regex.exec(text);
         if (regex) {
-            var v = Number(regex[1] || 0);
+            var v = Number(regex[1] || 1);
             score = this.evaluator(score, v);
             for (let scorer of this.custom_scorers) {
                 const res = scorer.run(score, text);
                 score = res[0];
-                if (res[1]) {
+                if (res[1].length > 0) {
                     tag = res[1];
                 }
             }
+            return [score, tag];
         }
-        return [score, tag];
+        return [score, ''];
     }
 }
 
+var score_types = {};
+function constructScoreUi(unit) {
+    const dom = document.querySelector('.unit-scores .detail-scores');
+    var html = '';
+    var score_total = 0;
+    const scores = unit['scores'];
+
+    for (let k in scores) {
+        score_total += scores[k].total;
+        html += `<div class="score-category ${k}">
+            <div class="score-type">${k}: ${scores[k].total.toFixed(2)}</div>`;
+        for (let d in scores[k].details) {
+            html += `<div class="score-detail">${d}: ${scores[k].details[d].toFixed(2)}</div>`
+        }
+        html += `</div>`
+    }
+
+    html = `<div class="score-total">Total: ${score_total.toFixed(2)}</div>` + html;
+
+    dom.innerHTML = html;
+}
 
 function scoreUnitText(unit, text) {
 	const min = Math.min;
     const SC = ScoreCritera;
     // A is accumulated value, B is extracted value from Regex
+    const imm_res_c = [
+        new SC(/(immune|IMM)/gi, (a, b) => a, 'defense-immune', [
+            new SC(/all debuffs?/gi, (a, b) => a + 6)
+        ]),
+        new SC(/resist/gi, (a, b) => a * 0.75, 'defense-resist', [
+            new SC(/any debuffs?/gi, (a, b) => a + 4)
+        ]),
+    ]
     const base_criterias = [
         // Resources
-        new SC(/(\d+)VP/gi, (a, b)=> a + b, 'resource:vp'),
-        new SC(/([+-]?\d+)G/gi, (a, b)=> a + b, 'resource:gold', [
+        new SC(/(\d+)VP/gi, (a, b)=> a + b, 'resource-vp'),
+        new SC(/([+-]?\d+)G/gi, (a, b)=> a + b, 'resource-gold', [
             new SC(/max (\d+)G/gi, (a, b)=> a + b * 0.5),
             new SC(/Steal.*G/gi, (a, b)=> a * 2),
             new SC(/Foe gain/gi, (a, b)=> a * -1),
         ]),
         
         // Offensive
-        new SC(/ATK (\d+)/gi, (a, b)=> a + b, 'offense:hit', [
+        new SC(/ATK (\d+)/gi, (a, b)=> a + b, 'offense-hit', [
             new SC(/ADV/gi, (a, b) => a * 1.25)
         ]),
-        new SC(/(\d+) True (?:dmg|damage)/gi, (a, b) => a + b * 2, 'offense:hit'),
-        new SC(/poison ?(\d+)?/gi, (a, b) => a + b, 'offense:dot'),
-        new SC(/burn ?(\d+)?/gi, (a, b) => a + b, 'offense:dot', [
+        new SC(/(\d+) True (?:dmg|damage)/gi, (a, b) => a + b * 2, 'offense-hit'),
+        new SC(/poison ?(\d+)?/gi, (a, b) => a + b, 'offense-dot', imm_res_c),
+        new SC(/burn ?(\d+)?/gi, (a, b) => a + b, 'offense-dot', [
+            ...imm_res_c,
             new SC(/self burn/gi, (a, b) => a * 0.2) // W/A for self burn
         ]),
-        new SC(/shock ?(\d+)?/gi, (a, b) => a + b, 'offense:debuff'),
-        new SC(/charm ?(\d+)?/gi, (a, b) => a + b * 1.5, 'offense:debuff'),
-        new SC(/reveal ?(\d+)?/gi, (a, b) => a + b, 'offense:debuff'),
-        new SC(/transfer debuffs/gi, (a, b) => a + 1.3, 'offense:debuff'),
+        new SC(/shock ?(\d+)?/gi, (a, b) => a + b, 'offense-debuff', imm_res_c),
+        new SC(/charm ?(\d+)?/gi, (a, b) => a + b * 1.5, 'offense-debuff', imm_res_c),
+        new SC(/reveal ?(\d+)?/gi, (a, b) => a + b, 'offense-debuff'),
+        new SC(/transfer debuffs/gi, (a, b) => a + 1.3, 'offense-debuff'),
 
         // Defensive
-        new SC(/DEF (\d+)/gi, (a, b) => a + b, 'defense'),
-        new SC(/chill ?(\d+)?/gi, (a, b) => a + b, 'defense:debuff'),
-        new SC(/stun/gi, (a, b) => a + 2, 'defense:debuff'),
-        new SC(/(immune|IMM)/gi, (a, b) => a, 'defense:immune', [
-            new SC(/all debuffs?/gi, (a, b) => a + 6)
-        ]),
-        new SC(/resist/gi, (a, b) => a * 0.75, 'defense:resist', [
-            new SC(/any debuffs?/gi, (a, b) => a + 4)
-        ]),
-        new SC(/stealth ?(\d+)?/gi, (a, b) => `+${(v || 1) * 1.5}`, 'defense:utility'),
-        new SC(/fog of war/gi, (a, b) => a + 3, 'defense:utility'),
-        new SC(/nullify/gi, (a, b) => a + 3, 'defense'),
-        new SC(/revive.*(\d+) HP/gi, (a, b) => a + b + 1, 'defense:sustain'),
-        new SC(/revive.*full HP/gi, (a, b) => a + unit['HP'], 'defense:sustain'),
-        new SC(/takes (\d+) damage at most per attack.*/gi, (a, b) => a + (6 / (b + 2) * unit['HP']), 'defense'),
+        new SC(/DEF (\d+)/gi, (a, b) => a + b, 'defense-stat'),
+        new SC(/chill ?(\d+)?/gi, (a, b) => a + b, 'defense-debuff', imm_res_c),
+        new SC(/stun/gi, (a, b) => a + 2, 'defense-debuff', imm_res_c),
+        new SC(/stealth ?(\d+)?/gi, (a, b) => a * 1.5, 'defense-utility'),
+        new SC(/fog of war/gi, (a, b) => a + 3, 'defense-utility'),
+        new SC(/nullify/gi, (a, b) => a + 3, 'defense-utility'),
+        new SC(/revive.*(\d+) HP/gi, (a, b) => a + b + 1, 'defense-sustain'),
+        new SC(/revive.*full HP/gi, (a, b) => a + unit['HP'], 'defense-sustain'),
+        new SC(/takes (\d+) damage at most per attack.*/gi, (a, b) => a + (6 / (b + 2) * unit['HP']), 'defense-utility'),
 
         // Supports
-        new SC(/heal ?(\d+)?/gi, (a, b) => a + b * 0.7, 'support:heal', [
-            new SC(/(?:self heal|heal( \d+)? self)/, (a, b) => a, 'defense:sustain')
+        new SC(/heal ?(\d+)?/gi, (a, b) => a + b * 0.7, 'support-heal', [
+            new SC(/(?:self heal|heal( \d+)? self)/, (a, b) => a, 'defense-sustain')
         ]),
-        new SC(/cleanse ?(\d+)?/gi, (a, b) => a + b * 0.7, 'support:cleanse', [
-            new SC(/(?:self cleanse|cleanse( \d+)? self)/, (a, b) => a, 'defense:sustain')
+        new SC(/cleanse ?(\d+)?/gi, (a, b) => a + b * 0.7, 'support-cleanse', [
+            new SC(/(?:self cleanse|cleanse( \d+)? self)/, (a, b) => a, 'defense-sustain')
         ]),
-        new SC(/empower ?(\d+)?/gi, (a, b) => a + b * 1.5, 'support:buff', [
-            new SC(/self empower/gi, (a, b) => a, 'offense:buff')
+        new SC(/empower ?(\d+)?/gi, (a, b) => a + b * 1.5, 'support-buff', [
+            new SC(/self empower/gi, (a, b) => a, 'offense-buff')
         ]),
-        new SC(/fortify ?(\d+)?/gi, (a, b) => a + b * 1.5, 'support:buff', [
-            new SC(/self fortify/gi, (a, b) => a, 'defense:buff')
+        new SC(/fortify ?(\d+)?/gi, (a, b) => a + b * 1.5, 'support-buff', [
+            new SC(/self fortify/gi, (a, b) => a, 'defense-buff')
         ]),
 
         // Utility
-        new SC(/free (\d+)?(?:self)?/gi, (a, b) => a + b * 5, 'utility'),
-        new SC(/(spawn|summon)/gi, (a, b) => a, 'utility', [
-            new SC(/spawn.*(\d+) ATK/gi, (a, b) => a + b, 'offense:summon'),
-            new SC(/spawn.*(\d+) HP/gi, (a, b) => a + b, 'defense:summon')
+        new SC(/free (\d+)?(?:self)?/gi, (a, b) => a + b * 5, 'utility-army'),
+        new SC(/(spawn|summon)/gi, (a, b) => a, 'utility-summon', [
+            new SC(/spawn.*(\d+) ATK/gi, (a, b) => a + b, 'offense-summon'),
+            new SC(/spawn.*(\d+) HP/gi, (a, b) => a + b, 'defense-summon')
         ]),
-        new SC(/draw (\d+) cards?/gi, (a, b) => a + b * 2, 'utility:card'),
+        new SC(/draw (\d+) cards?/gi, (a, b) => a + b * 2, 'utility-card'),
         new SC(/discard (\d+) cards?/gi, (a, b) => a - b),
-        new SC(/(perform|trigger).*(act|defend)/gi, (a, b) => a + 4, 'utility', [
-            new SC(/(perform|trigger).*act/gi, (a, b) => a, 'offense:utility'),
-            new SC(/(perform|trigger).*defend/gi, (a, b) => a, 'defense:utility')
+        new SC(/(perform|trigger).*(act|defend)/gi, (a, b) => a + 4, 'utility-trigger', [
+            new SC(/(perform|trigger).*act/gi, (a, b) => a, 'offense-utility'),
+            new SC(/(perform|trigger).*defend/gi, (a, b) => a, 'defense-utility')
         ]),
     ];
     // Parts are sepreated by ','
@@ -120,22 +145,23 @@ function scoreUnitText(unit, text) {
             new SC(/(before.*act)/gi, (a, b) => a * 2.5),
             new SC(/(after.*act)/gi, (a, b) => a * 2.5),
         ]),
-        new SC(/(may).*/gi, (v) => `*1.2`),
+        new SC(/(may).*/gi, (a, b) => a * 1.2),
 
         // Range & targetting multiplier
-        new SC(/RNG (\d+)/gi, (a, b) => a * (1 + 0.5 * (min(b, 4) - 1)), [
+        new SC(/RNG (\d+)/gi, (a, b) => a * (1 + 0.5 * (min(b, 4) - 1)), '', [
             new SC(/RNG \d+ FAR/gi, (a, b) => a * 1.2),
             new SC(/RNG \d+ ANY/gi, (a, b) => a * 2),
         ]),
 
         // Multiple targets
-        new SC(/AOE (\d+)/gi, (a, b) => a * (min(v, 2.5) + 1)),
+        new SC(/AOE (\d+)/gi, (a, b) => a * (min(b, 2.5) + 1)),
         new SC(/AOE (C|R)/gi, (a, b) => a * 1.8),
         new SC(/all.*(enemies|foes|allies)/gi, (a, b) => a * 2.5),
         new SC(/(L1 )/gi, (a, b) => a * 0.5),
         new SC(/(L1\/L2 )/gi, (a, b) => a * 0.8),
     ];
 
+    const text_scores = {};
     const lines = text.split(';');
     lines.forEach((line) => {
         const line_scores = {};
@@ -145,14 +171,20 @@ function scoreUnitText(unit, text) {
             const part_scores = {};
             base_criterias.forEach((scorer) => {
                 const [score, tag] = scorer.run(0, part);
-                part_scores[tag] = score;
+                if (tag) {
+                    if (!(tag in part_scores)) {
+                        part_scores[tag] = 0;
+                    }
+                    part_scores[tag] += score;
+                }
             })
 
             for (let tag in part_scores) {
                 part_criterias.forEach((scorer) => {
                     const [score, _] = scorer.run(part_scores[tag], part);
-                    line_scores[tag] = score;
+                    part_scores[tag] = score;
                 })
+                line_scores[tag] = part_scores[tag];
             }
         });
 
@@ -161,10 +193,85 @@ function scoreUnitText(unit, text) {
             line_criterias.forEach((scorer) => {
                 const [score, _] = scorer.run(line_scores[tag], line);
                 line_scores[tag] = score;
-            })
-        }
-        console.log(line);
-        console.log(line_scores);
-    });
+            });
+            text_scores[tag] = line_scores[tag];
 
+            // populate
+            score_types[tag] = 0;
+        }
+    });
+    return text_scores;
+}
+
+function calculateUnitScores(index, print=false) {
+    const unit = data[index];
+
+    const hp = Number(unit['HP']);
+    const def = Number(unit['DEF']);
+    const spd = Number(unit['SPD']);
+
+    var scores = {};
+    const def_stat = (hp * (1 + (def / 4))) * 1.3;
+    scores['defense'] = {
+        total: def_stat,
+        details: {'stat': def_stat}
+    };
+    const res_cost = -Number(unit['Cost'])
+    scores['resource'] = {
+        total: res_cost,
+        details: {'cost': res_cost}
+    };;
+    var total_score = def_stat + res_cost;
+
+    var spd_multi = spd / 10;
+    var def_multi = (def / 10) + (hp / 15);
+
+    const calcAct = (key, multiplier = 1) => {
+        if (!unit[key]) {
+            return;
+        }
+        var texts = unit[key].split(';');
+        texts.forEach((txt) => {
+            const res = scoreUnitText(unit, txt);
+            for (let i in res) {
+                var score = res[i] * multiplier;
+                const tag_type = i.split('-')[0];
+                const tag_detail = i.split('-')[1];
+
+                if (tag_type == 'defense') {
+                    score *= (1 + def_multi);
+                }
+
+                if (!(tag_type in scores)) {
+                    scores[tag_type] = {total: 0, details: {}};
+                }
+                if (!(tag_detail in scores[tag_type].details)) {
+                    scores[tag_type].details[tag_detail] = 0;
+                }
+
+                scores[tag_type].total += score;
+                scores[tag_type].details[tag_detail] += score;
+
+                total_score += score;
+            }
+        });
+    }
+
+    calcAct('Tactic');
+    calcAct('Deploy');
+    calcAct('Act', 1 + spd_multi);
+    calcAct('Defend');
+    calcAct('Defeat', 1 + (spd_multi * 0.3));
+    calcAct('Win');
+
+    unit['scores'] = scores;
+    unit['score-Total'] = Math.round(total_score);
+}
+
+function calculateStatScore(hp, def, spd, cost) {
+    var score = 0;
+    score += (Number(hp) * (1 + (Number(def) / 4))) * 1.3;
+    score += (Number(spd));
+    score -= Number(cost) * 1.2;
+    return score;
 }
