@@ -31,8 +31,9 @@ function constructScoreUi(unit) {
     var html = '';
     var score_total = 0;
     const scores = unit['scores'];
+    const keys = Object.keys(scores).sort((a, b) => scores[b].total - scores[a].total);
 
-    for (let k in scores) {
+    for (let k of keys) {
         score_total += scores[k].total;
         html += `<div class="score-category ${k}">
             <div class="score-type">${k}: ${scores[k].total.toFixed(2)}</div>`;
@@ -231,6 +232,7 @@ function calculateUnitScores(index, print=false) {
             return;
         }
         var texts = unit[key].split(';');
+        var act_score = 0;
         texts.forEach((txt) => {
             const res = scoreUnitText(unit, txt);
             for (let i in res) {
@@ -253,7 +255,9 @@ function calculateUnitScores(index, print=false) {
                 scores[tag_type].details[tag_detail] += score;
 
                 total_score += score;
+                act_score += score;
             }
+            unit[`score-${key}`] = act_score.toFixed(2);
         });
     }
 
