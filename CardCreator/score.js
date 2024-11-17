@@ -109,10 +109,10 @@ function scoreUnitText(unit, text) {
         new SC(/cleanse ?(\d+)?/gi, (a, b) => a + b * 0.7, 'support-cleanse', [
             new SC(/(?:self cleanse|cleanse( \d+)? self)/gi, (a, b) => a, 'defense-sustain')
         ]),
-        new SC(/empower ?(\d+)?/gi, (a, b) => a + b * 1.5, 'support-buff', [
+        new SC(/empower ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
             new SC(/self empower/gi, (a, b) => a, 'offense-buff')
         ]),
-        new SC(/fortify ?(\d+)?/gi, (a, b) => a + b * 1.5, 'support-buff', [
+        new SC(/fortify ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
             new SC(/self fortify/gi, (a, b) => a, 'defense-buff')
         ]),
 
@@ -270,7 +270,7 @@ function calculateUnitScores(index, print=false) {
 
     calcAct('Tactic');
     calcAct('Deploy', 0.5);
-    calcAct('Act', 1 + spd_multi);
+    calcAct('Act', 1 + (spd_multi + def_multi));
     calcAct('Defend');
     calcAct('Defeat', 1 + (spd_multi * 0.3));
     calcAct('Win');
