@@ -19,6 +19,7 @@ class ScoreCritera {
                     tag = res[1];
                 }
             }
+            console.log(regex[0], this.regex, tag, score);
             return [score, tag];
         }
         return [score, ''];
@@ -52,44 +53,50 @@ function scoreUnitText(unit, text) {
 	const min = Math.min;
     const SC = ScoreCritera;
     // A is accumulated value, B is extracted value from Regex
-    const imm_res_c = [
+    const debuff_sub_criterias = [
         new SC(/(immune|IMM)/gi, (a, b) => a, 'defense-immune', [
             new SC(/all debuffs?/gi, (a, b) => a + 6)
         ]),
         new SC(/resist/gi, (a, b) => a * 0.75, 'defense-resist', [
             new SC(/any debuffs?/gi, (a, b) => a + 4)
         ]),
+        new SC(/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (a, b) => 0),
     ]
     const base_criterias = [
         // Resources
-        new SC(/(\d+)VP/gi, (a, b)=> a + b, 'resource-vp'),
+        new SC(/(\d+)VP/gi, (a, b)=> a + b * 1.2, 'resource-vp'),
         new SC(/([+-]?\d+)G/gi, (a, b)=> a + b, 'resource-gold', [
             new SC(/max (\d+)G/gi, (a, b)=> a + b * 0.5),
             new SC(/Steal.*G/gi, (a, b)=> a * 2),
             new SC(/Foe gain/gi, (a, b)=> a * -1),
+            new SC(/per.*ally/gi, (a, b)=> a * 2.5),
+            new SC(/-\d+G/gi, (a, b)=> a * 1.75),
         ]),
         
         // Offensive
         new SC(/ATK (\d+)/gi, (a, b)=> a + b, 'offense-hit', [
             new SC(/ADV/gi, (a, b) => a * 1.25)
         ]),
+        new SC(/ATK X/gi, (a, b)=> a, 'offense-hit', [
+            new SC(/X =.*allies/gi, (a, b) => a + 2.5)
+        ]),
         new SC(/(\d+) True (?:dmg|damage)/gi, (a, b) => a + b * 2, 'offense-hit'),
-        new SC(/poison ?(\d+)?/gi, (a, b) => a + b, 'offense-dot', imm_res_c),
-        new SC(/burn ?(\d+)?/gi, (a, b) => a + b, 'offense-dot', [
-            ...imm_res_c,
+        new SC(/poison ?(\d+)?/gi, (a, b) => a + b, 'offense-dot', debuff_sub_criterias),
+        new SC(/burn ?(\d+)?/gi, (a, b) => a + 1.1**b, 'offense-dot', [
+            ...debuff_sub_criterias,
             new SC(/self burn/gi, (a, b) => a * 0.2) // W/A for self burn
         ]),
-        new SC(/shock ?(\d+)?/gi, (a, b) => a + b, 'offense-debuff', imm_res_c),
-        new SC(/charm ?(\d+)?/gi, (a, b) => a + b * 1.5, 'offense-debuff', imm_res_c),
+        new SC(/shock ?(\d+)?/gi, (a, b) => a + b, 'offense-debuff', debuff_sub_criterias),
+        new SC(/charm ?(\d+)?/gi, (a, b) => a + b * 1.5, 'offense-debuff', debuff_sub_criterias),
         new SC(/reveal ?(\d+)?/gi, (a, b) => a + b, 'offense-debuff'),
         new SC(/transfer debuffs/gi, (a, b) => a + 1.3, 'offense-debuff'),
 
         // Defensive
         new SC(/DEF (\d+)/gi, (a, b) => a + b, 'defense-stat'),
-        new SC(/chill ?(\d+)?/gi, (a, b) => a + b, 'defense-debuff', imm_res_c),
-        new SC(/stun/gi, (a, b) => a + 2, 'defense-debuff', imm_res_c),
-        new SC(/stealth ?(\d+)?/gi, (a, b) => a * 1.5, 'defense-utility'),
-        new SC(/fog of war/gi, (a, b) => a + 3, 'defense-utility'),
+        new SC(/chill ?(\d+)?/gi, (a, b) => a + b, 'defense-debuff', debuff_sub_criterias),
+        new SC(/stun/gi, (a, b) => a + 2, 'defense-debuff', debuff_sub_criterias),
+        new SC(/stealth ?(\d+)?/gi, (a, b) => a + b * 3, 'defense-utility'),
+        new SC(/fog of war/gi, (a, b) => a + 5, 'defense-utility'),
         new SC(/nullify/gi, (a, b) => a + 3, 'defense-utility'),
         new SC(/revive.*(\d+) HP/gi, (a, b) => a + b + 1, 'defense-sustain'),
         new SC(/revive.*full HP/gi, (a, b) => a + unit['HP'], 'defense-sustain'),
@@ -97,10 +104,10 @@ function scoreUnitText(unit, text) {
 
         // Supports
         new SC(/heal ?(\d+)?/gi, (a, b) => a + b * 0.7, 'support-heal', [
-            new SC(/(?:self heal|heal( \d+)? self)/, (a, b) => a, 'defense-sustain')
+            new SC(/(?:self heal|heal( \d+)? self)/gi, (a, b) => a, 'defense-sustain')
         ]),
         new SC(/cleanse ?(\d+)?/gi, (a, b) => a + b * 0.7, 'support-cleanse', [
-            new SC(/(?:self cleanse|cleanse( \d+)? self)/, (a, b) => a, 'defense-sustain')
+            new SC(/(?:self cleanse|cleanse( \d+)? self)/gi, (a, b) => a, 'defense-sustain')
         ]),
         new SC(/empower ?(\d+)?/gi, (a, b) => a + b * 1.5, 'support-buff', [
             new SC(/self empower/gi, (a, b) => a, 'offense-buff')
@@ -110,12 +117,12 @@ function scoreUnitText(unit, text) {
         ]),
 
         // Utility
-        new SC(/free (\d+)?(?:self)?/gi, (a, b) => a + b * 5, 'utility-army'),
+        new SC(/free (\d+)?(?:self)?/gi, (a, b) => a + b * 10, 'utility-army'),
         new SC(/(spawn|summon)/gi, (a, b) => a, 'utility-summon', [
             new SC(/spawn.*(\d+) ATK/gi, (a, b) => a + b, 'offense-summon'),
             new SC(/spawn.*(\d+) HP/gi, (a, b) => a + b, 'defense-summon')
         ]),
-        new SC(/draw (\d+) cards?/gi, (a, b) => a + b * 2, 'utility-card'),
+        new SC(/draw (\d+) cards?/gi, (a, b) => a + b, 'utility-card'),
         new SC(/discard (\d+) cards?/gi, (a, b) => a - b),
         new SC(/(perform|trigger).*(act|defend)/gi, (a, b) => a + 4, 'utility-trigger', [
             new SC(/(perform|trigger).*act/gi, (a, b) => a, 'offense-utility'),
@@ -212,7 +219,7 @@ function calculateUnitScores(index, print=false) {
     const spd = Number(unit['SPD']);
 
     var scores = {};
-    const def_stat = (hp * (1 + (def / 4))) * 1.3;
+    const def_stat = (hp * (1 + (def / 3))) * 1.3;
     scores['defense'] = {
         total: def_stat,
         details: {'stat': def_stat}
@@ -240,7 +247,7 @@ function calculateUnitScores(index, print=false) {
                 const tag_type = i.split('-')[0];
                 const tag_detail = i.split('-')[1];
 
-                if (tag_type == 'defense') {
+                if (tag_type === 'defense') {
                     score *= (1 + def_multi);
                 }
 
@@ -262,7 +269,7 @@ function calculateUnitScores(index, print=false) {
     }
 
     calcAct('Tactic');
-    calcAct('Deploy');
+    calcAct('Deploy', 0.5);
     calcAct('Act', 1 + spd_multi);
     calcAct('Defend');
     calcAct('Defeat', 1 + (spd_multi * 0.3));
