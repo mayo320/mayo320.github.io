@@ -56,7 +56,7 @@ function scoreUnitText(unit, text) {
     const debuff_sub_criterias = [
         new SC(/(immune|IMM)/gi, (a, b) => a, 'defense-immune'),
         new SC(/resist/gi, (a, b) => a * 0.75, 'defense-resist', [
-            new SC(/all.*allies gain/, (a, b) => a * 4)
+            new SC(/all.*allies gain/, (a, b) => a * 4, 'support-resist')
         ]),
         new SC(/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (a, b) => 0),
     ]
