@@ -103,10 +103,10 @@ function scoreUnitText(unit, text) {
         new SC(/takes (\d+) damage at most per attack.*/gi, (a, b) => a + (6 / (b + 2) * unit['HP']), 'defense-utility'),
 
         // Supports
-        new SC(/heal ?(\d+)?/gi, (a, b) => a + b * 0.7, 'support-heal', [
+        new SC(/heal ?(\d+)?/gi, (a, b) => a + b * 0.9, 'support-heal', [
             new SC(/(?:self heal|heal( \d+)? self)/gi, (a, b) => a, 'defense-sustain')
         ]),
-        new SC(/cleanse ?(\d+)?/gi, (a, b) => a + b * 0.7, 'support-cleanse', [
+        new SC(/cleanse ?(\d+)?/gi, (a, b) => a + b * 1.1, 'support-cleanse', [
             new SC(/(?:self cleanse|cleanse( \d+)? self)/gi, (a, b) => a, 'defense-sustain')
         ]),
         new SC(/empower ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
@@ -133,7 +133,7 @@ function scoreUnitText(unit, text) {
     const part_criterias = [
         // Conditional multipliers
         new SC(/(reflect)/gi, (a, b) => a, '', [
-            new SC(/against melee attack/gi, (a, b) => a * 0.75),
+            new SC(/against melee/gi, (a, b) => a * 0.75),
         ]),
         new SC(/(if|when).*:.*/gi, (a, b) => a * 0.65),
         new SC(/per.*ally/gi, (a, b) => a * 1.5),

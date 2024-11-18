@@ -265,6 +265,9 @@
 				.true-dmg {
 					text-shadow: 0 0 8px red;
 				}
+				.nullify {
+					text-shadow: 0 0 8px orange;
+				}
 				.adv {
 					color: orange;
 					text-shadow: 0 0 8px purple;
@@ -299,11 +302,11 @@
 					color: white;
 				}
 				.vp {
-					text-shadow: 0 0 8px purple;
+					text-shadow: 0 0 8px blue;
 					font-weight: bold;
 				}
 				.ap, .free {
-					text-shadow: 0 0 8px blue;
+					text-shadow: 0 0 8px purple;
 					font-weight: bold;
 				}
 				.g {
@@ -697,11 +700,11 @@
 					</div>
 					<div class="content">
 						<span class="sp melee">Melee</span>
-						<span>Target units directly in front of it; if none, target someone else on the same row.</span>
+						<span>Target nearest unit.</span>
 					</div>
 					<div class="content">
 						<span class="sp rng">RNG X</span>
-						<span>Target nearest units up to X tiles away.</span>
+						<span>Target nearest unit X tiles away.</span>
 					</div>
 					<div class="content">
 						<span class="sp far">FAR</span>
@@ -724,7 +727,7 @@
 						<span>Grant DEF/token.</span>
 					</div>
 					<div class="content">
-						<span class="sp adv">ADV X</span>
+						<span class="sp adv">ADV</span>
 						<span>Reroll any number of dice during ATK/DEF (once).</span>
 					</div>
 					<div class="content">
@@ -780,6 +783,10 @@
 						<span>Ongoing effect, cannot discard while active.</span>
 					</div>
 					<div class="content">
+						<span class="sp nullify">Nullify</span>
+						<span>Nullify ATK, but take true dmg/debuffs.</span>
+					</div>
+					<div class="content">
 						<span class="sp true-dmg">true damage</span>
 						<span>Bypasses DEF, absolute damage.</span>
 					</div>
@@ -797,7 +804,7 @@
 					</div>
 					<div class="content">
 						<span class="sp resist">X</span>
-						<span>End of Act: remove 1 X.</span>
+						<span>End of Act: remove 1 X. (Can't stack)</span>
 					</div>
 				</div>
 			</div>
