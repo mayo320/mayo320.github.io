@@ -54,11 +54,9 @@ function scoreUnitText(unit, text) {
     const SC = ScoreCritera;
     // A is accumulated value, B is extracted value from Regex
     const debuff_sub_criterias = [
-        new SC(/(immune|IMM)/gi, (a, b) => a, 'defense-immune', [
-            new SC(/all debuffs?/gi, (a, b) => a + 6)
-        ]),
+        new SC(/(immune|IMM)/gi, (a, b) => a, 'defense-immune'),
         new SC(/resist/gi, (a, b) => a * 0.75, 'defense-resist', [
-            new SC(/any debuffs?/gi, (a, b) => a + 4)
+            new SC(/all.*allies gain/, (a, b) => a * 4)
         ]),
         new SC(/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (a, b) => 0),
     ]
@@ -81,9 +79,13 @@ function scoreUnitText(unit, text) {
             new SC(/X =.*allies/gi, (a, b) => a + 2.5)
         ]),
         new SC(/(\d+) True (?:dmg|damage)/gi, (a, b) => a + b * 2, 'offense-hit'),
-        new SC(/poison ?(\d+)?/gi, (a, b) => a + b, 'offense-dot', debuff_sub_criterias),
+        new SC(/poison ?(\d+)?/gi, (a, b) => a + b, 'offense-dot', [
+            ...debuff_sub_criterias,
+            new SC(/trigger poison/gi, (a, b) => a * 2),
+        ]),
         new SC(/burn ?(\d+)?/gi, (a, b) => a + 1.1**b, 'offense-dot', [
             ...debuff_sub_criterias,
+            new SC(/trigger burn/gi, (a, b) => a * 2),
             new SC(/self burn/gi, (a, b) => a * 0.2) // W/A for self burn
         ]),
         new SC(/shock ?(\d+)?/gi, (a, b) => a + b, 'offense-debuff', debuff_sub_criterias),
@@ -95,19 +97,25 @@ function scoreUnitText(unit, text) {
         new SC(/DEF (\d+)/gi, (a, b) => a + b, 'defense-stat'),
         new SC(/chill ?(\d+)?/gi, (a, b) => a + b, 'defense-debuff', debuff_sub_criterias),
         new SC(/stun/gi, (a, b) => a + 2, 'defense-debuff', debuff_sub_criterias),
-        new SC(/stealth ?(\d+)?/gi, (a, b) => a + b * 3, 'defense-utility'),
-        new SC(/fog of war/gi, (a, b) => a + 5, 'defense-utility'),
         new SC(/nullify/gi, (a, b) => a + 3, 'defense-utility'),
         new SC(/revive.*(\d+) HP/gi, (a, b) => a + b + 1, 'defense-sustain'),
         new SC(/revive.*full HP/gi, (a, b) => a + unit['HP'], 'defense-sustain'),
         new SC(/takes (\d+) damage at most per attack.*/gi, (a, b) => a + (6 / (b + 2) * unit['HP']), 'defense-utility'),
+        new SC(/all debuffs?/gi, (a, b) => a + 6, '', debuff_sub_criterias),
+        new SC(/any debuffs?/gi, (a, b) => a + 4, '', debuff_sub_criterias),
 
         // Supports
         new SC(/heal ?(\d+)?/gi, (a, b) => a + b * 0.9, 'support-heal', [
-            new SC(/(?:self heal|heal( \d+)? self)/gi, (a, b) => a, 'defense-sustain')
+            new SC(/(?:self.*heal)/gi, (a, b) => a, 'defense-sustain')
         ]),
         new SC(/cleanse ?(\d+)?/gi, (a, b) => a + b * 1.1, 'support-cleanse', [
-            new SC(/(?:self cleanse|cleanse( \d+)? self)/gi, (a, b) => a, 'defense-sustain')
+            new SC(/(?:self.*cleanse)/gi, (a, b) => a, 'defense-sustain')
+        ]),
+        new SC(/stealth ?(\d+)?/gi, (a, b) => a + b * 3, 'support-defense', [
+            new SC(/(?:self.*stealth)/gi, (a, b) => a, 'defense-utility')
+        ]),
+        new SC(/fog of war/gi, (a, b) => a + 5, 'support-defense', [
+            new SC(/(?:self.*fog of war)/gi, (a, b) => a, 'defense-utility')
         ]),
         new SC(/empower ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
             new SC(/self empower/gi, (a, b) => a, 'offense-buff')
@@ -269,11 +277,11 @@ function calculateUnitScores(index, print=false) {
     }
 
     calcAct('Tactic');
-    calcAct('Deploy', 0.5);
+    calcAct('Deploy', 0.7);
     calcAct('Act', 1 + (spd_multi + def_multi));
     calcAct('Defend');
-    calcAct('Defeat', 1 + (spd_multi * 0.3));
-    calcAct('Win');
+    calcAct('Defeat', (1 + (spd_multi * 0.3)) / (1 + def_multi));
+    calcAct('Win', 1 + def_multi);
 
     unit['scores'] = scores;
     unit['score-Total'] = Math.round(total_score);
