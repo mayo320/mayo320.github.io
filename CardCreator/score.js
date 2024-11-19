@@ -59,7 +59,6 @@ function scoreUnitText(unit, text) {
             new SC(/all.*allies gain/, (a, b) => a, 'support-resist')
         ]),
         new SC(/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (a, b) => a - 1),
-        new SC(/if.*self.*(stealth|empower|fortif)/gi, (a, b) => a - 1.5),
     ]
     // Parts are sepreated by ','
     const part_criterias = [
@@ -158,16 +157,21 @@ function scoreUnitText(unit, text) {
             BSC(/(?:self.*cleanse)/gi, (a, b) => a, 'defense-sustain')
         ]),
         BSC(/stealth ?(\d+)?/gi, (a, b) => a + b * 3, 'support-utility', [
-            BSC(/(?:self.*stealth)/gi, (a, b) => a, 'defense-utility')
+            BSC(/(?:self.*stealth)/gi, (a, b) => a, 'defense-utility'),
+            BSC(/if self stealth/gi, (a, b) => a - 3, ''),
         ]),
         BSC(/fog of war/gi, (a, b) => a + 5, 'support-utility', [
-            BSC(/(?:self.*fog of war)/gi, (a, b) => a, 'defense-utility')
+            BSC(/(?:self.*fog of war)/gi, (a, b) => a, 'defense-utility'),
         ]),
         BSC(/empower ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
-            BSC(/self.*empower/gi, (a, b) => a, 'offense-buff')
+            BSC(/self.*empower/gi, (a, b) => a, 'offense-buff'),
+            BSC(/if self empower/gi, (a, b) => a - 1.75, ''),
+            BSC(/remove/gi, (a, b) => a, 'offense-remove'),
         ]),
         BSC(/fortify ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
-            BSC(/self.*fortify/gi, (a, b) => a, 'defense-buff')
+            BSC(/self.*fortify/gi, (a, b) => a, 'defense-buff'),
+            BSC(/if self fortify/gi, (a, b) => a - 1.75, ''),
+            BSC(/remove/gi, (a, b) => a, 'offense-remove'),
         ]),
 
         // Utility
