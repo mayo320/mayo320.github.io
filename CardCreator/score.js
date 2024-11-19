@@ -278,9 +278,9 @@ function calculateUnitScores(index, print=false) {
                     if (txt.match(/RNG|Melee/gi) && !txt.match(/Melee.*AOE R/gi)) {
                         score *= tactic_any_multi;
                     }
-                    if (['support', 'utility'].find((x) => x === tag_type)) {
-                        score *= tactic_any_multi;
-                    }
+                    // if (['support', 'utility'].find((x) => x === tag_type)) {
+                    //     score *= tactic_any_multi;
+                    // }
                     if (tag_type === 'resource') {
                         score *= tactic_resource_multi;
                     }
