@@ -239,14 +239,15 @@ function calculateUnitScores(index, print=false) {
     };;
     var total_score = def_stat + res_cost;
 
-    var spd_multi = spd / 10;
-    var def_multi = (def / 10) + (hp / 15);
+    const spd_multi = spd / 10;
+    const def_multi = (def / 10) + (hp / 15);
+    const tactic_resource_multi = 2;
 
-    const calcAct = (key, multiplier = 1) => {
-        if (!unit[key]) {
+    const calcAct = (action, multiplier = 1) => {
+        if (!unit[action]) {
             return;
         }
-        var texts = unit[key].split(';');
+        var texts = unit[action].split(';');
         var act_score = 0;
         texts.forEach((txt) => {
             const res = scoreUnitText(unit, txt);
@@ -255,10 +256,15 @@ function calculateUnitScores(index, print=false) {
                 const tag_type = i.split('-')[0];
                 const tag_detail = i.split('-')[1];
 
+                // Edge cases
                 if (tag_type === 'defense') {
                     score *= (1 + def_multi);
                 }
+                if (tag_type === 'resource' && action === 'Tactic') {
+                    score *= tactic_resource_multi;
+                }
 
+                // Handle tags
                 if (!(tag_type in scores)) {
                     scores[tag_type] = {total: 0, details: {}};
                 }
@@ -272,7 +278,7 @@ function calculateUnitScores(index, print=false) {
                 total_score += score;
                 act_score += score;
             }
-            unit[`score-${key}`] = act_score.toFixed(2);
+            unit[`score-${action}`] = act_score.toFixed(2);
         });
     }
 
