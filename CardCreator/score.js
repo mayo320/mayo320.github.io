@@ -225,6 +225,7 @@ function calculateUnitScores(index, print=false) {
     const hp = Number(unit['HP']);
     const def = Number(unit['DEF']);
     const spd = Number(unit['SPD']);
+    const cost = Number(unit['Cost']);
 
     var scores = {};
     const def_stat = (hp * (1 + (def / 3))) * 1.3;
@@ -232,7 +233,7 @@ function calculateUnitScores(index, print=false) {
         total: def_stat,
         details: {'stat': def_stat}
     };
-    const res_cost = -Number(unit['Cost'])
+    const res_cost = -cost;
     scores['resource'] = {
         total: res_cost,
         details: {'cost': res_cost}
@@ -241,7 +242,8 @@ function calculateUnitScores(index, print=false) {
 
     const spd_multi = spd / 10;
     const def_multi = (def / 10) + (hp / 15);
-    const tactic_resource_multi = 1.5;
+    const tactic_resource_multi = 1.5;  // Tactics that grant resources are valuable
+    const tactic_cost_multi = 2 / cost;  // The more it cost, the less value tactic is
 
     const calcAct = (action, multiplier = 1) => {
         if (!unit[action]) {
@@ -282,7 +284,7 @@ function calculateUnitScores(index, print=false) {
         });
     }
 
-    calcAct('Tactic');
+    calcAct('Tactic', tactic_cost_multi);
     calcAct('Deploy', 0.7);
     calcAct('Act', 1 + (spd_multi + def_multi));
     calcAct('Defend');
