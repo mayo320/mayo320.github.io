@@ -66,7 +66,7 @@ function scoreUnitText(unit, text) {
         new SC(/(\d+)VP/gi, (a, b)=> a + b * 1.2, 'resource-vp'),
         new SC(/([+-]?\d+)G/gi, (a, b)=> a + b, 'resource-gold', [
             new SC(/max (\d+)G/gi, (a, b)=> a + b * 0.5),
-            new SC(/Steal.*G/gi, (a, b)=> a * 2),
+            new SC(/Steal.*G/gi, (a, b)=> a * 1.5),
             new SC(/Foe gain/gi, (a, b)=> a * -1),
             new SC(/per.*ally/gi, (a, b)=> a * 2.5),
             new SC(/-\d+G/gi, (a, b)=> a * 1.75),
@@ -84,7 +84,7 @@ function scoreUnitText(unit, text) {
             ...debuff_sub_criterias,
             new SC(/trigger poison/gi, (a, b) => a * 2),
         ]),
-        new SC(/burn ?(\d+)?/gi, (a, b) => a + 1.1**b, 'offense-dot', [
+        new SC(/burn ?(\d+)?/gi, (a, b) => a + 1.2**b, 'offense-dot', [
             ...debuff_sub_criterias,
             new SC(/trigger burn/gi, (a, b) => a * 2),
             new SC(/self burn/gi, (a, b) => a * 0.2) // W/A for self burn
@@ -244,7 +244,7 @@ function calculateUnitScores(index, print=false) {
     const spd_multi = spd / 10;
     const def_multi = (def / 10) + (hp / 15);
     const tactic_resource_multi = 1.5;  // Tactics that grant resources are valuable
-    const tactic_cost_multi = 2 / cost;  // The more it cost, the less value tactic is
+    const tactic_cost_multi = 5 / (cost + 2);  // The more it cost, the less value tactic is
 
     const calcAct = (action, multiplier = 1) => {
         if (!unit[action]) {
