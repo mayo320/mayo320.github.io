@@ -132,8 +132,8 @@ function processAct(unit, key) {
 	base_scores.forEach((score) => {
 		if (text.match(score[0]) || score[0].match('_')) {
 			base_score_ui += `<div class="${score[0]}">
-				<span class="score-text">${score[0]}:</span>
-				${score[1].toFixed(2)}
+				<span class="score-text">${score[0]}</span>
+				<span class="score-value">${score[1].toFixed(2)}</span>
 			</div>`;
 		}
 	});
