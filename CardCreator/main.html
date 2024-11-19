@@ -71,6 +71,7 @@
 		.score,
 		.score-tooltip {
 			box-shadow: 0 0 15px black;
+			border: 1px solid lightgray;
 			position: absolute;
 			top: 0;
 			left: -20px;
@@ -94,22 +95,18 @@
 				min-width: 50px;
 			}
 			.total_, .x_ {
-				margin-top: 4px;
+				margin: 6px 0px;
 				border-radius: 0;
 				border-top: 1px solid white;
 			}
 		}
-		.score-tooltip {
-			top: auto;
-			bottom: 50px;
-		}
 		#card-creator.show-score .action:hover .score-tooltip {
-			left: 0;
+			left: -150px;
 			position: absolute;
 			display: inline-block;
-			top: -100%;
+			top: auto;
+			bottom: 100%;
 			z-index: 9;
-			border: 1px solid lightgray;
 		}
 		#a4 {
 			width: 2268px;
