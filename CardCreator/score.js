@@ -74,7 +74,8 @@ function scoreUnitText(unit, text) {
         
         // Offensive
         new SC(/ATK (\d+)/gi, (a, b)=> a + b, 'offense-hit', [
-            new SC(/ADV/gi, (a, b) => a * 1.25)
+            new SC(/ADV/gi, (a, b) => a * 1.25),
+            new SC(/ATK.*per/gi, (a, b) => a * 2.5),
         ]),
         new SC(/ATK X/gi, (a, b)=> a, 'offense-hit', [
             new SC(/X =.*allies/gi, (a, b) => a + 2.5)
@@ -244,7 +245,7 @@ function calculateUnitScores(index, print=false) {
     const spd_multi = spd / 10;
     const def_multi = (def / 10) + (hp / 15);
     const tactic_resource_multi = 1.5;  // Tactics that grant resources are valuable
-    const tactic_cost_multi = 5 / (cost + 2);  // The more it cost, the less value tactic is
+    const tactic_cost_multi = 6 / (cost + 3);  // The more it cost, the less value tactic is
 
     const calcAct = (action, multiplier = 1) => {
         if (!unit[action]) {
