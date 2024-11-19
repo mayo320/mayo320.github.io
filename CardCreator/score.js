@@ -59,6 +59,7 @@ function scoreUnitText(unit, text) {
             new SC(/all.*allies gain/, (a, b) => a, 'support-resist')
         ]),
         new SC(/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (a, b) => a - 1),
+        new SC(/if.*self (stealth|empower|fortif)/gi, (a, b) => a - 1.5),
     ]
     const base_criterias = [
         // Resources
