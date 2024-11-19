@@ -123,10 +123,10 @@ function processAct(text) {
 		['(\\w+ Phase)', 'phase'],
 		['(free(?: \\d+| self)?)', 'free'],
 	];
-	text = text.replace(';', '\n<br>');
+	text = text.replaceAll(';', '\n<br>');
 	matches.forEach((pattern) => {
 		var regex = RegExp(pattern[0], 'gi');
-		text = text.replace(regex, "<span class='sp " + pattern[1].toLowerCase() + "'>$1</span>"); 
+		text = text.replaceAll(regex, "<span class='sp " + pattern[1].toLowerCase() + "'>$1</span>"); 
 	});
 	return text;
 }
