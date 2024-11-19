@@ -19,7 +19,7 @@ class ScoreCritera {
                     tag = res[1];
                 }
             }
-            // console.log(regex[0], this.regex, tag, score);
+            console.log(regex[0], this.regex, tag, score);
             return [score, tag, regex[0]];
         }
         return [score, '', ''];
@@ -89,7 +89,7 @@ function scoreUnitText(unit, text) {
         // Range & targetting multiplier
         new SC(/RNG (\d+)/gi, (a, b) => a * (1 + 0.5 * (min(b, 4) - 1)), '', [
             new SC(/RNG \d+ FAR/gi, (a, b) => a * 1.3),
-            new SC(/RNG \d+ ANY/gi, (a, b) => a * 2),
+            new SC(/RNG \d+ ANY/gi, (a, b) => a * 1.5),
         ]),
 
         // Multiple targets
