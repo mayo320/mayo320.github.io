@@ -266,25 +266,29 @@ function calculateUnitScores(index, print=false) {
         texts.forEach((txt) => {
             const [res, base] = scoreUnitText(unit, txt);
             for (let i in res) {
-                var score = res[i] * multiplier;
+                var txt_multi = multiplier;
+                var score = res[i];
                 const tag_type = i.split('-')[0];
                 const tag_detail = i.split('-')[1];
 
                 // Edge cases
                 if (tag_type === 'defense') {
-                    score *= (1 + def_multi);
+                    txt_multi *= (1 + def_multi);
                 }
                 if (action === 'Tactic') {
                     if (txt.match(/RNG|Melee/gi) && !txt.match(/Melee.*AOE R/gi)) {
-                        score *= tactic_any_multi;
+                        txt_multi *= tactic_any_multi;
                     }
                     // if (['support', 'utility'].find((x) => x === tag_type)) {
-                    //     score *= tactic_any_multi;
+                    //     txt_multi *= tactic_any_multi;
                     // }
                     if (tag_type === 'resource') {
-                        score *= tactic_resource_multi;
+                        txt_multi *= tactic_resource_multi;
                     }
                 }
+
+                // Total multiplier
+                score *= txt_multi;
 
                 // Handle tags
                 if (!(tag_type in scores)) {
@@ -303,6 +307,7 @@ function calculateUnitScores(index, print=false) {
             unit[`score-${action}`] = act_score.toFixed(2);
             base_scores[action] = base_scores[action].concat(base);
         });
+        base_scores[action].push(['Total', act_score]);
     }
 
     calcAct('Tactic', tactic_cost_multi);
