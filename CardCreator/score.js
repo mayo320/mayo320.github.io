@@ -129,7 +129,7 @@ function scoreUnitText(unit, text) {
             ...debuff_sub_criterias,
             BSC(/trigger poison/gi, (a, b) => a * 2),
         ]),
-        BSC(/burn ?(\d+)?/gi, (a, b) => a + b*1.1**b, 'offense-dot', [
+        BSC(/burn ?(\d+)?/gi, (a, b) => a + b*1.2**b, 'offense-dot', [
             ...debuff_sub_criterias,
             BSC(/trigger burn/gi, (a, b) => a * 2),
             BSC(/self.*burn/gi, (a, b) => a * 0.2) // W/A for self burn
