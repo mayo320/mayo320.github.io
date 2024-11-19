@@ -182,9 +182,10 @@ function scoreUnitText(unit, text) {
         ]),
         BSC(/draw (\d+) cards?/gi, (a, b) => a + b, 'utility-card'),
         BSC(/discard (\d+) cards?/gi, (a, b) => a - b),
-        BSC(/(perform|trigger).*(act|defend)/gi, (a, b) => a + 4, 'utility-trigger', [
-            BSC(/(perform|trigger).*act/gi, (a, b) => a, 'offense-utility'),
-            BSC(/(perform|trigger).*defend/gi, (a, b) => a, 'defense-utility')
+        BSC(/(perform|trigger).*(tactic|act|defend)/gi, (a, b) => a + 4, 'utility-trigger', [
+            BSC(/(perform|trigger).*(act)/gi, (a, b) => a, 'offense-trigger'),
+            BSC(/(perform|trigger).*(tactic)/gi, (a, b) => a * 1.25, 'utility-trigger'),
+            BSC(/(perform|trigger).*defend/gi, (a, b) => a, 'defense-trigger')
         ]),
     ];
 
@@ -273,12 +274,15 @@ function calculateUnitScores(index, print=false) {
                 if (tag_type === 'defense') {
                     score *= (1 + def_multi);
                 }
-                if (tag_type === 'resource' && action === 'Tactic') {
-                    score *= tactic_resource_multi;
-                }
-                if (action === 'Tactic' && txt.match(/RNG|Melee/gi)) {
-                    if (!txt.match(/Melee.*AOE R/gi)) {
+                if (action === 'Tactic') {
+                    if (txt.match(/RNG|Melee/gi) && !txt.match(/Melee.*AOE R/gi)) {
                         score *= tactic_any_multi;
+                    }
+                    if (['support', 'utility'].find((x) => x === tag_type)) {
+                        score *= tactic_any_multi;
+                    }
+                    if (tag_type === 'resource') {
+                        score *= tactic_resource_multi;
                     }
                 }
 
