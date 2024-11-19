@@ -74,7 +74,8 @@
 			position: absolute;
 			top: 0;
 			left: -20px;
-			background: gray;
+			background: black;
+			opacity: 0.9;
 			padding: 0 5px;
 			border-radius: 5px;
 			color: white;
@@ -85,15 +86,22 @@
 			.score-text {
 				display: inline-block;
 				min-width: 150px;
-				font-size: 26px;
+				font-size: 22px;
+		        vertical-align: middle;
 			}
 			.score-value {
 				text-align: right;
 				min-width: 50px;
 			}
 			.total_, .x_ {
+				margin-top: 4px;
+				border-radius: 0;
 				border-top: 1px solid white;
 			}
+		}
+		.score-tooltip {
+			top: auto;
+			bottom: 50px;
 		}
 		#card-creator.show-score .action:hover .score-tooltip {
 			left: 0;

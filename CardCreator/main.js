@@ -144,7 +144,7 @@ function processAct(unit, key) {
 	});
 
 	text += `<span class="score-tooltip">
-		<span class="subtext">Note: values are estimated</span> <br>
+		<span class="subtext" style="color: white">Note: values are estimated</span> <br>
 		${base_score_ui}</span>`;
 	return text;
 }
