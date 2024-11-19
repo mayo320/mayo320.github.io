@@ -308,7 +308,7 @@ function calculateUnitScores(index, print=false) {
             base_scores[action] = base_scores[action].concat(base);
         });
         const base_total = base_scores[action].reduce((a,b) => a + b);
-        base_scores[action].push(['X_', (act_score / base_total).toFixed(2)]);
+        base_scores[action].push(['X_', act_score / base_total]);
         base_scores[action].push(['Total_', act_score]);
     }
 
