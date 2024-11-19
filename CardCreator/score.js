@@ -120,7 +120,6 @@ function scoreUnitText(unit, text) {
         // Offensive
         BSC(/ATK (\d+)/gi, (a, b)=> a + b, 'offense-hit', [
             BSC(/ADV/gi, (a, b) => a * 1.25),
-            BSC(/ATK.*per/gi, (a, b) => a * 2.5),
         ]),
         BSC(/ATK X/gi, (a, b)=> a, 'offense-hit', [
             BSC(/X =.*allies/gi, (a, b) => a + 2.5)
