@@ -252,6 +252,7 @@ function calculateUnitScores(index, print=false) {
     const tactic_cost_multi = 6 / (cost + 3);  // The more it cost, the less value tactic is
 
     const calcAct = (action, multiplier = 1) => {
+        base_scores[action] = [];
         if (!unit[action]) {
             return;
         }
@@ -287,7 +288,7 @@ function calculateUnitScores(index, print=false) {
                 act_score += score;
             }
             unit[`score-${action}`] = act_score.toFixed(2);
-            base_scores[action] = base;
+            base_scores[action] = base_scores[action].concat(base);
         });
     }
 

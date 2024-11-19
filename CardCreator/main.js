@@ -125,14 +125,23 @@ function processAct(unit, key) {
 		['(free(?: \\d+| self)?)', 'free'],
 	];
 	text = text.replaceAll(';', '\n<br>');
+
+	var base_score_ui = '';
+	const base_scores = unit['base_scores'][key];
+	base_scores.forEach((score) => {
+		if (text.match(score[0])) {
+			base_score_ui += `<span style="opacity: 0.7;">${score[0]}:</span> ${score[1].toFixed(2)} <br>`;
+		}
+	});
+
 	matches.forEach((pattern) => {
 		var regex = RegExp(pattern[0], 'gi');
 		text = text.replace(regex, "<span class='sp " + pattern[1].toLowerCase() + "'>$1</span>"); 
 	});
-	// const base_scores = unit['base_scores'][key];
-	// base_scores.forEach((score) => {
-	// 	text = text.replace(score[0], `${score[0]} <span class="score-tooltip">${score[1].toFixed(2)}</span>`);
-	// });
+
+	text += `<span class="score-tooltip">
+		<span class="subtext">Note: values are estimated</span> <br>
+		${base_score_ui}</span>`;
 	return text;
 }
 
