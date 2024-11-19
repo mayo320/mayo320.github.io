@@ -126,7 +126,7 @@ function processAct(text) {
 	text = text.replaceAll(';', '\n<br>');
 	matches.forEach((pattern) => {
 		var regex = RegExp(pattern[0], 'gi');
-		text = text.replaceAll(regex, "<span class='sp " + pattern[1].toLowerCase() + "'>$1</span>"); 
+		text = text.replace(regex, "<span class='sp " + pattern[1].toLowerCase() + "'>$1</span>"); 
 	});
 	return text;
 }
