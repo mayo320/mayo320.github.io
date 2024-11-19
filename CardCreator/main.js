@@ -129,10 +129,10 @@ function processAct(unit, key) {
 		var regex = RegExp(pattern[0], 'gi');
 		text = text.replace(regex, "<span class='sp " + pattern[1].toLowerCase() + "'>$1</span>"); 
 	});
-	const base_scores = unit['base_scores'][key];
-		base_scores.forEach((score) => {
-			text = text.replace(score[0], `${score[0]} <span class="score-tooltip">${score[1].toFixed(2)}</span>`);
-		});
+	// const base_scores = unit['base_scores'][key];
+	// base_scores.forEach((score) => {
+	// 	text = text.replace(score[0], `${score[0]} <span class="score-tooltip">${score[1].toFixed(2)}</span>`);
+	// });
 	return text;
 }
 
