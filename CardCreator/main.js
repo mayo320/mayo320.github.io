@@ -1,7 +1,7 @@
 var data = [];
 var current_index = 0;
 var outfile_name = '';
-
+var unit_names_regex = '';
 
 function init() {
 	data = parseCsv();
@@ -78,7 +78,7 @@ function processAct(unit, key) {
 		return '';
 	}
 	var matches = [
-		['(tactic|act|defend)', 'action'],
+		['(tactic|act|defend|defeat)', 'action'],
 		['((?:\\d+/)?\\d* ?HP)', 'HP'],
 		['(melee)', 'melee'],
 		['(\\+?rng(?: \\d+))', 'rng'],
@@ -123,6 +123,7 @@ function processAct(unit, key) {
 		['(\\d+G)', 'g'],
 		['(\\w+ Phase)', 'phase'],
 		['(free(?: \\d+| self)?)', 'free'],
+		[unit_names_regex, 'unit-name']
 	];
 	text = text.replaceAll(';', '\n<br>');
 
@@ -146,6 +147,8 @@ function processAct(unit, key) {
 }
 
 function createUnitList() {
+	unit_names_regex = `(${data.map((u)=>u['Name']).join('|')})`;
+
 	var cont = document.querySelector('#card-list');
 	var html = ''
 	for (let i in data) {
