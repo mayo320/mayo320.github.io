@@ -59,7 +59,7 @@ function scoreUnitText(unit, text) {
             new SC(/all.*allies gain/, (a, b) => a, 'support-resist')
         ]),
         new SC(/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (a, b) => a - 1),
-        new SC(/if.*self (stealth|empower|fortif)/gi, (a, b) => a - 1.5),
+        new SC(/if.*self.*(stealth|empower|fortif)/gi, (a, b) => a - 1.5),
     ]
     const base_criterias = [
         // Resources
@@ -87,7 +87,7 @@ function scoreUnitText(unit, text) {
         new SC(/burn ?(\d+)?/gi, (a, b) => a + 1.2**b, 'offense-dot', [
             ...debuff_sub_criterias,
             new SC(/trigger burn/gi, (a, b) => a * 2),
-            new SC(/self burn/gi, (a, b) => a * 0.2) // W/A for self burn
+            new SC(/self.*burn/gi, (a, b) => a * 0.2) // W/A for self burn
         ]),
         new SC(/shock ?(\d+)?/gi, (a, b) => a + b, 'offense-debuff', debuff_sub_criterias),
         new SC(/charm ?(\d+)?/gi, (a, b) => a + b * 1.5, 'offense-debuff', debuff_sub_criterias),
@@ -119,10 +119,10 @@ function scoreUnitText(unit, text) {
             new SC(/(?:self.*fog of war)/gi, (a, b) => a, 'defense-utility')
         ]),
         new SC(/empower ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
-            new SC(/self empower/gi, (a, b) => a, 'offense-buff')
+            new SC(/self.*empower/gi, (a, b) => a, 'offense-buff')
         ]),
         new SC(/fortify ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
-            new SC(/self fortify/gi, (a, b) => a, 'defense-buff')
+            new SC(/self.*fortify/gi, (a, b) => a, 'defense-buff')
         ]),
 
         // Utility
@@ -158,7 +158,7 @@ function scoreUnitText(unit, text) {
         // Conditional
         new SC(/once.*/gi, (a, b) => a * 0.75),
         new SC(/persistent.*/gi, (a, b) => a, 'utility', [
-            new SC(/(on deploy)/gi, (a) => a * 1.9),
+            new SC(/(on deploy)/gi, (a) => a * 2.2),
             new SC(/(before.*act)/gi, (a, b) => a * 2.5),
             new SC(/(after.*act)/gi, (a, b) => a * 2.5),
         ]),
