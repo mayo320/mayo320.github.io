@@ -143,7 +143,7 @@ function scoreUnitText(unit, text) {
         new SC(/(reflect)/gi, (a, b) => a, '', [
             new SC(/against melee/gi, (a, b) => a * 0.75),
         ]),
-        new SC(/(if|when).*:.*/gi, (a, b) => a * 0.65),
+        new SC(/(if|when|on).*:.*/gi, (a, b) => a * 0.65),
         new SC(/per.*ally/gi, (a, b) => a * 1.5),
         new SC(/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (a, b) => a * 1.5),
         new SC(/(X = current HP|per current HP)/gi, (a, b) => a * (unit['HP'] * 0.5)),
