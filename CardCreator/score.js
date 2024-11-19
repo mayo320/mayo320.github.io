@@ -166,12 +166,12 @@ function scoreUnitText(unit, text) {
         BSC(/empower ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
             BSC(/self.*empower/gi, (a, b) => a, 'offense-buff'),
             BSC(/if self empower/gi, (a, b) => a - 1.75, ''),
-            BSC(/remove/gi, (a, b) => a, 'offense-remove'),
+            BSC(/remove/gi, (a, b) => a * 0.7, 'offense-remove'),
         ]),
         BSC(/fortify ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
             BSC(/self.*fortify/gi, (a, b) => a, 'defense-buff'),
             BSC(/if self fortify/gi, (a, b) => a - 1.75, ''),
-            BSC(/remove/gi, (a, b) => a, 'offense-remove'),
+            BSC(/remove/gi, (a, b) => a * 0.7, 'offense-remove'),
         ]),
 
         // Utility
