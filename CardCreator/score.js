@@ -241,7 +241,7 @@ function calculateUnitScores(index, print=false) {
 
     const spd_multi = spd / 10;
     const def_multi = (def / 10) + (hp / 15);
-    const tactic_resource_multi = 2;
+    const tactic_resource_multi = 1.5;
 
     const calcAct = (action, multiplier = 1) => {
         if (!unit[action]) {
