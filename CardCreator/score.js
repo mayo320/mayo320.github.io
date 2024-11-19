@@ -54,8 +54,8 @@ function scoreUnitText(unit, text) {
     const SC = ScoreCritera;
     // A is accumulated value, B is extracted value from Regex
     const debuff_sub_criterias = [
-        new SC(/(immune|IMM)/gi, (a, b) => a, 'defense-immune'),
-        new SC(/resist/gi, (a, b) => a * 0.75, 'defense-resist', [
+        new SC(/(immune|IMM)/gi, (a, b) => a * 1.2, 'defense-immune'),
+        new SC(/resist/gi, (a, b) => a * 0.85, 'defense-resist', [
             new SC(/all.*allies gain/, (a, b) => a, 'support-resist')
         ]),
         new SC(/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (a, b) => 0),
