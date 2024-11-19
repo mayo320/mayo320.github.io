@@ -60,14 +60,16 @@
 			}
 		}
 		#card-creator .score,
-		#card-creator .score-detail {
+		#card-creator .score-detail,
+		#card-creator .score-tooltip {
 			display: none;
 		}
 		#card-creator.show-score .score,
 		#card-creator.show-score .score-detail {
 			display: block;
 		}
-		.score {
+		.score,
+		.score-tooltip {
 			box-shadow: 0 0 15px black;
 			position: absolute;
 			top: 0;
@@ -76,6 +78,12 @@
 			padding: 0 5px;
 			border-radius: 5px;
 			color: white;
+		}
+		#card-creator.show-score .action:hover .score-tooltip {
+			left: 0;
+			position: absolute;
+			display: inline-block;
+			top: -40px;
 		}
 		#a4 {
 			width: 2268px;
@@ -210,6 +218,7 @@
 					border-radius: 6px;
 					text-transform: capitalize;
 					color:white;
+					position: relative;
 				}
 				.action {
 					text-decoration: underline;

@@ -19,10 +19,10 @@ class ScoreCritera {
                     tag = res[1];
                 }
             }
-            console.log(regex[0], this.regex, tag, score);
-            return [score, tag];
+            // console.log(regex[0], this.regex, tag, score);
+            return [score, tag, regex[0]];
         }
-        return [score, ''];
+        return [score, '', ''];
     }
 }
 
@@ -61,84 +61,6 @@ function scoreUnitText(unit, text) {
         new SC(/per (poison|burn|chill|shock|charm|empower|fortify)/gi, (a, b) => a - 1),
         new SC(/if.*self.*(stealth|empower|fortif)/gi, (a, b) => a - 1.5),
     ]
-    const base_criterias = [
-        // Resources
-        new SC(/(\d+)VP/gi, (a, b)=> a + b * 1.2, 'resource-vp'),
-        new SC(/([+-]?\d+)G/gi, (a, b)=> a + b, 'resource-gold', [
-            new SC(/max (\d+)G/gi, (a, b)=> a + b * 0.5),
-            new SC(/Steal.*G/gi, (a, b)=> a * 1.5),
-            new SC(/Foe gain/gi, (a, b)=> a * -1),
-            new SC(/per.*ally/gi, (a, b)=> a * 2.5),
-            new SC(/-\d+G/gi, (a, b)=> a * 1.75),
-        ]),
-        
-        // Offensive
-        new SC(/ATK (\d+)/gi, (a, b)=> a + b, 'offense-hit', [
-            new SC(/ADV/gi, (a, b) => a * 1.25),
-            new SC(/ATK.*per/gi, (a, b) => a * 2.5),
-        ]),
-        new SC(/ATK X/gi, (a, b)=> a, 'offense-hit', [
-            new SC(/X =.*allies/gi, (a, b) => a + 2.5)
-        ]),
-        new SC(/(\d+) True (?:dmg|damage)/gi, (a, b) => a + b * 2, 'offense-hit'),
-        new SC(/poison ?(\d+)?/gi, (a, b) => a + b, 'offense-dot', [
-            ...debuff_sub_criterias,
-            new SC(/trigger poison/gi, (a, b) => a * 2),
-        ]),
-        new SC(/burn ?(\d+)?/gi, (a, b) => a + 1.2**b, 'offense-dot', [
-            ...debuff_sub_criterias,
-            new SC(/trigger burn/gi, (a, b) => a * 2),
-            new SC(/self.*burn/gi, (a, b) => a * 0.2) // W/A for self burn
-        ]),
-        new SC(/shock ?(\d+)?/gi, (a, b) => a + b, 'offense-debuff', debuff_sub_criterias),
-        new SC(/charm ?(\d+)?/gi, (a, b) => a + b * 1.5, 'offense-debuff', debuff_sub_criterias),
-        new SC(/reveal ?(\d+)?/gi, (a, b) => a + b, 'offense-debuff'),
-        new SC(/transfer debuffs/gi, (a, b) => a + 1.3, 'offense-debuff'),
-
-        // Defensive
-        new SC(/DEF (\d+)/gi, (a, b) => a + b, 'defense-stat'),
-        new SC(/chill ?(\d+)?/gi, (a, b) => a + b, 'defense-debuff', debuff_sub_criterias),
-        new SC(/stun/gi, (a, b) => a + 2, 'defense-debuff', debuff_sub_criterias),
-        new SC(/nullify/gi, (a, b) => a + 3, 'defense-utility'),
-        new SC(/revive.*(\d+) HP/gi, (a, b) => a + b + 1, 'defense-sustain'),
-        new SC(/revive.*full HP/gi, (a, b) => a + unit['HP'], 'defense-sustain'),
-        new SC(/takes (\d+) damage at most per attack.*/gi, (a, b) => a + (6 / (b + 2) * unit['HP']), 'defense-utility'),
-        new SC(/all debuffs?/gi, (a, b) => a + 6, '', debuff_sub_criterias),
-        new SC(/any debuffs?/gi, (a, b) => a + 4, '', debuff_sub_criterias),
-
-        // Supports
-        new SC(/heal ?(\d+)?/gi, (a, b) => a + b * 0.9, 'support-heal', [
-            new SC(/(?:self.*heal)/gi, (a, b) => a, 'defense-sustain')
-        ]),
-        new SC(/cleanse ?(\d+)?/gi, (a, b) => a + b * 1.1, 'support-cleanse', [
-            new SC(/(?:self.*cleanse)/gi, (a, b) => a, 'defense-sustain')
-        ]),
-        new SC(/stealth ?(\d+)?/gi, (a, b) => a + b * 3, 'support-utility', [
-            new SC(/(?:self.*stealth)/gi, (a, b) => a, 'defense-utility')
-        ]),
-        new SC(/fog of war/gi, (a, b) => a + 5, 'support-utility', [
-            new SC(/(?:self.*fog of war)/gi, (a, b) => a, 'defense-utility')
-        ]),
-        new SC(/empower ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
-            new SC(/self.*empower/gi, (a, b) => a, 'offense-buff')
-        ]),
-        new SC(/fortify ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
-            new SC(/self.*fortify/gi, (a, b) => a, 'defense-buff')
-        ]),
-
-        // Utility
-        new SC(/free (\d+)?(?:self)?/gi, (a, b) => a + b * 10, 'utility-army'),
-        new SC(/(spawn|summon)/gi, (a, b) => a, 'utility-summon', [
-            new SC(/spawn.*(\d+) ATK/gi, (a, b) => a + b, 'offense-summon'),
-            new SC(/spawn.*(\d+) HP/gi, (a, b) => a + b, 'defense-summon')
-        ]),
-        new SC(/draw (\d+) cards?/gi, (a, b) => a + b, 'utility-card'),
-        new SC(/discard (\d+) cards?/gi, (a, b) => a - b),
-        new SC(/(perform|trigger).*(act|defend)/gi, (a, b) => a + 4, 'utility-trigger', [
-            new SC(/(perform|trigger).*act/gi, (a, b) => a, 'offense-utility'),
-            new SC(/(perform|trigger).*defend/gi, (a, b) => a, 'defense-utility')
-        ]),
-    ];
     // Parts are sepreated by ','
     const part_criterias = [
         // Conditional multipliers
@@ -153,12 +75,11 @@ function scoreUnitText(unit, text) {
             new SC(/ or /gi, (a, b) => a * 2),
         ]),
     ];
-
     // Lines are separated by ';'
     const line_criterias = [
         // Conditional
         new SC(/once.*/gi, (a, b) => a * 0.75),
-        new SC(/persistent.*/gi, (a, b) => a, 'utility', [
+        new SC(/persistent.*/gi, (a, b) => a, '', [
             new SC(/(on deploy)/gi, (a) => a * 2.2),
             new SC(/(before.*act)/gi, (a, b) => a * 2.5),
             new SC(/(after.*act)/gi, (a, b) => a * 2.5),
@@ -167,7 +88,7 @@ function scoreUnitText(unit, text) {
 
         // Range & targetting multiplier
         new SC(/RNG (\d+)/gi, (a, b) => a * (1 + 0.5 * (min(b, 4) - 1)), '', [
-            new SC(/RNG \d+ FAR/gi, (a, b) => a * 1.2),
+            new SC(/RNG \d+ FAR/gi, (a, b) => a * 1.3),
             new SC(/RNG \d+ ANY/gi, (a, b) => a * 2),
         ]),
 
@@ -178,47 +99,128 @@ function scoreUnitText(unit, text) {
         new SC(/(L1 )/gi, (a, b) => a * 0.5),
         new SC(/(L1\/L2 )/gi, (a, b) => a * 0.8),
     ];
+    const BSC = (r, o, t, s = []) => {
+        return new SC(r, o, t, [
+            ...s,
+            ...part_criterias,
+        ]);
+    };
+    // Base criteras
+    const base_criterias = [
+        // Resources
+        BSC(/(\d+)VP/gi, (a, b)=> a + b * 1.2, 'resource-vp'),
+        BSC(/([+-]?\d+)G/gi, (a, b)=> a + b, 'resource-gold', [
+            BSC(/max (\d+)G/gi, (a, b)=> a + b * 0.5),
+            BSC(/Steal.*G/gi, (a, b)=> a * 1.5),
+            BSC(/Foe gain/gi, (a, b)=> a * -1),
+            BSC(/per.*ally/gi, (a, b)=> a * 2.5),
+            BSC(/-\d+G/gi, (a, b)=> a * 1.75),
+        ]),
+        
+        // Offensive
+        BSC(/ATK (\d+)/gi, (a, b)=> a + b, 'offense-hit', [
+            BSC(/ADV/gi, (a, b) => a * 1.25),
+            BSC(/ATK.*per/gi, (a, b) => a * 2.5),
+        ]),
+        BSC(/ATK X/gi, (a, b)=> a, 'offense-hit', [
+            BSC(/X =.*allies/gi, (a, b) => a + 2.5)
+        ]),
+        BSC(/(\d+) True (?:dmg|damage)/gi, (a, b) => a + b * 2, 'offense-hit'),
+        BSC(/poison ?(\d+)?/gi, (a, b) => a + b, 'offense-dot', [
+            ...debuff_sub_criterias,
+            BSC(/trigger poison/gi, (a, b) => a * 2),
+        ]),
+        BSC(/burn ?(\d+)?/gi, (a, b) => a + 1.2**b, 'offense-dot', [
+            ...debuff_sub_criterias,
+            BSC(/trigger burn/gi, (a, b) => a * 2),
+            BSC(/self.*burn/gi, (a, b) => a * 0.2) // W/A for self burn
+        ]),
+        BSC(/shock ?(\d+)?/gi, (a, b) => a + b, 'offense-debuff', debuff_sub_criterias),
+        BSC(/charm ?(\d+)?/gi, (a, b) => a + b * 1.5, 'offense-debuff', debuff_sub_criterias),
+        BSC(/reveal ?(\d+)?/gi, (a, b) => a + b, 'offense-debuff'),
+        BSC(/transfer debuffs/gi, (a, b) => a + 1.3, 'offense-debuff'),
+
+        // Defensive
+        BSC(/DEF (\d+)/gi, (a, b) => a + b, 'defense-stat'),
+        BSC(/chill ?(\d+)?/gi, (a, b) => a + b, 'defense-debuff', debuff_sub_criterias),
+        BSC(/stun/gi, (a, b) => a + 2, 'defense-debuff', debuff_sub_criterias),
+        BSC(/nullify/gi, (a, b) => a + 3, 'defense-utility'),
+        BSC(/revive.*(\d+) HP/gi, (a, b) => a + b + 1, 'defense-sustain'),
+        BSC(/revive.*full HP/gi, (a, b) => a + unit['HP'], 'defense-sustain'),
+        BSC(/takes (\d+) damage at most per attack.*/gi, (a, b) => a + (6 / (b + 2) * unit['HP']), 'defense-utility'),
+        BSC(/all debuffs?/gi, (a, b) => a + 6, '', debuff_sub_criterias),
+        BSC(/any debuffs?/gi, (a, b) => a + 4, '', debuff_sub_criterias),
+
+        // Supports
+        BSC(/heal ?(\d+)?/gi, (a, b) => a + b * 0.9, 'support-heal', [
+            BSC(/(?:self.*heal)/gi, (a, b) => a, 'defense-sustain')
+        ]),
+        BSC(/cleanse ?(\d+)?/gi, (a, b) => a + b * 1.1, 'support-cleanse', [
+            BSC(/(?:self.*cleanse)/gi, (a, b) => a, 'defense-sustain')
+        ]),
+        BSC(/stealth ?(\d+)?/gi, (a, b) => a + b * 3, 'support-utility', [
+            BSC(/(?:self.*stealth)/gi, (a, b) => a, 'defense-utility')
+        ]),
+        BSC(/fog of war/gi, (a, b) => a + 5, 'support-utility', [
+            BSC(/(?:self.*fog of war)/gi, (a, b) => a, 'defense-utility')
+        ]),
+        BSC(/empower ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
+            BSC(/self.*empower/gi, (a, b) => a, 'offense-buff')
+        ]),
+        BSC(/fortify ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
+            BSC(/self.*fortify/gi, (a, b) => a, 'defense-buff')
+        ]),
+
+        // Utility
+        BSC(/free (\d+)?(?:self)?/gi, (a, b) => a + b * 10, 'utility-army'),
+        BSC(/(spawn|summon)/gi, (a, b) => a, 'utility-summon', [
+            BSC(/spawn.*(\d+) ATK/gi, (a, b) => a + b, 'offense-summon'),
+            BSC(/spawn.*(\d+) HP/gi, (a, b) => a + b, 'defense-summon')
+        ]),
+        BSC(/draw (\d+) cards?/gi, (a, b) => a + b, 'utility-card'),
+        BSC(/discard (\d+) cards?/gi, (a, b) => a - b),
+        BSC(/(perform|trigger).*(act|defend)/gi, (a, b) => a + 4, 'utility-trigger', [
+            BSC(/(perform|trigger).*act/gi, (a, b) => a, 'offense-utility'),
+            BSC(/(perform|trigger).*defend/gi, (a, b) => a, 'defense-utility')
+        ]),
+    ];
 
     const text_scores = {};
+    const base_scores = [];
     const lines = text.split(';');
     lines.forEach((line) => {
-        const line_scores = {};
+        const part_scores = {};
         const parts = line.split(',');
 
+        // Base scores
         parts.forEach((part) => {
-            const part_scores = {};
             base_criterias.forEach((scorer) => {
-                const [score, tag] = scorer.run(0, part);
+                const [score, tag, matched] = scorer.run(0, part);
                 if (tag) {
                     if (!(tag in part_scores)) {
                         part_scores[tag] = 0;
                     }
                     part_scores[tag] += score;
+                    base_scores.push([matched.trim(), score]);
                 }
-            })
-
-            for (let tag in part_scores) {
-                part_criterias.forEach((scorer) => {
-                    const [score, _] = scorer.run(part_scores[tag], part);
-                    part_scores[tag] = score;
-                })
-                line_scores[tag] = part_scores[tag];
-            }
+            });
         });
 
-        
-        for (let tag in line_scores) {
-            line_criterias.forEach((scorer) => {
-                const [score, _] = scorer.run(line_scores[tag], line);
-                line_scores[tag] = score;
-            });
-            text_scores[tag] = line_scores[tag];
-
-            // populate
+        // Line multipliers
+        var multiplier = 1;
+        line_criterias.forEach((scorer) => {
+            const [m, _, __] = scorer.run(multiplier, line);
+            multiplier = m;
+        });
+        for (let tag in part_scores) {
+            text_scores[tag] = Number(part_scores[tag]) * multiplier;
             score_types[tag] = 0;
         }
+        for (let i in base_scores) {
+            base_scores[i][1] = base_scores[i][1] * multiplier;
+        }
     });
-    return text_scores;
+    return [text_scores, base_scores];
 }
 
 function calculateUnitScores(index, print=false) {
@@ -242,6 +244,8 @@ function calculateUnitScores(index, print=false) {
     };;
     var total_score = def_stat + res_cost;
 
+    const base_scores = {};
+
     const spd_multi = spd / 10;
     const def_multi = (def / 10) + (hp / 15);
     const tactic_resource_multi = 1.5;  // Tactics that grant resources are valuable
@@ -254,7 +258,7 @@ function calculateUnitScores(index, print=false) {
         var texts = unit[action].split(';');
         var act_score = 0;
         texts.forEach((txt) => {
-            const res = scoreUnitText(unit, txt);
+            const [res, base] = scoreUnitText(unit, txt);
             for (let i in res) {
                 var score = res[i] * multiplier;
                 const tag_type = i.split('-')[0];
@@ -283,6 +287,7 @@ function calculateUnitScores(index, print=false) {
                 act_score += score;
             }
             unit[`score-${action}`] = act_score.toFixed(2);
+            base_scores[action] = base;
         });
     }
 
@@ -294,6 +299,7 @@ function calculateUnitScores(index, print=false) {
     calcAct('Win', 1 + def_multi);
 
     unit['scores'] = scores;
+    unit['base_scores'] = base_scores;
     unit['score-Total'] = Math.round(total_score);
 }
 
