@@ -111,10 +111,10 @@ function scoreUnitText(unit, text) {
         new SC(/cleanse ?(\d+)?/gi, (a, b) => a + b * 1.1, 'support-cleanse', [
             new SC(/(?:self.*cleanse)/gi, (a, b) => a, 'defense-sustain')
         ]),
-        new SC(/stealth ?(\d+)?/gi, (a, b) => a + b * 3, 'support-defense', [
+        new SC(/stealth ?(\d+)?/gi, (a, b) => a + b * 3, 'support-utility', [
             new SC(/(?:self.*stealth)/gi, (a, b) => a, 'defense-utility')
         ]),
-        new SC(/fog of war/gi, (a, b) => a + 5, 'support-defense', [
+        new SC(/fog of war/gi, (a, b) => a + 5, 'support-utility', [
             new SC(/(?:self.*fog of war)/gi, (a, b) => a, 'defense-utility')
         ]),
         new SC(/empower ?(\d+)?/gi, (a, b) => a + b * 1.75, 'support-buff', [
