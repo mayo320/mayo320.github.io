@@ -130,7 +130,7 @@ function processAct(unit, key) {
 	var base_score_ui = '';
 	const base_scores = unit['base_scores'][key];
 	base_scores.forEach((score) => {
-		if (text.match(score[0])) {
+		if (text.match(score[0]) || score[0].match('_')) {
 			base_score_ui += `<div class="${score[0]}">
 				<span class="score-text">${score[0]}:</span>
 				${score[1].toFixed(2)}

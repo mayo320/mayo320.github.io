@@ -307,7 +307,7 @@ function calculateUnitScores(index, print=false) {
             unit[`score-${action}`] = act_score.toFixed(2);
             base_scores[action] = base_scores[action].concat(base);
         });
-        base_scores[action].push(['Total', act_score]);
+        base_scores[action].push(['Total_', act_score]);
     }
 
     calcAct('Tactic', tactic_cost_multi);
