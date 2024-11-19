@@ -96,7 +96,7 @@ function processAct(text) {
 		['((?:all|any) debuffs?)', 'all-debuffs'],
 		['(poison(?:ed)?(?: \\d+)?)', 'poison'],
 		['(burn(?:t)?(?: \\d+)?)', 'burn'],
-		['(stun(?:ed)?(?: \\d+)?)', 'stun'],
+		['(stun(?:ned)?(?: \\d+)?)', 'stun'],
 		['(chill(?:ed)?(?: \\d+)?)', 'chill'],
 		['(shock(?:ed)?(?: \\d+)?)', 'shock'],
 		['(revives?)', 'revive'],
