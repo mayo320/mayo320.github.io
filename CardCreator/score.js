@@ -253,7 +253,7 @@ function calculateUnitScores(index, print=false) {
     const def_multi = (def / 10) + (hp / 15);
     const tactic_resource_multi = 1.5;  // Tactics that grant resources are valuable
     const tactic_cost_multi = 6 / (cost + 3);  // The more it cost, the less value tactic is
-    const tactic_any_rng_multi = 1.5;
+    const tactic_any_multi = 1.4;
 
     const calcAct = (action, multiplier = 1) => {
         base_scores[action] = [];
@@ -276,8 +276,8 @@ function calculateUnitScores(index, print=false) {
                 if (tag_type === 'resource' && action === 'Tactic') {
                     score *= tactic_resource_multi;
                 }
-                if (action === 'Tactic' && txt.match('RNG')) {
-                    score *= tactic_any_rng_multi;
+                if (action === 'Tactic' && txt.match(/RNG|Melee/gi)) {
+                    score *= tactic_any_multi;
                 }
 
                 // Handle tags
