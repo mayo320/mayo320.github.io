@@ -183,9 +183,9 @@ function scoreUnitText(unit, text) {
         BSC(/(\d+) hand limit/gi, (a, b) => a + b * 10, 'utility-card'),
         BSC(/draw (\d+) cards?/gi, (a, b) => a + b, 'utility-card'),
         BSC(/discard (\d+) cards?/gi, (a, b) => a - b),
-        BSC(/(perform|trigger).*(tactic|act|defend)/gi, (a, b) => a + 4, 'utility-trigger', [
+        BSC(/(perform|trigger).*(tactic|act|defend)/gi, (a, b) => a + 8, 'utility-trigger', [
             BSC(/(perform|trigger).*(act)/gi, (a, b) => a, 'offense-trigger'),
-            BSC(/(perform|trigger).*(tactic)/gi, (a, b) => a * 1.25, 'utility-trigger'),
+            BSC(/(perform|trigger).*(tactic)/gi, (a, b) => a + 1, 'utility-trigger'),
             BSC(/(perform|trigger).*defend/gi, (a, b) => a, 'defense-trigger')
         ]),
     ];
