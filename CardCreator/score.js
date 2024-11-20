@@ -158,7 +158,7 @@ function scoreUnitText(unit, text) {
         ]),
         BSC(/stealth ?(\d+)?/gi, (a, b) => a + b * 3, 'support-utility', [
             BSC(/(?:self.*stealth)/gi, (a, b) => a, 'defense-utility'),
-            BSC(/if self stealth/gi, (a, b) => a - 3, ''),
+            BSC(/if self stealth/gi, (a, b) => a - 2.35, ''),
         ]),
         BSC(/fog of war/gi, (a, b) => a + 5, 'support-utility', [
             BSC(/(?:self.*fog of war)/gi, (a, b) => a, 'defense-utility'),
