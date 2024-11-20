@@ -115,6 +115,7 @@ function processAct(unit, key) {
 		['(celestial)', 'celestial'],
 		['(nature)', 'nature'],
 		['(draw \\d+ cards?)', 'draw-card'],
+		['(\\+\\d+ hand limit)', 'hand-limit'],
 		['(discard \\d+ cards?)', 'discard-card'],
 		['(spawn|summon)', 'action'],
 		['(\\d+VP)', 'vp'],

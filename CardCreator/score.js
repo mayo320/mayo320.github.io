@@ -144,7 +144,7 @@ function scoreUnitText(unit, text) {
         BSC(/stun/gi, (a, b) => a + 2, 'defense-debuff', debuff_sub_criterias),
         BSC(/nullify/gi, (a, b) => a + 3, 'defense-utility'),
         BSC(/revive.*(\d+) HP/gi, (a, b) => a + b + 1, 'defense-sustain'),
-        BSC(/revive.*full HP/gi, (a, b) => a + unit['HP'], 'defense-sustain'),
+        BSC(/revive.*full HP/gi, (a, b) => a + unit['HP'] * 1.25, 'defense-sustain'),
         BSC(/takes (\d+) damage at most per attack.*/gi, (a, b) => a + (6 / (b + 2) * unit['HP']), 'defense-utility'),
         BSC(/all debuffs?/gi, (a, b) => a + 6, '', debuff_sub_criterias),
         BSC(/any debuffs?/gi, (a, b) => a + 4, '', debuff_sub_criterias),
@@ -180,6 +180,7 @@ function scoreUnitText(unit, text) {
             BSC(/spawn.*(\d+) ATK/gi, (a, b) => a + b, 'offense-summon'),
             BSC(/spawn.*(\d+) HP/gi, (a, b) => a + b, 'defense-summon')
         ]),
+        BSC(/(\d+) hand limit/gi, (a, b) => a + b * 10, 'utility-card'),
         BSC(/draw (\d+) cards?/gi, (a, b) => a + b, 'utility-card'),
         BSC(/discard (\d+) cards?/gi, (a, b) => a - b),
         BSC(/(perform|trigger).*(tactic|act|defend)/gi, (a, b) => a + 4, 'utility-trigger', [
