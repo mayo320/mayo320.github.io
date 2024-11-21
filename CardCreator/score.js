@@ -107,7 +107,7 @@ function scoreUnitText(unit, text) {
     // Base criteras
     const base_criterias = [
         // Resources
-        BSC(/(\d+)VP/gi, (a, b)=> a + b * 1.2, 'resource-vp'),
+        BSC(/(\d+)VP/gi, (a, b)=> a + b * 1.5, 'resource-vp'),
         BSC(/([+-]?\d+)G/gi, (a, b)=> a + b, 'resource-gold', [
             BSC(/max (\d+)G/gi, (a, b)=> a + b * 0.5),
             BSC(/Steal.*G/gi, (a, b)=> a * 1.5),
