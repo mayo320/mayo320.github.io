@@ -45,12 +45,12 @@ function exportCard(element) {
 	}).then(function (canvas) {
 		document.body.appendChild(canvas);
 
-		var img = canvas.toDataURL('image/png');
-		var link = document.createElement('a');
-		link.href = img;
-		link.download = outfile_name;
-		link.style.display = 'none';
-		link.click();
+		// var img = canvas.toDataURL('image/png');
+		// var link = document.createElement('a');
+		// link.href = img;
+		// link.download = outfile_name;
+		// link.style.display = 'none';
+		// link.click();
 	});
 }
 
@@ -77,38 +77,43 @@ function processAct(unit, key) {
 	if (text === undefined || text.length === 0) {
 		return '';
 	}
+
+	var status_re = (st) => {
+		return `${st} ?(\\d+)?`
+	}
+
 	var matches = [
 		['(tactic|act|defend|defeat)', 'action'],
 		['((?:\\d+/)?\\d* ?HP)', 'HP'],
-		['(melee)', 'melee'],
-		['(\\+?rng(?: \\d+))', 'rng'],
+		['melee()', 'melee'],
+		['\\+?rng (\\d+)', 'rng'],
 		['(aoe(?: [RC\\d+])?)', 'aoe'],
-		['(\\+?ATK(?: [\\d+X])?)', 'atk'],
+		['\\+?ATK ([\\d+X])?', 'atk'],
 		['(\\+?(?:\\d+ )?def(?: \\d+))', 'def'],
 		['((?:\\d+ )?true (?:damage|dmg))', 'true-dmg'],
 		['(ADV)', 'adv'],
 		['(\\+?SPD ?\\d+)', 'spd'],
 		['IMM( .*);?', 'immunity'], // imm should be above statuses
 		['resist( .*);?', 'resist'], // imm should be above statuses
-		['(heal(?: \\d+)?)', 'heal'],
-		['(cleanse(?: \\d+)?)', 'cleanse'],
+		['heal (\\d+)?', 'heal'],
+		['cleanse (\\d+)?', 'cleanse'],
 		['(empower(?:ed)?(?: \\d+)?)', 'empower'],
 		['(fortif(?:y|ied)(?: \\d+)?)', 'fortify'],
 		['((?:all|any) debuffs?)', 'all-debuffs'],
-		['(poison(?:ed)?(?: \\d+)?)', 'poison'],
-		['(burn(?:t)?(?: \\d+)?)', 'burn'],
-		['(stun(?:ned)?(?: \\d+)?)', 'stun'],
-		['(chill(?:ed)?(?: \\d+)?)', 'chill'],
-		['(shock(?:ed)?(?: \\d+)?)', 'shock'],
+		[status_re('poison(?:ed)?'), 'poison debuff'],
+		[status_re('burnt?'), 'burn debuff'],
+		[status_re('stun(?:ned)?'), 'stun debuff'],
+		[status_re('chill(?:ed)?'), 'chill debuff'],
+		[status_re('shock(?:ed)?'), 'shock debuff'],
 		['(revives?)', 'revive'],
 		['(persistent)', 'persistent'],
 		['(once):?', 'once'],
 		['(stealth(?:ed)?(?: \\d+)?)', 'stealth'],
-		['(reveal(?:ed)?(?: \\d+)?)', 'reveal'],
+		[status_re('reveal(?:ed)?'), 'reveal'],
 		['(nullify)', 'nullify'],
 		['(FOG OF WAR)', 'fog-of-war'],
 		['(killing blow)', 'killing-blow'],
-		['(charm(?:ed)?(?: \\d+)?)', 'charm'],
+		[status_re('charm(?:ed)?'), 'charm debuff'],
 		['(chaos)', 'chaos'],
 		['(order)', 'order'],
 		['(construct)', 'construct'],
@@ -118,12 +123,15 @@ function processAct(unit, key) {
 		['(\\+\\d+ hand limit)', 'hand-limit'],
 		['(discard \\d+ cards?)', 'discard-card'],
 		['(spawn|summon)', 'action'],
-		['(\\d+VP)', 'vp'],
+		['(\\d+)(?:VP)', 'vp'],
 		['(\\d+ap)', 'ap'],
 		['(-\\d+G)', 'no-g'], // above G
-		['(\\d+G)', 'g'],
+		['(\\d+)(?:G)', 'g'],
 		['(\\w+ Phase)', 'phase'],
 		['(free(?: \\d+| self)?)', 'free'],
+		['(any|far|self)', 'target'],
+		['(trash)', 'trash'],
+		['reflect()', 'reflect'],
 		[unit_names_regex, 'unit-name']
 	];
 	text = text.replaceAll(';', '\n<br>');

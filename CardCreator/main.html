@@ -15,7 +15,6 @@
 	<style type="text/css">
 		.emoji {
 			font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
-			font-variant-emoji: emoji;
 		}
 		body {
 			font-family: Trebuchet MS, sans-serif;
@@ -100,6 +99,22 @@
 				border-top: 1px solid white;
 			}
 		}
+		.action.winblock {
+			position: absolute;
+			padding: 10px;
+			color: white;
+			/*background: rgba(0,0,0,0.75);*/
+			background: linear-gradient(90deg, black , transparent);
+			top: 180px;
+			margin: 0 10px;
+			right: 5px;
+			border-radius: 12px;
+		    /*border-top-right-radius: 20%;
+		    border-bottom-right-radius: 20%;*/
+			.sp {
+				font-size: 40px;
+			}
+		}
 		#card-creator.show-score .action:hover .score-tooltip {
 			left: 0;
 			position: absolute;
@@ -144,8 +159,7 @@
 		.unit-name {
 			font-style: italic;
 			font-family: Georgia, serif;
-			color: white;
-			text-shadow: 0 0 10px white;
+			font-weight: bold;
 		}
 		.Celestial, .celestial {
 			color: white;
@@ -211,11 +225,18 @@
 			.score-category.resource {background: gold;}
 			.score-category.support {background: lightgreen;}
 		}
+		.action-cont {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			justify-content: flex-end;
+		}
 		.action {
+			font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
 			padding: 2px 8px;
 			border-radius: 5px;
-			font-size: 30px;
-			margin: 6px 4px;
+			font-size: 32px;
+			margin: 10px 4px;
 			position: relative;
 			.type {
 				/*opacity: 0.7;*/
@@ -242,194 +263,284 @@
 				text-align: left;
 				color: gainsboro;
 				max-width: 600px;
-				.sp {
-					padding: 0 4px;
-					border-radius: 6px;
-					text-transform: capitalize;
-					color:white;
-					position: relative;
-				}
-				.action {
-					text-decoration: underline;
-					padding: 0;
-				}
-				.stealth, .fog-of-war {
-					background: dimgray;
-					color: black;
-					font-weight: bold;
-					font-style: italic;
-				}
-				.reveal {
-					background: gold;
-					color: black;
-					font-weight: bold;
-					font-style: italic;
-				}
-				.killing-blow {
-					color: pink;
-				}
-				.charm {
-					background: violet;
-					color: black;
-					font-weight: bold;
-					font-style: italic;
-				}
-				.poison {
-					font-style: italic;
-					background: darkgreen;
-				}
-				.burn {
-					font-style: italic;
-					background: darkred;
-				}
-				.stun {
-					font-style: italic;
-					background: dimgray;
-				}
-				.chill {
-					font-style: italic;
-					background: steelblue;
-				}
-				.shock {
-					font-style: italic;
-					background: darkgoldenrod;
-				}
-				.all-debuffs {
-					font-style: italic;
-					background: linear-gradient(90deg, darkred 0%, darkgreen 20%, dimgray 40%, steelblue 60%, darkgoldenrod 80%, violet 100%);
-					padding: 0 10px;
-					text-shadow: 0 0 5px gold;
-				}
-				.true-dmg {
-					text-shadow: 0 0 8px red;
-				}
-				.nullify {
-					color: orange;
-				}
-				.adv {
-					color: orange;
-					text-shadow: 0 0 8px purple;
-				}
-				.atk {
-					color: orange;
-				}
-				.def {
-					color: lightblue;
-				}
-				.heal {
-					color: lightgreen;
-				}
-				.revive {
-					color: white;
-					text-shadow: 0 0 8px gold;
-				}
-				.cleanse {
-					color: lightgreen;
-					text-shadow: 0 0 8px teal;
-				}
-				.hp {
-					color: pink;
-				}
-				.fortify{
-					border: 1px solid cyan;
-				}
-				.empower {
-					border: 1px solid orangered;
-				}
-				.melee {
-					color: white;
-				}
-				.vp {
-					text-shadow: 0 0 8px blue;
-					font-weight: bold;
-				}
-				.ap, .free {
-					text-shadow: 0 0 8px purple;
-					font-weight: bold;
-				}
-				.g {
-					text-shadow: 0 0 8px gold;
-					font-weight: bold;
-				}
-				.no-g {
-					text-shadow: 0 0 8px red;
-					font-weight: bold;
-					.g {
-						text-shadow: 0 0 8px red;
-					}
-				}
-				.phase {
-					font-weight: bold;
-				}
-				.immunity, .resist {
-					border: 1px solid gray;
-				    padding: 0;
-				    padding-left: 4px;
-					border-radius: 8px;
-				    display: inline-block;
-					.sp {
-						display: inline-block;
-					}
-				}
-				.immunity:before {
-					content: 'Immune ';
-					color: gray;
-					font-size: 26px;
-				}
-				.resist:before {
-					content: 'Resist ';
-					color: gray;
-					font-size: 26px;
-				}
-				.persistent {
-					background: lightblue;
-					color: darkblue;
-      				text-transform: uppercase;
-					font-size: 26px;
-				}
-				.once {
-					background: darkorange;
-					color: darkred;
-      				text-transform: uppercase;
-					font-size: 26px;
-				}
-				.hand-limit::before {
-					content: '\01F450 ';
-				}
-				.draw-card::before {
-					content: '\01F91A ';
-				}
-				.discard-card::before {
-					content: '\01F590 ';
-				}
-				.rng::before {
-					content: '\02B8F ';
-					color: gray;
-				}
-				.aoe::before {
-					content: '\0233E ';
-					color: gray;
+			}
+			.sp {
+				padding: 0 4px;
+				border-radius: 6px;
+				text-transform: capitalize;
+				color:white;
+				position: relative;
+			}
+			.action {
+				text-decoration: underline;
+				padding: 0;
+			}
+			.stealth, .fog-of-war {
+				color: gray;
+				font-weight: bold;
+			}
+			.stealth::before {
+				content :'\1F300 ';
+			}
+			.fog-of-war::before {
+				content: '\1F32B ';
+			}
+			.reveal {
+				/*background: gold;*/
+				/*font-weight: bold;*/
+				color: white;
+				text-shadow: 0 0 5px gold;
+				&::before {
+					content: '\1F441 ';
 				}
 			}
+			.killing-blow {
+				color: pink;
+			}
+			.debuff {
+				padding: 2px;
+				border-radius: 25px;
+				text-shadow: 0 0 8px black;
+				&::after {
+					/*content: ' ';*/
+				}
+			}
+			.charm {
+				background: darkmagenta;
+				font-weight: bold;
+				&::before {
+					content: '\1F493';
+				}
+			}
+			.poison {
+				background: darkgreen;
+				&::before {
+					content: '\1F480';
+				}
+			}
+			.burn {
+				background: darkred;
+				&::before {
+					content: '\1F525';
+				}
+			}
+			.stun {
+				background: dimgray;
+				&::before {
+					content: '\1F4AB';
+				}
+			}
+			.chill {
+				background: steelblue;
+				&::before {
+					content: '\2744';
+				}
+			}
+			.shock {
+				background: darkblue;
+				&::before {
+					content: '\26A1';
+				}
+			}
+			.all-debuffs {
+				font-style: italic;
+				background: linear-gradient(90deg, darkred 0%, darkgreen 20%, dimgray 40%, steelblue 60%, palegoldenrod 80%, violet 100%);
+				padding: 0 10px;
+				text-shadow: 0 0 5px gold;
+			}
+			.true-dmg {
+				text-shadow: 0 0 8px red;
+			}
+			.nullify {
+				color: orange;
+			}
+			.adv {
+				color: orange;
+				text-shadow: 0 0 8px purple;
+			}
+			.atk {
+				color: orange;
+				&::before {
+					content: '\1F4A5 ';
+				}
+			}
+			.def {
+				color: lightblue;
+			}
+			.heal {
+				color: lightgreen;
+				&::before {
+					content: '\1F49A';
+				}
+			}
+			.revive {
+				color: white;
+				text-shadow: 0 0 8px gold;
+			}
+			.cleanse {
+				color: lightgreen;
+				text-shadow: 0 0 8px teal;
+				&::before {
+					content: '\2747';
+				}
+			}
+			.hp {
+				color: pink;
+			}
+			.fortify{
+				border: 1px solid cyan;
+			}
+			.empower {
+				border: 1px solid orangered;
+			}
+			.melee {
+				color: white;
+		        margin-right: -16px;
+				&::before {
+					/*content: '\1F5E1';*/
+				}
+			}
+			.vp {
+				text-shadow: 0 0 8px blue;
+				font-weight: bold;
+				&::after {
+					content: '\1F48E';
+				}
+			}
+			.ap, .free {
+				text-shadow: 0 0 8px purple;
+				font-weight: bold;
+			}
+			.g {
+				text-shadow: 0 0 8px gold;
+				font-weight: bold;
+				&::after {
+					content: '\1FA99';
+					margin-left: -2px;
+				}
+			}
+			.no-g {
+				text-shadow: 0 0 8px red;
+				font-weight: bold;
+				.g {
+					text-shadow: 0 0 8px red;
+				}
+			}
+			.phase {
+				font-weight: bold;
+			}
+			.immunity, .resist {
+				border: 1px solid gray;
+			    padding: 0;
+			    padding-left: 4px;
+				border-radius: 8px;
+			    display: inline-block;
+				.sp {
+					display: inline-block;
+				}
+				.sp.debuff {
+					border-radius: 0;
+				}
+				.sp.debuff:last-child {
+					border-top-right-radius: 8px;
+					border-bottom-right-radius: 8px;
+				}
+			}
+			.immunity:before {
+				content: 'imm ';
+				color: gray;
+				font-size: smaller;
+			}
+			.resist:before {
+				content: 'res ';
+				color: gray;
+				font-size: smaller;
+			}
+			.persistent {
+				background: lightblue;
+				color: darkblue;
+  				text-transform: uppercase;
+				font-size: smaller;
+			}
+			.once {
+				background: darkorange;
+				color: darkred;
+  				text-transform: uppercase;
+				font-size: 26px;
+			}
+			.hand-limit::before {
+				content: '\01F450 ';
+			}
+			.draw-card::before {
+				content: '\01F91A ';
+			}
+			.discard-card::before {
+				content: '\01F590 ';
+			}
+			.rng::before {
+				content: '\1F3F9 ';
+			}
+			.aoe {
+				font-style: italic;
+				font-size: smaller;
+				&::before {
+					content: '\1F505 ';
+				}
+			}
+			.target {
+				font-style: italic;
+				font-size: smaller;
+				&::before {
+					content: '\1F3AF';
+				}
+			}
+			.trash {
+				&::before {
+					content: '\274E';
+				}	
+			}
+			.reflect {
+				margin-right: -10px;
+				&::before {
+					content: '\21AA:';
+				}	
+			}
 		}
-		.class-Level img {display: none;}
+		.class-Level .level-star,
+		.class-Level .level-border {display: none;}
 		.class-Level.c1 {
 			.level-star.c1 {display: block;}
+			.level-border.c1 {display: block;}
 		}
 		.class-Level.c2 {
 			.level-star.c2 {display: block;}
+			.level-border.c2 {display: block;}
 		}
 		.class-Level.c3 {
 			.level-star.c3 {display: block;}
+			.level-border.c3 {display: block;}
 		}
 		.level-star {
 			font-size: 90px;
 			color: white;
-			text-shadow: 0 0 10px gold;
+			/*text-shadow: 0 0 20px black;*/
 			margin-top: 0px;
 			display: none;
 			position: relative;
 			line-height: 0.9;
+			font-style: normal;
+			i {
+				font-size: 90px;
+			}
+		}
+		.class-Level .level-border,
+		.class-Level .level-border-cont {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0; 
+			left: 0;
+			box-sizing: border-box;
 		}
 		.faction-bg {
 			width: 100%;
@@ -497,62 +608,78 @@
 			<div class="card" style="background: black; position: relative; overflow: hidden;">
 				<!-- Unit art -->
 				<img style="width: 100%;" class="top block img-Img" src="https://ideogram.ai/assets/image/lossless/response/wmCkuBYqQD2bIf24HgRsQA" alt="img"/>
+				
+				<!-- Black border -->
+				<div class="class-Level">
+					<div class="level-border-cont">
+						<div class="level-border c1" style="border: 35px solid black; border-radius: 60px"></div>	
+						<div class="level-border c1" style="border: 35px solid black;"></div>
+
+						<div class="level-border c2" style="border: 35px solid black; border-radius: 60px"></div>	
+						<div class="level-border c2" style="border: 35px solid black;"></div>
+					</div>
+				</div>
+
 
 				<!-- Top block -->
-				<div class="top block" style="width: 100%;">
-					<!-- Gradient top -->
-					<div style="background: linear-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%); height: 100px; width: 100%;"></div>
-
+				<div class="top block" style="width: 100%; left: 0">
 					<!-- Cost -->
-					<div class="block" style="top: 20px; right: 20px">
-						<div class="block top right" style="margin: 0px 14px; font-size: 80px; color: white; font-weight: bold; text-shadow: #FC0 0px 0 20px;">
-							<span class="text-Cost">5</span>
+					<div class="block" style="top: 20px; right: 10px">
+						<div class="block top right" style="margin: 0px 14px; font-size: 80px; color: white; font-weight: bold">
+							<span class="emoji" style="position: absolute; right: -18px; font-size: larger; top: -10px; opacity: 1; text-shadow: 0 0 20px black;">&#x1FA99;</span>
+
+							<span class="text-Cost" style="position: absolute;right: 27px; top: 5px; text-shadow: black 0px 0 10px;">5</span>
 						</div>
 					</div>
 
+					<!-- Win Effects -->
+					<div class="action if-Win winblock" style="">
+
+						<div>
+							<i class="material-icons" style="color: white; font-size: 40px; padding: 6px; border-radius: 50%; text-shadow: lightgreen 0 0 10px; background: black; border: 2px solid lightgreen;">flag</i>
+						</div>
+
+						<div class="text-Win process"
+						style="max-width: 90px;">
+							3&#x1FA99; 1&#x1F4A0;
+						</div>
+						<span class="score text-score-Win"></span>
+
+					</div>
+
 					<!-- Level badge -->
-					<div class="block" style="top: 30px; left: 20px">
+					<div class="class-Faction" style="top: 26px; left: 30px; position: absolute;">
 						<div class="class-Level">
-							<div class="level-star c1">
+							<div class="level-star c1 emoji">
 								&#x1F7C6;
 							</div>
-							<div class="level-star c2">
+							<div class="level-star c2 emoji">
 								&#x1F7CA; <br> &#x1F7CA;
 							</div>
-							<div class="level-star c3">
+							<div class="level-star c3 emoji">
 								&#x1F7CC; <br> &#x1F7CC; <br> &#x1F7CC; <br>
 							</div>
 						</div>
 					</div>
+
 					<!-- Name -->
-					<h1 class="class-Faction" style="text-align: center; color: white; font-size: 65px; margin: 0; margin-top: -100px; padding-top: 20px; border:none; font-family: Georgia, serif;">
-						<span class="text-Name">
+					<h1 class="class-Faction" style="text-align: center; color: white; font-size: 65px; padding-top: 22px; margin: 0; border:none; font-family: Georgia, serif; background: linear-gradient(180deg, black, transparent)">
+						<span class="text-Name unit-name">
 							Mist Lord
 						</span>
 					</h1>
+
+					<!-- Faction -->
+					<h3 class="class-Faction" style="text-align: center; font-size: 24px; margin: 0 20%; font-family: Georgia, serif; background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.5), transparent);">
+						<span class="text-Faction">Chaos</span>
+						&bull;
+						<span class="text-Class">Warrior</span>
+					</h3>
+
 				</div>
 
 				<!-- Bottom block -->
-				<div class="bottom block" style="width: 100%; min-height: 300px; color: white; text-align: center; background: black">
-					<!-- background -->
-					<div class="faction-bg block top left">
-						<div class="class-Faction">
-							<div class="img chaos" style="background-image: url('assets/icons/chaos.png')"></div>
-							<div class="img celestial" style="background-image: url('assets/icons/celestial.png')"></div>
-							<div class="img order" style="background-image: url('assets/icons/order.png')"></div>
-							<div class="img nature" style="background-image: url('assets/icons/nature.png')"></div>
-							<div class="img construct" style="background-image: url('assets/icons/construct.png')"></div>
-						</div>
-					</div>
-
-					<!-- Gradient to top -->
-					<div class="" style="width: 100%; margin-top: -149px; height: 150px; background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(194,245,255,0) 100%); border:none;"></div>
-
-					<!-- Faction -->
-					<h3 class="class-Faction" style="text-align: center; font-size: 30px; margin: 0; margin-top: -100px; font-family: Georgia, serif;">
-						<span class="text-Faction">Chaos</span>
-					</h3>
-
+				<div class="bottom block action-cont" style="width: 100%; min-height: 400px; color: white; text-align: center; background: linear-gradient(0deg, black 80%, transparent);">
 					<!-- Stats -->
 					<div style="text-align: center; position: relative;">
 						<div class="item" style="">
@@ -576,12 +703,7 @@
 					</div>
 
 					<!-- Actions -->
-					<div style="margin: 10px 20px 30px 20px; padding-bottom: 10px; background: rbga(0,0,0,0.8); text-align: left; display: inline-block; max-width: 90%;">
-						<div class="action if-Tactic" style="">
-							<span class="type Tactic"><i class="material-icons">psychology</i></span>
-							<span class="content text-Tactic process"></span>
-							<span class="score text-score-Tactic"></span>
-						</div>
+					<div style="margin: 10px 20px 50px 20px; background: rbga(0,0,0,0.8); text-align: left; display: inline-block; max-width: 90%;">
 
 						<div class="action if-Deploy" style="">
 							<span class="type Deploy"><i class="material-icons">person_add</i></span>
@@ -607,10 +729,17 @@
 							<span class="score text-score-Defeat"></span>
 						</div>
 
-						<div class="action if-Win" style="">
+						<!-- <div class="action if-Win" style="">
 							<span class="type Win"><i class="material-icons">check_circle</i></span>
 							<span class="content text-Win process"></span>
 							<span class="score text-score-Win"></span>
+						</div>
+ -->
+						<div class="action if-Tactic" style="">
+							<div style="background: linear-gradient(90deg, transparent 0%, white 50%, transparent 100%); height: 1px; width: 120%; margin: 12px 0; margin-left: -10%;"></div>
+							<span class="type Tactic"><i class="material-icons">psychology</i></span>
+							<span class="content text-Tactic process"></span>
+							<span class="score text-score-Tactic"></span>
 						</div>
 
 						<!-- <div class="if-Flavor" style="color: lightgray; font-style: italic; font-size: 20px; text-align: center; font-family: Georgia, serif;">
@@ -620,6 +749,7 @@
 						</div> -->
 					</div>
 				</div>
+
 				<div class="block" style="width: 100%; text-align: center; color: white; bottom: 10px">
 					v0.3 / <span class="text-score-Total"></span>
 				</div>
