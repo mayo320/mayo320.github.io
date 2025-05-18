@@ -45,12 +45,12 @@ function exportCard(element) {
 	}).then(function (canvas) {
 		document.body.appendChild(canvas);
 
-		// var img = canvas.toDataURL('image/png');
-		// var link = document.createElement('a');
-		// link.href = img;
-		// link.download = outfile_name;
-		// link.style.display = 'none';
-		// link.click();
+		var img = canvas.toDataURL('image/png');
+		var link = document.createElement('a');
+		link.href = img;
+		link.download = outfile_name;
+		link.style.display = 'none';
+		link.click();
 	});
 }
 
