@@ -233,6 +233,7 @@
 		}
 		.action {
 			font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
+			line-height: 1.6;
 			padding: 2px 8px;
 			border-radius: 5px;
 			font-size: 32px;
@@ -296,8 +297,11 @@
 			}
 			.killing-blow {
 				color: pink;
+				&::before {
+					content: '\1FA7B';
+				}
 			}
-			.debuff {
+			.debuff, .buff {
 				padding: 2px;
 				border-radius: 25px;
 				text-shadow: 0 0 8px black;
@@ -366,6 +370,9 @@
 			}
 			.def {
 				color: lightblue;
+				&::before {
+					content: '\1F6E1';
+				}
 			}
 			.heal {
 				color: lightgreen;
@@ -389,9 +396,15 @@
 			}
 			.fortify{
 				border: 1px solid cyan;
+				&::before {
+					content: '\1F6E1';
+				}
 			}
 			.empower {
 				border: 1px solid orangered;
+				&::before {
+					content: '\2694';
+				}
 			}
 			.melee {
 				color: white;
@@ -477,19 +490,27 @@
 			.discard-card::before {
 				content: '\01F590 ';
 			}
-			.rng::before {
-				content: '\1F3F9 ';
+			.rng {
+				&::before {
+					content: '\1F3F9 ';
+				}
+				&::after {
+					content: '\27A0';
+					opacity: 0.5;
+				}
 			}
 			.aoe {
 				font-style: italic;
-				font-size: smaller;
 				&::before {
 					content: '\1F505 ';
+				}
+				&::after {
+					content: '\21DB';
+					opacity: 0.5;
 				}
 			}
 			.target {
 				font-style: italic;
-				font-size: smaller;
 				&::before {
 					content: '\1F3AF';
 				}
