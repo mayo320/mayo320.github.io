@@ -93,7 +93,7 @@ function processAct(unit, key) {
 		['((?:\\d+ )?true (?:damage|dmg))', 'true-dmg'],
 		['(ADV)', 'adv'],
 		['(\\+?SPD ?\\d+)', 'spd'],
-		['IMM( .*);?', 'immunity'], // imm should be above statuses
+		['IMM( .*)(?:;|\n<br>)?', 'immunity'], // imm should be above statuses
 		['resist( .*);?', 'resist'], // imm should be above statuses
 		['heal (\\d+)?', 'heal'],
 		['cleanse (\\d+)?', 'cleanse'],
@@ -208,9 +208,12 @@ function loadUnit(index) {
 		// Mutate classes
 		var classes = document.querySelectorAll('.class-' + k);
 		classes.forEach((ele) => {
-			ele.classList.add('class-' + k);
-			ele.classList.add('c' + unit[k]);
-			ele.classList.add(unit[k]);
+			original = ele.attributes['_class']
+			if (original === undefined) {
+				original = ele.classList.toString()
+				ele.attributes['_class'] = original
+			}
+			ele.classList = original + ` class-${k} c${unit[k]} ${unit[k]}`
 		});
 
 		// If exists
