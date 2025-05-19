@@ -208,7 +208,9 @@ function loadUnit(index) {
 		// Mutate classes
 		var classes = document.querySelectorAll('.class-' + k);
 		classes.forEach((ele) => {
-			ele.classList = 'class-' + k + ' c' + unit[k] + ' ' + unit[k];
+			ele.classList.add('class-' + k);
+			ele.classList.add('c' + unit[k]);
+			ele.classList.add(unit[k]);
 		});
 
 		// If exists

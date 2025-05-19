@@ -67,6 +67,14 @@
 		#card-creator.show-score .score-detail {
 			display: block;
 		}
+		.card {
+			&.c3 .level-border-cont {
+				display: none;
+			}
+			&.c3 .action-cont {
+				background: linear-gradient(0deg, rgba(0,0,0,0.75) 80%, transparent);
+			}
+		}
 		.score,
 		.score-tooltip {
 			box-shadow: 0 0 15px black;
@@ -230,6 +238,7 @@
 			align-items: center;
 			flex-direction: column;
 			justify-content: flex-end;
+			background: linear-gradient(0deg, black 80%, transparent);
 		}
 		.action {
 			font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
@@ -303,6 +312,7 @@
 			}
 			.debuff, .buff {
 				padding: 2px;
+				margin: 0 2px;
 				border-radius: 25px;
 				text-shadow: 0 0 8px black;
 				&::after {
@@ -453,6 +463,7 @@
 				}
 				.sp.debuff {
 					border-radius: 0;
+					margin: 0;
 				}
 				.sp.debuff:last-child {
 					border-top-right-radius: 8px;
@@ -505,7 +516,7 @@
 					content: '\1F505 ';
 				}
 				&::after {
-					content: '\21DB';
+					content: ' \27A0';
 					opacity: 0.5;
 				}
 			}
@@ -527,19 +538,15 @@
 				}	
 			}
 		}
-		.class-Level .level-star,
-		.class-Level .level-border {display: none;}
+		.class-Level .level-star {display: none;}
 		.class-Level.c1 {
 			.level-star.c1 {display: block;}
-			.level-border.c1 {display: block;}
 		}
 		.class-Level.c2 {
 			.level-star.c2 {display: block;}
-			.level-border.c2 {display: block;}
 		}
 		.class-Level.c3 {
 			.level-star.c3 {display: block;}
-			.level-border.c3 {display: block;}
 		}
 		.level-star {
 			font-size: 90px;
@@ -626,19 +633,14 @@
 		<div id="card-cont" class="compress" style="display: inline-block;
 		vertical-align: top; position: relative; background: black;">
 			<!-- Card -->
-			<div class="card" style="background: black; position: relative; overflow: hidden;">
+			<div class="card class-Level" style="background: black; position: relative; overflow: hidden;">
 				<!-- Unit art -->
 				<img style="width: 100%;" class="top block img-Img" src="https://ideogram.ai/assets/image/lossless/response/wmCkuBYqQD2bIf24HgRsQA" alt="img"/>
 				
 				<!-- Black border -->
-				<div class="class-Level">
-					<div class="level-border-cont">
-						<div class="level-border c1" style="border: 35px solid black; border-radius: 60px"></div>	
-						<div class="level-border c1" style="border: 35px solid black;"></div>
-
-						<div class="level-border c2" style="border: 35px solid black; border-radius: 60px"></div>	
-						<div class="level-border c2" style="border: 35px solid black;"></div>
-					</div>
+				<div class="level-border-cont">
+					<div class="level-border" style="border: 35px solid black; border-radius: 60px"></div>	
+					<div class="level-border" style="border: 35px solid black;"></div>
 				</div>
 
 
@@ -700,7 +702,7 @@
 				</div>
 
 				<!-- Bottom block -->
-				<div class="bottom block action-cont" style="width: 100%; min-height: 400px; color: white; text-align: center; background: linear-gradient(0deg, black 80%, transparent);">
+				<div class="bottom block action-cont" style="width: 100%; min-height: 400px; color: white; text-align: center;">
 					<!-- Stats -->
 					<div style="text-align: center; position: relative;">
 						<div class="item" style="">
@@ -942,10 +944,10 @@
 						<span class="sp stun">stun</span>
 						<span>Skip turn. (Can't stack)</span>
 					</div>
-					<div class="content">
+					<!-- <div class="content">
 						<span class="sp charm">Charm X</span>
 						<span>Change alignment if Charm tokens # >= current HP, effect ends if # = 0; End of Act: remove L tokens.</span>
-					</div>
+					</div> -->
 					<div class="content">
 						<span class="sp cleanse">cleanse X</span>
 						<span>Remove X debuff tokens.</span>
