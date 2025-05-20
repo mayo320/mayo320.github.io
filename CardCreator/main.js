@@ -19,7 +19,9 @@ function exportCardAddA4(element, count) {
 		useCORS: true,
 		width: element.clientWidth,
 		height: element.clientHeight,
-		scale: 1
+		scale: 1,
+		allowTaint : true,
+	    useCors : true
 	}).then(function (canvas) {
 		for (var i = 0; i < count; i++) {
 			var destCanvas = document.createElement('canvas');
@@ -82,6 +84,7 @@ function processAct(unit, key) {
 		return `${st} ?(\\d+)?`
 	}
 
+	// Regex, class, icon?
 	var matches = [
 		['(tactic|act|defend|defeat)', 'action'],
 		['((?:\\d+/)?\\d* ?HP)', 'HP'],
@@ -119,9 +122,10 @@ function processAct(unit, key) {
 		['(construct)', 'construct'],
 		['(celestial)', 'celestial'],
 		['(nature)', 'nature'],
-		['(draw \\d+ cards?)', 'draw-card'],
 		['(\\+\\d+ hand limit)', 'hand-limit'],
-		['(discard \\d+ cards?)', 'discard-card'],
+		['draw (\\d+) cards?', 'draw-card', 'card-draw.svg'],
+		['discard (\\d+) cards?', 'discard-card', 'card-discard.svg'],
+		['(trash)', 'trash', 'card-trash.svg'],
 		['(spawn|summon)', 'action'],
 		['(\\d+)(?:VP)', 'vp'],
 		['(\\d+ap)', 'ap'],
@@ -130,8 +134,7 @@ function processAct(unit, key) {
 		['(\\w+ Phase)', 'phase'],
 		['(free(?: \\d+| self)?)', 'free'],
 		['(any|far|self)', 'target'],
-		['(trash)', 'trash'],
-		['reflect()', 'reflect'],
+		['reflect()', 'reflect', 'shield-reflect.svg'],
 		[unit_names_regex, 'unit-name']
 	];
 	text = text.replaceAll(';', '\n<br>');
@@ -149,7 +152,13 @@ function processAct(unit, key) {
 
 	matches.forEach((pattern) => {
 		var regex = RegExp(pattern[0], 'gi');
-		text = text.replace(regex, "<span class='sp " + pattern[1].toLowerCase() + "'>$1</span>"); 
+		icon = pattern.length > 2 ? `<img class="icon" src="assets/icons/${pattern[2]}">` : ''
+		text = text.replace(regex, `
+			<span class='sp ${pattern[1].toLowerCase()}'>
+				${icon}
+				<span class='value'>$1</span>
+			</span>`); 
+		text = text.replace("<span class='value'></span>", "");
 	});
 
 	text += `<span class="score-tooltip">

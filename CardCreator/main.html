@@ -303,6 +303,11 @@
 				color:white;
 				position: relative;
 			}
+			.icon {
+				display: inline-block;
+				width: 50px; height: 50px;
+				vertical-align: bottom;
+			}
 			.action {
 				text-decoration: underline;
 				padding: 0;
@@ -337,8 +342,8 @@
 				margin: 0 2px;
 				border-radius: 25px;
 				text-shadow: 0 0 8px black;
-				&::after {
-					/*content: ' ';*/
+				.value {
+					padding-right: 12px;
 				}
 			}
 			.charm {
@@ -448,7 +453,7 @@
 			.vp {
 				text-shadow: 0 0 8px blue;
 				font-weight: bold;
-				&::after {
+				.value::after {
 					content: '\1F48E';
 				}
 			}
@@ -459,9 +464,8 @@
 			.g {
 				text-shadow: 0 0 8px gold;
 				font-weight: bold;
-				&::after {
+				.value::after {
 					content: '\1FA99';
-					margin-left: -2px;
 				}
 			}
 			.no-g {
@@ -518,11 +522,19 @@
 			.hand-limit::before {
 				content: '\01F450 ';
 			}
-			.draw-card::before {
-				content: '\01F91A ';
+			.draw-card .before {
+				display: inline-block;
+				width: 50px; height: 50px;
+				vertical-align: bottom;
+				background: url('assets/icons/card-draw.svg');
+				background-size: cover;
 			}
-			.discard-card::before {
-				content: '\01F590 ';
+			.discard-card .before {
+				display: inline-block;
+				width: 50px; height: 50px;
+				vertical-align: bottom;
+				background: url('assets/icons/card-discard.svg');
+				background-size: cover;
 			}
 			.rng {
 				&.sp {padding: 0;}
@@ -551,16 +563,9 @@
 					content: '\1F3AF';
 				}
 			}
-			.trash {
-				&::before {
-					content: '\274E';
-				}	
-			}
-			.reflect {
-				margin-right: -10px;
-				&::before {
-					content: '\21AA:';
-				}	
+			.reflect::after {
+				content: ' \27A0';
+				opacity: 0.5;
 			}
 		}
 		.level-star {
@@ -678,7 +683,7 @@
 						</div>
 
 						<div class="text-Win process"
-						style="max-width: 90px;">
+						style="max-width: 100px;">
 							3&#x1FA99; 1&#x1F4A0;
 						</div>
 						<span class="score text-score-Win"></span>
