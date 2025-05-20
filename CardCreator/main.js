@@ -99,7 +99,7 @@ function processAct(unit, key) {
 		['melee()', 'melee'],
 		['\\+?rng (\\d+)', 'rng', 'overhead.png'],
 		['aoe ([RC\\d+])?', 'aoe', 'platform.png'],
-		['\\+?ATK (\\d+|X\\+L|X|L)?', 'atk', '_a_t_k_.png'],
+		['\\+?ATK (\\d+|X\\+L|X|L)?', 'atk', 'a_t_k_.png'],
 		['\\+?(?:\\d+ )?def (\\d+)', 'def', 'shield.png'],
 		['(\\d+ )?true (?:damage|dmg)', 'true-dmg', 'open-wound.png'],
 		['(ADV)', 'adv', 'dice.png'],
