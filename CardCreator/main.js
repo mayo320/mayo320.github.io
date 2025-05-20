@@ -13,6 +13,14 @@ function init() {
 
 function exportCardAddA4(element, count) {
 	// Draw element on canvas
+	var svgElements = element.querySelectorAll('svg');
+	svgElements.forEach(function(item) {
+	    item.setAttribute("width", item.getBoundingClientRect().width);
+	    item.setAttribute("height", item.getBoundingClientRect().height);
+	    item.style.width = null;
+	    item.style.height= null;
+	});
+
 	var html = element.innerHTML.trim();
 
 	html2canvas(element, {
@@ -89,17 +97,17 @@ function processAct(unit, key) {
 		['(tactic|act|defend|defeat)', 'action'],
 		['((?:\\d+/)?\\d* ?HP)', 'HP'],
 		['melee()', 'melee'],
-		['\\+?rng (\\d+)', 'rng'],
-		['aoe ([RC\\d+])?', 'aoe'],
-		['\\+?ATK ([\\d+X])?', 'atk'],
+		['\\+?rng (\\d+)', 'rng', 'overhead.png'],
+		['aoe ([RC\\d+])?', 'aoe', 'platform.png'],
+		['\\+?ATK (\\d+|X\\+L|X|L)?', 'atk', '_a_t_k_.png'],
 		['(\\+?(?:\\d+ )?def(?: \\d+))', 'def'],
-		['((?:\\d+ )?true (?:damage|dmg))', 'true-dmg'],
+		['(\\d+ )?true (?:damage|dmg)', 'true-dmg', 'open-wound.png'],
 		['(ADV)', 'adv'],
 		['(\\+?SPD ?\\d+)', 'spd'],
 		['IMM( .*)(?:;|\n<br>)?', 'immunity'], // imm should be above statuses
 		['resist( .*);?', 'resist'], // imm should be above statuses
-		['heal (\\d+)?', 'heal'],
-		['cleanse (\\d+)?', 'cleanse'],
+		['heal (\\d+)?', 'heal', 'heart-plus.png'],
+		['cleanse (\\d+)?', 'cleanse', 'sparkles.png'],
 		[status_re('empower(?:ed)?'), 'empower buff'],
 		[status_re('fortif(?:y|ied)'), 'fortify buff'],
 		['((?:all|any) debuffs?)', 'all-debuffs'],
@@ -112,20 +120,20 @@ function processAct(unit, key) {
 		['(persistent)', 'persistent'],
 		['(once):?', 'once'],
 		['(stealth(?:ed)?(?: \\d+)?)', 'stealth'],
-		[status_re('reveal(?:ed)?'), 'reveal'],
+		[status_re('reveal(?:ed)?'), 'reveal', 'eye-target.png'],
 		['(nullify)', 'nullify'],
 		['(FOG OF WAR)', 'fog-of-war'],
-		['(killing blow)', 'killing-blow'],
+		['(killing blow)', 'killing-blow', 'william-tell-skull.png'],
 		[status_re('charm(?:ed)?'), 'charm debuff'],
 		['(chaos)', 'chaos'],
 		['(order)', 'order'],
 		['(construct)', 'construct'],
 		['(celestial)', 'celestial'],
 		['(nature)', 'nature'],
-		['(\\+\\d+ hand limit)', 'hand-limit'],
-		['draw (\\d+) cards?', 'draw-card', 'card-draw.svg'],
-		['discard (\\d+) cards?', 'discard-card', 'card-discard.svg'],
-		['(trash)', 'trash', 'card-trash.svg'],
+		['(\\+\\d+ hand limit)', 'hand-limit', 'up-card.png'],
+		['draw (\\d+) cards?', 'draw-card', 'card-draw.png'],
+		['discard (\\d+) cards?', 'discard-card', 'card-discard.png'],
+		['(trash)', 'trash', 'card-trash.png'],
 		['(spawn|summon)', 'action'],
 		['(\\d+)(?:VP)', 'vp'],
 		['(\\d+ap)', 'ap'],
@@ -133,8 +141,8 @@ function processAct(unit, key) {
 		['(\\d+)(?:G)', 'g'],
 		['(\\w+ Phase)', 'phase'],
 		['(free(?: \\d+| self)?)', 'free'],
-		['(any|far|self)', 'target'],
-		['reflect()', 'reflect', 'shield-reflect.svg'],
+		['(any|far|self)', 'target', 'human-target.png'],
+		['reflect()', 'reflect', 'shield-reflect.png'],
 		[unit_names_regex, 'unit-name']
 	];
 	text = text.replaceAll(';', '\n<br>');
@@ -152,12 +160,12 @@ function processAct(unit, key) {
 
 	matches.forEach((pattern) => {
 		var regex = RegExp(pattern[0], 'gi');
-		icon = pattern.length > 2 ? `<img class="icon" src="assets/icons/${pattern[2]}">` : ''
-		text = text.replace(regex, `
-			<span class='sp ${pattern[1].toLowerCase()}'>
-				${icon}
-				<span class='value'>$1</span>
-			</span>`); 
+		icon = pattern.length > 2 ? `<img class="icon" src="assets/icons/${pattern[2]}"/>` : '';
+		text = text.replace(regex, 
+			`<span class="sp ${pattern[1].toLowerCase()}">` +
+				icon +
+				`<span class='value'>$1</span>` +
+			`</span>`); 
 		text = text.replace("<span class='value'></span>", "");
 	});
 
@@ -169,6 +177,7 @@ function processAct(unit, key) {
 
 function createUnitList() {
 	unit_names_regex = `(${data.map((u)=>u['Name']).join('|')})`;
+	console.log(unit_names_regex);
 
 	var cont = document.querySelector('#card-list');
 	var html = ''

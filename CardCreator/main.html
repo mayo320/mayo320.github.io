@@ -255,7 +255,7 @@
 			align-items: center;
 			flex-direction: column;
 			justify-content: flex-end;
-			background: linear-gradient(0deg, black 80%, transparent);
+			background: linear-gradient(0deg, black 70%, transparent);
 		}
 		.action {
 			font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
@@ -306,7 +306,8 @@
 			.icon {
 				display: inline-block;
 				width: 50px; height: 50px;
-				vertical-align: bottom;
+				vertical-align: top;
+				margin-right: 1px;
 			}
 			.action {
 				text-decoration: underline;
@@ -327,15 +328,9 @@
 				/*font-weight: bold;*/
 				color: white;
 				text-shadow: 0 0 5px gold;
-				&::before {
-					content: '\1F441 ';
-				}
 			}
 			.killing-blow {
 				color: pink;
-				&::before {
-					content: '\1FA7B';
-				}
 			}
 			.debuff, .buff {
 				padding: 2px;
@@ -401,9 +396,9 @@
 			}
 			.atk {
 				color: orange;
-				&::before {
+				/*&::before {
 					content: '\1F4A5 ';
-				}
+				}*/
 			}
 			.def {
 				color: lightblue;
@@ -413,9 +408,6 @@
 			}
 			.heal {
 				color: lightgreen;
-				&::before {
-					content: '\1F49A';
-				}
 			}
 			.revive {
 				color: white;
@@ -424,9 +416,6 @@
 			.cleanse {
 				color: lightgreen;
 				text-shadow: 0 0 8px teal;
-				&::before {
-					content: '\2747';
-				}
 			}
 			.hp {
 				color: pink;
@@ -519,28 +508,15 @@
   				text-transform: uppercase;
 				font-size: 26px;
 			}
-			.hand-limit::before {
-				content: '\01F450 ';
-			}
-			.draw-card .before {
-				display: inline-block;
-				width: 50px; height: 50px;
-				vertical-align: bottom;
-				background: url('assets/icons/card-draw.svg');
-				background-size: cover;
-			}
-			.discard-card .before {
-				display: inline-block;
-				width: 50px; height: 50px;
-				vertical-align: bottom;
-				background: url('assets/icons/card-discard.svg');
-				background-size: cover;
+			.draw-card,
+			.discard-card {
+				.icon {width: 60px; height: 60px;}
 			}
 			.rng {
 				&.sp {padding: 0;}
-				&::before {
+				/*&::before {
 					content: '\1F3F9 ';
-				}
+				}*/
 				&::after {
 					content: ' \27A0';
 					opacity: 0.5;
@@ -548,20 +524,17 @@
 			}
 			.aoe {
 				&.sp {padding: 0;}
-				font-style: italic;
-				&::before {
-					content: '\1F505 ';
-				}
+				.icon {width:55px; height:55px;}
 				&::after {
 					content: ' \27A0';
 					opacity: 0.5;
 				}
 			}
 			.target {
-				font-style: italic;
-				&::before {
+				/*font-style: italic;*/
+				/*&::before {
 					content: '\1F3AF';
-				}
+				}*/
 			}
 			.reflect::after {
 				content: ' \27A0';

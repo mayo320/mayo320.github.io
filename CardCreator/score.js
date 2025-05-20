@@ -19,7 +19,7 @@ class ScoreCritera {
                     tag = res[1];
                 }
             }
-            console.log(regex[0], this.regex, tag, score);
+            // console.log(regex[0], this.regex, tag, score);
             return [score, tag, regex[0]];
         }
         return [score, '', ''];
