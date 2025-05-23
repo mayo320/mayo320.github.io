@@ -270,11 +270,11 @@
 			background: linear-gradient(0deg, black 70%, transparent);
 		}
 		.action {
-			font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
+			/*font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;*/
 			line-height: 1.6;
 			padding: 2px 8px;
 			border-radius: 5px;
-			font-size: 33px;
+			font-size: 30px;
 			margin: 10px 4px;
 			position: relative;
 			.type {
@@ -322,7 +322,7 @@
 			}
 			.icon {
 				display: inline-block;
-				width: 50px; height: 50px;
+				width: 45px; height: 45px;
 				vertical-align: top;
 				margin-right: 1px;
 			}
@@ -529,7 +529,7 @@
 			}
 			.draw-card,
 			.discard-card {
-				.icon {width: 60px; height: 60px;}
+				.icon {width: 50px; height: 50px;}
 			}
 			.rng {
 				&.sp {padding: 0;}
@@ -543,7 +543,7 @@
 			}
 			.aoe {
 				&.sp {padding: 0;}
-				.icon {width:55px; height:55px;}
+				.icon {width:50px; height:50px;}
 				&::after {
 					content: ' \27A0';
 					opacity: 0.5;
@@ -562,7 +562,6 @@
 			.trigger {
 				font-size: smaller;
 				.icon {
-					/*height: 40px; width: 40px;*/
 					vertical-align: bottom;
 				}
 			}
@@ -783,7 +782,7 @@
 				</div>
 
 				<div class="block" style="width: 100%; text-align: center; color: white; bottom: 10px">
-					v0.3 / <span class="text-score-Total"></span>
+					v0.4 / <span class="text-score-Total"></span>
 				</div>
 			</div>
 
@@ -886,9 +885,9 @@
 					<div class="content">
 						<span class="sp action">Tactic<i class="material-icons" style="text-shadow: 0 0 10px orange;"> psychology</i></span>
 					</div>
-					<div class="content">
+					<!-- <div class="content">
 						<span class="sp action">Deploy<i class="material-icons" style="text-shadow: 0 0 10px orange;"> person_add</i></span>
-					</div>
+					</div> -->
 					<div class="content">
 						<span class="sp action">Act<i class="material-icons" style="text-shadow: 0 0 10px cyan;"> electric_bolt</i></span>
 					</div>
@@ -969,10 +968,10 @@
 						<span class="sp stealth">Stealth X</span>
 						<span>Cannot be targeted until X Acts.</span>
 					</div>
-					<div class="content">
+					<!-- <div class="content">
 						<span class="sp fog-of-war">Fog of War</span>
 						<span>Unrevealed until War Phase starts.</span>
-					</div>
+					</div> -->
 					<div class="content">
 						<span class="sp reveal">Reveal X</span>
 						<span>Reveal unit with Fog of War, and remove X Stealth.</span>
@@ -993,10 +992,10 @@
 						<span class="sp true-dmg">true damage</span>
 						<span>Bypasses DEF, absolute damage.</span>
 					</div>
-					<div class="content">
+					<!-- <div class="content">
 						<span class="sp free">Free X/Self</span>
 						<span>Next X/self allies do not cost AP to deploy.</span>
-					</div>
+					</div> -->
 					<div class="content">
 						<span class="sp revive">Revive</span>
 						<span>Revive unit, remove all status tokens.</span>
