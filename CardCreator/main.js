@@ -6,7 +6,7 @@ var unit_names_regex = '';
 function init() {
 	data = parseCsv();
 	createUnitList();
-	loadUnit(0);
+	loadUnit(data.length-1);
 	setChitButtons();
 	setChit('Poison');
 }
@@ -89,7 +89,7 @@ function processAct(unit, key) {
 	}
 
 	var status_re = (st) => {
-		return `${st} ?(\\d+)?`
+		return `${st} ?(\\d+|\\+)?`
 	}
 
 	// Regex, class, icon?

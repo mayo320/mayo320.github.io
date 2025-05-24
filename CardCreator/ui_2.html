@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Card Creator</title>
+	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+	<script src="data.js"></script>
+	<script src="main.js"></script>
+	<script src="zip.js"></script>
+	<script src="score.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="styles/ui_2.css">
+</head>
+<body>
+	<div class="nav" style="padding: 10px; background: lightgray; margin-bottom: 10px; border-radius: 10px;">
+		<style type="text/css">
+			.nav button {
+				font-weight: bold;
+			}
+		</style>
+		<button onclick="toggleCreator('#card-creator')">Card (Units) Creator</button>
+		<button onclick="toggleCreator('#chit-creator')">Chit (Status) Creator</button>
+	</div>
+
+	<!-- Card creator -->
+	<div id='card-creator' class='creator'>
+		<!-- List -->
+		<div id="card-list" class="">
+		</div>
+
+		<!-- Actual card -->
+		<div id="card-cont" class="compress" style="display: inline-block;
+		vertical-align: top; position: relative; background: black;">
+			<!-- Card -->
+			<div class="card-border class-Level">
+				
+			<div class="card">
+				<!-- Unit art -->
+				<img class="img-Img" src="https://ideogram.ai/assets/image/lossless/response/wmCkuBYqQD2bIf24HgRsQA" alt="img"/>
+				
+				<!-- Top block -->
+				<div class="top block" style="width: 100%; left: 0">
+					<!-- Cost -->
+					<div class="block if-Cost" style="top: 20px; right: 10px; z-index: 9">
+						<div class="block top right" style="margin: 0px 14px; font-size: 80px; color: white; font-weight: bold">
+							<span class="emoji" style="position: absolute; right: -18px; font-size: larger; top: -10px; opacity: 1; text-shadow: 0 0 20px black;">&#x1FA99;</span>
+
+							<span class="text-Cost" style="position: absolute;right: 27px; top: 5px; text-shadow: black 0px 0 10px;">5</span>
+						</div>
+					</div>
+					<!-- <div style="float: right;">
+						<span class="text-Cost"></span>
+					</div> -->
+
+					<!-- Win Effects -->
+					<!-- <div class="action if-Win winblock" style="">
+
+						<div>
+							<i class="material-icons" style="color: white; font-size: 40px; padding: 6px; border-radius: 50%; text-shadow: lightgreen 0 0 10px; background: black; border: 2px solid lightgreen;">flag</i>
+						</div>
+
+						<div class="text-Win process"
+						style="max-width: 100px;">
+							3&#x1FA99; 1&#x1F4A0;
+						</div>
+						<span class="score text-score-Win"></span>
+
+					</div> -->
+
+					<!-- Level badge -->
+					<div class="ctext class-Faction" style="top: 86px; left: 30px; position: absolute;">
+						<div class="level-star c1 emoji">
+							&#x1F7C6;
+						</div>
+						<div class="level-star c2 emoji">
+							&#x1F7CA; <br> &#x1F7CA;
+						</div>
+						<div class="level-star c3 emoji">
+							&#x1F7CC; <br> &#x1F7CC; <br> &#x1F7CC; <br>
+						</div>
+						<div class="level-star c4 emoji">
+							&#x1F7C6; <br> &#x1F7CA; <br> &#x1F7CC; <br>
+						</div>
+					</div>
+
+					<!-- Name -->
+					<h1 class="ctext class-Faction card-name">
+						<div class="cbg class-Faction">
+						</div>
+						<span class="text-Name unit-name">
+							Mist Lord
+						</span>
+						<div class="cshine class-Faction overlay"></div>
+						<div class="hr"></div>
+					</h1>
+
+					<!-- Faction -->
+					<h3 class="ctext class-Faction" style="text-align: center; font-size: 22px; margin: 0 20%; font-family: Georgia, serif; background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.5), transparent);">
+						<span class="text-Faction">Chaos</span>
+						&bull;
+						<span class="text-Class">Warrior</span>
+					</h3>
+
+				</div>
+
+				<!-- Bottom block -->
+				<div class="bottom block card-content">
+					<div class="combat-cont">
+						<!-- Stats -->
+						<div class="stats">
+							<div class="stat if-HP" style="">
+								<span class="stat-value text-HP" style="text-shadow: red 0px 0 9px;">
+									6
+								</span>
+								<i class="material-icons" style="text-shadow: red 0px 0 9px;">favorite</i>
+							</div>
+							<div class="stat if-DEF">
+								<span class="stat-value text-DEF" style="text-shadow: blue 0px 0 9px;">
+									3
+								</span>
+								<i class="material-icons" style="text-shadow: blue 0px 0 9px;">shield</i>
+							</div>
+							<div class="stat if-SPD">
+								<span class="stat-value text-SPD" style="text-shadow: green 0px 0 9px;">
+									4
+								</span>
+								<i class="material-icons" style="text-shadow: green 0px 0 9px;">tornado</i>
+							</div>
+						</div>
+
+						<!-- Actions -->
+						<div class="actions">
+							<div class="action if-Act" style="">
+								<span class="type Act"><i class="material-icons">electric_bolt</i></span>
+								<span class="content text-Act process"></span>
+								<span class="score text-score-Act"></span>
+							</div>
+
+							<div class="action if-Defend" style="">
+								<span class="type Defend"><i class="material-icons">security</i></span>
+								<span class="content text-Defend process"></span>
+								<span class="score text-score-Defend"></span>
+							</div>
+
+							<div class="action if-Defeat" style="">
+								<span class="type Defeat"><i class="material-icons">cancel</i></span>
+								<span class="content text-Defeat process"></span>
+								<span class="score text-score-Defeat"></span>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="tactic-cont">
+						<div class="cbg class-Faction" style="opacity: 0.2;"></div>
+						<div class="hr"></div>
+						<div class="action if-Tactic">
+							<span class="content text-Tactic process"></span>
+							<span class="score text-score-Tactic"></span>	
+						</div>
+						<div class="overlay clogo class-Faction" style=""></div>
+						<div class="overlay"
+							style="background: linear-gradient(270deg, black, transparent); opacity: 0.5;"></div>
+						<div class="overlay"
+							style="background: linear-gradient(110deg, white, transparent 20%); opacity: 0.2;"></div>
+					</div>
+				</div>
+
+				<div class="block" style="width: 100%; text-align: center; color: white; bottom: -20px">
+					v0.5 / <span class="text-score-Total"></span>
+				</div>
+			</div>
+			</div>
+
+
+			<!-- Card back -->
+			<div id='card-back' class="view block top left hidden" style="background: black;">
+				<div class="class-Level" style="position: absolute; inset: 0; margin: auto; text-align: center; height: 250px; opacity: 0.7;">
+					<div class="level-star" style="display: block;">
+						&#x1F7C6; <br>
+						&#x1F7CA; <br>
+						&#x1F7CC;
+					</div>
+				</div>
+			</div>
+
+			<!-- Instruction -->
+			<style type="text/css">
+				#instructions, #instructions2 {
+					color: white;
+					h1 {font-size: 40px; text-shadow: 0 0 10px gold;}
+					h2 {font-size: 26px; }
+					p {
+						font-size: 26px; padding-left: 20px;
+					}
+					.material-icons, i {
+						font-size: 26px;
+						vertical-align: middle;
+					}
+				}
+				#instructions2 {
+					.content {
+						/*margin: 4px 2px;*/
+						padding: 6px 4px;
+						margin-left: -8px;
+						margin-top: 2px;
+						display: inline-block;
+						max-width: none;
+						/*border: 1px solid gray;*/
+						font-size: 24px;
+						font-style: italic;
+						.sp {
+							font-style: normal;
+						}
+						.action {
+							font-size: 26px;
+							font-style: italic;
+						}
+						.action .material-icons {
+							font-size: 30px;
+						}
+
+						/**/
+						background: linear-gradient(90deg, rgb(62, 53, 60) 0%, rgba(0,0,0,0) 150px);
+						border-radius: 4px;
+					}
+				}
+			</style>
+			<div class="view block top left hidden" id='instructions' style="background: black;">
+				<div style="padding: 5px 60px;" class="content">
+					<h1 style="text-align: center;">Instructions</h1>
+					<h2 style="text-shadow: 0 0 10px lightgreen;"><span class="emoji">&#x1F37A;</span> Recruit Phase</h2>
+					<p>
+						Players A -> B -> .. take turns doing:
+						<span style="margin-left: 20px; display: block;">
+							1. Get <span class="sp g">3xL gold coins</span> <br>
+							2. Recruit 0 or 1 unit <br>
+						</span>
+						This ends when all parties agree it ends, then shuffle your deck
+					</p>
+					<h2 style="text-shadow: 0 0 10px cyan;"><span class="emoji">&#x1F9E9;</span> Deploy Phase</h2>
+					<p>
+						Players  A -> B -> .. take 4 turns performing:
+						<span style="margin-left: 20px; display: block;">
+							1. <span class="sp draw-card">Draw 2+L cards</span> from your Deck <br>
+							2. Perform below in any order <br>
+							<span style="margin-left: 20px; display: inline-block;">
+								a. <i class="material-icons" style="text-shadow: 0 0 10px orange;">psychology</i> Use 0 or more Tactic(s) <br>
+								b. <i class="material-icons" style="text-shadow: 0 0 10px aqua;">person_add</i> Deploy up to 1 unit <br>
+							</span> <br>
+							3. Discard with hand limit of 3 <br>
+						</span>
+					</p>
+					<h2 style="text-shadow: 0 0 10px red;"><span class="emoji">&#x1F5E1;</span> War Phase</h2>
+					<p>
+						Ordered by each unit's <i class="material-icons" style="text-shadow: green 0px 0 10px;">tornado</i>SPD, resolve their <i class="material-icons" style="text-shadow: 0 0 10px aqua;">electric_bolt</i>Act or Move, <i class="material-icons" style="text-shadow: 0 0 10px aqua;">security</i>Defend, <i class="material-icons" style="text-shadow: 0 0 10px red;">cancel</i>Defeat.
+						This ends when one side's units are all defeated. 
+						<br> <br>
+						Then: <br>
+						<span style="margin-left: 20px; display: block;">
+							1. Resolve <i class="material-icons" style="text-shadow: green 0px 0 9px;">check_circle</i>Win conditions on living units <br>
+							3. Increment Round Tracker <br>
+						</span>
+						Start from Recruit Phase if game has not ended. <br>
+						Increment player order, e.g. B -> C -> ..
+					</p>
+				</div>
+			</div>
+
+			<div class="view block top left hidden" id='instructions2' style="background: black;">
+				<div style="padding: 16px 26px; font-size: 24px;" class="action">
+					<div class="content">
+						<span class="sp action">Tactic<i class="material-icons" style="text-shadow: 0 0 10px orange;"> psychology</i></span>
+					</div>
+					<!-- <div class="content">
+						<span class="sp action">Deploy<i class="material-icons" style="text-shadow: 0 0 10px orange;"> person_add</i></span>
+					</div> -->
+					<div class="content">
+						<span class="sp action">Act<i class="material-icons" style="text-shadow: 0 0 10px cyan;"> electric_bolt</i></span>
+					</div>
+					<div class="content">
+						<span class="sp action">Defend<i class="material-icons" style="text-shadow: 0 0 10px cyan;"> security</i></span>
+					</div>
+					<div class="content">
+						<span class="sp action">Defeat<i class="material-icons" style="text-shadow: 0 0 10px red;"> cancel</i></span>
+					</div>
+					<div class="content">
+						<span class="sp action">Win<i class="material-icons" style="text-shadow: 0 0 10px green;"> check_circle</i></span>
+					</div>
+					<div class="content">
+						<span class="sp rng">RNG X</span>
+						<span>Target nearest unit up to X tiles.</span>
+					</div>
+					<div class="content">
+						<span class="sp far">FAR</span>
+						<span>Target furthest.</span>
+					</div>
+					<div class="content">
+						<span class="sp far">Any</span>
+						<span>Target any unit in range.</span>
+					</div>
+					<div class="content">
+						<span class="sp melee">Melee</span>
+						<span>Target nearest unit.</span>
+					</div>
+					<div class="content">
+						<span class="sp aoe">AOE X</span>
+						<span>Area spanning X tiles from origin; R=row; C=column.</span>
+					</div>
+					<div class="content">
+						<span class="sp empower">Empower X</span>
+						<span>Grant ATK/token.</span>
+					</div>
+					<div class="content">
+						<span class="sp fortify">Fortify X</span>
+						<span>Grant DEF/token.</span>
+					</div>
+					<div class="content">
+						<span class="sp adv">ADV</span>
+						<span>Reroll any number of dice during ATK/DEF (once).</span>
+					</div>
+					<div class="content">
+						<span class="sp burn">burn X</span>
+						<span>Deal X True Damage on Act, then remove 1 token.</span>
+					</div>
+					<div class="content">
+						<span class="sp poison">poison X</span>
+						<span>Deal ATK X on Act.</span>
+					</div>
+					<div class="content">
+						<span class="sp chill">chill X</span>
+						<span>Reduce 1 ATK/token.</span>
+					</div>
+					<div class="content">
+						<span class="sp shock">Shock</span>
+						<span>Reduce 1 DEF/token.</span>
+					</div>
+					<div class="content">
+						<span class="sp stun">stun</span>
+						<span>Skip turn. (Can't stack)</span>
+					</div>
+					<!-- <div class="content">
+						<span class="sp charm">Charm X</span>
+						<span>Change alignment if Charm tokens # >= current HP, effect ends if # = 0; End of Act: remove L tokens.</span>
+					</div> -->
+					<div class="content">
+						<span class="sp cleanse">cleanse X</span>
+						<span>Remove X debuff tokens.</span>
+					</div>
+					<div class="content">
+						<span class="sp heal">Heal X</span>
+						<span>Heal X HP.</span>
+					</div>
+					<div class="content">
+						<span class="sp stealth">Stealth X</span>
+						<span>Cannot be targeted until X Acts.</span>
+					</div>
+					<!-- <div class="content">
+						<span class="sp fog-of-war">Fog of War</span>
+						<span>Unrevealed until War Phase starts.</span>
+					</div> -->
+					<div class="content">
+						<span class="sp reveal">Reveal X</span>
+						<span>Reveal unit with Fog of War, and remove X Stealth.</span>
+					</div>
+					<div class="content">
+						<span class="sp once">Once</span>
+						<span>Can only be triggered once per round.</span>
+					</div>
+					<div class="content">
+						<span class="sp persistent">persistent</span>
+						<span>Ongoing effect, cannot discard while active.</span>
+					</div>
+					<div class="content">
+						<span class="sp nullify">Nullify</span>
+						<span>Nullify ATK, but take true dmg/debuffs.</span>
+					</div>
+					<div class="content">
+						<span class="sp true-dmg">true damage</span>
+						<span>Bypasses DEF, absolute damage.</span>
+					</div>
+					<!-- <div class="content">
+						<span class="sp free">Free X/Self</span>
+						<span>Next X/self allies do not cost AP to deploy.</span>
+					</div> -->
+					<div class="content">
+						<span class="sp revive">Revive</span>
+						<span>Revive unit, remove all status tokens.</span>
+					</div>
+					<div class="content">
+						<span class="sp immunity">X</span>
+						<span>Immunity to X.</span>
+					</div>
+					<div class="content">
+						<span class="sp resist">X</span>
+						<span>End of Act: remove 1 X. (Can't stack)</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Overlay -->
+			<img style="width: 100%;" id="overlay" class="hidden top block" style="z-index: 9" src="https://www.thegamecrafter.com/overlays/pokerdeck.png" alt="img"/>
+		</div>
+
+		<!-- Action bottons -->
+		<div style="display: inline-block; vertical-align: top;">
+			<span>Toggles</span> <br>
+			<button style="min-width: 200px" onclick="document.querySelector('#card-cont').classList.toggle('compress')">Borderless</button> <br>
+			<button style="min-width: 200px" onclick="document.querySelector('#overlay').classList.toggle('hidden')">Overlay</button> <br>
+			
+			<br>
+			<span>Views</span> <br>
+			<button style="min-width: 200px" onclick="hideViews()">Card (F)</button> <br>
+			<button style="min-width: 200px" onclick="hideViews(); document.querySelector('#card-back').classList.remove('hidden')">Card (B)</button> <br>
+			<button style="min-width: 200px" onclick="outfile_name = 'instructions[face,2]'; hideViews(); document.querySelector('#instructions').classList.remove('hidden')">Instructions (F)</button> <br>
+			<button style="min-width: 200px" onclick="outfile_name = 'instructions[back,2]'; hideViews(); document.querySelector('#instructions2').classList.remove('hidden')">Instructions (B)</button> <br>
+
+			<br>
+			<span>Navigation</span> <br>
+			<button style="min-width: 200px" onclick="loadUnit(current_index - 1)">Previous</button>
+			<br>
+			<button style="min-width: 200px" onclick="loadUnit(current_index + 1)">Next</button>
+			<br>
+			<br>
+
+			<span>Export</span> <br>
+			<button style="min-width: 200px; height: 90px; font-weight: bold; background: gainsboro;" onclick="download()">
+				<i class="material-icons" style="vertical-align: middle; font-size: 30px;">download</i>
+				Download
+			</button> <br>
+			<button style="min-width: 200px; font-weight: bold; background: pink" onclick="bulkExport()">Bulk Download</button> <br>
+			<button style="min-width: 200px; font-weight: bold; background: gold" onclick="exportA4()">Export A4</button> <br>
+
+			<hr>
+			<span>Unit Score</span> <br>
+
+			<button style="min-width: 200px" onclick="document.querySelector('#card-creator').classList.toggle('show-score')">Toggle Details</button> <br> <br>
+
+			<div class="unit-scores">
+				<div class="detail-scores">
+					
+				</div>
+			</div>
+			
+
+		</div>
+
+		<!-- A4 exports -->
+		<div id="a4"></div>
+	</div>
+
+	<!-- Chit creator -->
+	<div id='chit-creator' class='creator hidden'>
+		<style type="text/css">
+			.chit-cont {
+				display: inline-block;
+				vertical-align: top;
+				position: relative; width: 300px; height: 300px; background: black;
+				text-align: center;
+				color:white;
+				overflow: hidden;
+				background: black;
+
+				.chit {
+					height: 100%;
+					position: absolute; inset: 0; margin: auto;
+					padding-top: 195px;
+					.emoji {
+						line-height: 0.4;
+						font-size: 100px;
+					}
+					.material-icons {
+						vertical-align: middle;
+						font-size: 20px;
+					}
+					.icons {
+						position: absolute;
+					      right: 70px;
+					      bottom: 240px;
+					      width: 30px;
+						.material-icons {
+							font-size: 26px;
+						}
+					}
+					.text {
+						font-size: 35px;
+						font-family: Trebuchet MS, sans-serif;
+						font-style: italic;
+						text-transform: capitalize;
+						line-height: 1;
+						text-align: center;
+						text-shadow: 0 0 10px;
+					}
+					.subtext {
+						font-size: 20px;
+						opacity: 0.8;
+						line-height: 1;
+					}
+					.chill {
+						text-shadow: 0 0 50px cyan;
+					}
+					.poison {
+						text-shadow: 0 0 50px lightgreen;
+					}
+					.burn {
+						text-shadow: 0 0 50px pink;
+					}
+					.shock {
+						text-shadow: 0 0 50px gold;
+					}
+					.stun {
+						text-shadow: 0 0 50px white;
+					}
+					.fortify {
+						text-shadow: 0 0 50px teal;
+					}
+					.empower {
+						text-shadow: 0 0 50px red;
+					}
+					.stealth {
+						text-shadow: 0 0 50px gray;
+					}
+					.charm {
+						text-shadow: 0 0 50px pink;
+					}
+					.summon {
+						text-shadow: 0 0 50px pink;
+					}
+				}
+			}
+			#chit-btns {
+				button {
+					width: 300px;
+				}
+			}
+		</style>
+
+		<!-- List -->
+		<div style="display: inline-block; vertical-align: top;">
+			<div id='chit-btns'></div>
+			<br>
+			<button style="background: lightgray" onclick="exportChit(document.querySelector('.chit-cont'))">
+				<i class="material-icons" style="vertical-align: middle; font-size: 36px;">download</i>
+			DOWNLOAD</button>
+		</div>
+
+		<!-- Container -->
+		<div class='chit-cont'>
+			<div class='chit'>
+			</div>
+			<!-- Overlay -->
+			<img id='chit-overlay' src="https://www.thegamecrafter.com/overlays/mediumcirclechit.png"/>
+		</div>
+
+	</div>
+
+</body>
+</html>
