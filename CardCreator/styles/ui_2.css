@@ -83,10 +83,16 @@ body {
 			background: linear-gradient(0deg, rgba(0,0,0,0.85) 70%, transparent);
 		}
 	}
+	&.c1, &.c2 {
+		.img-Img {
+			margin-top: 59px;
+		}
+	}
 }
 .card {
 	width: 100%;
 	height: 100%;
+	background: black;
 	border-radius: inherit;
 
 	position: relative;
@@ -98,7 +104,7 @@ body {
 		left: -35px;
 		width: 775px;*/
 		width: 100%;
-		border-radius: 20px;
+		/*border-radius: 20px;*/
 		/*border: 1px solid gold;*/
 	}
 
@@ -108,6 +114,23 @@ body {
 		padding-top: 90px;
 		background: linear-gradient(0deg, black 70%, transparent);
 		/*background: black;*/
+	}
+
+	.card-rank {
+		position: absolute;
+		z-index: 9;
+		top: 0px;
+		left: 5px;
+		text-shadow: 0 0 10px gold;
+
+		img {
+			width: 60px;
+			display: none;
+		}
+		&.c1 .c1 {display: block;}
+		&.c2 .c2 {display: block;}
+		&.c3 .c3 {display: block;}
+		&.c4 .c4 {display: block;}
 	}
 	
 	.card-name {
@@ -133,6 +156,35 @@ body {
 		}
 	}
 
+	.card-faction {
+		text-align: center;
+		font-size: 22px;
+		margin: 0;
+		padding: 0 10px;
+		font-family: Georgia, serif;
+		/*display: inline-block;*/
+		/*background: rgba(0,0,0,0.8);*/
+		/*background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.5), transparent);*/
+		padding-bottom: 20px;
+		background: linear-gradient(180deg, rgba(0,0,0,0.5), transparent);
+	}
+
+	.card-cost {
+		top: 0px;
+		right: 10px;
+		z-index: 9;
+
+		.text-Cost {
+			text-shadow: 0 0 10px gold;
+			text-align: center;
+			font-size: 60px;
+			font-weight: bold;
+			color: white;
+			z-index: 999;
+			line-height: 1;
+		}
+	}
+
 	.cbg.class-Faction {
 		opacity: 0.2; width: 100%; height: 100%;
 		position: absolute;
@@ -153,7 +205,7 @@ body {
 
 	.bottom.block.card-content {
 		width: 100%;
-		min-height: 380px;
+		min-height: 340px;
 		color: white;
 		text-align: center;
 
@@ -176,9 +228,17 @@ body {
 			.stats {
 				text-align: right;
 				position: relative;
-				margin: 16px;
+				margin-right: 16px;
+				/*margin-bottom: 55px;*/
+
+				display: flex;
+				flex-direction: column;
+				justify-content: right;
+				align-items: end;
+
 				.stat {
-					width: 80px;
+					width: 85px;
+					margin: 4px 0;
 				}
 				.stat-value {
 					font-size: 36px;
@@ -190,8 +250,8 @@ body {
 				}
 			}
 
-			.action {
-				margin: 10px 0px;
+			.line {
+				margin: 5px 0px;
 				padding-left: 10px;
 			}
 			
@@ -213,7 +273,7 @@ body {
 			background: black;
 		}
 
-		.actions {
+		.lines {
 			flex-grow: 1;
 			margin: 10px 0px 0px 10px;
 			background: rbga(0,0,0,0.8);
@@ -258,23 +318,7 @@ body {
 		border-top: 1px solid white;
 	}
 }
-.action.winblock {
-	position: absolute;
-	padding: 10px;
-	color: white;
-	/*background: rgba(0,0,0,0.75);*/
-	background: linear-gradient(90deg, black , transparent);
-	top: 180px;
-	margin: 0 10px;
-	right: 5px;
-	border-radius: 12px;
-    /*border-top-right-radius: 20%;
-    border-bottom-right-radius: 20%;*/
-	.sp {
-		font-size: 40px;
-	}
-}
-#card-creator.show-score .action:hover .score-tooltip {
+#card-creator.show-score .line:hover .score-tooltip {
 	left: 0;
 	position: absolute;
 	display: inline-block;
@@ -318,14 +362,6 @@ body {
 .unit-class {
 	font-style: italic;
 	font-weight: bold;
-}
-.sp.unit-level {
-	font-weight: bold;
-	text-shadow: 0 0 5px gold;
-	.icon {
-		height: 40px; width: 40px;
-		vertical-align: middle;
-	}
 }
 .ctext {
 	&.Celestial, &.celestial {
@@ -424,6 +460,13 @@ body {
 		background-image: url('../assets/icons/nature.png');
 	}
 }
+.lbg {
+	display: none;
+	&.c1.lbg-c1 {display: block;}
+	&.c2.lbg-c2 {display: block;}
+	&.c3.lbg-c3 {display: block;}
+	&.c4.lbg-c4 {display: block;}
+}
 .unit-scores {
 	font-size: 20px;
 	color: black;
@@ -458,7 +501,7 @@ body {
 	.score-category.resource {background: gold;}
 	.score-category.support {background: lightgreen;}
 }
-.action {
+.line {
 	/*font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;*/
 	line-height: 1.6;
 	padding: 2px 8px;
@@ -491,6 +534,9 @@ body {
 		&.Defeat {
 			text-shadow: 0 0 10px red;
 		}
+		&.Win{
+			text-shadow: 0 0 10px green;
+		}
 	}
 	.content {
 		display: inline-block;
@@ -498,6 +544,7 @@ body {
 		text-align: left;
 		color: gainsboro;
 		margin-left: 30px;
+		min-width: 100px;
 	}
 	.sp {
 		margin: 0 4px;
@@ -517,11 +564,9 @@ body {
 		text-decoration: underline;
 		padding: 0;
 	}
-	.stealth, .fog-of-war {
+	.stealth {
 		color: gray;
 		font-weight: bold;
-	}
-	.stealth {
 		border: 1px solid violet;
 	    padding: 0 4px;
 	    border-radius: 4px;
@@ -530,15 +575,13 @@ body {
 		content: '\1F32B ';
 	}
 	.reveal {
-		/*background: gold;*/
-		/*font-weight: bold;*/
 		color: white;
 		text-shadow: 0 0 5px gold;
 	}
 	.killing-blow {
 		color: pink;
 	}
-	.debuff, .buff {
+	.debuff {
 		font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
 		margin: 0 5px;
 		padding: 0 4px;
@@ -547,6 +590,9 @@ body {
 		.value {
 			padding-right: 12px;
 		}
+	}
+	.buff {
+		font-weight: bold;
 	}
 	.charm {
 		background: darkmagenta;
@@ -651,9 +697,18 @@ body {
 			content: '\1F48E';
 		}
 	}
-	.ap, .free {
+	.rp {
 		text-shadow: 0 0 8px purple;
 		font-weight: bold;
+		margin: 0 8px;
+	}
+	.unit-rank {
+		font-weight: bold;
+		text-shadow: 0 0 8px purple;
+		.icon {
+			height: 40px; width: 40px;
+			vertical-align: middle;
+		}
 	}
 	.g {
 		text-shadow: 0 0 8px gold;
@@ -755,6 +810,16 @@ body {
 		height: 40px; width: 40px;
 		/*vertical-align: middle;*/
 	}
+	.skill {
+		padding: 0 6px;
+		text-shadow: 0 0 5px black;
+		font-family: Georgia, serif;
+		font-style: italic;
+		color: cyan;
+		&::after {
+			content: ':';
+		}
+	}
 }
 .level-star {
 	font-size: 90px;
@@ -769,8 +834,8 @@ body {
 		font-size: 90px;
 	}
 }
-.class-Level .level-border,
-.class-Level .level-border-cont {
+.class-rank .level-border,
+.class-rank .level-border-cont {
 	position: absolute;
 	width: 100%;
 	height: 100%;

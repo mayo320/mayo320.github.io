@@ -99,7 +99,7 @@ function processAct(unit, key) {
 		['melee()', 'melee'],
 		['\\+?rng (\\d+)', 'rng', 'overhead.png'],
 		['aoe ([RC\\d+])?', 'aoe', 'platform.png'],
-		['\\+?ATK (\\d+|X\\+L|X|L)?', 'atk', 'a_t_k_.png'],
+		['\\+?ATK (\\d+|X\\+R|X|R)?', 'atk', 'a_t_k_.png'],
 		['\\+?(?:\\d+ )?def (\\d+)', 'def', 'shield.png'],
 		['(\\d+ )?true (?:damage|dmg)', 'true-dmg', 'open-wound.png'],
 		['(ADV)', 'adv', 'dice.png'],
@@ -125,30 +125,34 @@ function processAct(unit, key) {
 		['(FOG OF WAR)', 'fog-of-war'],
 		['(killing blow)', 'killing-blow', 'william-tell-skull.png'],
 		[status_re('charm(?:ed)?'), 'charm debuff'],
-		['(chaos)', 'chaos'],
-		['(order)', 'order'],
-		['(construct)', 'construct'],
-		['(celestial)', 'celestial'],
-		['(nature)', 'nature'],
+		['(chaos)', 'chaos ctext'],
+		['(order)', 'order ctext'],
+		['(construct)', 'construct ctext'],
+		['(celestial)', 'celestial ctext'],
+		['(nature)', 'nature ctext'],
 		[' (warriors?|mages?|rogues?|rangers?|supports?)', 'unit-class'],
 		['(\\+\\d+ hand limit)', 'hand-limit', 'up-card.png'],
 		['draw (\\d+X?) cards?', 'draw-card', 'card-draw.png'],
 		['discard (\\d+|X)(?: cards?)?', 'discard-card', 'card-discard.png'],
 		['(trash)', 'trash', 'card-trash.png'],
 		['(spawn|summon)', 'action'],
-		['(\\d+)(?:VP)', 'vp'],
+		['(\\d+|R)(?:VP)', 'vp'],
 		['(\\d+ap)', 'ap'],
 		['(-\\d+G)', 'no-g'], // above G
 		['(\\d+)(?:G)', 'g'],
+		['gold( )', 'g'],
+		[' (RP |AP )', 'rp'],
 		['(\\w+ Phase)', 'phase'],
 		['(free(?: \\d+| self)?)', 'free'],
 		['(any|far|self)', 'target', 'human-target.png'],
 		['reflect()', 'reflect', 'shield-reflect.png'],
-		['(L1)', 'unit-level', 'rank-1.png'],
-		['(L2)', 'unit-level', 'rank-2.png'],
-		['(L3)', 'unit-level', 'rank-3.png'],
+		['(R1)', 'unit-rank', 'rank-1.png'],
+		['(R2)', 'unit-rank', 'rank-2.png'],
+		['(R3)', 'unit-rank', 'rank-3.png'],
 		['trigger()', 'trigger', 'orb-direction.png'],
 		['rounded down()', 'round-down', 'save-arrow.png'],
+		['(move)', 'move', 'move.png'],
+		['\\[(\\w+)\\]', 'skill'],
 		[unit_names_regex, 'unit-name']
 	];
 	text = text.replaceAll(';', '\n<br>');
@@ -191,7 +195,7 @@ function createUnitList() {
 		calculateUnitScores(i);
 		var unit = data[i];
 		html += `
-			<button class="c${unit['Level']} c${unit['Faction']}" onclick="loadUnit(${i})">
+			<button class="c${unit['Level']} c${unit['Faction']} c${unit['Rank']}" onclick="loadUnit(${i})">
 				<span class="subtext">${i}:</span>
 				${unit['Name']}
 				<span class="subtext">(${unit['score-Total']})</span>
@@ -237,7 +241,7 @@ function loadUnit(index) {
 				original = ele.classList.toString()
 				ele.attributes['_class'] = original
 			}
-			ele.classList = original + ` class-${k} c${unit[k]} ${unit[k]}`
+			ele.classList = original + ` c${unit[k]} ${unit[k]}`
 		});
 
 		// If exists

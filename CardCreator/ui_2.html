@@ -33,7 +33,7 @@
 		<div id="card-cont" class="compress" style="display: inline-block;
 		vertical-align: top; position: relative; background: black;">
 			<!-- Card -->
-			<div class="card-border class-Level">
+			<div class="card-border class-Rank">
 				
 			<div class="card">
 				<!-- Unit art -->
@@ -42,46 +42,19 @@
 				<!-- Top block -->
 				<div class="top block" style="width: 100%; left: 0">
 					<!-- Cost -->
-					<div class="block if-Cost" style="top: 20px; right: 10px; z-index: 9">
-						<div class="block top right" style="margin: 0px 14px; font-size: 80px; color: white; font-weight: bold">
-							<span class="emoji" style="position: absolute; right: -18px; font-size: larger; top: -10px; opacity: 1; text-shadow: 0 0 20px black;">&#x1FA99;</span>
+					<div class="block if-Cost card-cost">
+						<!-- <div class="cbg class-Faction overlay"></div> -->
+						<!-- <div class="cshine class-Faction overlay"></div> -->
+						<div class="text-Cost"></div>
 
-							<span class="text-Cost" style="position: absolute;right: 27px; top: 5px; text-shadow: black 0px 0 10px;">5</span>
-						</div>
 					</div>
-					<!-- <div style="float: right;">
-						<span class="text-Cost"></span>
-					</div> -->
 
-					<!-- Win Effects -->
-					<!-- <div class="action if-Win winblock" style="">
-
-						<div>
-							<i class="material-icons" style="color: white; font-size: 40px; padding: 6px; border-radius: 50%; text-shadow: lightgreen 0 0 10px; background: black; border: 2px solid lightgreen;">flag</i>
-						</div>
-
-						<div class="text-Win process"
-						style="max-width: 100px;">
-							3&#x1FA99; 1&#x1F4A0;
-						</div>
-						<span class="score text-score-Win"></span>
-
-					</div> -->
-
-					<!-- Level badge -->
-					<div class="ctext class-Faction" style="top: 86px; left: 30px; position: absolute;">
-						<div class="level-star c1 emoji">
-							&#x1F7C6;
-						</div>
-						<div class="level-star c2 emoji">
-							&#x1F7CA; <br> &#x1F7CA;
-						</div>
-						<div class="level-star c3 emoji">
-							&#x1F7CC; <br> &#x1F7CC; <br> &#x1F7CC; <br>
-						</div>
-						<div class="level-star c4 emoji">
-							&#x1F7C6; <br> &#x1F7CA; <br> &#x1F7CC; <br>
-						</div>
+					<!-- Rank badge -->
+					<div class="class-Rank card-rank">
+						<img class="c1" src="assets/icons/rank-1.png">
+						<img class="c2" src="assets/icons/rank-2.png">
+						<img class="c3" src="assets/icons/rank-3.png">
+						<img class="c4" src="assets/icons/rank-4.png">
 					</div>
 
 					<!-- Name -->
@@ -92,15 +65,16 @@
 							Mist Lord
 						</span>
 						<div class="cshine class-Faction overlay"></div>
-						<div class="overlay"
+
+						<div class="overlay lbg lbg-c3 lbg-c4 class-Rank"
 							style="background:linear-gradient(210deg, violet, transparent 20%); opacity: 0.3;"></div>
-						<div class="overlay"
+						<div class="overlay lbg lbg-c3 lbg-c4 class-Rank"
 						style="background:linear-gradient(-20deg, cyan, transparent 20%); opacity: 0.3;"></div>
 						<div class="hr"></div>
 					</h1>
 
 					<!-- Faction -->
-					<h3 class="ctext class-Faction" style="text-align: center; font-size: 22px; margin: 0 20%; font-family: Georgia, serif; background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.5), transparent);">
+					<h3 class="ctext class-Faction card-faction">
 						<span class="text-Faction">Chaos</span>
 						&bull;
 						<span class="text-Class">Warrior</span>
@@ -134,32 +108,41 @@
 						</div>
 
 						<!-- Actions -->
-						<div class="actions">
-							<div class="action if-Act" style="">
+						<div class="lines">
+							<div class="line if-Act" style="">
 								<span class="type Act"><i class="material-icons">electric_bolt</i></span>
 								<span class="content text-Act process"></span>
 								<span class="score text-score-Act"></span>
 							</div>
 
-							<div class="action if-Defend" style="">
+							<div class="line if-Defend" style="">
 								<span class="type Defend"><i class="material-icons">security</i></span>
 								<span class="content text-Defend process"></span>
 								<span class="score text-score-Defend"></span>
 							</div>
 
-							<div class="action if-Defeat" style="">
+							<div class="line if-Defeat" style="">
 								<span class="type Defeat"><i class="material-icons">cancel</i></span>
 								<span class="content text-Defeat process"></span>
 								<span class="score text-score-Defeat"></span>
 							</div>
-						</div>
 
+							<!-- Win rewards -->
+							<div class="line if-Win">
+								<span class="type Win"><i class="material-icons">label_important</i></span>
+								<span class="content text-Win process">
+									3&#x1FA99; 1&#x1F4A0;
+								</span>
+								<span class="score text-score-Win"></span>	
+							</div>
+						</div>
 					</div>
 
 					<div class="tactic-cont">
+						<!-- Tactic -->
 						<div class="cbg class-Faction" style="opacity: 0.2;"></div>
 						<div class="hr"></div>
-						<div class="action if-Tactic">
+						<div class="line if-Tactic">
 							<span class="content text-Tactic process"></span>
 							<span class="score text-score-Tactic"></span>	
 						</div>
@@ -180,7 +163,7 @@
 
 			<!-- Card back -->
 			<div id='card-back' class="view block top left hidden" style="background: black;">
-				<div class="class-Level" style="position: absolute; inset: 0; margin: auto; text-align: center; height: 250px; opacity: 0.7;">
+				<div class="class-Rank" style="position: absolute; inset: 0; margin: auto; text-align: center; height: 250px; opacity: 0.7;">
 					<div class="level-star" style="display: block;">
 						&#x1F7C6; <br>
 						&#x1F7CA; <br>
