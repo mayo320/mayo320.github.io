@@ -273,16 +273,21 @@ body {
 			background: black;
 		}
 
-		.lines {
+		.actions-cont {
 			flex-grow: 1;
 			margin: 10px 0px 0px 10px;
-			background: rbga(0,0,0,0.8);
+
+		}
+		.lines {
+			/*background: rbga(0,0,0,0.8);*/
 			text-align: left;
 			display: inline-block;
 
-			display: flex;
 			justify-content: right;
 			flex-direction: column;
+
+			.line {
+			}
 		}
 	}
 }
@@ -506,7 +511,7 @@ body {
 	line-height: 1.6;
 	padding: 2px 8px;
 	border-radius: 5px;
-	font-size: 28px;
+	font-size: 30px;
 	margin: 10px 4px;
 	position: relative;
 	.content.text-Act {
@@ -521,7 +526,7 @@ body {
 		position: absolute;
 		left: 0px;
 		i {
-			font-size: 30px;
+			font-size: 32px;
 			vertical-align: middle;
 		}
 
@@ -769,7 +774,7 @@ body {
 		background: darkorange;
 		color: darkred;
 			text-transform: uppercase;
-		font-size: 26px;
+		font-size: smaller;
 	}
 	.draw-card,
 	.discard-card {
