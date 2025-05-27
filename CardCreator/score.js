@@ -188,6 +188,7 @@ function scoreUnitText(unit, text) {
             BSC(/(perform|trigger).*(tactic)/gi, (a, b) => a + 1, 'utility-trigger'),
             BSC(/(perform|trigger).*defend/gi, (a, b) => a, 'defense-trigger')
         ]),
+        BSC(/Trash.*card/gi, (a, b) => a + b * 7, 'utility-card'),
     ];
 
     const text_scores = {};
