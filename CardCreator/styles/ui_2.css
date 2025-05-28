@@ -58,7 +58,7 @@ body {
 .card-border {
 	border-radius: 18px;
 	/*Border width*/
-	padding: 1px; 
+	padding: 1.5px; 
 	background: linear-gradient(45deg,
 		red, orange, yellow, green, cyan, blue, violet);
 	box-sizing: border-box; 
@@ -77,7 +77,7 @@ body {
 		.level-border-cont {
 			display: none;
 		}
-		.card-content {
+		.card-content .combat-cont {
 			/*background: rgba(0,0,0,0.8);*/
 			background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.85) 130px);
 		}
@@ -109,9 +109,9 @@ body {
 
 	/*stars*/
 	.level-star {display: none;}
-	.card-content {
+	.card-content .combat-cont{
 		padding-top: 100px;
-			background: linear-gradient(to bottom, transparent, black 130px);
+		background: linear-gradient(to bottom, transparent, black 130px);
 	}
 
 	.card-rank {
@@ -164,7 +164,7 @@ body {
 		/*background: rgba(0,0,0,0.8);*/
 		/*background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.5), transparent);*/
 		padding-bottom: 20px;
-		background: linear-gradient(180deg, rgba(0,0,0,0.5), transparent);
+		/*background: linear-gradient(180deg, rgba(0,0,0,0.5), transparent);*/
 	}
 
 	.card-cost {
@@ -201,6 +201,75 @@ body {
 		height: 100%; width: 100%;
 	}
 
+
+		.side-cont {
+			width: 100%;
+			min-height: 250px;
+			color: white;
+			/*margin-top: -40px;*/
+			display: flex;
+			align-items: start;
+
+			background:
+			/*Left stats*/
+				linear-gradient(115deg, rgba(0,0,0,0.6), transparent 15%),
+			/*Right wins*/
+				linear-gradient(245deg, rgba(0,0,0,0.6), transparent 15%),
+			/*Top down gradient*/
+				linear-gradient(180deg, rgba(0,0,0,0.6), transparent 50px)
+			;
+
+
+			.if-Win, .stats {
+				margin: 0;
+				/*background: rgba(0,0,0,0.75);*/
+				/*background: linear-gradient(180deg, black, transparent);*/
+				padding: 10px;
+				border-radius: 0;
+				/*border: 1px solid gold;*/
+			}
+
+			.if-Win {
+				/*border-top-left-radius: 10px;
+				border-bottom-left-radius: 10px;*/
+				border-right: none;
+				padding-right: 0px;
+				text-align: center;
+				.content {
+					min-width: none;
+				}
+				.sp{
+					display: block;
+				}
+			}
+
+			.stats {
+				/*border-top-right-radius: 10px;
+				border-bottom-right-radius: 10px;*/
+				border-left: none;
+
+				display: flex;
+				flex-direction: column;
+				align-items: baseline;
+
+				text-align: left;
+				position: relative;
+				.stat {
+					/*width: 85px;*/
+					margin: 4px 0;
+				}
+				.stat-value {
+					font-size: 36px;
+					vertical-align: middle;
+					font-weight: bold;
+				}
+				.material-icons {
+					font-size: 36px;
+					vertical-align: middle;
+				}
+			}
+		}
+
 	.bottom.block.card-content {
 		width: 100%;
 		/*min-height: 340px;*/
@@ -214,6 +283,7 @@ body {
 
 		/*border-top: 1px solid gold;*/
 
+
 		.combat-cont {
 			flex-grow: 1;
 			position: relative;
@@ -221,32 +291,6 @@ body {
 			flex-direction: row-reverse;
 			align-items: center;
 	        width: 100%;
-	        background: rgba();
-
-			.stats {
-				text-align: right;
-				position: relative;
-				margin-right: 16px;
-				/*margin-bottom: 55px;*/
-
-				display: flex;
-				flex-direction: column;
-				justify-content: right;
-				align-items: end;
-
-				.stat {
-					width: 85px;
-					margin: 4px 0;
-				}
-				.stat-value {
-					font-size: 36px;
-					vertical-align: middle;
-				}
-				.material-icons {
-					font-size: 36px;
-					vertical-align: middle;
-				}
-			}
 
 			.line {
 				margin: 5px 0px;
@@ -522,6 +566,7 @@ body {
 	}
 	.content.text-Tactic {
 		text-align: center;
+		margin-left: 0;
 	}
 	.type {
 		position: absolute;
