@@ -55,7 +55,13 @@ body {
 #card-creator.show-score .score-detail {
 	display: block;
 }
+.card-count {
+	&.c1::before{content: '•';}
+	&.c2::before{content: '••';}
+	&.c3::before{content: '•••';}
+}
 .card-border {
+	position: relative;
 	border-radius: 18px;
 	/*Border width*/
 	padding: 1.5px; 
@@ -227,6 +233,7 @@ body {
 				padding: 10px;
 				border-radius: 0;
 				/*border: 1px solid gold;*/
+				min-width: 80px;
 			}
 
 			.if-Win {
