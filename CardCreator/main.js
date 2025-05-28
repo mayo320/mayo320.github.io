@@ -155,6 +155,7 @@ function processAct(unit, key) {
 		['rounded down()', 'round-down', 'save-arrow.png'],
 		['(move)', 'move', 'move.png'],
 		['\\[(\\w+)\\]', 'skill'],
+		['(swap)', 'swap', 'card-exchange.png'],
 		[unit_names_regex, 'unit-name']
 	];
 	text = text.replaceAll(';', '\n<br>');
