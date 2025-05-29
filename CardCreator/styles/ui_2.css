@@ -85,7 +85,7 @@ body {
 		}
 		.card-content .combat-cont {
 			/*background: rgba(0,0,0,0.8);*/
-			background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.85) 130px);
+			background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.65) 130px);
 		}
 	}
 	&.c1, &.c2 {
@@ -116,7 +116,7 @@ body {
 	/*stars*/
 	.level-star {display: none;}
 	.card-content .combat-cont{
-		padding-top: 100px;
+		padding-top: 110px;
 		background: linear-gradient(to bottom, transparent, black 130px);
 	}
 
@@ -166,11 +166,7 @@ body {
 		margin: 0;
 		padding: 0 10px;
 		font-family: Georgia, serif;
-		/*display: inline-block;*/
-		/*background: rgba(0,0,0,0.8);*/
-		/*background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.5), transparent);*/
 		padding-bottom: 20px;
-		/*background: linear-gradient(180deg, rgba(0,0,0,0.5), transparent);*/
 	}
 
 	.card-cost {
@@ -210,69 +206,29 @@ body {
 
 		.side-cont {
 			width: 100%;
-			min-height: 250px;
 			color: white;
-			/*margin-top: -40px;*/
+			min-height: 250px;
 			display: flex;
 			align-items: start;
 
 			background:
-			/*Left stats*/
-				linear-gradient(115deg, rgba(0,0,0,0.6), transparent 15%),
 			/*Right wins*/
 				linear-gradient(245deg, rgba(0,0,0,0.6), transparent 15%),
 			/*Top down gradient*/
-				linear-gradient(180deg, rgba(0,0,0,0.6), transparent 50px)
-			;
-
-
-			.if-Win, .stats {
-				margin: 0;
-				/*background: rgba(0,0,0,0.75);*/
-				/*background: linear-gradient(180deg, black, transparent);*/
-				padding: 10px;
-				border-radius: 0;
-				/*border: 1px solid gold;*/
-				min-width: 80px;
-			}
+				linear-gradient(180deg, rgba(0,0,0,0.6), transparent 50px)			;
 
 			.if-Win {
-				/*border-top-left-radius: 10px;
-				border-bottom-left-radius: 10px;*/
+				text-align: right;
+				margin: 0;
+				padding: 10px;
+				border-radius: 0;
 				border-right: none;
 				padding-right: 0px;
-				text-align: center;
 				.content {
 					min-width: none;
 				}
 				.sp{
 					display: block;
-				}
-			}
-
-			.stats {
-				/*border-top-right-radius: 10px;
-				border-bottom-right-radius: 10px;*/
-				border-left: none;
-
-				display: flex;
-				flex-direction: column;
-				align-items: baseline;
-
-				text-align: left;
-				position: relative;
-				.stat {
-					/*width: 85px;*/
-					margin: 4px 0;
-				}
-				.stat-value {
-					font-size: 36px;
-					vertical-align: middle;
-					font-weight: bold;
-				}
-				.material-icons {
-					font-size: 36px;
-					vertical-align: middle;
 				}
 			}
 		}
@@ -288,8 +244,15 @@ body {
 		flex-direction: column;
 		justify-content: flex-end;
 
-		/*border-top: 1px solid gold;*/
-
+		.text-Flavor {
+			font-family: Georgia, serif;
+			font-size: 20px;
+			font-style: italic;
+			text-shadow: 0 0 10px black;
+			margin-bottom: -80px;
+			z-index: 9;
+			color: lightgray;
+		}
 
 		.combat-cont {
 			flex-grow: 1;
@@ -300,8 +263,69 @@ body {
 	        width: 100%;
 
 			.line {
-				margin: 5px 0px;
-				padding-left: 10px;
+				margin: 4px;
+				padding: 4px;
+				position: relative;
+				z-index: 9;
+				background: rgba(45,45,45,0.6);
+				display: flex;
+				flex-direction: column;
+				&.if-Act {
+					flex-grow: 1;
+				}
+				&.if-HP .line-type {
+					text-align: right;
+				}
+
+				.stat-value {
+					font-size: 40px;
+					vertical-align: middle;
+				}
+				.stat-icon {
+					vertical-align: middle;
+				}
+				.type {
+					position: absolute;
+					left: 7px;
+					top: 0px;
+				}
+			}
+			.line-type {
+				line-height: 1;
+				margin: 4px;
+				border-radius: 4px;
+				display: inline-block;
+				flex-shrink: 1;
+
+				.stat {
+					display: inline-block;
+					font-weight: bold;
+					.stat-value {
+						font-size: 40px;
+						vertical-align: middle;
+					}
+					i {
+						font-size: 36px;
+						vertical-align: middle;
+					}
+				}
+			}
+			.line-content {
+				padding: 4px;
+				vertical-align: middle;
+				background: rgba(0,0,0,0.5);
+				border-radius: 4px;
+				flex-grow: 1;
+			}
+			.line .type {
+				margin-top: 6px;
+				margin-left: 4px;
+			}
+			.line.if-Defeat .content {
+				margin-left: 50px;
+				padding: 5px;
+				background: rgba(0,0,0,0.5);
+				border-radius: 10px;
 			}
 			
 		}
@@ -324,19 +348,13 @@ body {
 
 		.actions-cont {
 			flex-grow: 1;
-			margin: 10px 0px 0px 10px;
+			margin: 10px;
 
 		}
 		.lines {
-			/*background: rbga(0,0,0,0.8);*/
+			justify-content: center;
 			text-align: left;
-			display: inline-block;
-
-			justify-content: right;
-			flex-direction: column;
-
-			.line {
-			}
+			display: flex;
 		}
 	}
 }
@@ -563,7 +581,7 @@ body {
 	line-height: 1.6;
 	padding: 2px 8px;
 	border-radius: 5px;
-	font-size: 30px;
+	font-size: 28px;
 	margin: 10px 4px;
 	position: relative;
 	.content.text-Act {
@@ -577,7 +595,7 @@ body {
 	}
 	.type {
 		position: absolute;
-		left: 0px;
+		left: 7px;
 		i {
 			font-size: 32px;
 			vertical-align: middle;
@@ -601,7 +619,7 @@ body {
 		vertical-align: top;
 		text-align: left;
 		color: gainsboro;
-		margin-left: 30px;
+		margin-left: 60px;
 		min-width: 100px;
 	}
 	.sp {
@@ -789,7 +807,7 @@ body {
 		border: 1px solid gray;
 	    padding: 0;
 	    padding-left: 4px;
-		border-radius: 8px;
+		border-radius: 0px;
 	    display: inline-block;
 	    line-height: 1.1;
 		.sp {
@@ -798,10 +816,6 @@ body {
 		.sp.debuff {
 			border-radius: 0;
 			margin: 0;
-		}
-		.sp.debuff:last-child {
-			border-top-right-radius: 8px;
-			border-bottom-right-radius: 8px;
 		}
 	}
 	.immunity:before {

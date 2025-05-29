@@ -75,28 +75,7 @@
 
 					<!-- Bottom panels -->
 					<div class="side-cont">
-						<!-- Stats -->
-						<div class="stats">
-							<div class="stat if-HP" style="">
-								<i class="material-icons" style="text-shadow: red 0px 0 13px;">favorite</i>
-								<span class="stat-value text-HP" style="text-shadow: red 0px 0 13px;">
-									6
-								</span>
-							</div>
-							<div class="stat if-DEF">
-								<i class="material-icons" style="text-shadow: blue 0px 0 13px;">shield</i>
-								<span class="stat-value text-DEF" style="text-shadow: blue 0px 0 13px;">
-									3
-								</span>
-							</div>
-							<div class="stat if-SPD">
-								<i class="material-icons" style="text-shadow: green 0px 0 13px;">tornado</i>
-								<span class="stat-value text-SPD" style="text-shadow: green 0px 0 13px;">
-									4
-								</span>
-							</div>
-						</div>
-
+						<div style="width: 100px;"></div>
 						<div style="flex-grow:1;">
 							<!-- Faction -->
 							<h3 class="ctext class-Faction card-faction">
@@ -107,7 +86,7 @@
 						</div>
 
 						<!-- Win rewards -->
-						<div class="line if-Win">
+						<div class="line if-Win" style="width: 100px;">
 							<span class="text-Win process">
 								3&#x1FA99; 1&#x1F4A0;
 							</span>
@@ -119,7 +98,7 @@
 				<!-- Bottom block -->
 				<div class="bottom block card-content">
 
-
+					<div class="if-Flavor text-Flavor"></div>
 
 					<!-- Combat contianer -->
 					<div class="combat-cont">
@@ -128,17 +107,39 @@
 						<div class="actions-cont">
 							
 						<div class="lines">
-							<div class="line if-Act" style="">
-								<span class="type Act"><i class="material-icons">electric_bolt</i></span>
-								<span class="content text-Act process"></span>
+							<div class="line if-Act">
+								<div class="line-type">
+									<span class="stat if-SPD">
+										<span class="stat-value text-SPD" style="text-shadow: green 0px 0 13px;">
+											4
+										</span><i class="material-icons" style="text-shadow: green 0px 0 13px;">tornado</i>
+									</span>
+								</div>
+
+								<div class="line-content text-Act process"></div>
 								<span class="score text-score-Act"></span>
 							</div>
 
-							<div class="line if-Defend" style="">
-								<span class="type Defend"><i class="material-icons">security</i></span>
-								<span class="content text-Defend process"></span>
+
+							<div class="line if-HP">
+								<div class="line-type">
+									<span class="stat if-HP">
+										<span class="if-HP stat-value text-HP" style="text-shadow: red 0px 0 13px;">
+											4
+										</span><i class="if-HP material-icons" style="text-shadow: red 0px 0 13px;">favorite</i>
+									</span>
+
+									<span class="stat if-DEF">
+										<span class="if-DEF stat-value text-DEF" style="text-shadow: blue 0px 0 13px;">
+											4
+										</span><i class="if-DEF material-icons" style="text-shadow: blue 0px 0 13px;">shield</i>
+									</span>
+								</div>
+								<div class="if-Defend line-content text-Defend process"></div>
 								<span class="score text-score-Defend"></span>
 							</div>
+
+						</div>
 
 							<div class="line if-Defeat" style="">
 								<span class="type Defeat"><i class="material-icons">cancel</i></span>
@@ -146,15 +147,6 @@
 								<span class="score text-score-Defeat"></span>
 							</div>
 
-							<!-- Win rewards -->
-							<!-- <div class="line if-Win">
-								<span class="type Win"><i class="material-icons">label_important</i></span>
-								<span class="content text-Win process">
-									3&#x1FA99; 1&#x1F4A0;
-								</span>
-								<span class="score text-score-Win"></span>	
-							</div> -->
-						</div>
 						</div>
 
 					</div>
