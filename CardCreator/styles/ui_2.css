@@ -201,7 +201,6 @@ body {
 	.overlay {
 		position: absolute; left: 0; top: 0;
 		height: 100%; width: 100%;
-		z-index: -10;
 	}
 
 
@@ -302,6 +301,7 @@ body {
 				border-radius: 4px;
 				display: inline-block;
 				flex-shrink: 1;
+				z-index: 9;
 
 				.stat {
 					display: inline-block;
@@ -322,6 +322,9 @@ body {
 				background: rgba(0,0,0,0.5);
 				border-radius: 4px;
 				flex-grow: 1;
+			}
+			.c3 .line-content, .c4 .line-content {
+				background: linear-gradient(to right, black, rgba(0,0,0,0.6) 30%);
 			}
 			.line .type {
 				margin-top: 6px;
@@ -358,7 +361,7 @@ body {
 
 		}
 		.lines {
-			justify-content: center;
+			justify-content: end;
 			text-align: left;
 			display: flex;
 		}
