@@ -32,8 +32,8 @@ body {
 
 	/*35px bleed, 35px cut*/
 	.card-border, .view {
-		width: calc(100% - 140px);
-		height: calc(100% - 140px);
+		width: calc(100% - 122px);
+		height: calc(100% - 122px);
 		margin: auto auto;
 	}
 }
@@ -42,8 +42,8 @@ body {
 
 	/*35px bleed*/
 	.card-border, .view {
-		width: calc(100% - 65px);
-		height: calc(100% - 65px);
+		width: calc(100% - 62px);
+		height: calc(100% - 62px);
 	}
 }
 #card-creator {
@@ -146,13 +146,12 @@ body {
 		text-align: center;
 		color: white;
 		font-size: 40px;
-		/*padding: 8px;*/
 		margin: 0;
 		border:none;
 		font-family: Georgia, serif;
 		background: rgba(0,0,0,0.7);
-		/*border-bottom: 1px solid gold;*/
 		position: relative;
+		overflow: hidden;
 		
 		.unit-name {
 			position: relative;
@@ -282,9 +281,19 @@ body {
 				}
 				&.if-Act {
 					flex-grow: 1;
+					/*border: 1px solid darkgreen;*/
+					/*background: rgba(30,60,30,0.6);*/
 				}
-				&.if-HP .line-type {
-					text-align: right;
+				&.if-HP {
+					/*background: rgba(30,40,70,0.6);*/
+					/*border: 1px solid blue;*/
+					.line-type {
+						text-align: right;
+					}
+				}
+				&.if-Defeat {
+					/*background: rgba(60,30,30,0.6);*/
+					/*border: 1px solid red;*/
 				}
 
 				.stat-value {
@@ -293,11 +302,6 @@ body {
 				}
 				.stat-icon {
 					vertical-align: middle;
-				}
-				.type {
-					position: absolute;
-					left: 7px;
-					top: 0px;
 				}
 			}
 			.line-type {
@@ -324,9 +328,11 @@ body {
 			.line-content {
 				padding: 4px;
 				vertical-align: middle;
-				background: rgba(0,0,0,0.5);
+				background: rgba(0,0,0,0.6);
 				border-radius: 4px;
 				flex-grow: 1;
+				border: 1px solid black;
+				text-align: left;
 			}
 			.c3 .line-content, .c4 .line-content {
 				background: linear-gradient(to right, black, rgba(0,0,0,0.6) 30%);
@@ -335,11 +341,16 @@ body {
 				margin-top: 6px;
 				margin-left: 4px;
 			}
-			.line.if-Defeat .content {
+			.line.if-Defeat {
+				display: flex;
+				justify-content: center;
+				.type {
+					margin-top: -10px;
+				}
+			}
+			.line.if-Defeat .line-content {
 				margin-left: 50px;
 				padding: 5px;
-				background: rgba(0,0,0,0.5);
-				border-radius: 10px;
 			}
 			
 		}
@@ -533,14 +544,13 @@ body {
 	background-size: contain;
 	&.Celestial, &.celestial {
 		background-image: url('../assets/icons/celestial.png');
-		
 	}
 	&.Chaos, &.chaos {
 		background-image: url('../assets/icons/chaos.png');
-		
 	}
 	&.Order, &.order {
 		background-image: url('../assets/icons/order.png');
+		opacity: 0.15;
 	}
 	&.Construct, &.construct {
 		background-image: url('../assets/icons/construct.png');

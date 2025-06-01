@@ -101,7 +101,7 @@ function processAct(unit, key) {
 		['far rng (\\d+)', 'rng', 'far.png'],
 		['rng (\\d+)', 'rng', 'overhead.png'],
 		['aoe ([RC\\d+])?', 'aoe', 'platform.png'],
-		['\\+?ATK (\\d+|X\\+R|X|R)?', 'atk', 'a_t_k_.png'],
+		['ATK (\\d+|X\\+R|X|R)?', 'atk', 'a_t_k_.png'],
 		['\\+?(?:\\d+ )?def (\\d+)', 'def', 'shield.png'],
 		['(\\d+ )?true (?:damage|dmg)', 'true-dmg', 'open-wound.png'],
 		['(ADV)', 'adv', 'dice.png'],
@@ -156,7 +156,7 @@ function processAct(unit, key) {
 		['(move)', 'move', 'move.png'],
 		['\\[(\\w+)\\]', 'skill'],
 		['(swap)', 'swap', 'card-exchange.png'],
-		[unit_names_regex, 'unit-name']
+		[unit_names_regex, 'unit-name', 'ace.png']
 	];
 	text = text.replaceAll(';', '\n<br>');
 
