@@ -28,12 +28,13 @@ body {
 #card-cont {
 	width: 825px; height: 1125px; 
 	overflow: hidden;
+	display: flex;
 
 	/*35px bleed, 35px cut*/
 	.card-border, .view {
 		width: calc(100% - 140px);
 		height: calc(100% - 140px);
-		margin: 70px;
+		margin: auto auto;
 	}
 }
 #card-cont.compress {
@@ -41,10 +42,13 @@ body {
 
 	/*35px bleed*/
 	.card-border, .view {
-		width: calc(100% - 70px);
-		height: calc(100% - 70px);
-		margin: 35px;
+		width: calc(100% - 65px);
+		height: calc(100% - 65px);
 	}
+}
+#card-creator {
+	display: flex;
+	flex-wrap: wrap;
 }
 #card-creator .score,
 #card-creator .score-detail,
@@ -63,17 +67,18 @@ body {
 .card-border {
 	position: relative;
 	border-radius: 18px;
-	/*Border width*/
-	padding: 1.5px; 
-	background: linear-gradient(45deg,
-		red, orange, yellow, green, cyan, blue, violet);
-	box-sizing: border-box; 
+	box-sizing: border-box;
+	padding: 8.5px; /*Border width*/
 
 	&.c1 {
 		background: white;
 	}
 	&.c2 {
-		background: gold;
+		background: linear-gradient(105deg, gold, lightyellow, darkorange, gold);
+	}
+	&.c3, &.c4 {
+		background: linear-gradient(45deg,
+			red, orange, yellow, green, cyan, blue, violet);
 	}
 	&.c1 { .level-star.c1 {display: block;}}
 	&.c2 { .level-star.c2 {display: block;}}
