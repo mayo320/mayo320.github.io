@@ -26,7 +26,7 @@
 	<!-- Card creator -->
 	<div id='card-creator' class='creator'>
 		<!-- List -->
-		<div id="card-list" class="">
+		<div id="card-list">
 		</div>
 
 		<!-- Card -->
@@ -206,21 +206,21 @@
 							<div class="cbg class-Faction"></div>
 							<div class="overlay clogo class-Faction"></div>
 							<span class="unit-name">
-								Inspire
+								<span class="text-Skill1_Name"></span>
 							</span>
 							<div class="cshine class-Faction overlay"></div>
 						</h1>
 						<div class="hr"></div>
 						<h3 class="ctext class-Faction card-faction">
-							Arthur, Hero King
+							<span class="text-Name"></span>
 						</h3>
 					</div>
 					<div class="skill-description">
-						Some skill description
+						<span class="line text-Skill1 process"></span>
 					</div>
 					<div class="hr"></div>
 					<div class="skill-description op">
-						Other skill descr
+						<span class="line text-Skill2 process"></span>
 					</div>
 					<div class="skill-name op">
 						<!-- Skill name -->
@@ -228,13 +228,13 @@
 							<div class="cbg class-Faction"></div>
 							<div class="overlay clogo class-Faction"></div>
 							<span class="unit-name">
-								Inspire
+								<span class="text-Skill2_Name"></span>
 							</span>
 							<div class="cshine class-Faction overlay"></div>
 						</h1>
 						<div class="hr"></div>
 						<h3 class="ctext class-Faction card-faction">
-							Arthur, Hero King
+							<span class="text-Name"></span>
 						</h3>
 					</div>
 				</div>
@@ -411,17 +411,17 @@
 			
 			<br>
 			<span>Views</span> <br>
-			<button view='card' onclick="showView(this)">Card (F)</button> <br>
+			<button view='card' onclick="showView(this); createUnitList();">Card (F)</button> <br>
 			<button view='card-back' onclick="showView(this)">Card (B)</button> <br>
 			<button view='instructions' onclick="outfile_name = 'instructions[face,2]'; showView(this)">Instructions (F)</button> <br>
 			<button view='instructions2' onclick="outfile_name = 'instructions[back,2]'; showView(this)">Instructions (B)</button> <br>
-			<button view='comm-skill' onclick="showView(this)">Comm Skill (B)</button> <br>
+			<button view='comm-skill' onclick="showView(this); createCommSkillsList();">Comm Skill (F)</button> <br>
 
 			<br>
 			<span>Navigation</span> <br>
-			<button onclick="loadUnit(current_index - 1)">Previous</button>
+			<button onclick="loadCard(current_index - 1)">Previous</button>
 			<br>
-			<button onclick="loadUnit(current_index + 1)">Next</button>
+			<button onclick="loadCard(current_index + 1)">Next</button>
 			<br>
 			<br>
 

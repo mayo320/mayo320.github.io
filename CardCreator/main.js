@@ -1,12 +1,18 @@
 var data = [];
+var comm_skills = [];
 var current_index = 0;
 var outfile_name = '';
 var unit_names_regex = '';
+var cur_card_mode = 'unit';
 
 function init() {
-	data = parseCsv();
+	data = parseCsv(CSV_DATA);
+	comm_skills = parseCsv(CSV_COMM_SKILL_DATA);
+	
 	createUnitList();
 	loadUnit(data.length-1);
+	loadCommSkill(0);
+	
 	setChitButtons();
 	setChit('Poison');
 }
@@ -64,8 +70,8 @@ function exportCard(element) {
 	});
 }
 
-function parseCsv() {
-	var lines = CSV_DATA.split('\n')
+function parseCsv(in_data) {
+	var lines = in_data.split('\n')
 		.map(x => x.trim())
 		.filter(x => x.length > 0);
 	
@@ -120,7 +126,7 @@ function processAct(unit, key) {
 		[status_re('shock(?:ed)?'), 'shock debuff'],
 		['(revives?)', 'revive'],
 		['(persistent)', 'persistent', 'infinity.png'],
-		['(once):?', 'once'],
+		['(once(?: / (?:round|turn))?:?)', 'once'],
 		[status_re('stealth(?:ed)?'), 'stealth', 'hood.png'],
 		[status_re('reveal(?:ed)?'), 'reveal', 'eye-target.png'],
 		['(nullify)', 'nullify'],
@@ -160,17 +166,6 @@ function processAct(unit, key) {
 	];
 	text = text.replaceAll(';', '\n<br>');
 
-	var base_score_ui = '';
-	const base_scores = unit['base_scores'][key];
-	base_scores.forEach((score) => {
-		if (text.match(score[0]) || score[0].match('_')) {
-			base_score_ui += `<div class="score-item ${score[0].toLowerCase()}">
-				<span class="score-text">${score[0]}</span>
-				<span class="score-value">${score[1].toFixed(2)}</span>
-			</div>`;
-		}
-	});
-
 	matches.forEach((pattern) => {
 		var regex = RegExp(pattern[0], 'gi');
 		icon = pattern.length > 2 ? `<img class="icon" src="assets/icons/${pattern[2]}"/>` : '';
@@ -182,23 +177,40 @@ function processAct(unit, key) {
 		text = text.replace("<span class='value'></span>", "");
 	});
 
-	text += `<span class="score-tooltip">
-		<span class="subtext" style="color: white">Note: values are estimated</span> <br>
-		${base_score_ui}</span>`;
+
+	const should_score = 'base_scores' in unit;
+	if (should_score) {
+		var base_score_ui = '';
+		const base_scores = unit['base_scores'][key];
+		base_scores.forEach((score) => {
+			if (text.match(score[0]) || score[0].match('_')) {
+				base_score_ui += `<div class="score-item ${score[0].toLowerCase()}">
+					<span class="score-text">${score[0]}</span>
+					<span class="score-value">${score[1].toFixed(2)}</span>
+				</div>`;
+			}
+		});
+		
+		text += `<span class="score-tooltip">
+			<span class="subtext" style="color: white">Note: values are estimated</span> <br>
+			${base_score_ui}</span>`;
+	}
+
 	return text;
 }
 
-function createUnitList() {
-	unit_names_regex = `(${data.map((u)=>u['Name']).join('|')})`;
+function createCardList(generic, load_fn) {
+	current_index = 0;
+	unit_names_regex = `(${generic.map((u)=>u['Name']).join('|')})`;
 	console.log(unit_names_regex);
 
 	var cont = document.querySelector('#card-list');
 	var html = ''
-	for (let i in data) {
+	for (let i in generic) {
 		calculateUnitScores(i);
-		var unit = data[i];
+		var unit = generic[i];
 		html += `
-			<button class="c${unit['Level']} c${unit['Faction']} c${unit['Rank']}" onclick="loadUnit(${i})">
+			<button class="c${unit['Level']} c${unit['Faction']} c${unit['Rank']}" onclick="${load_fn}(${i})">
 				<span class="subtext">${i}:</span>
 				${unit['Name']}
 				<span class="subtext">(${unit['score-Total']})</span>
@@ -208,31 +220,41 @@ function createUnitList() {
 	cont.innerHTML = html;
 }
 
-function loadUnit(index) {
-	if (index >= data.length) {
+function createUnitList() {
+	cur_card_mode = 'unit';
+	createCardList(data, 'loadUnit');
+}
+
+function createCommSkillsList() {
+	cur_card_mode = 'comm_skills';
+	createCardList(comm_skills, 'loadCommSkill');
+}
+
+function updateIndex(index, gen_data) {
+	if (index >= gen_data.length) {
 		index = 0;
 	} else if (index < 0) {
-		index = data.length - 1;
+		index = gen_data.length - 1;
 	}
-
 	current_index = index;
-	var unit = data[index];
-	constructScoreUi(unit);
-	outfile_name = unit['Name'] + '[face,'+unit['Count']+']'
-	for (let k in unit) {
+	return index;
+}
+
+function loadRowGeneric(gen_data) {
+	for (let k in gen_data) {
 		// Mutate images
 		var imgs = document.querySelectorAll('.img-' + k);
 		imgs.forEach((ele) => {
-			ele.src = unit[k];
+			ele.src = gen_data[k];
 		});
 
 		// Mutate texts
 		var texts = document.querySelectorAll('.text-' + k);
 		texts.forEach((ele) => {
 			if (ele.classList.contains('process')) {
-				ele.innerHTML = processAct(unit, k);
+				ele.innerHTML = processAct(gen_data, k);
 			} else {
-				ele.innerHTML = unit[k];
+				ele.innerHTML = gen_data[k];
 			}
 		});
 
@@ -244,13 +266,13 @@ function loadUnit(index) {
 				original = ele.classList.toString()
 				ele.attributes['_class'] = original
 			}
-			ele.classList = original + ` c${unit[k]} ${unit[k]}`
+			ele.classList = original + ` c${gen_data[k]} ${gen_data[k]}`
 		});
 
 		// If exists
 		var ifs = document.querySelectorAll('.if-' + k);
 		ifs.forEach((ele) => {
-			if (unit[k] !== undefined && unit[k].length > 0) {
+			if (gen_data[k] !== undefined && gen_data[k].length > 0) {
 				show(ele);
 			} else {
 				hide(ele);
@@ -260,32 +282,54 @@ function loadUnit(index) {
 	}
 }
 
-window.onload = function(){
+function loadUnit(index) {
+	index = updateIndex(index, data);
+	var unit = data[index];
+	constructScoreUi(unit);
+	outfile_name = unit['Name'] + '[face,'+unit['Count']+']'
+	loadRowGeneric(unit);
+}
+
+function loadCommSkill(index) {
+	index = updateIndex(index, comm_skills);
+	var skill = comm_skills[index];
+	loadRowGeneric(skill);
+}
+
+function loadCard(index) {
+	if (cur_card_mode === 'unit') {
+		loadUnit(index);
+	} else if (cur_card_mode === 'comm_skills') {
+		loadCommSkill(index);
+	}
+}
+
+window.onload = async function(){
 	const data = getUriParam('csv');
 	if (data) {
-		loadCsvFromData(data);	
+		CSV_DATA = await loadCsvFromData(data);	
 	}
 	else {
-		loadCsvFromData(CSV_ENCODED_DATA);
+		CSV_DATA = await loadCsvFromData(CSV_ENCODED_DATA);
 	}
+	CSV_COMM_SKILL_DATA = await loadCsvFromData(CSV_COMM_SKILL_ENCODED_DATA);
+	init();
 
 	// Arrow keys to navigate
 	document.onkeydown = (e) => {
 	  e = e || window.event;
 	  if (e.keyCode === 38) {
-	    loadUnit(current_index - 1);
+	    loadCard(current_index - 1);
 	  } else if (e.keyCode === 40) {
-	    loadUnit(current_index + 1);
+	    loadCard(current_index + 1);
 	  } else if (e.keyCode === 37) {
-	    loadUnit(current_index - 1);
+	    loadCard(current_index - 1);
 	  } else if (e.keyCode === 39) {
-	    loadUnit(current_index + 1);
+	    loadCard(current_index + 1);
 	  }
 	}
 
-	showView(
-		document.querySelector('.buttons-cont button[view="comm-skill"]')
-	);
+	document.querySelector('.buttons-cont button[view="card"]').click();
 }
 
 function download() {

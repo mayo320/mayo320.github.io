@@ -19,6 +19,5 @@ function getUriParam(key) {
 
 async function loadCsvFromData(data) {
   const csv = await UnzipBase64EncodedString(data);
-  CSV_DATA = csv.replaceAll('\\t', '\t').replaceAll('\t\\n\t', '\n');
-  init();
+  return csv.replaceAll('\\t', '\t').replaceAll('\t\\n\t', '\n');
 }

@@ -1062,6 +1062,7 @@ body {
 		text-shadow: 0 0 10px black;
 	}
 	.op {
-		rotate: 180deg;
+		/*rotate: 180deg;*/
+		transform: rotate(180deg);
 	}
 }
