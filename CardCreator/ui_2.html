@@ -33,9 +33,9 @@
 		<div id="card-cont" class="compress" style="
 		vertical-align: top; position: relative; background: black;">
 			<!-- Card -->
-			<div class="card-border class-Rank">
+			<div id='card' class="card-border class-Rank view">
 				
-			<div class="card">
+			<div  class="card">
 				<!-- Unit art -->
 				<img class="img-Img" src="https://ideogram.ai/assets/image/lossless/response/wmCkuBYqQD2bIf24HgRsQA" alt="img"/>
 				
@@ -174,6 +174,7 @@
 
 			</div>
 
+			<!-- Version num -->
 			<div class="left block" style="width: 100%; text-align: center; color: white; bottom: -20px">
 				v0.5
 				<!-- <span class="text-score-Total"></span> -->
@@ -195,47 +196,6 @@
 			</div>
 
 			<!-- Instruction -->
-			<style type="text/css">
-				#instructions, #instructions2 {
-					color: white;
-					h1 {font-size: 40px; text-shadow: 0 0 10px gold;}
-					h2 {font-size: 26px; }
-					p {
-						font-size: 26px; padding-left: 20px;
-					}
-					.material-icons, i {
-						font-size: 26px;
-						vertical-align: middle;
-					}
-				}
-				#instructions2 {
-					.content {
-						/*margin: 4px 2px;*/
-						padding: 6px 4px;
-						margin-left: -8px;
-						margin-top: 2px;
-						display: inline-block;
-						max-width: none;
-						/*border: 1px solid gray;*/
-						font-size: 24px;
-						font-style: italic;
-						.sp {
-							font-style: normal;
-						}
-						.action {
-							font-size: 26px;
-							font-style: italic;
-						}
-						.action .material-icons {
-							font-size: 30px;
-						}
-
-						/**/
-						background: linear-gradient(90deg, rgb(62, 53, 60) 0%, rgba(0,0,0,0) 150px);
-						border-radius: 4px;
-					}
-				}
-			</style>
 			<div class="view block top left hidden" id='instructions' style="background: black;">
 				<div style="padding: 5px 60px;" class="content">
 					<h1 style="text-align: center;">Instructions</h1>
@@ -243,27 +203,27 @@
 					<p>
 						Players A -> B -> .. take turns doing:
 						<span style="margin-left: 20px; display: block;">
-							1. Get <span class="sp g">3xL gold coins</span> <br>
+							1. Get <span class="sp g">3xR gold coins 🪙</span> <br>
 							2. Recruit 0 or 1 unit <br>
 						</span>
 						This ends when all parties agree it ends, then shuffle your deck
 					</p>
-					<h2 style="text-shadow: 0 0 10px cyan;"><span class="emoji">&#x1F9E9;</span> Deploy Phase</h2>
+					<h2 style="text-shadow: 0 0 10px cyan;"><span class="emoji">➕</span> Deploy Phase</h2>
 					<p>
-						Players  A -> B -> .. take 4 turns performing:
+						Players  A -> B -> .. take 3 turns performing:
 						<span style="margin-left: 20px; display: block;">
-							1. <span class="sp draw-card">Draw 2+L cards</span> from your Deck <br>
+							1. <span class="sp draw-card">Draw 5 cards</span> from your Deck <br>
 							2. Perform below in any order <br>
 							<span style="margin-left: 20px; display: inline-block;">
-								a. <i class="material-icons" style="text-shadow: 0 0 10px orange;">psychology</i> Use 0 or more Tactic(s) <br>
-								b. <i class="material-icons" style="text-shadow: 0 0 10px aqua;">person_add</i> Deploy up to 1 unit <br>
+								a. <i class="material-icons" style="text-shadow: 0 0 10px orange;">psychology</i> Use any number of Tactic(s) <br>
+								b. <i class="material-icons" style="text-shadow: 0 0 10px aqua;">person_add</i> Deploy any number of units <br>
 							</span> <br>
-							3. Discard with hand limit of 3 <br>
+							3. Discard all cards <br>
 						</span>
 					</p>
-					<h2 style="text-shadow: 0 0 10px red;"><span class="emoji">&#x1F5E1;</span> War Phase</h2>
+					<h2 style="text-shadow: 0 0 10px red;"><span class="emoji">⚔️</span> War Phase</h2>
 					<p>
-						Ordered by each unit's <i class="material-icons" style="text-shadow: green 0px 0 10px;">tornado</i>SPD, resolve their <i class="material-icons" style="text-shadow: 0 0 10px aqua;">electric_bolt</i>Act or Move, <i class="material-icons" style="text-shadow: 0 0 10px aqua;">security</i>Defend, <i class="material-icons" style="text-shadow: 0 0 10px red;">cancel</i>Defeat.
+						Ordered by each unit's <i class="material-icons" style="text-shadow: green 0px 0 10px;">tornado</i>SPD, resolve their Move & Act.
 						This ends when one side's units are all defeated. 
 						<br> <br>
 						Then: <br>
@@ -282,9 +242,6 @@
 					<div class="content">
 						<span class="sp action">Tactic<i class="material-icons" style="text-shadow: 0 0 10px orange;"> psychology</i></span>
 					</div>
-					<!-- <div class="content">
-						<span class="sp action">Deploy<i class="material-icons" style="text-shadow: 0 0 10px orange;"> person_add</i></span>
-					</div> -->
 					<div class="content">
 						<span class="sp action">Act<i class="material-icons" style="text-shadow: 0 0 10px cyan;"> electric_bolt</i></span>
 					</div>
@@ -349,10 +306,6 @@
 						<span class="sp stun">stun</span>
 						<span>Skip turn. (Can't stack)</span>
 					</div>
-					<!-- <div class="content">
-						<span class="sp charm">Charm X</span>
-						<span>Change alignment if Charm tokens # >= current HP, effect ends if # = 0; End of Act: remove L tokens.</span>
-					</div> -->
 					<div class="content">
 						<span class="sp cleanse">cleanse X</span>
 						<span>Remove X debuff tokens.</span>
@@ -365,10 +318,6 @@
 						<span class="sp stealth">Stealth X</span>
 						<span>Cannot be targeted until X Acts.</span>
 					</div>
-					<!-- <div class="content">
-						<span class="sp fog-of-war">Fog of War</span>
-						<span>Unrevealed until War Phase starts.</span>
-					</div> -->
 					<div class="content">
 						<span class="sp reveal">Reveal X</span>
 						<span>Reveal unit with Fog of War, and remove X Stealth.</span>
@@ -389,10 +338,6 @@
 						<span class="sp true-dmg">true damage</span>
 						<span>Bypasses DEF, absolute damage.</span>
 					</div>
-					<!-- <div class="content">
-						<span class="sp free">Free X/Self</span>
-						<span>Next X/self allies do not cost AP to deploy.</span>
-					</div> -->
 					<div class="content">
 						<span class="sp revive">Revive</span>
 						<span>Revive unit, remove all status tokens.</span>
@@ -413,45 +358,48 @@
 		</div>
 
 		<!-- Action bottons -->
-		<div style="display: inline-block; vertical-align: top;">
+		<div class="buttons-cont">
 			<span>Toggles</span> <br>
-			<button style="min-width: 200px" onclick="document.querySelector('#card-cont').classList.toggle('compress')">Borderless</button> <br>
-			<button style="min-width: 200px" onclick="document.querySelector('#overlay').classList.toggle('hidden')">Overlay</button> <br>
+			<button onclick="document.querySelector('#overlay').classList.toggle('hidden'); document.querySelector('#card-cont').classList.toggle('compress')">Overlay</button> 
+			<br>
 			
 			<br>
 			<span>Views</span> <br>
-			<button style="min-width: 200px" onclick="hideViews()">Card (F)</button> <br>
-			<button style="min-width: 200px" onclick="hideViews(); document.querySelector('#card-back').classList.remove('hidden')">Card (B)</button> <br>
-			<button style="min-width: 200px" onclick="outfile_name = 'instructions[face,2]'; hideViews(); document.querySelector('#instructions').classList.remove('hidden')">Instructions (F)</button> <br>
-			<button style="min-width: 200px" onclick="outfile_name = 'instructions[back,2]'; hideViews(); document.querySelector('#instructions2').classList.remove('hidden')">Instructions (B)</button> <br>
+			<button view='card' onclick="showView(this)">Card (F)</button> <br>
+			<button view='card-back' onclick="showView(this)">Card (B)</button> <br>
+			<button view='instructions' onclick="outfile_name = 'instructions[face,2]'; showView(this)">Instructions (F)</button> <br>
+			<button view='instructions2' onclick="outfile_name = 'instructions[back,2]'; showView(this)">Instructions (B)</button> <br>
 
 			<br>
 			<span>Navigation</span> <br>
-			<button style="min-width: 200px" onclick="loadUnit(current_index - 1)">Previous</button>
+			<button onclick="loadUnit(current_index - 1)">Previous</button>
 			<br>
-			<button style="min-width: 200px" onclick="loadUnit(current_index + 1)">Next</button>
+			<button onclick="loadUnit(current_index + 1)">Next</button>
 			<br>
 			<br>
 
 			<span>Export</span> <br>
-			<button style="min-width: 200px; height: 90px; font-weight: bold; background: gainsboro;" onclick="download()">
+			<button style="height: 90px; font-weight: bold; background: gainsboro;" onclick="download()">
 				<i class="material-icons" style="vertical-align: middle; font-size: 30px;">download</i>
 				Download
 			</button> <br>
-			<button style="min-width: 200px; font-weight: bold; background: pink" onclick="bulkExport()">Bulk Download</button> <br>
-			<button style="min-width: 200px; font-weight: bold; background: gold" onclick="exportA4()">Export A4</button> <br>
+			<button style="font-weight: bold; background: pink" onclick="bulkExport()">Bulk Download</button> <br>
+			<button style="font-weight: bold; background: gold" onclick="exportA4()">Export A4</button> <br>
 
 			<hr>
 			<span>Unit Score</span> <br>
 
-			<button style="min-width: 200px" onclick="document.querySelector('#card-creator').classList.toggle('show-score')">Toggle Details</button> <br> <br>
+			<button onclick="document.querySelector('#card-creator').classList.toggle('show-score')">Toggle Details</button> <br> <br>
 
 			<div class="unit-scores">
 				<div class="detail-scores">
 					
 				</div>
 			</div>
-			
+
+			<script type="text/javascript">
+				showView(document.querySelector('.buttons-cont button[view="card"]'));
+			</script>
 
 		</div>
 

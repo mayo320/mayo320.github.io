@@ -441,6 +441,15 @@ function hideViews() {
 	document.querySelectorAll('.view').forEach((x) => x.classList.add('hidden'));
 }
 
+function showView(el) {
+	view = el.attributes['view'];
+	hideViews();
+	document.querySelector('#' + view.value).classList.remove('hidden');
+
+	document.querySelectorAll('.buttons-cont button').forEach((x) => x.classList.remove('selected'));
+	el.classList.add('selected');
+}
+
 // Potential list of emojis https://www.unicode.org/emoji/charts/full-emoji-list.html
 // U+1F5E3
 // U+1F464

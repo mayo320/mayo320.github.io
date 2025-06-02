@@ -1,3 +1,17 @@
+.buttons-cont {
+	display: inline-block; vertical-align: top;
+	margin-left: 8px;
+	button {
+		min-width: 200px;
+	}
+	button.selected {
+		background: lightblue;
+		font-style: italic;
+		&:before {
+			content: ">";
+		}
+	}
+}
 .emoji {
 	font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
 }
@@ -31,7 +45,7 @@ body {
 	display: flex;
 
 	/*35px bleed, 35px cut*/
-	.card-border, .view {
+	.card-border {
 		width: calc(100% - 122px);
 		height: calc(100% - 122px);
 		margin: auto auto;
@@ -41,7 +55,7 @@ body {
 	width: 755px; height: 1055px;
 
 	/*35px bleed*/
-	.card-border, .view {
+	.card-border {
 		width: calc(100% - 62px);
 		height: calc(100% - 62px);
 	}
@@ -74,7 +88,7 @@ body {
 		background: white;
 	}
 	&.c2 {
-		background: linear-gradient(105deg, gold, lightyellow, darkorange, gold);
+		background: linear-gradient(105deg, gold, lightyellow, orange, gold);
 	}
 	&.c3, &.c4 {
 		background: linear-gradient(45deg,
@@ -980,4 +994,45 @@ body {
 	.cChaos {border-left-color: purple;}
 	.cConstruct {border-left-color: gray;}
 	.cNature {border-left-color: green;}
+}
+
+/*Instructions*/
+#instructions, #instructions2 {
+	color: white;
+	h1 {font-size: 40px; text-shadow: 0 0 10px gold;}
+	h2 {font-size: 26px; }
+	p {
+		font-size: 26px; padding-left: 20px;
+	}
+	.material-icons, i {
+		font-size: 26px;
+		vertical-align: middle;
+	}
+}
+#instructions2 {
+	.content {
+		/*margin: 4px 2px;*/
+		padding: 6px 4px;
+		margin-left: -8px;
+		margin-top: 2px;
+		display: inline-block;
+		max-width: none;
+		/*border: 1px solid gray;*/
+		font-size: 24px;
+		font-style: italic;
+		.sp {
+			font-style: normal;
+		}
+		.action {
+			font-size: 26px;
+			font-style: italic;
+		}
+		.action .material-icons {
+			font-size: 30px;
+		}
+
+		/**/
+		background: linear-gradient(90deg, rgb(62, 53, 60) 0%, rgba(0,0,0,0) 150px);
+		border-radius: 4px;
+	}
 }
