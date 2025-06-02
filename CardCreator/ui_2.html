@@ -29,13 +29,13 @@
 		<div id="card-list" class="">
 		</div>
 
-		<!-- Actual card -->
+		<!-- Card -->
 		<div id="card-cont" class="compress" style="
 		vertical-align: top; position: relative; background: black;">
-			<!-- Card -->
+			<!-- Unit Card -->
 			<div id='card' class="card-border class-Rank view">
 				
-			<div  class="card">
+			<div class="card">
 				<!-- Unit art -->
 				<img class="img-Img" src="https://ideogram.ai/assets/image/lossless/response/wmCkuBYqQD2bIf24HgRsQA" alt="img"/>
 				
@@ -185,7 +185,7 @@
 
 
 			<!-- Card back -->
-			<div id='card-back' class="view block top left hidden" style="background: black;">
+			<div id='card-back' class="view" style="background: black;">
 				<div class="class-Rank" style="position: absolute; inset: 0; margin: auto; text-align: center; height: 250px; opacity: 0.7;">
 					<div class="level-star" style="display: block;">
 						&#x1F7C6; <br>
@@ -195,9 +195,55 @@
 				</div>
 			</div>
 
+			<!-- Commander skill -->
+			<div id='comm-skill' class="view card-border">
+				<div class="card">
+					<!-- Unit art -->
+					<img class="img-Img" src="https://ideogram.ai/assets/image/lossless/response/wmCkuBYqQD2bIf24HgRsQA" alt="img"/>
+
+					<div class="skill-name">
+						<h1 class="ctext class-Faction card-name">
+							<div class="cbg class-Faction"></div>
+							<div class="overlay clogo class-Faction"></div>
+							<span class="unit-name">
+								Inspire
+							</span>
+							<div class="cshine class-Faction overlay"></div>
+						</h1>
+						<div class="hr"></div>
+						<h3 class="ctext class-Faction card-faction">
+							Arthur, Hero King
+						</h3>
+					</div>
+					<div class="skill-description">
+						Some skill description
+					</div>
+					<div class="hr"></div>
+					<div class="skill-description op">
+						Other skill descr
+					</div>
+					<div class="skill-name op">
+						<!-- Skill name -->
+						<h1 class="ctext class-Faction card-name">
+							<div class="cbg class-Faction"></div>
+							<div class="overlay clogo class-Faction"></div>
+							<span class="unit-name">
+								Inspire
+							</span>
+							<div class="cshine class-Faction overlay"></div>
+						</h1>
+						<div class="hr"></div>
+						<h3 class="ctext class-Faction card-faction">
+							Arthur, Hero King
+						</h3>
+					</div>
+				</div>
+
+			</div>
+
 			<!-- Instruction -->
-			<div class="view block top left hidden" id='instructions' style="background: black;">
-				<div style="padding: 5px 60px;" class="content">
+			<div class="view" id='instructions' style="background: black;">
+				<div style="padding: 5px 10px;" class="content">
 					<h1 style="text-align: center;">Instructions</h1>
 					<h2 style="text-shadow: 0 0 10px lightgreen;"><span class="emoji">&#x1F37A;</span> Recruit Phase</h2>
 					<p>
@@ -237,7 +283,7 @@
 				</div>
 			</div>
 
-			<div class="view block top left hidden" id='instructions2' style="background: black;">
+			<div class="view" id='instructions2' style="background: black;">
 				<div style="padding: 16px 26px; font-size: 24px;" class="action">
 					<div class="content">
 						<span class="sp action">Tactic<i class="material-icons" style="text-shadow: 0 0 10px orange;"> psychology</i></span>
@@ -369,6 +415,7 @@
 			<button view='card-back' onclick="showView(this)">Card (B)</button> <br>
 			<button view='instructions' onclick="outfile_name = 'instructions[face,2]'; showView(this)">Instructions (F)</button> <br>
 			<button view='instructions2' onclick="outfile_name = 'instructions[back,2]'; showView(this)">Instructions (B)</button> <br>
+			<button view='comm-skill' onclick="showView(this)">Comm Skill (B)</button> <br>
 
 			<br>
 			<span>Navigation</span> <br>
@@ -396,10 +443,6 @@
 					
 				</div>
 			</div>
-
-			<script type="text/javascript">
-				showView(document.querySelector('.buttons-cont button[view="card"]'));
-			</script>
 
 		</div>
 

@@ -251,9 +251,9 @@ function loadUnit(index) {
 		var ifs = document.querySelectorAll('.if-' + k);
 		ifs.forEach((ele) => {
 			if (unit[k] !== undefined && unit[k].length > 0) {
-				ele.classList.remove('hidden');
+				show(ele);
 			} else {
-				ele.classList.add('hidden');
+				hide(ele);
 			}
 		});
 
@@ -261,11 +261,9 @@ function loadUnit(index) {
 }
 
 window.onload = function(){
-	init();
-
 	const data = getUriParam('csv');
 	if (data) {
-		loadCsvFromData(getUriParam('csv'));	
+		loadCsvFromData(data);	
 	}
 	else {
 		loadCsvFromData(CSV_ENCODED_DATA);
@@ -284,6 +282,10 @@ window.onload = function(){
 	    loadUnit(current_index + 1);
 	  }
 	}
+
+	showView(
+		document.querySelector('.buttons-cont button[view="comm-skill"]')
+	);
 }
 
 function download() {
@@ -407,7 +409,7 @@ function setChitButtons() {
 var CHIT_SIZE = 300
 function exportChit(element) {
 	var overlay = document.querySelector('#chit-overlay');
-	overlay.classList.add('hidden');
+	hide(overlay);
 
 	// Draw element on canvas
 	var html = element.innerHTML.trim();
@@ -427,27 +429,37 @@ function exportChit(element) {
 		link.download = current_chit + '[all,'+CHIT_DATA[current_chit][0]+']';
 		link.click();
 
-		overlay.classList.remove('hidden');
+		show(overlay);
 	});
 }
 
 function toggleCreator(pg) {
-	document.querySelectorAll('.creator').forEach((x) => x.classList.add('hidden'));
-	document.querySelector(pg).classList.remove('hidden');
+	document.querySelectorAll('.creator').forEach((x) => hide(x));
+	hide(document.querySelector(pg));
 	init();
 }
 
 function hideViews() {
-	document.querySelectorAll('.view').forEach((x) => x.classList.add('hidden'));
+	document.querySelectorAll('.view').forEach((x) => hide(x));
 }
 
 function showView(el) {
 	view = el.attributes['view'];
 	hideViews();
-	document.querySelector('#' + view.value).classList.remove('hidden');
+	show(document.querySelector('#' + view.value));
 
 	document.querySelectorAll('.buttons-cont button').forEach((x) => x.classList.remove('selected'));
 	el.classList.add('selected');
+}
+
+function hide(el) {
+	if (el.attributes['_display'] === undefined) {
+		el.attributes['_display'] = el.style.display;
+	}
+	el.style.display = 'none';
+}
+function show(el) {
+	el.style.display = el.attributes['_display'] === 'none' ? 'block': el.attributes['_display'];
 }
 
 // Potential list of emojis https://www.unicode.org/emoji/charts/full-emoji-list.html

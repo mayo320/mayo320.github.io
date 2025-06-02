@@ -45,17 +45,18 @@ body {
 	display: flex;
 
 	/*35px bleed, 35px cut*/
-	.card-border {
+	.card-border, .view {
 		width: calc(100% - 122px);
 		height: calc(100% - 122px);
 		margin: auto auto;
+		position: relative;
 	}
 }
 #card-cont.compress {
 	width: 755px; height: 1055px;
 
 	/*35px bleed*/
-	.card-border {
+	.card-border, .view {
 		width: calc(100% - 62px);
 		height: calc(100% - 62px);
 	}
@@ -1034,5 +1035,33 @@ body {
 		/**/
 		background: linear-gradient(90deg, rgb(62, 53, 60) 0%, rgba(0,0,0,0) 150px);
 		border-radius: 4px;
+	}
+}
+
+/*Commander*/
+#comm-skill {
+	.img-Img {
+		opacity: 0.15;
+		width: 120%;
+		margin-left: -10%;
+	}
+	&.card-border {
+		/*padding: 3px;*/
+		/*background: white;*/
+	}
+	.card {
+		display: flex;
+		flex-direction: column;
+		color: white;
+		justify-content: space-between;
+	}
+	.skill-description {
+		padding: 20px;
+		text-align: center;
+		font-size: 30px;
+		text-shadow: 0 0 10px black;
+	}
+	.op {
+		rotate: 180deg;
 	}
 }
