@@ -95,7 +95,7 @@ function processAct(unit, key) {
 	}
 
 	var status_re = (st) => {
-		return `${st} ?(\\d+|\\+)?`
+		return `${st} ?(\\d+|\\+|X)?`
 	}
 
 	// Regex, class, icon?
@@ -108,14 +108,14 @@ function processAct(unit, key) {
 		['rng (\\d+)', 'rng', 'overhead.png'],
 		['aoe ([RC\\d+])?', 'aoe', 'platform.png'],
 		['ATK (\\d+|X\\+R|X|R)?', 'atk', 'a_t_k_.png'],
-		['\\+?(?:\\d+ )?def (\\d+)', 'def', 'shield.png'],
+		['\\+?(?:\\d+ )?def ?(\\d+)?', 'def', 'shield.png'],
 		['(\\d+ )?true (?:damage|dmg)', 'true-dmg', 'open-wound.png'],
 		['(ADV)', 'adv', 'dice.png'],
 		['(\\+?SPD ?\\d+)', 'spd'],
 		['IMM( .*)(?:;|\n<br>)?', 'immunity'], // imm should be above statuses
 		['resist( .*);?', 'resist'], // imm should be above statuses
-		['heal (\\d+)?', 'heal', 'heart-plus.png'],
-		['cleanse (\\d+)?', 'cleanse', 'sparkles.png'],
+		[status_re('heal'), 'heal', 'heart-plus.png'],
+		[status_re('cleanse'), 'cleanse', 'sparkles.png'],
 		[status_re('empower(?:ed)?'), 'empower buff', 'sword-brandish.png'],
 		[status_re('fortif(?:y|ied)'), 'fortify buff', 'armor-upgrade.png'],
 		['((?:all|any) debuffs?)', 'all-debuffs'],
@@ -126,7 +126,7 @@ function processAct(unit, key) {
 		[status_re('shock(?:ed)?'), 'shock debuff'],
 		['(revives?)', 'revive'],
 		['(persistent)', 'persistent', 'infinity.png'],
-		['(once(?: / (?:round|turn))?:?)', 'once'],
+		['(once(?: / (?:round|turn))?)', 'once'],
 		[status_re('stealth(?:ed)?'), 'stealth', 'hood.png'],
 		[status_re('reveal(?:ed)?'), 'reveal', 'eye-target.png'],
 		['(nullify)', 'nullify'],
@@ -142,21 +142,23 @@ function processAct(unit, key) {
 		['(\\+\\d+ hand limit)', 'hand-limit', 'up-card.png'],
 		['draw (\\d+X?) cards?', 'draw-card', 'card-draw.png'],
 		['discard (\\d+|X)(?: cards?)?', 'discard-card', 'card-discard.png'],
-		['(trash)', 'trash', 'card-trash.png'],
+		['(trash(?:ed)?)', 'trash', 'card-trash.png'],
 		['(spawn|summon)', 'action'],
 		['(\\d+|R)(?:VP)', 'vp'],
 		['(\\d+ap)', 'ap'],
 		['(-\\d+G)', 'no-g'], // above G
-		['(\\d+)(?:G)', 'g'],
+		['(\\d+|R)(?:G)', 'g'],
 		['gold( )', 'g'],
-		[' (RP |AP )', 'rp'],
-		['(\\w+ Phase)', 'phase'],
+		['(\\+?(?:\\d+)?RP)', 'rp'],
+		['(\\w+ Phase(?: start| end)?)', 'phase'],
+		['(on unlock)', 'phase'],
 		['(free(?: \\d+| self)?)', 'free'],
 		['(self)', 'target', 'human-target.png'],
 		['reflect()', 'reflect', 'shield-reflect.png'],
 		['(R1)', 'unit-rank', 'rank-1.png'],
 		['(R2)', 'unit-rank', 'rank-2.png'],
 		['(R3)', 'unit-rank', 'rank-3.png'],
+		['(R4)', 'unit-rank', 'rank-4.png'],
 		['trigger()', 'trigger', 'orb-direction.png'],
 		['rounded down()', 'round-down', 'save-arrow.png'],
 		['(move)', 'move', 'move.png'],
@@ -201,8 +203,6 @@ function processAct(unit, key) {
 
 function createCardList(generic, load_fn) {
 	current_index = 0;
-	unit_names_regex = `(${generic.map((u)=>u['Name']).join('|')})`;
-	console.log(unit_names_regex);
 
 	var cont = document.querySelector('#card-list');
 	var html = ''
@@ -222,12 +222,15 @@ function createCardList(generic, load_fn) {
 
 function createUnitList() {
 	cur_card_mode = 'unit';
+	unit_names_regex = `(${data.map((u)=>u['Name']).join('|')})`;
 	createCardList(data, 'loadUnit');
+	document.querySelector('#card-cont').classList.remove('mini');
 }
 
 function createCommSkillsList() {
 	cur_card_mode = 'comm_skills';
 	createCardList(comm_skills, 'loadCommSkill');
+	document.querySelector('#card-cont').classList.add('mini');
 }
 
 function updateIndex(index, gen_data) {
@@ -334,9 +337,9 @@ window.onload = async function(){
 
 function download() {
 	document.querySelector('#card-cont').classList.remove('compress');
-	document.querySelector('#overlay').classList.add('hidden');
+	document.querySelector('.proof-overlay').classList.add('hidden');
 	exportCard(document.getElementById('card-cont'))
-	document.querySelector('#overlay').classList.remove('hidden');
+	document.querySelector('.proof-overlay').classList.remove('hidden');
 }
 
 function bulkExport() {
@@ -385,7 +388,7 @@ function exportA4() {
 			}, 1300);
 		} else {
 			setTimeout(() => {
-				document.querySelector('#overlay').classList.add('hidden');
+				document.querySelector('.proof-overlay').classList.add('hidden');
 				exportCardAddA4(document.getElementById('card-cont'), count);
 			}, 300);
 
@@ -504,6 +507,9 @@ function hide(el) {
 }
 function show(el) {
 	el.style.display = el.attributes['_display'] === 'none' ? 'block': el.attributes['_display'];
+}
+function toggleOverlays() {
+	
 }
 
 // Potential list of emojis https://www.unicode.org/emoji/charts/full-emoji-list.html

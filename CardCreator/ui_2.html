@@ -400,13 +400,16 @@
 			</div>
 
 			<!-- Overlay -->
-			<img style="width: 100%;" id="overlay" class="hidden top block" style="z-index: 9" src="https://www.thegamecrafter.com/overlays/pokerdeck.png" alt="img"/>
+			<div class="proof-overlay hidden top block">
+				<img style="width: 100%;" class="poker" style="z-index: 9" src="https://www.thegamecrafter.com/overlays/pokerdeck.png" alt="img"/>
+				<img style="width: 100%;" class="mini" style="z-index: 9" src="https://www.thegamecrafter.com/overlays/minideck.png" alt="img"/>	
+			</div>
 		</div>
 
 		<!-- Action bottons -->
 		<div class="buttons-cont">
 			<span>Toggles</span> <br>
-			<button onclick="document.querySelector('#overlay').classList.toggle('hidden'); document.querySelector('#card-cont').classList.toggle('compress')">Overlay</button> 
+			<button onclick="document.querySelector('.proof-overlay').classList.toggle('hidden'); document.querySelector('#card-cont').classList.toggle('compress')">Overlay</button> 
 			<br>
 			
 			<br>

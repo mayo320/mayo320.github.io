@@ -40,7 +40,18 @@ body {
 	display: none !important;
 }
 #card-cont {
-	width: 825px; height: 1125px; 
+	width: 825px; height: 1125px;
+	.proof-overlay {
+		.mini {display: none;}
+		.poker {display: block;}
+	}
+	&.mini {
+		width: 600px; height: 825px;
+		.proof-overlay {
+			.mini {display: block;}
+			.poker {display: none;}
+		}
+	}
 	overflow: hidden;
 	display: flex;
 
@@ -54,6 +65,9 @@ body {
 }
 #card-cont.compress {
 	width: 755px; height: 1055px;
+	&.mini {
+		width: 530px; height: 755px;
+	}
 
 	/*35px bleed*/
 	.card-border, .view {
@@ -212,7 +226,7 @@ body {
 
 	.hr {
 		background: linear-gradient(90deg, transparent 0%, gold 50%, transparent 100%);
-		height: 1px;
+		min-height: 1px;
 		width: 100%;
 		min-width: 200px;
 	}
@@ -841,14 +855,27 @@ body {
 	}
 	.phase {
 		font-weight: bold;
+		background: gray;
+		padding-left: 4px; padding-right: 4px;
+		font-size: smaller;
 	}
 	.immunity, .resist {
 		border: 1px solid gray;
 	    padding: 0;
-	    padding-left: 4px;
 		border-radius: 0px;
 	    display: inline-block;
 	    line-height: 1.1;
+	    .value {
+	    	display: flex;
+	    	flex-wrap: wrap;
+	    	&:before {
+				content: 'IMM';
+				color: gray;
+				font-size: smaller;
+				padding-right: 6px;
+	    		padding-left: 4px;
+			}
+	    }
 		.sp {
 			display: inline-block;
 		}
@@ -856,11 +883,6 @@ body {
 			border-radius: 0;
 			margin: 0;
 		}
-	}
-	.immunity:before {
-		content: 'IMM ';
-		color: gray;
-		font-size: smaller;
 	}
 	.resist:before {
 		content: 'RES ';
@@ -871,6 +893,7 @@ body {
 		text-transform: uppercase;
 		font-size: smaller;
 		text-shadow: none;
+		padding-left: 4px; padding-right: 4px;
 	}
 	.persistent {
 		background: lightblue;
@@ -931,6 +954,11 @@ body {
 		&::after {
 			content: ':';
 		}
+	}
+	.unit-name {
+		padding-right: 6px;
+		font-style: italic;
+		font-family: Georgia, serif;
 	}
 }
 .level-star {
@@ -1064,5 +1092,9 @@ body {
 	.op {
 		/*rotate: 180deg;*/
 		transform: rotate(180deg);
+	}
+	.hr {
+		text-align: center; color: black;
+		font-style: italic;
 	}
 }
