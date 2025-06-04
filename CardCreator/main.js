@@ -264,12 +264,19 @@ function loadRowGeneric(gen_data) {
 		// Mutate classes
 		var classes = document.querySelectorAll('.class-' + k);
 		classes.forEach((ele) => {
-			original = ele.attributes['_class']
-			if (original === undefined) {
-				original = ele.classList.toString()
-				ele.attributes['_class'] = original
+			_class = ele.attributes['_class'];
+			if (_class === undefined) {
+				_class = {
+					'original': ele.classList.toString()
+				};
 			}
-			ele.classList = original + ` c${gen_data[k]} ${gen_data[k]}`
+			_class[k] = ` c${gen_data[k]} ${gen_data[k]}`;
+			ele.attributes['_class'] = _class;
+
+			ele.classList = '';
+			for (c in _class) {
+				ele.classList += ' ' + _class[c];
+			}
 		});
 
 		// If exists
