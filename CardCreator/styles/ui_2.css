@@ -148,11 +148,11 @@ body {
 			flex-direction: column;
 
 			position: absolute;
-			color: white; text-shadow: 0 0 10px cyan;
 			text-align: center;
 
 			.top-cont, .deck, .discard {
 				/*font-weight: bold;*/
+				color: white; text-shadow: 0 0 10px cyan;
 				font-size: 22px;
 				margin-top: 30px;
 				background: linear-gradient(to left, transparent, black, transparent);
@@ -182,7 +182,16 @@ body {
 				font-size: 20px;
 				padding-bottom: 60px;
 				padding-top: 40px;
-
+				position: relative;
+				.text-Flavor {
+					color: white;
+					text-shadow: 0 0 10px black;
+					font-style: italic;
+					padding: 0 80px;
+					/*position: absolute;*/
+					top: -50px;
+					left: 0;
+				}
 				.text-Name {
 					position: relative;
 					font-style: italic;
