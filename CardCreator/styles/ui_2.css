@@ -190,11 +190,11 @@ body {
 				padding-top: 40px;
 				position: relative;
 				.text-Flavor {
-					color: white;
+					color: lightgray;
 					text-shadow: 0 0 10px black;
 					font-style: italic;
+					font-weight: lighter;
 					padding: 0 80px;
-					/*position: absolute;*/
 					top: -50px;
 					left: 0;
 				}
