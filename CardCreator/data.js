@@ -23,7 +23,7 @@ var CHIT_DATA = {
 	'Stun': [8, '1F4AB', 'Skip <i class="material-icons">electric_bolt</i>/<i class="material-icons">security</i>',
 		['layers_clear', 'exposure_neg_1']
 	],
-}
+};
 
 const INSTRUCTIONS = {
 'Instructions': `
@@ -51,8 +51,8 @@ const INSTRUCTIONS = {
 	<div>Cleanse X -X debuff tokens</div>
 </div>
 	Revive Unit, clear all status tokens;
-	Empower Grant ATK 1 Empower+ Grant ATK 2 (Act:-1);
-	Fortify Grant DEF 1 Fortify+ Grant DEF 2 (Act:-1);
+	Empower Grant ATK 1 (Act:-1) Empower+ Grant ATK 2 (Act:flip);
+	Fortify Grant DEF 1 (Act:-1) Fortify+ Grant DEF 2 (Act:flip);
 	Stealth X Cannot be targeted or damaged (Act:-1 or AOE X damaged:-1);
 	IMM some_debuff; Immunity to status;
 	Resist some_debuff; Resistance to status, Act:-1 of that status;

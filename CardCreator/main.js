@@ -343,6 +343,7 @@ window.onload = async function(){
 	}
 
 	document.querySelector('.buttons-cont button[view="card"]').click();
+	toggleCreator('#card-creator');
 }
 
 function download() {
@@ -492,7 +493,7 @@ function exportChit(element) {
 
 function toggleCreator(pg) {
 	document.querySelectorAll('.creator').forEach((x) => hide(x));
-	hide(document.querySelector(pg));
+	show(document.querySelector(pg));
 	init();
 }
 
