@@ -11,7 +11,7 @@ function init() {
 	
 	createUnitList();
 	loadUnit(data.length-1);
-	loadCommSkill(0);
+	// loadCommSkill(0);
 	
 	setChitButtons();
 	setChit('Poison');
@@ -103,17 +103,17 @@ function processAct(unit, key) {
 		['(tactic|act|defend|defeat)', 'action'],
 		['((?:\\d+/)?\\d* ?HP)', 'HP'],
 		['melee()', 'melee'],
-		['any rng (\\d+)', 'rng', 'any.png'],
-		['far rng (\\d+)', 'rng', 'far.png'],
-		['rng (\\d+)', 'rng', 'overhead.png'],
-		['aoe ([RC\\d+])?', 'aoe', 'platform.png'],
+		['any rng (\\d+|X)', 'rng', 'any.png'],
+		['far rng (\\d+|X)', 'rng', 'far.png'],
+		['rng (\\d+|X)', 'rng', 'overhead.png'],
+		['aoe ([XRC\\d+])?', 'aoe', 'platform.png'],
 		['ATK (\\d+|X\\+R|X|R)?', 'atk', 'a_t_k_.png'],
-		['\\+?(?:\\d+ )?def ?(\\d+)?', 'def', 'shield.png'],
-		['(\\d+ )?true (?:damage|dmg)', 'true-dmg', 'open-wound.png'],
+		['\\+?(?:\\d+ )?def (\\d+|X)?', 'def', 'shield.png'],
+		['(\\d+ |X )?true (?:damage|dmg)', 'true-dmg', 'open-wound.png'],
 		['(ADV)', 'adv', 'dice.png'],
 		['(\\+?SPD ?\\d+)', 'spd'],
 		['IMM( .*)(?:;|\n<br>)?', 'immunity'], // imm should be above statuses
-		['resist( .*);?', 'resist'], // imm should be above statuses
+		['resist( .*)(?:;|\n<br>)?', 'resist'], // imm should be above statuses
 		[status_re('heal'), 'heal', 'heart-plus.png'],
 		[status_re('cleanse'), 'cleanse', 'sparkles.png'],
 		[status_re('empower(?:ed)?'), 'empower buff', 'sword-brandish.png'],
@@ -124,6 +124,7 @@ function processAct(unit, key) {
 		[status_re('stun(?:ned)?'), 'stun debuff'],
 		[status_re('chill(?:ed)?'), 'chill debuff'],
 		[status_re('shock(?:ed)?'), 'shock debuff'],
+		[status_re('some_debuff'), 'some_debuff debuff'],
 		['(revives?)', 'revive'],
 		['(persistent)', 'persistent', 'infinity.png'],
 		['(once(?: / (?:round|turn))?)', 'once'],
@@ -144,10 +145,12 @@ function processAct(unit, key) {
 		['discard (\\d+|X)(?: cards?)?', 'discard-card', 'card-discard.png'],
 		['(trash(?:ed)?)', 'trash', 'card-trash.png'],
 		['(spawn|summon)', 'action'],
-		['(\\d+|R)(?:VP)', 'vp'],
+		['(\\d+)(?:VP)', 'vp'],
+		['(R)ank(?:VP)', 'vp'],
 		['(\\d+ap)', 'ap'],
 		['(-\\d+G)', 'no-g'], // above G
-		['(\\d+|R)(?:G)', 'g'],
+		['(\\d+)(?:G)', 'g'],
+		['(R)ank(?:G)', 'g'],
 		['gold( )', 'g'],
 		['(\\+?(?:\\d+)?RP)', 'rp'],
 		['(\\w+ Phase(?: start| end)?)', 'phase'],
@@ -159,7 +162,7 @@ function processAct(unit, key) {
 		['(R2)', 'unit-rank', 'rank-2.png'],
 		['(R3)', 'unit-rank', 'rank-3.png'],
 		['(R4)', 'unit-rank', 'rank-4.png'],
-		['trigger()', 'trigger', 'orb-direction.png'],
+		['trigger ()', 'trigger', 'orb-direction.png'],
 		['rounded down()', 'round-down', 'save-arrow.png'],
 		['(move)', 'move', 'move.png'],
 		['\\[(\\w+)\\]', 'skill'],

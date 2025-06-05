@@ -310,116 +310,7 @@
 
 			<div class="view" id='instructions2' style="background: black;">
 				<div style="padding: 16px 26px; font-size: 24px;" class="action">
-					<div class="content">
-						<span class="sp action">Tactic<i class="material-icons" style="text-shadow: 0 0 10px orange;"> psychology</i></span>
-					</div>
-					<div class="content">
-						<span class="sp action">Act<i class="material-icons" style="text-shadow: 0 0 10px cyan;"> electric_bolt</i></span>
-					</div>
-					<div class="content">
-						<span class="sp action">Defend<i class="material-icons" style="text-shadow: 0 0 10px cyan;"> security</i></span>
-					</div>
-					<div class="content">
-						<span class="sp action">Defeat<i class="material-icons" style="text-shadow: 0 0 10px red;"> cancel</i></span>
-					</div>
-					<div class="content">
-						<span class="sp action">Win<i class="material-icons" style="text-shadow: 0 0 10px green;"> check_circle</i></span>
-					</div>
-					<div class="content">
-						<span class="sp rng">RNG X</span>
-						<span>Target nearest unit up to X tiles.</span>
-					</div>
-					<div class="content">
-						<span class="sp far">FAR</span>
-						<span>Target furthest.</span>
-					</div>
-					<div class="content">
-						<span class="sp far">Any</span>
-						<span>Target any unit in range.</span>
-					</div>
-					<div class="content">
-						<span class="sp melee">Melee</span>
-						<span>Target nearest unit.</span>
-					</div>
-					<div class="content">
-						<span class="sp aoe">AOE X</span>
-						<span>Area spanning X tiles from origin; R=row; C=column.</span>
-					</div>
-					<div class="content">
-						<span class="sp empower">Empower X</span>
-						<span>Grant ATK/token.</span>
-					</div>
-					<div class="content">
-						<span class="sp fortify">Fortify X</span>
-						<span>Grant DEF/token.</span>
-					</div>
-					<div class="content">
-						<span class="sp adv">ADV</span>
-						<span>Reroll any number of dice during ATK/DEF (once).</span>
-					</div>
-					<div class="content">
-						<span class="sp burn">burn X</span>
-						<span>Deal X True Damage on Act, then remove 1 token.</span>
-					</div>
-					<div class="content">
-						<span class="sp poison">poison X</span>
-						<span>Deal ATK X on Act.</span>
-					</div>
-					<div class="content">
-						<span class="sp chill">chill X</span>
-						<span>Reduce 1 ATK/token.</span>
-					</div>
-					<div class="content">
-						<span class="sp shock">Shock</span>
-						<span>Reduce 1 DEF/token.</span>
-					</div>
-					<div class="content">
-						<span class="sp stun">stun</span>
-						<span>Skip turn. (Can't stack)</span>
-					</div>
-					<div class="content">
-						<span class="sp cleanse">cleanse X</span>
-						<span>Remove X debuff tokens.</span>
-					</div>
-					<div class="content">
-						<span class="sp heal">Heal X</span>
-						<span>Heal X HP.</span>
-					</div>
-					<div class="content">
-						<span class="sp stealth">Stealth X</span>
-						<span>Cannot be targeted until X Acts.</span>
-					</div>
-					<div class="content">
-						<span class="sp reveal">Reveal X</span>
-						<span>Reveal unit with Fog of War, and remove X Stealth.</span>
-					</div>
-					<div class="content">
-						<span class="sp once">Once</span>
-						<span>Can only be triggered once per round.</span>
-					</div>
-					<div class="content">
-						<span class="sp persistent">persistent</span>
-						<span>Ongoing effect, cannot discard while active.</span>
-					</div>
-					<div class="content">
-						<span class="sp nullify">Nullify</span>
-						<span>Nullify ATK, but take true dmg/debuffs.</span>
-					</div>
-					<div class="content">
-						<span class="sp true-dmg">true damage</span>
-						<span>Bypasses DEF, absolute damage.</span>
-					</div>
-					<div class="content">
-						<span class="sp revive">Revive</span>
-						<span>Revive unit, remove all status tokens.</span>
-					</div>
-					<div class="content">
-						<span class="sp immunity">X</span>
-						<span>Immunity to X.</span>
-					</div>
-					<div class="content">
-						<span class="sp resist">X</span>
-						<span>End of Act: remove 1 X. (Can't stack)</span>
+					<div class="line text-Instructions process">
 					</div>
 				</div>
 			</div>
@@ -442,7 +333,7 @@
 			<button view='card' onclick="showView(this); createUnitList();">Card (F)</button> <br>
 			<button view='card-back' onclick="showView(this)">Card (B)</button> <br>
 			<button view='instructions' onclick="outfile_name = 'instructions[face,2]'; showView(this)">Instructions (F)</button> <br>
-			<button view='instructions2' onclick="outfile_name = 'instructions[back,2]'; showView(this)">Instructions (B)</button> <br>
+			<button view='instructions2' onclick="outfile_name = 'instructions[back,2]'; showView(this); loadRowGeneric(INSTRUCTIONS)">Instructions (B)</button> <br>
 			<button view='comm-skill' onclick="showView(this); createCommSkillsList();">Comm Skill (F)</button> <br>
 
 			<br>

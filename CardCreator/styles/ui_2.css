@@ -88,6 +88,12 @@ body {
 #card-creator.show-score .score-detail {
 	display: block;
 }
+.hr {
+	background: linear-gradient(90deg, transparent 0%, gold 50%, transparent 100%);
+	min-height: 1px;
+	width: 100%;
+	min-width: 200px;
+}
 .card-count {
 	&.c1::before{content: '•';}
 	&.c2::before{content: '••';}
@@ -307,13 +313,6 @@ body {
 		top: 0; left: 0;
 	}
 
-	.hr {
-		background: linear-gradient(90deg, transparent 0%, gold 50%, transparent 100%);
-		min-height: 1px;
-		width: 100%;
-		min-width: 200px;
-	}
-
 	.overlay {
 		position: absolute; left: 0; top: 0;
 		height: 100%; width: 100%;
@@ -394,6 +393,7 @@ body {
 				}
 				&.if-Act {
 					flex-grow: 1;
+					min-width: 100px;
 					/*border: 1px solid darkgreen;*/
 					/*background: rgba(30,60,30,0.6);*/
 				}
@@ -795,13 +795,15 @@ body {
 		color: pink;
 	}
 	.debuff {
-		font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
 		margin: 0 5px;
 		padding: 0 4px;
 		border-radius: 35px;
 		text-shadow: 0 0 8px black;
 		.value {
 			padding-right: 12px;
+		}
+		&:before {
+			font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
 		}
 	}
 	.buff {
@@ -840,18 +842,15 @@ body {
 	}
 	.shock {
 		background: darkblue;
-		.value {
-			/*color: darkblue;*/
-		}
 		&::before {
 			content: '\26A1';
 		}
 	}
-	.all-debuffs {
-		font-style: italic;
-		background: linear-gradient(90deg, darkred 0%, darkgreen 20%, dimgray 40%, steelblue 60%, palegoldenrod 80%, violet 100%);
-		padding: 0 10px;
-		text-shadow: 0 0 5px gold;
+	.some_debuff {
+		background: linear-gradient(to bottom right, darkred, darkblue);
+		&::before {
+			content: '❔';
+		}
 	}
 	.true-dmg {
 		text-shadow: 0 0 8px red;
@@ -865,9 +864,6 @@ body {
 	}
 	.atk {
 		color: orange;
-		/*&::before {
-			content: '\1F4A5 ';
-		}*/
 	}
 	.def {
 		color: lightblue;
@@ -968,10 +964,8 @@ body {
 			margin: 0;
 		}
 	}
-	.resist:before {
-		content: 'RES ';
-		color: gray;
-		font-size: smaller;
+	.resist .value:before {
+		content: 'RES';
 	}
 	.persistent, .once {
 		text-transform: uppercase;
@@ -1123,11 +1117,11 @@ body {
 	}
 }
 #instructions2 {
-	.content {
+	.line {
 		/*margin: 4px 2px;*/
 		padding: 6px 4px;
 		margin-left: -8px;
-		margin-top: 2px;
+		margin-top: -4px;
 		display: inline-block;
 		max-width: none;
 		/*border: 1px solid gray;*/
@@ -1136,17 +1130,18 @@ body {
 		.sp {
 			font-style: normal;
 		}
-		.action {
-			font-size: 26px;
-			font-style: italic;
-		}
-		.action .material-icons {
-			font-size: 30px;
-		}
 
-		/**/
-		background: linear-gradient(90deg, rgb(62, 53, 60) 0%, rgba(0,0,0,0) 150px);
-		border-radius: 4px;
+		.sp:not(.debuff) {
+			/*background: linear-gradient(90deg, rgb(62, 53, 60) 0%, rgba(0,0,0,0) 150px);*/
+			border-radius: 4px;
+		}
+		.hr {
+			margin: 6px 0;
+		}
+		.section {
+			display: flex;
+			justify-content: space-between;
+		}
 	}
 }
 
