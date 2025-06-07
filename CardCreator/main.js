@@ -15,6 +15,8 @@ function init() {
 	
 	setChitButtons();
 	setChit('Poison');
+
+	genCardStats();
 }
 
 function exportCardAddA4(element, count) {
@@ -521,6 +523,29 @@ function show(el) {
 }
 function toggleOverlays() {
 	
+}
+
+function genCardStats() {
+	const class_dis = {};
+	for (k in data) {
+		const unit = data[k];
+		const cls = unit['Class'];
+		const cnt = unit['Count'];
+		const rnk = unit['Rank'] - 1;
+
+		if (!(`cls-${cls}` in class_dis)) {
+			class_dis[`cls-${cls}`] = 0;
+			class_dis[`cnt-${cls}`] = 0;
+			class_dis[`rnk-${cls}`] = [0,0,0,0];
+		}
+		
+		class_dis[`cls-${cls}`]++;
+		class_dis[`cnt-${cls}`] += Number(cnt);
+		class_dis[`rnk-${cls}`][rnk] += Number(cnt);
+	}
+	loadRowGeneric({
+		...class_dis
+	});
 }
 
 // Potential list of emojis https://www.unicode.org/emoji/charts/full-emoji-list.html

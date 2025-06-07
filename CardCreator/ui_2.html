@@ -21,6 +21,7 @@
 		</style>
 		<button onclick="toggleCreator('#card-creator')">Card (Units) Creator</button>
 		<button onclick="toggleCreator('#chit-creator')">Chit (Status) Creator</button>
+		<button onclick="toggleCreator('#card-stats')">Card Statistics</button>
 	</div>
 
 	<!-- Card creator -->
@@ -223,7 +224,7 @@
 			</div>
 
 			<!-- Commander skill -->
-			<div id='comm-skill' class="view card-border">
+			<div id='comm-skill' class="view card-border class-Faction">
 				<div class="card">
 					<!-- Unit art -->
 					<img class="img-Img" src="https://ideogram.ai/assets/image/lossless/response/wmCkuBYqQD2bIf24HgRsQA" alt="img"/>
@@ -474,6 +475,54 @@
 			<img id='chit-overlay' src="https://www.thegamecrafter.com/overlays/mediumcirclechit.png"/>
 		</div>
 
+	</div>
+
+	<!-- Card Statistics -->
+	<div id="card-stats" class="creator">
+		<h3>Class Distribution</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Class</th>
+					<th>By Type</th>
+					<th>By Count</th>
+					<th>Count/Rank</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>🛡️Warrior</th>
+					<td class="text-cls-Warrior"></td>
+					<td class="text-cnt-Warrior"></td>
+					<td class="text-rnk-Warrior"></td>
+				</tr>
+				<tr>
+					<th>🗡️Rogue</th>
+					<td class="text-cls-Rogue"></td>
+					<td class="text-cnt-Rogue"></td>
+					<td class="text-rnk-Rogue"></td>
+				</tr>
+				<tr>
+					<th>🪄Mage</th>
+					<td class="text-cls-Mage"></td>
+					<td class="text-cnt-Mage"></td>
+					<td class="text-rnk-Mage"></td>
+				</tr>
+				<tr>
+					<th>🏹Ranger</th>
+					<td class="text-cls-Ranger"></td>
+					<td class="text-cnt-Ranger"></td>
+					<td class="text-rnk-Ranger"></td>
+				</tr>
+				<tr>
+					<th>🍀Support</th>
+					<td class="text-cls-Support"></td>
+					<td class="text-cnt-Support"></td>
+					<td class="text-rnk-Support"></td>
+				</tr>
+			</tbody>
+		</table>
+		
 	</div>
 
 </body>

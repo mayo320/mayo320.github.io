@@ -15,6 +15,13 @@
 .emoji {
 	font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
 }
+table {
+	border-collapse: collapse;
+	td, th {
+		border: 1px solid gray;
+		padding: 2px 4px;
+	}
+}
 body {
 	font-family: Trebuchet MS, sans-serif;
 	line-height: 1.25;
@@ -103,7 +110,7 @@ body {
 .Nature .hr { background: linear-gradient(90deg, transparent, 
 	lightgreen 50%, transparent); }
 .Construct .hr { background: linear-gradient(90deg, transparent, 
-	brown 50%, transparent); }
+	chocolate 50%, transparent); }
 
 .card-count {
 	&.c1::before{content: '•';}
@@ -609,7 +616,7 @@ body {
 	&.Construct, &.construct {
 		color: white;
 		font-style: italic;
-		text-shadow: 0 0 10px brown;
+		text-shadow: 0 0 10px chocolate;
 		font-family: Georgia, serif;
 	}
 	&.Nature, &.nature {
@@ -1195,3 +1202,9 @@ body {
 		font-style: italic;
 	}
 }
+
+
+#card-stats {
+	font-size: 20px;
+}
+
