@@ -622,7 +622,7 @@ body {
 	&.Nature, &.nature {
 		color: white;
 		font-style: italic;
-		text-shadow: 0 0 10px green;
+		text-shadow: 0 0 10px lightgreen;
 		font-family: Georgia, serif;
 	}
 }
