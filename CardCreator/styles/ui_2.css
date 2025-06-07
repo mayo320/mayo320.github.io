@@ -94,6 +94,17 @@ body {
 	width: 100%;
 	min-width: 200px;
 }
+.Celestial .hr { background: linear-gradient(90deg, transparent, 
+	gold 50%, transparent); }
+.Chaos .hr { background: linear-gradient(90deg, transparent, 
+	violet 50%, transparent); }
+.Order .hr { background: linear-gradient(90deg, transparent, 
+	cyan 50%, transparent); }
+.Nature .hr { background: linear-gradient(90deg, transparent, 
+	lightgreen 50%, transparent); }
+.Construct .hr { background: linear-gradient(90deg, transparent, 
+	brown 50%, transparent); }
+
 .card-count {
 	&.c1::before{content: '•';}
 	&.c2::before{content: '••';}
@@ -1134,6 +1145,9 @@ body {
 		.sp:not(.debuff) {
 			/*background: linear-gradient(90deg, rgb(62, 53, 60) 0%, rgba(0,0,0,0) 150px);*/
 			border-radius: 4px;
+		}
+		.sp.buff {
+			margin-bottom: 4px;
 		}
 		.hr {
 			margin: 6px 0;
