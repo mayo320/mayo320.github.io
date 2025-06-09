@@ -103,7 +103,7 @@ function processAct(unit, key) {
 	// Regex, class, icon?
 	var matches = [
 		['(tactic|act|defend|defeat)', 'action'],
-		['((?:\\d+/)?\\d* ?HP)', 'HP'],
+		['((?:\\d+ )?HP)', 'HP'],
 		['melee()', 'melee'],
 		['any rng (\\d+|X)', 'rng', 'any.png'],
 		['far rng (\\d+|X)', 'rng', 'far.png'],
@@ -169,6 +169,7 @@ function processAct(unit, key) {
 		['(move)', 'move', 'move.png'],
 		['\\[(\\w+)\\]', 'skill'],
 		['(swap)', 'swap', 'card-exchange.png'],
+		['(\\(max \\d+\\))', 'max-x'],
 		[unit_names_regex, 'unit-name', 'ace.png']
 	];
 	text = text.replaceAll(';', '\n<br>');

@@ -1056,6 +1056,11 @@ body {
 		font-style: italic;
 		font-family: Georgia, serif;
 	}
+	.max-x {
+		color: gray;
+		font-style: italic;
+		text-transform: lowercase;
+	}
 }
 .level-star {
 	font-size: 90px;
