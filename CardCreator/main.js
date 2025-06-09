@@ -420,14 +420,14 @@ function exportA4() {
 				// export last paper
 				setTimeout(() => {
 					// Instructions front
-					showView(document.querySelector('#instructions'));
+					document.querySelector('button[view="instructions"]').click();
 					exportCardAddA4(document.getElementById('card-cont'), 2);
 
 					// Instructions back
 					setTimeout(() => {
-						showView(document.querySelector('#instructions2'));
+						document.querySelector('button[view="instructions2"]').click();
 						exportCardAddA4(document.getElementById('card-cont'), 2);
-					}, 300);
+					}, 500);
 
 					setTimeout(() => {
 						outfile_name = `a4-${current_index}`;

@@ -561,12 +561,14 @@ body {
 	width: 2268px;
 	height: 3167px;
 	border: 1px solid black;
+	/*overflow: hidden;*/
 	position: absolute;
 	left: -5000px;
 	top: -5000px;
 
 	canvas {
 		margin: -3px 1px 0 0;
+		background: gray;
 	}
 }
 .block {
