@@ -420,12 +420,12 @@ function exportA4() {
 				// export last paper
 				setTimeout(() => {
 					// Instructions front
-					document.querySelector('#instructions').classList.remove('hidden');
+					showView(document.querySelector('#instructions'));
 					exportCardAddA4(document.getElementById('card-cont'), 2);
 
 					// Instructions back
 					setTimeout(() => {
-						document.querySelector('#instructions2').classList.remove('hidden');
+						showView(document.querySelector('#instructions2'));
 						exportCardAddA4(document.getElementById('card-cont'), 2);
 					}, 300);
 
