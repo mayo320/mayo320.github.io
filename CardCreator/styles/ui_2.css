@@ -1202,9 +1202,13 @@ body {
 		/*rotate: 180deg;*/
 		transform: rotate(180deg);
 	}
+	.separator {
+		text-align: center;
+	}
 	.hr {
 		text-align: center; color: black;
 		font-style: italic;
+		height: 2px;
 	}
 }
 
