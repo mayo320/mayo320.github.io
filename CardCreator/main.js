@@ -383,13 +383,17 @@ function bulkExport() {
 var a4_count = 0
 function exportA4() {
 	current_index -= 1;
+	var cards_per_page = 9;
+	if (cur_card_mode === 'comm_skills') {
+		cards_per_page = 16;
+	}
 
 	function exportUnitA4() {
 		current_index += 1;
 		var card = loadCard(current_index);
 		var count = Number(card['Count']);
 
-		if (a4_count + count > 9) {
+		if (a4_count + count > cards_per_page) {
 			// export paper
 			outfile_name = `a4-${current_index - 1}`;
 			exportCard(document.getElementById('a4'));
