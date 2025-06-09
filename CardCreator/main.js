@@ -416,7 +416,7 @@ function exportA4() {
 				setTimeout(() => {
 					exportUnitA4();
 				}, 1300);
-			} else if (0) {
+			} else if (cur_card_mode === 'unit') {
 				// export last paper
 				setTimeout(() => {
 					// Instructions front
