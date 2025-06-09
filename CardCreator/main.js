@@ -303,20 +303,23 @@ function loadUnit(index) {
 	constructScoreUi(unit);
 	outfile_name = unit['Name'] + '[face,'+unit['Count']+']'
 	loadRowGeneric(unit);
+	return unit;
 }
 
 function loadCommSkill(index) {
 	index = updateIndex(index, comm_skills);
 	var skill = comm_skills[index];
 	loadRowGeneric(skill);
+	return skill;
 }
 
 function loadCard(index) {
 	if (cur_card_mode === 'unit') {
-		loadUnit(index);
+		return loadUnit(index);
 	} else if (cur_card_mode === 'comm_skills') {
-		loadCommSkill(index);
+		return loadCommSkill(index);
 	}
+	return {};
 }
 
 window.onload = async function(){
@@ -383,10 +386,8 @@ function exportA4() {
 
 	function exportUnitA4() {
 		current_index += 1;
-		loadCard(current_index);
-
-		var unit = data[current_index];
-		var count = Number(unit['Count']);
+		var card = loadCard(current_index);
+		var count = Number(card['Count']);
 
 		if (a4_count + count > 9) {
 			// export paper
@@ -411,7 +412,7 @@ function exportA4() {
 				setTimeout(() => {
 					exportUnitA4();
 				}, 1300);
-			} else {
+			} else if (0) {
 				// export last paper
 				setTimeout(() => {
 					// Instructions front
