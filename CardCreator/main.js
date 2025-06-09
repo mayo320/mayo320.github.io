@@ -29,8 +29,6 @@ function exportCardAddA4(element, count) {
 	    item.style.height= null;
 	});
 
-	var html = element.innerHTML.trim();
-
 	html2canvas(element, {
 		useCORS: true,
 		width: element.clientWidth,
@@ -53,15 +51,16 @@ function exportCardAddA4(element, count) {
 
 function exportCard(element) {
 	// Draw element on canvas
-	var html = element.innerHTML.trim();
-
 	html2canvas(element, {
 		useCORS: true,
 		width: element.clientWidth,
 		height: element.clientHeight,
-		scale: 1
+		scale: 1,
+		allowTaint : true,
+	    useCors : true
 	}).then(function (canvas) {
 		document.body.appendChild(canvas);
+		console.log(canvas);
 
 		var img = canvas.toDataURL('image/png');
 		var link = document.createElement('a');
@@ -363,7 +362,7 @@ function bulkExport() {
 	function exportUnit() {
 		current_index += 1;
 		console.log('Exporting ' + current_index);
-		loadUnit(current_index);
+		loadCard(current_index);
 		setTimeout(() => {
 			download();
 		}, 300);
@@ -384,7 +383,7 @@ function exportA4() {
 
 	function exportUnitA4() {
 		current_index += 1;
-		loadUnit(current_index);
+		loadCard(current_index);
 
 		var unit = data[current_index];
 		var count = Number(unit['Count']);
