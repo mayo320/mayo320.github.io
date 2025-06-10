@@ -49,13 +49,23 @@ body {
 #card-cont {
 	width: 825px; height: 1125px;
 	.proof-overlay {
-		.mini {display: none;}
 		.poker {display: block;}
+		.mini {display: none;}
+		.chit {display: none;}
 	}
 	&.mini {
 		width: 600px; height: 825px;
 		.proof-overlay {
 			.mini {display: block;}
+			.chit {display: none;}
+			.poker {display: none;}
+		}
+	}
+	&.chit {
+		width: 300px; height: 300px;
+		.proof-overlay {
+			.mini {display: none;}
+			.chit {display: block;}
 			.poker {display: none;}
 		}
 	}
@@ -71,9 +81,12 @@ body {
 	}
 }
 #card-cont.compress {
-	width: 755px; height: 1055px;
+	width: 765px; height: 1065px;
 	&.mini {
-		width: 530px; height: 755px;
+		width: 540px; height: 765px;
+	}
+	&.chit {
+		width: 240px; height: 240px;
 	}
 
 	/*35px bleed*/
@@ -1238,3 +1251,40 @@ body {
 	font-size: 20px;
 }
 
+
+/*Chit*/
+#status-chit {
+	color: white;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	.line {
+		font-size: 20px;
+		margin: 0;
+		padding: 0;
+		line-height: 1;
+	}
+	.debuff, .buff {
+		font-size: 60px;
+		height: 100px; width: 100px;
+		text-align: center;
+		line-height: 1.5;
+	}
+	.debuff {
+		border-radius: 50%;
+	}
+	.icon {
+		height: 30px; width: 30px;
+	}
+	.buff .icon {
+		height: 100px; width: 100px;
+	}
+	.text-Type {
+		/*opacity: 0.75;*/
+		border: 1px solid gray;
+		padding: 1px 4px;
+		margin-top: 4px;
+	}
+}

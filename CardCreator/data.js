@@ -1,29 +1,54 @@
-var CHIT_DATA = {
-	'Poison': [18, '1F480', '<i class="material-icons">electric_bolt</i>: DMG',
-		['layers']
-	],
-	'Burn': [18, '1F525', '<i class="material-icons">electric_bolt</i>: True DMG',
-		['layers', 'exposure_neg_1']
-	],
-	'Chill': [18, '2744', '- ATK',
-		['layers']
-	],
-	'Shock': [18, '26A1', '- DEF',
-		['layers']
-	],
-	'Fortify': [18, '1F6E1', '+ DEF',
-		['layers']
-	],
-	'Empower': [18, '2694', '+ ATK',
-		['layers']
-	],
-	'Stealth': [8, '1F300', 'Untargetable',
-		['layers', 'exposure_neg_1']
-	],
-	'Stun': [8, '1F4AB', 'Skip <i class="material-icons">electric_bolt</i>/<i class="material-icons">security</i>',
-		['layers_clear', 'exposure_neg_1']
-	],
-};
+var CHIT_DATA = [
+	{
+		'Name': 'Poison',
+		'Count': 15,
+		'Text': 'Poison; Act: Take ATK 1',
+		'Type': '♾️/ 0'
+	},
+	{
+		'Name': 'Burn',
+		'Count': 15,
+		'Text': 'Burn; Act: Take 1 True Damage',
+		'Type': '♾️/ -1'
+	},
+	{
+		'Name': 'Chill',
+		'Count': 15,
+		'Text': 'Chill; Reduce ATK 1',
+		'Type': '♾️/ 0'
+	},
+	{
+		'Name': 'Shock',
+		'Count': 15,
+		'Text': 'Shock; Reduce DEF 1',
+		'Type': '♾️/ 0'
+	},
+	{
+		'Name': 'Stun',
+		'Count': 4,
+		'Text': 'Stun; Skip Act',
+		'Type': '1 / -1'
+	},
+	{
+		'Name': 'Fortify',
+		'Count': 15,
+		'Text': 'Fortify; DEF 1',
+		'Type': '2 / -1'
+	},
+	{
+		'Name': 'Empower',
+		'Count': 15,
+		'Text': 'Empower; +ATK 1',
+		'Type': '2 / -1'
+	},
+	{
+		'Name': 'Stealth',
+		'Count': 8,
+		'Text': 'Stealth; Cannot be targeted',
+		'Type': '♾️/ -1 / -HP'
+	},
+];
+
 
 const INSTRUCTIONS = {
 'Instructions': `
@@ -59,15 +84,16 @@ const INSTRUCTIONS = {
 	IMM some_debuff; Immunity to status;
 	Resist some_debuff; Resistance to status (Act:-1 of that status);
 <div class="hr"></div>
+
+	<div>Burn Act: Take 1 true damage/token (Act:-1)</div>
 <div class="section">
-	<div>Poison Deal ATK 1/token</div>
+	<div>Poison Act: Take ATK 1/token</div>
 	<div>Chill Reduce ATK 1/token</div>
 </div>
 <div class="section">
-	<div>Burn Deal 1 true damage/token (Act:-1)</div>
+	Stun Skip unit's turn (Act:-1);
 	<div>Shock Reduce DEF 1/token</div>
 </div>
-	Stun Skip unit's turn (Act:-1);
 <div class="hr"></div>
 	Once Effect that is triggered one time per round;
 	Persistent Ongoing effect for the round;

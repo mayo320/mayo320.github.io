@@ -19,8 +19,7 @@
 				font-weight: bold;
 			}
 		</style>
-		<button onclick="toggleCreator('#card-creator')">Card (Units) Creator</button>
-		<button onclick="toggleCreator('#chit-creator')">Chit (Status) Creator</button>
+		<button onclick="toggleCreator('#card-creator')">Card Creator</button>
 		<button onclick="toggleCreator('#card-stats')">Card Statistics</button>
 	</div>
 
@@ -107,11 +106,6 @@
 							
 						<div class="lines">
 							<div class="line if-Act class-Rank">
-								<!-- <div class="overlay"
-								style="background: linear-gradient(to bottom right, cyan, transparent 50%); opacity: 0.2;"></div> -->
-								<!-- <div class="overlay"
-								style="background: linear-gradient(to right, yellow, transparent 20%); opacity: 0.15;"></div> -->
-
 								<div class="line-type">
 									<span class="stat if-SPD">
 										<span class="stat-value text-SPD" style="text-shadow: green 0px 0 13px;">
@@ -322,10 +316,17 @@
 				</div>
 			</div>
 
+			<!-- Chit -->
+			<div id="status-chit" class='view'>
+				<span class="line text-Text process"></span>
+				<span class="line text-Type process"></span>
+			</div>
+
 			<!-- Overlay -->
 			<div class="proof-overlay hidden top block">
-				<img style="width: 100%;" class="poker" style="z-index: 9" src="https://www.thegamecrafter.com/overlays/pokerdeck.png" alt="img"/>
-				<img style="width: 100%;" class="mini" style="z-index: 9" src="https://www.thegamecrafter.com/overlays/minideck.png" alt="img"/>	
+				<img style="width: 100%; z-index: 9" class="poker" src="https://www.thegamecrafter.com/overlays/pokerdeck.png" alt="img"/>
+				<img style="width: 100%; z-index: 9" class="mini" src="https://www.thegamecrafter.com/overlays/minideck.png" alt="img"/>
+				<img style="width: 100%; z-index: 9" class='chit' src="https://www.thegamecrafter.com/overlays/mediumcirclechit.png"/>
 			</div>
 		</div>
 
@@ -342,6 +343,7 @@
 			<button view='instructions' onclick="outfile_name = 'instructions[face,2]'; showView(this)">Instructions (F)</button> <br>
 			<button view='instructions2' onclick="outfile_name = 'instructions[back,2]'; showView(this); loadRowGeneric(INSTRUCTIONS)">Instructions (B)</button> <br>
 			<button view='comm-skill' onclick="showView(this); createCommSkillsList();">Comm Skill (F)</button> <br>
+			<button view='status-chit' onclick="showView(this); createStatusList();">Status (F)</button> <br>
 
 			<br>
 			<span>Navigation</span> <br>
@@ -374,111 +376,6 @@
 
 		<!-- A4 exports -->
 		<div id="a4"></div>
-	</div>
-
-	<!-- Chit creator -->
-	<div id='chit-creator' class='creator'>
-		<style type="text/css">
-			.chit-cont {
-				display: inline-block;
-				vertical-align: top;
-				position: relative; width: 300px; height: 300px; background: black;
-				text-align: center;
-				color:white;
-				overflow: hidden;
-				background: black;
-
-				.chit {
-					height: 100%;
-					position: absolute; inset: 0; margin: auto;
-					padding-top: 195px;
-					.emoji {
-						line-height: 0.4;
-						font-size: 100px;
-					}
-					.material-icons {
-						vertical-align: middle;
-						font-size: 20px;
-					}
-					.icons {
-						position: absolute;
-					      right: 70px;
-					      bottom: 240px;
-					      width: 30px;
-						.material-icons {
-							font-size: 26px;
-						}
-					}
-					.text {
-						font-size: 35px;
-						font-family: Trebuchet MS, sans-serif;
-						font-style: italic;
-						text-transform: capitalize;
-						line-height: 1;
-						text-align: center;
-						text-shadow: 0 0 10px;
-					}
-					.subtext {
-						font-size: 20px;
-						opacity: 0.8;
-						line-height: 1;
-					}
-					.chill {
-						text-shadow: 0 0 50px cyan;
-					}
-					.poison {
-						text-shadow: 0 0 50px lightgreen;
-					}
-					.burn {
-						text-shadow: 0 0 50px pink;
-					}
-					.shock {
-						text-shadow: 0 0 50px gold;
-					}
-					.stun {
-						text-shadow: 0 0 50px white;
-					}
-					.fortify {
-						text-shadow: 0 0 50px teal;
-					}
-					.empower {
-						text-shadow: 0 0 50px red;
-					}
-					.stealth {
-						text-shadow: 0 0 50px gray;
-					}
-					.charm {
-						text-shadow: 0 0 50px pink;
-					}
-					.summon {
-						text-shadow: 0 0 50px pink;
-					}
-				}
-			}
-			#chit-btns {
-				button {
-					width: 300px;
-				}
-			}
-		</style>
-
-		<!-- List -->
-		<div style="display: inline-block; vertical-align: top;">
-			<div id='chit-btns'></div>
-			<br>
-			<button style="background: lightgray" onclick="exportChit(document.querySelector('.chit-cont'))">
-				<i class="material-icons" style="vertical-align: middle; font-size: 36px;">download</i>
-			DOWNLOAD</button>
-		</div>
-
-		<!-- Container -->
-		<div class='chit-cont'>
-			<div class='chit'>
-			</div>
-			<!-- Overlay -->
-			<img id='chit-overlay' src="https://www.thegamecrafter.com/overlays/mediumcirclechit.png"/>
-		</div>
-
 	</div>
 
 	<!-- Card Statistics -->

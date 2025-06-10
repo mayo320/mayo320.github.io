@@ -13,9 +13,6 @@ function init() {
 	loadUnit(data.length-1);
 	// loadCommSkill(0);
 	
-	setChitButtons();
-	setChit('Poison');
-
 	genCardStats();
 }
 
@@ -129,7 +126,7 @@ function processAct(unit, key) {
 		['(revives?)', 'revive'],
 		['(persistent)', 'persistent', 'infinity.png'],
 		['(once(?: / (?:round|turn))?)', 'once'],
-		[status_re('stealth(?:ed)?'), 'stealth', 'hood.png'],
+		[status_re('stealth(?:ed)?'), 'stealth buff', 'hood.png'],
 		[status_re('reveal(?:ed)?'), 'reveal', 'eye-target.png'],
 		['(nullify)', 'nullify'],
 		['(FOG OF WAR)', 'fog-of-war'],
@@ -228,14 +225,26 @@ function createCardList(generic, load_fn) {
 function createUnitList() {
 	cur_card_mode = 'unit';
 	unit_names_regex = `(${data.map((u)=>u['Name']).join('|')})`;
-	createCardList(data, 'loadUnit');
+	createCardList(data, 'loadCard');
 	document.querySelector('#card-cont').classList.remove('mini');
+	document.querySelector('#card-cont').classList.remove('chit');
+	loadCard(current_index);
 }
 
 function createCommSkillsList() {
 	cur_card_mode = 'comm_skills';
-	createCardList(comm_skills, 'loadCommSkill');
+	createCardList(comm_skills, 'loadCard');
+	document.querySelector('#card-cont').classList.remove('chit');
 	document.querySelector('#card-cont').classList.add('mini');
+	loadCard(current_index);
+}
+
+function createStatusList() {
+	cur_card_mode = 'statuses';
+	createCardList(CHIT_DATA, 'loadCard');
+	document.querySelector('#card-cont').classList.remove('mini');
+	document.querySelector('#card-cont').classList.add('chit');
+	loadCard(current_index);
 }
 
 function updateIndex(index, gen_data) {
@@ -313,12 +322,22 @@ function loadCommSkill(index) {
 	return skill;
 }
 
+function loadStatus(index) {
+	index = updateIndex(index, CHIT_DATA);
+	var status = CHIT_DATA[index];
+	outfile_name = status['Name'] + '[face,'+status['Count']+']'
+	loadRowGeneric(status);
+	return status;
+}
+
 function loadCard(index) {
 	if (cur_card_mode === 'unit') {
 		return loadUnit(index);
 	} else if (cur_card_mode === 'comm_skills') {
 		return loadCommSkill(index);
-	}
+	} else if (cur_card_mode === 'statuses') {
+		return loadStatus(index);
+	} 
 	return {};
 }
 
@@ -382,10 +401,17 @@ function bulkExport() {
 
 var a4_count = 0
 function exportA4() {
+	document.getElementById('a4').innerHTML = '';
 	current_index -= 1;
 	var cards_per_page = 9;
+	var max_index = data.length;
 	if (cur_card_mode === 'comm_skills') {
 		cards_per_page = 16;
+		max_index = comm_skills.length;
+	}
+	if (cur_card_mode === 'statuses') {
+		cards_per_page = 117;
+		max_index = CHIT_DATA.length;
 	}
 
 	function exportUnitA4() {
@@ -395,7 +421,7 @@ function exportA4() {
 
 		if (a4_count + count > cards_per_page) {
 			// export paper
-			outfile_name = `a4-${current_index - 1}`;
+			outfile_name = `a4-${cur_card_mode}-${current_index - 1}`;
 			exportCard(document.getElementById('a4'));
 
 			current_index -= 1;
@@ -412,7 +438,7 @@ function exportA4() {
 
 			a4_count += count;
 
-			if (current_index < data.length - 1) {
+			if (current_index < max_index - 1) {
 				setTimeout(() => {
 					exportUnitA4();
 				}, 1300);
@@ -430,9 +456,14 @@ function exportA4() {
 					}, 500);
 
 					setTimeout(() => {
-						outfile_name = `a4-${current_index}`;
+						outfile_name = `a4-${cur_card_mode}-${current_index}`;
 						exportCard(document.getElementById('a4'));
 					}, 1300);
+				}, 1300);
+			} else {
+				setTimeout(() => {
+					outfile_name = `a4-${cur_card_mode}-${current_index}`;
+					exportCard(document.getElementById('a4'));
 				}, 1300);
 			}
 		}
