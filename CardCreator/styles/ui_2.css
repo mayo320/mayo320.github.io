@@ -72,7 +72,7 @@ body {
 	overflow: hidden;
 	display: flex;
 
-	/*35px bleed, 35px cut*/
+	/*31px bleed, 35px cut*/
 	.card-border, .view {
 		width: calc(100% - 122px);
 		height: calc(100% - 122px);
@@ -81,15 +81,15 @@ body {
 	}
 }
 #card-cont.compress {
-	width: 765px; height: 1065px;
+	width: 755px; height: 1055px;
 	&.mini {
-		width: 540px; height: 765px;
+		width: 530px; height: 755px;
 	}
 	&.chit {
 		width: 240px; height: 240px;
 	}
 
-	/*35px bleed*/
+	/*31px bleed*/
 	.card-border, .view {
 		width: calc(100% - 62px);
 		height: calc(100% - 62px);
