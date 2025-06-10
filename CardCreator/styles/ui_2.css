@@ -857,13 +857,13 @@ body {
 		}
 	}
 	.chill {
-		background: blue;
+		background: steelblue;
 		&::before {
 			content: '\2744';
 		}
 	}
 	.shock {
-		background: darkgoldenrod;
+		background: darkblue;
 		&::before {
 			content: '\26A1';
 		}
