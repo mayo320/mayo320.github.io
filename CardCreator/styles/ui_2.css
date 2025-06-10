@@ -818,7 +818,7 @@ body {
 		margin: 0 5px;
 		padding: 0 4px;
 		border-radius: 35px;
-		text-shadow: 0 0 8px black;
+		text-shadow: 0 0 5px black;
 		.value {
 			padding-right: 12px;
 		}
@@ -837,9 +837,11 @@ body {
 		}
 	}
 	.poison {
-		background: darkgreen;
+		/*background: darkgreen;*/
+		background: purple;
 		&::before {
-			content: '\1F480';
+			/*content: '\1F480';*/
+			content: '\1FAE7';
 		}
 	}
 	.burn {
@@ -855,13 +857,13 @@ body {
 		}
 	}
 	.chill {
-		background: steelblue;
+		background: blue;
 		&::before {
 			content: '\2744';
 		}
 	}
 	.shock {
-		background: darkblue;
+		background: darkgoldenrod;
 		&::before {
 			content: '\26A1';
 		}
@@ -901,6 +903,9 @@ body {
 	}
 	.hp {
 		color: pink;
+		&:after {
+			content: '\2764';
+		}
 	}
 	.fortify{
 		border: 1px solid cyan;
@@ -970,10 +975,11 @@ body {
 	    	flex-wrap: wrap;
 	    	&:before {
 				content: 'IMM';
+				min-width: 48px;
+				flex-grow: 1;
+				text-align: center;
 				color: gray;
 				font-size: smaller;
-				padding-right: 6px;
-	    		padding-left: 4px;
 			}
 	    }
 		.sp {
@@ -981,7 +987,20 @@ body {
 		}
 		.sp.debuff {
 			border-radius: 0;
+			padding: 0;
 			margin: 0;
+			flex-grow: 1;
+			text-align: center;
+			/*&:after {
+				color: white;
+				content: '\2573';
+				position: absolute;
+		        left: 3px;
+		        font-weight: bold;
+		        font-size: larger;
+		        top: -6px;
+		        text-shadow: 0 0 5px black;
+			}*/
 		}
 	}
 	.resist .value:before {

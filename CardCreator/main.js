@@ -102,7 +102,7 @@ function processAct(unit, key) {
 	// Regex, class, icon?
 	var matches = [
 		['(tactic|act|defend|defeat)', 'action'],
-		['((?:\\d+ )?HP)', 'HP'],
+		['((?:\\d+ |full |current )?)HP', 'HP'],
 		['melee()', 'melee'],
 		['any rng (\\d+|X)', 'rng', 'any.png'],
 		['far rng (\\d+|X)', 'rng', 'far.png'],
