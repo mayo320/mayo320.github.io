@@ -52,6 +52,85 @@ var CHIT_DATA = [
 
 const INSTRUCTIONS = {
 'Instructions': `
+<h2>📋 Round Tracking</h2>
+<table class="line">
+	<thead>
+		<tr>
+			<th>Round</th>
+			<th>Rank Points (RP)</th>
+			<th>Deck Unlock (R)</th>
+			<th>Commander Skill Unlock</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>3</td>
+			<td>R1</td>
+			<td>🗸</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>4</td>
+			<td>R2</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>5</td>
+			<td></td>
+			<td>🗸</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>6</td>
+			<td>R3</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>7</td>
+			<td></td>
+			<td>🗸</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>🍺 Recruit Phase</h2>
+<div style="margin-left: 20px">
+	1. All players income: <span class="sp g">3R gold </span> <br>
+	2. Players A -> B -> .. take turns recruiting 0 or 1 unit <br>
+</div>
+Phase ends when all parties agree, shuffle your deck
+
+<div class="hr"></div>
+<h2>➕ Deploy Phase</h2>
+Players  A -> B -> .. take 3 turns performing:
+<div style="margin-left: 20px">
+	1. Draw X cards Dr???aw 5 cards from your Deck <br>
+	2. Perform below in any or???der <br>
+	<div style="margin-left: 20px" class="subtext">
+		- Use any number of Tactic(s) <br>
+		- Deploy any number of units by consuming RP<br>
+	</div>
+	3. Discard X cards Discard all cards <br>
+</div>
+
+<div class="hr"></div>
+<h2>⚔️ War Phase</h2>
+Orde???red by each unit's <i class="material-icons">tornado</i>SPD, resolve their Move & Act.
+This ends when one side's units are all defeated. 
+<br><br>
+<span class="subtext">Then:</span>
+<br>
+<div style="margin-left: 20px">
+	1. Resolve the Win conditions on living units <br>
+	3. Increment Round Tracker <br>
+</div>
+Start from Recruit Phase if game has not ended, Increment player ord???er, e.g. B -> C -> ..
+`,
+
+'Icons': `
 	ATK X Attack, by default target nearest unit in the row;
 <div class="section">
 	<div>DEF X Defence</div>

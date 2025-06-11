@@ -139,7 +139,7 @@ function processAct(unit, key) {
 		['(nature)', 'nature ctext'],
 		[' (warriors?|mages?|rogues?|rangers?|supports?)', 'unit-class'],
 		['(\\+\\d+ hand limit)', 'hand-limit', 'up-card.png'],
-		['draw (\\d+X?) cards?', 'draw-card', 'card-draw.png'],
+		['draw (\\d+X?|X) cards?', 'draw-card', 'card-draw.png'],
 		['discard (\\d+|X)(?: cards?)?', 'discard-card', 'card-discard.png'],
 		['(trash(?:ed)?)', 'trash', 'card-trash.png'],
 		['(spawn|summon)', 'action'],

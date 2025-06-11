@@ -1163,14 +1163,42 @@ body {
 /*Instructions*/
 #instructions, #instructions2 {
 	color: white;
-	h1 {font-size: 40px; text-shadow: 0 0 10px gold;}
-	h2 {font-size: 26px; }
+	h2 {
+		font-size: 30px;
+		margin: 0; padding: 0;
+	}
 	p {
-		font-size: 26px; padding-left: 20px;
+		padding: 0; margin: 5px;
+		font-size: 24px; padding-left: 20px;
 	}
 	.material-icons, i {
-		font-size: 26px;
+		font-size: 24px;
 		vertical-align: middle;
+	}
+	.subtext {
+		color: inherit;
+	}
+	.hr {
+		margin: 12px 0;
+	}
+}
+#instructions {
+	table {
+		border-radius: 10px;
+		text-align: center;
+		thead tr {
+			background: dimgray;
+		}
+		th {font-size: 20px;}
+		th, td {padding: 2px 6px;}
+	}
+	img {
+		width: 30px; height: 30px;
+		vertical-align: middle;
+	}
+	.line {
+		font-size: 26px;
+		line-height: 1.2;
 	}
 }
 #instructions2 {
