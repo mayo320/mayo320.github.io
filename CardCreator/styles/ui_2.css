@@ -72,7 +72,7 @@ body {
 	overflow: hidden;
 	display: flex;
 
-	/*31px bleed, 35px cut*/
+	/*31px bleed, 30px cut*/
 	.card-border, .view {
 		width: calc(100% - 122px);
 		height: calc(100% - 122px);
@@ -1178,7 +1178,7 @@ body {
 		/*margin: 4px 2px;*/
 		padding: 6px 4px;
 		margin-left: -8px;
-		margin-top: -4px;
+		margin-top: -18px;
 		display: inline-block;
 		max-width: none;
 		/*border: 1px solid gray;*/

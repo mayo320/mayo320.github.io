@@ -180,6 +180,7 @@ function processAct(unit, key) {
 			`</span>`); 
 		text = text.replace("<span class='value'></span>", "");
 	});
+	text = text.replaceAll("???", "");
 
 
 	const should_score = 'base_scores' in unit;

@@ -95,11 +95,12 @@ const INSTRUCTIONS = {
 	<div>Shock Reduce DEF 1/token</div>
 </div>
 <div class="hr"></div>
-	Once Effect that is triggered one time per round;
+	Once Effect that is triggered on???ce per round;
 	Persistent Ongoing effect for the round;
 	Nullify Ignore ATK X, bypassed by True Dmg;
 	Trigger Triggers the effect that follows it;
 	Move a unit to an adjacent tile;
+	Trash rem???ove a card in hand or discard from the game;
 	`
 };
 
