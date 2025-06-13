@@ -1172,6 +1172,8 @@ body {
 	.c1 {background: lightgreen;}
 	.c2 {background: lightblue;}
 	.c3 {background: pink;}
+	.c4 {background: orange;}
+	.c {background: linear-gradient(to right, cyan, violet);}
 	.cOrder {border-left-color: blue;}
 	.cCelestial {border-left-color: goldenrod;}
 	.cChaos {border-left-color: purple;}
@@ -1264,19 +1266,36 @@ body {
 		z-index: 999;
 	}
 	&.card-border {
-		padding: 3px;
-		background: linear-gradient(to bottom, orange, blue);
+		padding: 5px;
+	}
+	&.Celestial.card-border {
+		background: linear-gradient(to bottom, lightyellow, gold);
+	}
+	&.Order.card-border {
+		background: linear-gradient(to bottom, cyan, blue);
+	}
+	&.Chaos.card-border {
+		background: linear-gradient(to bottom, purple, violet);
+	}
+	&.Construct.card-border {
+		background: linear-gradient(to bottom, brown, chocolate);
+	}
+	&.Nature.card-border {
+		background: linear-gradient(to bottom, green, lightgreen);
 	}
 	.card {
 		display: flex;
 		flex-direction: column;
 		color: white;
 		justify-content: space-between;
+		.card-faction {
+			padding-bottom: 0;
+		}
 	}
 	.skill-description {
 		padding: 20px;
 		text-align: center;
-		font-size: 30px;
+		font-size: 32px;
 		text-shadow: 0 0 10px black;
 	}
 	.op {

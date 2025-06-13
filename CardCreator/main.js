@@ -228,11 +228,12 @@ function createCardList(generic, load_fn) {
 	for (let i in generic) {
 		calculateUnitScores(i);
 		var unit = generic[i];
+		var score_html = ('score-Total' in unit) ? `<span class="subtext">(${unit['score-Total']})</span>` : ``;
 		html += `
 			<button class="c${unit['Level']} c${unit['Faction']} c${unit['Rank']}" onclick="${load_fn}(${i})">
 				<span class="subtext">${i}:</span>
 				${unit['Name']}
-				<span class="subtext">(${unit['score-Total']})</span>
+				${score_html}
 			</button>
 		`;
 	}
