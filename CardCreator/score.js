@@ -229,9 +229,7 @@ function scoreUnitText(unit, text) {
     return [text_scores, base_scores];
 }
 
-function calculateUnitScores(index, print=false) {
-    const unit = data[index];
-
+function calculateUnitScores(unit, print=false) {
     const hp = Number(unit['HP']);
     const def = Number(unit['DEF']);
     const spd = Number(unit['SPD']);

@@ -20,13 +20,49 @@
 			}
 		</style>
 		<button onclick="toggleCreator('#card-creator')">Card Creator</button>
-		<button onclick="toggleCreator('#card-stats')">Card Statistics</button>
+		<button onclick="toggleCreator('#card-stats'); genCardStats()">Card Statistics</button>
 	</div>
 
 	<!-- Card creator -->
 	<div id='card-creator' class='creator'>
+
+		<!-- Action bottons -->
+		<div class="buttons-cont ui-section">
+			<h3>Toggles</h3>
+			<button onclick="document.querySelector('.proof-overlay').classList.toggle('hidden'); document.querySelector('#card-cont').classList.toggle('compress')">Overlay</button> 
+			
+			<h3>Views</h3>
+			<div id="views-container">
+				
+			</div>
+
+			<h3>Navigation</h3>
+			<button onclick="loadCard(current_index - 1)">Previous</button>
+			<br>
+			<button onclick="loadCard(current_index + 1)">Next</button>
+			<br>
+			<br>
+
+			<h3>Export</h3>
+			<button style="height: 90px; font-weight: bold; background: gainsboro;" onclick="download()">
+				<i class="material-icons" style="vertical-align: middle; font-size: 30px;">download</i>
+				Download
+			</button>
+			<button style="font-weight: bold; background: pink" onclick="bulkExport()">Bulk Download</button>
+			<button style="font-weight: bold; background: gold" onclick="exportA4()">Export A4</button>
+
+			<h3>Unit Score</h3>
+			<button onclick="document.querySelector('#card-creator').classList.toggle('show-score')">Toggle Details</button>
+
+			<div class="unit-scores">
+				<div class="detail-scores">
+					
+				</div>
+			</div>
+		</div>
+		
 		<!-- List -->
-		<div id="card-list">
+		<div id="card-list" class="ui-section">
 		</div>
 
 		<!-- Card -->
@@ -292,50 +328,6 @@
 				<img style="width: 100%; z-index: 9" class="mini" src="https://www.thegamecrafter.com/overlays/minideck.png" alt="img"/>
 				<img style="width: 100%; z-index: 9" class='chit' src="https://www.thegamecrafter.com/overlays/mediumcirclechit.png"/>
 			</div>
-		</div>
-
-		<!-- Action bottons -->
-		<div class="buttons-cont">
-			<span>Toggles</span> <br>
-			<button onclick="document.querySelector('.proof-overlay').classList.toggle('hidden'); document.querySelector('#card-cont').classList.toggle('compress')">Overlay</button> 
-			<br>
-			
-			<br>
-			<span>Views</span> <br>
-			<button view='card' onclick="showView(this); createUnitList();">Card (F)</button> <br>
-			<button view='card-back' onclick="showView(this)">Card (B)</button> <br>
-			<button view='instructions' onclick="outfile_name = 'instructions[face,2]'; showView(this); loadRowGeneric(INSTRUCTIONS)">Instructions (F)</button> <br>
-			<button view='instructions2' onclick="outfile_name = 'instructions[back,2]'; showView(this); loadRowGeneric(INSTRUCTIONS)">Instructions (B)</button> <br>
-			<button view='comm-skill' onclick="showView(this); createCommSkillsList();">Comm Skill (F)</button> <br>
-			<button view='status-chit' onclick="showView(this); createStatusList();">Status (F)</button> <br>
-
-			<br>
-			<span>Navigation</span> <br>
-			<button onclick="loadCard(current_index - 1)">Previous</button>
-			<br>
-			<button onclick="loadCard(current_index + 1)">Next</button>
-			<br>
-			<br>
-
-			<span>Export</span> <br>
-			<button style="height: 90px; font-weight: bold; background: gainsboro;" onclick="download()">
-				<i class="material-icons" style="vertical-align: middle; font-size: 30px;">download</i>
-				Download
-			</button> <br>
-			<button style="font-weight: bold; background: pink" onclick="bulkExport()">Bulk Download</button> <br>
-			<button style="font-weight: bold; background: gold" onclick="exportA4()">Export A4</button> <br>
-
-			<hr>
-			<span>Unit Score</span> <br>
-
-			<button onclick="document.querySelector('#card-creator').classList.toggle('show-score')">Toggle Details</button> <br> <br>
-
-			<div class="unit-scores">
-				<div class="detail-scores">
-					
-				</div>
-			</div>
-
 		</div>
 
 		<!-- A4 exports -->

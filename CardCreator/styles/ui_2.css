@@ -1,17 +1,3 @@
-.buttons-cont {
-	display: inline-block; vertical-align: top;
-	margin-left: 8px;
-	button {
-		min-width: 200px;
-	}
-	button.selected {
-		background: lightblue;
-		font-style: italic;
-		&:before {
-			content: ">";
-		}
-	}
-}
 .emoji {
 	font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
 }
@@ -37,6 +23,14 @@ body {
 		background: cyan !important;
 	}
 }
+button.selected {
+	background: lightblue;
+	font-style: italic;
+	&:before {
+		content: ">";
+	}
+}
+
 .subtext {
 	font-size: 20px;
 	color: black;
@@ -45,6 +39,14 @@ body {
 }
 .hidden {
 	display: none !important;
+}
+.ui-section {
+	margin: 8px;
+	padding: 8px;
+	background: lavender;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
 }
 #card-cont {
 	width: 825px; height: 1125px;
@@ -1157,6 +1159,10 @@ body {
 	.class-Faction.Order .order {display:block;}
 	.class-Faction.Nature .nature {display:block;}
 	.class-Faction.Construct .construct {display:block;}
+}
+
+#views-container {
+	button {display: block; width: 100%;}
 }
 
 #card-list {

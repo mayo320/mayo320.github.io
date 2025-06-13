@@ -1,19 +1,26 @@
-var data = [];
-var comm_skills = [];
 var current_index = 0;
 var outfile_name = '';
 var unit_names_regex = '';
 var cur_card_mode = 'unit';
 
-function init() {
-	data = parseCsv(CSV_DATA);
-	comm_skills = parseCsv(CSV_COMM_SKILL_DATA);
+async function init() {
+	var views_btn_html = '';
+	for (i in data) {
+		if ('encoded_data' in data[i]) {
+			data[i]['decoded_data'] = parseCsv(await loadCsvFromData(data[i]['encoded_data']));
+		}
+
+		views_btn_html += `
+			<button view='${data[i].key}' onclick="showView(this); createCardList('${data[i].key}');">${data[i].name}</button>
+		`
+	}
+
+	document.querySelector('#views-container').innerHTML = views_btn_html;
 	
-	createUnitList();
-	loadUnit(data.length-1);
-	// loadCommSkill(0);
-	
-	genCardStats();
+	createCardList(data[0].key);
+	loadCard(data[0].decoded_data.length-1);
+
+	unit_names_regex = `(${data[0].decoded_data.map((u)=>u['Name']).join('|')})`;
 }
 
 function exportCardAddA4(element, count) {
@@ -220,17 +227,20 @@ function processAct(unit, key) {
 	return text;
 }
 
-function createCardList(generic, load_fn) {
+function createCardList(item_key) {
+	const item = data.find((x) => x.key === item_key);
+	cur_card_mode = item_key;
 	current_index = 0;
 
 	var cont = document.querySelector('#card-list');
 	var html = ''
-	for (let i in generic) {
-		calculateUnitScores(i);
-		var unit = generic[i];
+	for (let i in item.decoded_data) {
+		var unit = item.decoded_data[i];
+		if (item_key === 'card') {calculateUnitScores(unit);}
+		
 		var score_html = ('score-Total' in unit) ? `<span class="subtext">(${unit['score-Total']})</span>` : ``;
 		html += `
-			<button class="c${unit['Level']} c${unit['Faction']} c${unit['Rank']}" onclick="${load_fn}(${i})">
+			<button class="c${unit['Level']} c${unit['Faction']} c${unit['Rank']}" onclick="loadCard(${i})">
 				<span class="subtext">${i}:</span>
 				${unit['Name']}
 				${score_html}
@@ -238,32 +248,14 @@ function createCardList(generic, load_fn) {
 		`;
 	}
 	cont.innerHTML = html;
-}
 
-function createUnitList() {
-	cur_card_mode = 'unit';
-	unit_names_regex = `(${data.map((u)=>u['Name']).join('|')})`;
-	createCardList(data, 'loadCard');
 	document.querySelector('#card-cont').classList.remove('mini');
 	document.querySelector('#card-cont').classList.remove('chit');
+	document.querySelector('#card-cont').classList.remove('poker');
+	document.querySelector('#card-cont').classList.add(item.overlay);
 	loadCard(current_index);
 }
 
-function createCommSkillsList() {
-	cur_card_mode = 'comm_skills';
-	createCardList(comm_skills, 'loadCard');
-	document.querySelector('#card-cont').classList.remove('chit');
-	document.querySelector('#card-cont').classList.add('mini');
-	loadCard(current_index);
-}
-
-function createStatusList() {
-	cur_card_mode = 'statuses';
-	createCardList(CHIT_DATA, 'loadCard');
-	document.querySelector('#card-cont').classList.remove('mini');
-	document.querySelector('#card-cont').classList.add('chit');
-	loadCard(current_index);
-}
 
 function updateIndex(index, gen_data) {
 	if (index >= gen_data.length) {
@@ -324,51 +316,30 @@ function loadRowGeneric(gen_data) {
 	}
 }
 
-function loadUnit(index) {
-	index = updateIndex(index, data);
-	var unit = data[index];
-	constructScoreUi(unit);
-	outfile_name = unit['Name'] + '[face,'+unit['Count']+']'
-	loadRowGeneric(unit);
-	return unit;
-}
-
-function loadCommSkill(index) {
-	index = updateIndex(index, comm_skills);
-	var skill = comm_skills[index];
-	loadRowGeneric(skill);
-	return skill;
-}
-
-function loadStatus(index) {
-	index = updateIndex(index, CHIT_DATA);
-	var status = CHIT_DATA[index];
-	outfile_name = status['Name'] + '[face,'+status['Count']+']'
-	loadRowGeneric(status);
-	return status;
-}
-
 function loadCard(index) {
-	if (cur_card_mode === 'unit') {
-		return loadUnit(index);
-	} else if (cur_card_mode === 'comm_skills') {
-		return loadCommSkill(index);
-	} else if (cur_card_mode === 'statuses') {
-		return loadStatus(index);
-	} 
-	return {};
+	var item = {}
+	for (i in data) {
+		if (data[i].key === cur_card_mode) {
+			item = data[i];
+		}
+	}
+	index = updateIndex(index, item.decoded_data);
+	const data_entry = item.decoded_data[index];
+	outfile_name = data_entry['Name'] + '[face,'+data_entry['Count']+']';
+	loadRowGeneric(data_entry);
+	return data_entry;
 }
 
 window.onload = async function(){
-	const data = getUriParam('csv');
-	if (data) {
-		CSV_DATA = await loadCsvFromData(data);	
-	}
-	else {
-		CSV_DATA = await loadCsvFromData(CSV_ENCODED_DATA);
-	}
-	CSV_COMM_SKILL_DATA = await loadCsvFromData(CSV_COMM_SKILL_ENCODED_DATA);
-	init();
+	// const data = getUriParam('csv');
+	// if (data) {
+	// 	CSV_DATA = await loadCsvFromData(data);	
+	// }
+	// else {
+	// 	CSV_DATA = await loadCsvFromData(CSV_ENCODED_DATA);
+	// }
+	// CSV_COMM_SKILL_DATA = await loadCsvFromData(CSV_COMM_SKILL_ENCODED_DATA);
+	await init();
 
 	// Arrow keys to navigate
 	document.onkeydown = (e) => {
@@ -421,16 +392,9 @@ var a4_count = 0
 function exportA4() {
 	document.getElementById('a4').innerHTML = '';
 	current_index -= 1;
-	var cards_per_page = 9;
-	var max_index = data.length;
-	if (cur_card_mode === 'comm_skills') {
-		cards_per_page = 16;
-		max_index = comm_skills.length;
-	}
-	if (cur_card_mode === 'statuses') {
-		cards_per_page = 117;
-		max_index = CHIT_DATA.length;
-	}
+	const item = data.find((x) => x.key === cur_card_mode);
+	const cards_per_page = item.cards_per_page || 9;
+	var max_index = item.decoded_data.length;
 
 	function exportUnitA4() {
 		current_index += 1;
@@ -460,7 +424,7 @@ function exportA4() {
 				setTimeout(() => {
 					exportUnitA4();
 				}, 1300);
-			} else if (cur_card_mode === 'unit') {
+			} else if (cur_card_mode === 'card') {
 				// export last paper
 				setTimeout(() => {
 					// Instructions front
@@ -491,61 +455,6 @@ function exportA4() {
 	exportUnitA4();
 }
 
-
-// CHIT
-var current_chit = '';
-function setChit(name) {
-	var data = CHIT_DATA[name];
-	var chit = document.querySelector('.chit');
-	var html = `<span class="${name.toLowerCase()}"><span class="emoji">&#x${data[1]};</span>`;
-	html += `<div class="text">${name}</div>`;
-	if (data[2]) {
-		html += `<div class="subtext">${data[2]}</div>`;
-	}
-	// html += `<div class="icons">`
-	// for (let i in data[3]) {
-	// 	html += `<i class="material-icons">${data[3][i]}</i><br>`;
-	// }
-	// html += `</div>`
-	html += '</span>';
-	chit.innerHTML = html;
-	current_chit = name;
-}
-function setChitButtons() {
-	var cont = document.querySelector('#chit-btns');
-	var html = '';
-	for (k in CHIT_DATA) {
-		html += `<button onclick="setChit('${k}')">${k} (${CHIT_DATA[k][0]})</button><br>`;
-	}
-	cont.innerHTML = html;
-}
-
-var CHIT_SIZE = 300
-function exportChit(element) {
-	var overlay = document.querySelector('#chit-overlay');
-	hide(overlay);
-
-	// Draw element on canvas
-	var html = element.innerHTML.trim();
-
-	html2canvas(element, {
-		useCORS: true,
-		width: CHIT_SIZE,
-		height: CHIT_SIZE,
-		scale: 1
-	}).then(function (canvas) {
-		// document.body.appendChild(canvas);
-
-		var img = canvas.toDataURL('image/png');
-		var link = document.createElement('a');
-		link.href = img;
-		link.style.display = 'none';
-		link.download = current_chit + '[all,'+CHIT_DATA[current_chit][0]+']';
-		link.click();
-
-		show(overlay);
-	});
-}
 
 function toggleCreator(pg) {
 	document.querySelectorAll('.creator').forEach((x) => hide(x));
@@ -581,8 +490,9 @@ function toggleOverlays() {
 
 function genCardStats() {
 	const class_dis = {};
-	for (k in data) {
-		const unit = data[k];
+	const item = data.find((x) => x.key === 'card');
+	for (k in item.decoded_data) {
+		const unit = item.decoded_data[k];
 		const cls = unit['Class'];
 		const cnt = unit['Count'];
 		const rnk = unit['Rank'] - 1;
@@ -602,7 +512,3 @@ function genCardStats() {
 	});
 }
 
-// Potential list of emojis https://www.unicode.org/emoji/charts/full-emoji-list.html
-// U+1F5E3
-// U+1F464
-// U+1F465
