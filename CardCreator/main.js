@@ -249,10 +249,12 @@ function createCardList(item_key) {
 	}
 	cont.innerHTML = html;
 
-	document.querySelector('#card-cont').classList.remove('mini');
-	document.querySelector('#card-cont').classList.remove('chit');
-	document.querySelector('#card-cont').classList.remove('poker');
-	document.querySelector('#card-cont').classList.add(item.overlay);
+	const card_cont = document.querySelector('#card-cont');
+	if (card_cont.attributes['_class'] === undefined) {
+		card_cont.attributes['_class'] = card_cont.classList.toString();
+	}
+	card_cont.classList = card_cont.attributes['_class'];
+	card_cont.classList.add(item.overlay);
 	loadCard(current_index);
 }
 
@@ -331,14 +333,6 @@ function loadCard(index) {
 }
 
 window.onload = async function(){
-	// const data = getUriParam('csv');
-	// if (data) {
-	// 	CSV_DATA = await loadCsvFromData(data);	
-	// }
-	// else {
-	// 	CSV_DATA = await loadCsvFromData(CSV_ENCODED_DATA);
-	// }
-	// CSV_COMM_SKILL_DATA = await loadCsvFromData(CSV_COMM_SKILL_ENCODED_DATA);
 	await init();
 
 	// Arrow keys to navigate
@@ -355,7 +349,7 @@ window.onload = async function(){
 	  }
 	}
 
-	document.querySelector('.buttons-cont button[view="card"]').click();
+	document.querySelector(`.buttons-cont button[view="${data[0].key}"]`).click();
 	toggleCreator('#card-creator');
 }
 

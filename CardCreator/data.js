@@ -220,4 +220,46 @@ var data = [
 					Trash rem???ove a card in hand or discard from the game;
 				`}]
 	}
-]
+];
+
+
+var data = [
+	{
+		key: 'j-big',
+		name: 'Big (F)',
+		overlay: 'big',
+		cards_per_page: 9,
+		decoded_data: [
+			{
+				Name: 'Naruto',
+				Anime: 'Naruto',
+				Img: 'https://i.pinimg.com/474x/19/cc/b4/19ccb4f06b9948dcf87e597986c9a655.jpg',
+			}
+		]
+	},
+	{
+		key: 'j-med',
+		name: 'Medium (F)',
+		overlay: 'med',
+		cards_per_page: 9,
+		decoded_data: [
+			{
+				Name: 'naruto',
+				Img: 'https://i.pinimg.com/474x/19/cc/b4/19ccb4f06b9948dcf87e597986c9a655.jpg',
+			}
+		]
+	},
+	{
+		key: 'j-small',
+		name: 'Small (F)',
+		overlay: 'small',
+		cards_per_page: 9,
+		decoded_data: [
+			{
+				Name: 'yuzibo',
+				Img: 'https://i.pinimg.com/474x/19/cc/b4/19ccb4f06b9948dcf87e597986c9a655.jpg',
+			}
+		]
+	},
+];
+

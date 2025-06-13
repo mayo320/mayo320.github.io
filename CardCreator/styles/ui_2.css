@@ -49,30 +49,38 @@ button.selected {
 	flex-direction: column;
 }
 #card-cont {
-	width: 825px; height: 1125px;
 	.proof-overlay {
-		.poker {display: block;}
+		.poker {display: none;}
 		.mini {display: none;}
 		.chit {display: none;}
+		.small {display: none;}
+		.med {display: none;}
+		.big {display: none;}
+	}
+	&.poker {
+		width: 825px; height: 1125px;
+		.proof-overlay .poker{display: block;}
 	}
 	&.mini {
 		width: 600px; height: 825px;
-		.proof-overlay {
-			.mini {display: block;}
-			.chit {display: none;}
-			.poker {display: none;}
-		}
+		.proof-overlay .mini{display: block;}
 	}
 	&.chit {
 		width: 300px; height: 300px;
-		.proof-overlay {
-			.mini {display: none;}
-			.chit {display: block;}
-			.poker {display: none;}
-		}
+		.proof-overlay .chit{display: block;}
 	}
 	overflow: hidden;
 	display: flex;
+
+	&.small {
+		width: 560px; height: 560px;
+	}
+	&.med {
+		width: 1060px; height: 560px;
+	}
+	&.big {
+		width: 1060px; height: 1060px;
+	}
 
 	/*31px bleed, 30px cut*/
 	.card-border, .view {
@@ -83,12 +91,23 @@ button.selected {
 	}
 }
 #card-cont.compress {
-	width: 755px; height: 1055px;
+	&.poker {
+		width: 755px; height: 1055px;
+	}
 	&.mini {
 		width: 530px; height: 755px;
 	}
 	&.chit {
 		width: 240px; height: 240px;
+	}
+	&.small {
+		width: 500px; height: 500px;
+	}
+	&.med {
+		width: 1000px; height: 500px;
+	}
+	&.big {
+		width: 1000px; height: 1000px;
 	}
 
 	/*31px bleed*/
@@ -1362,5 +1381,28 @@ button.selected {
 		border: 1px solid gray;
 		padding: 1px 4px;
 		margin-top: 4px;
+	}
+}
+
+
+.jennifer {
+	color: white;
+	&.view {width: 100% !important; height: 100% !important;}
+	.img-Img {
+		width: 100%;
+	}
+	.description {
+		padding: 30px;
+		position: absolute;
+		bottom: 0; left: 0;
+		width: 100%;
+		background: linear-gradient(to top, #880f0f, rgba(145, 17, 17, 0.5));
+		border-top: 2px solid rgba(177,0,0);
+	}
+	.text-Name {
+		font-size: 24px;
+	}
+	.text-Anime {
+		font-size: 32px;
 	}
 }
