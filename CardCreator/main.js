@@ -26,6 +26,12 @@ function exportCardAddA4(element, count) {
 	    item.style.height= null;
 	});
 
+	const addCorner = function(el, dir) {
+		var corner = document.createElement('div');
+		corner.classList = 'corner ' + dir;
+		el.appendChild(corner);
+	}
+
 	html2canvas(element, {
 		useCORS: true,
 		width: element.clientWidth,
@@ -41,7 +47,17 @@ function exportCardAddA4(element, count) {
 			var dest = destCanvas.getContext('2d');
 			dest.drawImage(canvas, 0, 0);
 
-			document.getElementById('a4').appendChild(destCanvas);
+			var destDiv = document.createElement('div');
+			destDiv.classList = 'container';
+			destDiv.width = canvas.width;
+			destDiv.height = canvas.height;
+			addCorner(destDiv, 'top left');
+			addCorner(destDiv, 'top right');
+			addCorner(destDiv, 'bottom left');
+			addCorner(destDiv, 'bottom right');
+
+			destDiv.appendChild(destCanvas);
+			document.getElementById('a4').appendChild(destDiv);
 		}
 	});
 }
