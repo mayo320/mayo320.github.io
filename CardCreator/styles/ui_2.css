@@ -192,7 +192,7 @@ button.selected {
 			.top-cont, .deck, .discard {
 				/*font-weight: bold;*/
 				color: white; text-shadow: 0 0 10px cyan;
-				font-size: 22px;
+				font-size: 26px;
 				margin-top: 30px;
 				background: linear-gradient(to left, transparent, black, transparent);
 			}
@@ -218,11 +218,13 @@ button.selected {
 				background: linear-gradient(to bottom, transparent, black 120px);
 				display: flex;
 				flex-direction: column;
-				font-size: 20px;
 				padding-bottom: 60px;
 				padding-top: 40px;
 				position: relative;
+				font-size: 24px;
+
 				.text-Flavor {
+					font-size: 20px;
 					color: lightgray;
 					text-shadow: 0 0 10px black;
 					font-style: italic;
@@ -239,7 +241,7 @@ button.selected {
 					padding: 4px;
 					display: inline-block;
 					z-index: 999;
-					font-size: 35px;
+					font-size: 40px;
 				}
 			}
 			.icon {
@@ -772,7 +774,7 @@ button.selected {
 	line-height: 1.6;
 	padding: 2px 8px;
 	border-radius: 5px;
-	font-size: 28px;
+	font-size: 30px;
 	margin: 10px 4px;
 	position: relative;
 	.content.text-Act {
@@ -1175,11 +1177,13 @@ button.selected {
 		display: block;
 		border-left: 10px solid gray;
 	}
-	.c1 {background: lightgreen;}
-	.c2 {background: lightblue;}
-	.c3 {background: pink;}
-	.c4 {background: orange;}
-	.c {background: linear-gradient(to right, cyan, violet);}
+	.c1 {background: white;}
+	.c2 {background: gold;}
+	.c3, .c4 {background: linear-gradient(to right, cyan, violet);}
+	.c {
+		background: gainsboro;
+	    text-shadow: 0 0 10px violet;
+	}
 	.cOrder {border-left-color: blue;}
 	.cCelestial {border-left-color: goldenrod;}
 	.cChaos {border-left-color: purple;}
