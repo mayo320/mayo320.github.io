@@ -231,11 +231,19 @@ var data = [
 		cards_per_page: 9,
 		decoded_data: [
 			{
-				Name: 'Naruto',
+				Name: '宇智波佐助 (A)',
 				Anime: 'Naruto',
 				Img: 'https://i.pinimg.com/474x/19/cc/b4/19ccb4f06b9948dcf87e597986c9a655.jpg',
+				Skill: '入场 写轮眼 - 复制任意卡牌技能，后按照该卡牌技能使用',
+				Tags: '孤傲, 异瞳, 傲娇',
+				Combo1: '第七班',
+				Combo2: '永恒万花筒',
+				Combo3: '雷之使用者',
+				Combo4: '冰火双生',
+				Combo5: '独行侠',
 			}
-		]
+		],
+		encoded_data: decodeURIComponent(`H4sIAAAAAAAA%2F5WUy07bUBCGX8VLKlGp3LqnLNhU3dClN%2FSiKiqQSriL7hzI3U6c0oAJuUCIDQaSOCmXOMYhEo%2BCPOccr%2FoKHcdJxaVVQbI89hl75v%2BO%2F%2FGC8PVDKMwLb799%2BcgLsyuhZQxvFv3zXHhVwMTip1VeWPgcWlryl5bfhSeGcXIYp4ZxehhnhvElL%2FArvOAV40xqU%2B2KF%2Bh6g1VFjJET6LWhn2FijBeIc0Quqp5Vc22bG5t9xgtTWAJaCmjH3vbpOMfMMlWNcQ62oixlYvr1POe%2Fn4wz%2B4R7zoFSh7zmWqJrHd%2BIpWD9RiyDYpL0OZGrYHZJSiJpka33sHu97lrrVGlgE0VmFZuoEl7GW74sRab5XbzTv1P7wO1KkC4GetsVIh4i0eOYoJkgBZuc7ru9HKSPAqzpF5hoaLD2E1mcNVpBNrwBI4HrMR1KNgfxAus1acnxsbQMJC%2Fcy0sSVSBTpSk5IPjlyJDLEjlFY4fM1G%2Bn3F6f5o07iKRlkciGayVYuk0bG772DnIFTwZa75BTqc6qsnu192hWoqqkZKAMPJje58ZeIeuE%2FwnjHa9cGLH69W7peijDdMBK0sso5JKD3k%2Fea8%2BpD5ujNUE7IqkMmqcl0U3dL%2FZgJ4IFuhOFYgX68T9NH4m9rXuJLDHa3Ngc9sSWZOeM2ZF7nE%2Btihi1LGmdeaoRFMYx8sRdsA%2F8GrcN27zwNvuj%2FfoXy997QsxgEZnKWRy5waiRcuu6A6aMdofaSWDXybtTCI5ISuo4Rxo1t5vCNE4hlUt4EOnUtysO2VaXXf0IBjEwJOsXfEG5JFH3AmcOekKxiGfUft99T9OtJ2i6d90hSoZsytDcH%2F49Jkc7hmILNiKh%2BIEVeWEGRXvqMc2fD%2F4bJmg7E4vvhVB45b%2FSHhh2pPQ31R7%2FykMFAAA%3D`)
 	},
 	{
 		key: 'j-med',

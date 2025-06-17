@@ -1386,23 +1386,101 @@ button.selected {
 
 
 .jennifer {
+	font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Hiragino Sans GB", sans-serif;
+
 	color: white;
+	font-size: 34px;
 	&.view {width: 100% !important; height: 100% !important;}
 	.img-Img {
 		width: 100%;
 	}
-	.description {
-		padding: 30px;
+	.top-row {
+		text-align: right;
+		padding: 50px;
+		.icon {
+			width: 100px; height: 100px;
+		}
+		.cost {
+			text-shadow: 0 0 10px black;
+			font-size: 60px;
+			position: absolute;
+			right: 80px;
+			top: 60px;
+			font-weight: bold;
+		}
+	}
+	.container {
+		display: flex;
+		flex-direction: column;
 		position: absolute;
-		bottom: 0; left: 0;
-		width: 100%;
+		inset: 0;
+	}
+	.tags {
+		text-align: right;
+		padding-right: 30px; padding-bottom: 30px;
+		.tag {
+			margin: 8px;
+			padding: 8px 20px;
+			background: darkred;
+			border-radius: 35px;
+			display: inline-block;
+		}
+	}
+	.description {
+		padding: 0px 30px;
+		height: 25%;
+		padding-bottom: 30px;
 		background: linear-gradient(to top, #880f0f, rgba(145, 17, 17, 0.5));
-		border-top: 2px solid rgba(177,0,0);
+		border-top: 3px solid rgba(177,0,0);
+
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+		gap: 30px;
+		.left-content {
+			flex-grow: 1;
+		}
+		.combos {
+			padding: 12px;
+			padding-right: 50px;
+			margin-right: -60px;
+			margin-top: 18px;
+			background: rgba(0,0,0,0.3);
+			border-radius: 16px;
+			text-align: right;
+			display: flex;
+			.col {
+				display: inline-block;
+				margin: 0 10px;
+			}
+			.cb {
+				display: block;
+				padding: 2px 8px;
+				text-wrap: nowrap;
+			}
+		}
+		.skill-name {
+			display: flex;
+			align-items: center;
+			.sep {
+				flex-grow: 1;
+				border-top: 1px solid white;
+				margin: 0 20px;
+				line-height: 0;
+				text-align: right;
+		        padding-right: 50px;
+
+		       	color: pink;
+		       	border-color: pink;
+			}
+		}
 	}
 	.text-Name {
-		font-size: 24px;
+		opacity: 0.7;
+		font-size: 30px;
 	}
 	.text-Anime {
-		font-size: 32px;
+		font-size: 70px;
+		font-weight: bold;
 	}
 }

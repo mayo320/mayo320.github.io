@@ -227,6 +227,32 @@ function processAct(unit, key) {
 	return text;
 }
 
+function processJennifer(card, key) {
+	var text = card[key];
+	if (key === 'Tags') {
+		var tags = text.split(',');
+		var html = '';
+		for (var i in tags) {
+			html += `<div class="tag">${tags[i]}</div><br>`;
+		}
+		return html;
+	}
+	else if (key == 'Skill') {
+		var parts = text.split('-');
+		html = `
+			<div class="skill-name">
+				<div>${parts[0]}</div>
+				<div class="sep">&#x2726;</div>
+			</div>
+			<div>${parts[1]}</div>
+		`;
+		html = html.replace(/(入场)/gi, '[$1]');
+
+		return html;
+	}
+	return text;
+}
+
 function createCardList(item_key) {
 	const item = data.find((x) => x.key === item_key);
 	cur_card_mode = item_key;
@@ -282,6 +308,8 @@ function loadRowGeneric(gen_data) {
 		texts.forEach((ele) => {
 			if (ele.classList.contains('process')) {
 				ele.innerHTML = processAct(gen_data, k);
+			} if (ele.classList.contains('processJen')) {
+				ele.innerHTML = processJennifer(gen_data, k);
 			} else {
 				ele.innerHTML = gen_data[k];
 			}
