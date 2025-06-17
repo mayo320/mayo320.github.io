@@ -1386,9 +1386,10 @@ button.selected {
 
 
 .jennifer {
-	font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Hiragino Sans GB", sans-serif;
+	font-family: "HiraginoSansGBW6";
 
 	color: white;
+	font-weight: bold;
 	font-size: 34px;
 	&.view {width: 100% !important; height: 100% !important;}
 	.img-Img {
@@ -1428,17 +1429,16 @@ button.selected {
 	}
 	.description {
 		padding: 0px 30px;
+		padding-top: 10px;
 		height: 25%;
 		padding-bottom: 30px;
 		background: linear-gradient(to top, #880f0f, rgba(145, 17, 17, 0.5));
 		border-top: 3px solid rgba(177,0,0);
 
-		align-items: center;
 		display: flex;
 		justify-content: space-between;
 		gap: 30px;
 		.left-content {
-			flex-grow: 1;
 		}
 		.combos {
 			padding: 12px;
@@ -1449,6 +1449,7 @@ button.selected {
 			border-radius: 16px;
 			text-align: right;
 			display: flex;
+			align-self: center;
 			.col {
 				display: inline-block;
 				margin: 0 10px;
@@ -1458,6 +1459,10 @@ button.selected {
 				padding: 2px 8px;
 				text-wrap: nowrap;
 			}
+		}
+		.skill {
+			margin-top: 20px;
+			margin-left: 20px;
 		}
 		.skill-name {
 			display: flex;
@@ -1469,6 +1474,8 @@ button.selected {
 				line-height: 0;
 				text-align: right;
 		        padding-right: 50px;
+		       	max-width: 200px;
+		       	font-size: 24px;
 
 		       	color: pink;
 		       	border-color: pink;
@@ -1480,7 +1487,7 @@ button.selected {
 		font-size: 30px;
 	}
 	.text-Anime {
-		font-size: 70px;
+		font-size: 60px;
 		font-weight: bold;
 	}
 }
