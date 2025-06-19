@@ -1461,6 +1461,36 @@ button.selected {
 		inset: 0;
 	}
 
+	&.c热血 {
+		&.cA, &.cC {
+			.description {
+				background: linear-gradient(to top, #880f0f 55%, rgba(145, 17, 17, 0.5));
+				border-top: 3px solid #b10000;
+			}
+		}
+		&.cB {
+			.description {
+				background: linear-gradient(to right, #880f0f 55%, rgba(145, 17, 17, 0.5));
+				border-right: 3px solid #b10000;
+			}
+		}
+	}
+
+	&.c魔幻 {
+		&.cA, &.cC {
+			.description {
+				background: linear-gradient(to top, purple 55%, rgba(145, 17, 17, 0.5));
+				border-top: 3px solid violet;
+			}
+		}
+		&.cB {
+			.description {
+				background: linear-gradient(to right, purple 55%, rgba(145, 17, 17, 0.5));
+				border-right: 3px solid violet;
+			}
+		}
+	}
+
 	&.cB .container {
 		flex-direction: row-reverse;
 		.text-Anime {
@@ -1474,8 +1504,6 @@ button.selected {
 		.description {
 			padding: 20px 0 0 20px;
 			width: 30%;
-			border-right: 3px solid #b10000;
-			background: linear-gradient(to right, #880f0f 55%, rgba(145, 17, 17, 0.5));
 			.tags {
 				display: block;
 			}
@@ -1493,8 +1521,7 @@ button.selected {
 			padding-top: 10px;
 			height: 25%;
 			padding-bottom: 30px;
-			background: linear-gradient(to top, #880f0f 55%, rgba(145, 17, 17, 0.5));
-			border-top: 3px solid #b10000;
+			
 
 			display: flex;
 			justify-content: space-between;
