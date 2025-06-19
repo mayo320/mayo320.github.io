@@ -1386,7 +1386,7 @@ button.selected {
 
 
 .jennifer {
-	font-family: "HiraginoSansGBW6";
+	font-family: "Noto Sans TC", sans-serif;
 
 	color: white;
 	font-weight: bold;
@@ -1399,15 +1399,14 @@ button.selected {
 		text-align: right;
 		padding: 50px;
 		.icon {
-			width: 100px; height: 100px;
+			width: 82px; height: 115px;
 		}
 		.cost {
-			text-shadow: 0 0 10px black;
-			font-size: 60px;
+			font-weight: 500;
+			font-size: 50px;
 			position: absolute;
-			right: 80px;
-			top: 60px;
-			font-weight: bold;
+			right: 75px;
+			top: 90px;
 		}
 	}
 	.container {
@@ -1420,9 +1419,11 @@ button.selected {
 		text-align: right;
 		padding-right: 30px; padding-bottom: 30px;
 		.tag {
-			margin: 8px;
-			padding: 8px 20px;
-			background: darkred;
+			font-size: 32px;
+			font-weight: 500;
+			margin: 5px;
+			padding: 6px 18px;
+			background: #ca4c4c;
 			border-radius: 35px;
 			display: inline-block;
 		}
@@ -1432,8 +1433,8 @@ button.selected {
 		padding-top: 10px;
 		height: 25%;
 		padding-bottom: 30px;
-		background: linear-gradient(to top, #880f0f, rgba(145, 17, 17, 0.5));
-		border-top: 3px solid rgba(177,0,0);
+		background: linear-gradient(to top, #880f0f 55%, rgba(145, 17, 17, 0.5));
+		border-top: 3px solid #b10000;
 
 		display: flex;
 		justify-content: space-between;
@@ -1441,11 +1442,13 @@ button.selected {
 		.left-content {
 		}
 		.combos {
+			font-size: 33px;
+			font-weight: 500;
 			padding: 12px;
 			padding-right: 50px;
 			margin-right: -60px;
 			margin-top: 18px;
-			background: rgba(0,0,0,0.3);
+			background: rgba(0,0,0,0.15);
 			border-radius: 16px;
 			text-align: right;
 			display: flex;
@@ -1456,11 +1459,14 @@ button.selected {
 			}
 			.cb {
 				display: block;
-				padding: 2px 8px;
+				padding: 4px 8px;
 				text-wrap: nowrap;
 			}
 		}
 		.skill {
+			font-size: 32px;
+			font-weight: 500;
+			font-style: normal;
 			margin-top: 20px;
 			margin-left: 20px;
 		}
@@ -1476,18 +1482,24 @@ button.selected {
 		        padding-right: 50px;
 		       	max-width: 200px;
 		       	font-size: 24px;
-
-		       	color: pink;
-		       	border-color: pink;
+		       	color: #dc4949;
+		       	border-color: #dc4949;
+				position: relative;
+				span {
+					position: absolute;
+					top: -2px;
+				}
 			}
+			margin-bottom: 5px;
 		}
 	}
 	.text-Name {
-		opacity: 0.7;
+		font-weight: 600;
 		font-size: 30px;
+		margin-left: 10px;
 	}
 	.text-Anime {
 		font-size: 60px;
-		font-weight: bold;
+		font-weight: 600;
 	}
 }

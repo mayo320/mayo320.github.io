@@ -18,7 +18,8 @@ async function init() {
 	document.querySelector('#views-container').innerHTML = views_btn_html;
 	
 	createCardList(data[0].key);
-	loadCard(data[0].decoded_data.length-1);
+	// loadCard(data[0].decoded_data.length-1);
+	loadCard(0);
 
 	unit_names_regex = `(${data[0].decoded_data.map((u)=>u['Name']).join('|')})`;
 }
@@ -230,24 +231,47 @@ function processAct(unit, key) {
 function processJennifer(card, key) {
 	var text = card[key];
 	if (key === 'Tags') {
-		var tags = text.split(',');
+		var tags = text.split(',').map(tag => tag.trim());
+		var collator = new Intl.Collator('zh-CN', { sensitivity: 'base' });
+
+		tags.sort((a, b) => {
+			// 1. 优先按字数排序 (从小到大)
+			if (a.length !== b.length) {
+				return a.length - b.length;
+			}
+			// 2. 如果字数相同，则按拼音排序
+			return collator.compare(a, b);
+		});
+
 		var html = '';
-		for (var i in tags) {
+		for (var i = 0; i < tags.length; i++) { 
 			html += `<div class="tag">${tags[i]}</div><br>`;
 		}
-		return html;
+		return html
 	}
 	else if (key == 'Skill') {
 		var parts = text.split('-');
+
+		// parse [入场]
+		let firstSpaceIndex = parts[0].indexOf(' ')
+		let keyword = parts[0].substring(0, firstSpaceIndex);
+		let restOfString = parts[0].substring(firstSpaceIndex + 1); 
+		let newPart0  = `[${keyword}] ${restOfString}`;
+
 		html = `
 			<div class="skill-name">
-				<div>${parts[0]}</div>
-				<div class="sep">&#x2726;</div>
+				<div>${newPart0}</div>
+				<div class="sep">
+					<span>&#x2726;</span>
+				</div>
 			</div>
 			<div>${parts[1]}</div>
 		`;
-		html = html.replace(/(入场)/gi, '[$1]');
-
+			
+		return html;
+	}
+	else if (key === 'Name'){
+		html = text.replace(/\s*\(.*\)/, ""); 
 		return html;
 	}
 	return text;
