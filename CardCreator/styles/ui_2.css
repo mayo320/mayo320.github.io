@@ -53,9 +53,7 @@ button.selected {
 		.poker {display: none;}
 		.mini {display: none;}
 		.chit {display: none;}
-		.small {display: none;}
-		.med {display: none;}
-		.big {display: none;}
+		.custom {display: none;}
 	}
 	&.poker {
 		width: 825px; height: 1125px;
@@ -69,18 +67,15 @@ button.selected {
 		width: 300px; height: 300px;
 		.proof-overlay .chit{display: block;}
 	}
+
+	&.custom {
+		&:has(.jennifer.cA) {width: 1060px; height: 1060px;}
+		&:has(.jennifer.cB) {width: 1060px; height: 560px;}
+		&:has(.jennifer.cC) {width: 560px; height: 560px;}
+	}
+
 	overflow: hidden;
 	display: flex;
-
-	&.small {
-		width: 560px; height: 560px;
-	}
-	&.med {
-		width: 1060px; height: 560px;
-	}
-	&.big {
-		width: 1060px; height: 1060px;
-	}
 
 	/*31px bleed, 30px cut*/
 	.card-border, .view {
@@ -100,14 +95,10 @@ button.selected {
 	&.chit {
 		width: 240px; height: 240px;
 	}
-	&.small {
-		width: 500px; height: 500px;
-	}
-	&.med {
-		width: 1000px; height: 500px;
-	}
-	&.big {
-		width: 1000px; height: 1000px;
+	&.custom {
+		&:has(.jennifer.cA) {width: 1000px; height: 1000px;}
+		&:has(.jennifer.cB) {width: 1000px; height: 500px;}
+		&:has(.jennifer.cC) {width: 500px; height: 500px;}
 	}
 
 	/*31px bleed*/
@@ -1384,14 +1375,14 @@ button.selected {
 	}
 }
 
-
 .jennifer {
 	font-family: "Noto Sans TC", sans-serif;
-
+	margin: 0 !important;
 	color: white;
 	font-weight: bold;
 	font-size: 34px;
-	&.view {width: 100% !important; height: 100% !important;}
+	width: 100% !important; height: 100% !important;
+
 	.img-Img {
 		width: 100%;
 	}
@@ -1409,12 +1400,17 @@ button.selected {
 			top: 90px;
 		}
 	}
-	.container {
-		display: flex;
-		flex-direction: column;
-		position: absolute;
-		inset: 0;
+
+	.text-Name {
+		font-weight: 600;
+		font-size: 30px;
+		margin-left: 10px;
 	}
+	.text-Anime {
+		font-size: 60px;
+		font-weight: 600;
+	}
+
 	.tags {
 		text-align: right;
 		padding-right: 30px; padding-bottom: 30px;
@@ -1428,85 +1424,137 @@ button.selected {
 			display: inline-block;
 		}
 	}
-	.description {
-		padding: 0px 30px;
-		padding-top: 10px;
-		height: 25%;
-		padding-bottom: 30px;
-		background: linear-gradient(to top, #880f0f 55%, rgba(145, 17, 17, 0.5));
-		border-top: 3px solid #b10000;
 
+	.combos {
+		font-size: 33px;
+		font-weight: 500;
+		padding: 12px;
+		padding-right: 50px;
+		margin-right: -60px;
+		margin-top: 18px;
+		background: rgba(0,0,0,0.15);
+		border-radius: 16px;
+		text-align: right;
 		display: flex;
-		justify-content: space-between;
-		gap: 30px;
-		.left-content {
+		align-self: center;
+		.col {
+			display: inline-block;
+			margin: 0 10px;
+		}
+		.cb {
+			display: block;
+			padding: 4px 8px;
+			text-wrap: nowrap;
+		}
+		.cb .count {
+			font-size: 0.7em; /* Makes the count number smaller */
+			font-weight: 400;
+			margin-left: 3px; /* Space between word and count */    
+			margin-right: 3px; /* Space between word and count */
+
+		}
+	}
+
+	.container {
+		display: flex;
+		position: absolute;
+		inset: 0;
+	}
+
+	&.cB .container {
+		flex-direction: row-reverse;
+		.text-Anime {
+			display: block;
+		}
+		.tags {
+			margin-top: 10px;
+			display: none;
+			text-align: left;
+		}
+		.description {
+			padding: 20px 0 0 20px;
+			width: 30%;
+			border-right: 3px solid #b10000;
+			background: linear-gradient(to right, #880f0f 55%, rgba(145, 17, 17, 0.5));
+			.tags {
+				display: block;
+			}
 		}
 		.combos {
-			font-size: 33px;
-			font-weight: 500;
-			padding: 12px;
-			padding-right: 50px;
-			margin-right: -60px;
-			margin-top: 18px;
-			background: rgba(0,0,0,0.15);
-			border-radius: 16px;
+			background: none;
 			text-align: right;
-			display: flex;
-			align-self: center;
-			.col {
-				display: inline-block;
-				margin: 0 10px;
-			}
-			.cb {
-				display: block;
-				padding: 4px 8px;
-				text-wrap: nowrap;
-			}
-			.cb .count {
-				font-size: 0.7em; /* Makes the count number smaller */
-				font-weight: 400;
-				margin-left: 3px; /* Space between word and count */    
-				margin-right: 3px; /* Space between word and count */
+		    flex-direction: row-reverse;
+		}
+	}
+	&.cA .container, &.cC .container {
+		flex-direction: column;
+		.description {
+			padding: 0px 30px;
+			padding-top: 10px;
+			height: 25%;
+			padding-bottom: 30px;
+			background: linear-gradient(to top, #880f0f 55%, rgba(145, 17, 17, 0.5));
+			border-top: 3px solid #b10000;
 
+			display: flex;
+			justify-content: space-between;
+			gap: 30px;
+			.tags {
+				display: none;
+			}
+			.skill {
+				font-size: 32px;
+				font-weight: 500;
+				font-style: normal;
+				margin-top: 20px;
+				margin-left: 20px;
+			}
+			.skill-name {
+				display: flex;
+				align-items: center;
+				.sep {
+					flex-grow: 1;
+					border-top: 1px solid white;
+					margin: 0 20px;
+					line-height: 0;
+					text-align: right;
+			        padding-right: 50px;
+			       	max-width: 200px;
+			       	font-size: 24px;
+			       	color: #dc4949;
+			       	border-color: #dc4949;
+					position: relative;
+					span {
+						position: absolute;
+						top: -2px;
+					}
+				}
+				margin-bottom: 5px;
 			}
 		}
-		.skill {
-			font-size: 32px;
-			font-weight: 500;
-			font-style: normal;
-			margin-top: 20px;
-			margin-left: 20px;
-		}
-		.skill-name {
-			display: flex;
-			align-items: center;
-			.sep {
-				flex-grow: 1;
-				border-top: 1px solid white;
-				margin: 0 20px;
-				line-height: 0;
-				text-align: right;
-		        padding-right: 50px;
-		       	max-width: 200px;
-		       	font-size: 24px;
-		       	color: #dc4949;
-		       	border-color: #dc4949;
-				position: relative;
-				span {
-					position: absolute;
-					top: -2px;
+	}
+	&.cC .container {
+		.description {
+			flex-direction: column;
+			position: relative;
+			gap: 0;
+			height: 15%;
+			.basics {
+				position: absolute;
+				top: -50px;
+			}
+			.combos {
+				margin: 0;
+				margin-top: 30px;
+				padding: 0;
+				.col {
+					display: flex;
+				}
+				.cb {
+					display: inline;
 				}
 			}
-			margin-bottom: 5px;
 		}
 	}
-	.text-Name {
-		font-weight: 600;
-		font-size: 30px;
-		margin-left: 10px;
-	}
-	.text-Anime {
-		font-size: 60px;
-		font-weight: 600;
-	}
+	
 }
