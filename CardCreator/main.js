@@ -274,6 +274,21 @@ function processJennifer(card, key) {
 		html = text.replace(/\s*\(.*\)/, ""); 
 		return html;
 	}
+	else if (key.includes('Combo')) {
+        const match = String(text || '').trim().match(/^(.*?)\s*\((\d+)\)\s*$/);
+
+        let word = String(text || '').trim(); 
+        let count = ''; 
+
+        if (match && match[1] && match[2]) {
+            word = match[1].trim(); // Extract the word part before (count)
+            count = match[2].trim(); // Extract the number part
+        }
+
+		            html = `<span class="word-text">${word}</span>` + `<span class="count">${count}</span>`;
+
+        return html; 
+    }
 	return text;
 }
 

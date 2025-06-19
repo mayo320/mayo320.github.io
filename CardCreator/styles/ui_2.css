@@ -1422,9 +1422,9 @@ button.selected {
 			font-size: 32px;
 			font-weight: 500;
 			margin: 5px;
-			padding: 6px 18px;
+			padding: 4px 20px;
 			background: #ca4c4c;
-			border-radius: 35px;
+			border-radius: 22px;
 			display: inline-block;
 		}
 	}
@@ -1461,6 +1461,13 @@ button.selected {
 				display: block;
 				padding: 4px 8px;
 				text-wrap: nowrap;
+			}
+			.cb .count {
+				font-size: 0.7em; /* Makes the count number smaller */
+				font-weight: 400;
+				margin-left: 3px; /* Space between word and count */    
+				margin-right: 3px; /* Space between word and count */
+
 			}
 		}
 		.skill {
