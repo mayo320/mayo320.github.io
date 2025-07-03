@@ -2141,3 +2141,9 @@ button.selected {
 		border-radius: 20px;
 	}
 }
+#j-board {
+	border: 3px solid gray;
+}
+#a4 {
+	background-color: white;
+}
