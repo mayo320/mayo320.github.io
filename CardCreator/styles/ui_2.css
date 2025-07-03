@@ -1386,31 +1386,124 @@ button.selected {
 	.img-Img {
 		width: 100%;
 	}
+	&.cB .img-Img {
+		width: auto;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+	}
 	.top-row {
 		text-align: right;
 		padding: 50px;
-		.icon {
-			width: 82px; height: 115px;
+	}
+
+	&.cA {
+		.text-Name {
+			font-weight: 600;
+			font-size: 30px;
+			margin-left: 10px;
 		}
-		.cost {
+		.text-Anime {
+			font-size: 60px;
+			font-weight: 600;
+		}
+	}
+
+	&.cB .container {
+		.text-Name {
+			font-weight: 600;
+			font-size: 28px;
+			margin-left: 10px;
+		}
+		.text-Anime {
+			font-size: 48px;
+			font-weight: 600;
+			margin-top: 15px;
+			margin-left: 10px;
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		.top-row {
+		text-align: right;
+		padding: 50px;
+		}
+
+		flex-direction: row-reverse;
+		.tags {
+			display: none;
+			text-align: left;
+			margin-top: 10px;
+			padding-bottom: 0px;
+		}
+		.description {
+			padding: 20px 0 0 20px;
+			width: 30%;
+			.tags {
+				display: block;
+			}
+			.tag{
+				margin-top: 15px;
+			}
+		}
+		.combos {
+			background: none;
+			text-align: right;
+		    flex-direction: row-reverse;
+			.col {
+			margin: top 20px;
+			}
+		}
+		.sep {
+			display: none;
+		}
+		.skill {
+			font-size: 31px;
 			font-weight: 500;
-			font-size: 50px;
-			position: absolute;
-			right: 75px;
-			top: 90px;
+			font-style: normal;
+			margin-top: 10px;
+			margin-left: 10px;
+			margin-right: 20px;
+		}
+		.skill-name {
+			display: flex;
+			align-items: center;
 		}
 	}
 
-	.text-Name {
-		font-weight: 600;
-		font-size: 30px;
-		margin-left: 10px;
-	}
-	.text-Anime {
-		font-size: 60px;
-		font-weight: 600;
-	}
+	&.cC {
+		.text-Name {
+			font-weight: 600;
+			font-size: 21px;
+			margin-left: 20px;
+			position: absolute;
+			left:0px;
+			top:-200px;
+			display: block;
+			width: 10px;
+			text-shadow: 0 0 5px black;
+		}
+		.text-Anime {
+			font-size: 48px;
+			font-weight: 600;
+			margin-left: 55px;
+			text-shadow: 0 0 20px rgba(0, 0, 0, 0.655);
+		}
+		.tags {
+			margin-bottom: -55px;
+			margin-right:15px;
+			z-index: 9;
+		}
+		.top-row {
+		text-align: right;
+		padding: 50px;
+		}
+	}	
 
+	.cost {
+		z-index: 1;
+	}
 	.tags {
 		text-align: right;
 		padding-right: 30px; padding-bottom: 30px;
@@ -1418,9 +1511,11 @@ button.selected {
 			font-size: 32px;
 			font-weight: 500;
 			margin: 5px;
-			padding: 4px 20px;
+			padding: 20px;
+			padding-top: 0px;
+			padding-bottom: 4px;
 			background: #ca4c4c;
-			border-radius: 22px;
+			border-radius: 33px;
 			display: inline-block;
 		}
 	}
@@ -1461,59 +1556,503 @@ button.selected {
 		inset: 0;
 	}
 
+	.studio {
+		border-bottom-left-radius: 15px;
+		border-bottom-right-radius: 15px;
+		border: 1px solid white;
+		padding: 12px 14px;
+		font-weight: 500;
+		font-size: 40px;
+		background-color: #ca4c4c;
+		z-index: 0;
+		font-family: monospace;
+	}
+	
 	&.c热血 {
-		&.cA, &.cC {
+		.studio {color: white;}
+	}
+	
+	.icon {
+		display: none;
+		z-index: 1;
+	}
+
+	&.c热血 {
+		.icon.fire {
+			display: block;
+		}
+		.tag {
+			background: #ca4c4c;
+
+		}
+		.sep {
+			color: #dc4949;
+			border-color: #dc4949;
+		}
+		&.cA {
 			.description {
-				background: linear-gradient(to top, #880f0f 55%, rgba(145, 17, 17, 0.5));
+				background: linear-gradient(to top, #880f0f 55%, rgba(220, 73, 73, 0.6));
 				border-top: 3px solid #b10000;
 			}
+		.icon {
+			width: 76px;
+			position: absolute;
+			right: 45px;
+			top: 45px;
+			}
+		.cost {
+			font-weight: 400;
+			font-size: 43px;
+			position: absolute;
+			right: 56px;
+			top: 87px;
+		}
+		.studio {
+			padding: 25px 14px 10px;
+			position: absolute;
+			top: 134px;
+			right: 55px;
+			background: linear-gradient(to bottom, #b33030 55%, rgb(186 27 27 / 70%));
+		}
 		}
 		&.cB {
 			.description {
 				background: linear-gradient(to right, #880f0f 55%, rgba(145, 17, 17, 0.5));
 				border-right: 3px solid #b10000;
 			}
+			.icon {
+				width: 64px;
+				position: absolute;
+				right: 39px;
+				top: 35px;
+			}
+			.cost {
+				font-weight: 400;
+				font-size: 37px;
+				position: absolute;
+				right: 49px;
+				top: 70px;
+			}
+			.studio {
+                padding: 20px 12px 7px;
+                position: absolute;
+                font-size: 33px;
+                top: 110px;
+                right: 46.5px;
+                background: linear-gradient(to bottom, #b33030 55%, rgb(186 27 27 / 70%));
+            }
+		}
+		&.cC {
+			.description {
+				background: linear-gradient(to top, #880f0f 55%, rgba(145, 17, 17, 0.5));
+				border-top: 3px solid #b10000;
+				padding-left: 0px !important;
+			}
+			.icon {
+				width: 60px;
+				position: absolute;
+				right: 29px;
+				top: 26px;
+			}
+			.cost {
+				font-weight: 400;
+				font-size: 36px;
+				position: absolute;
+				right: 48px;
+				top: 58px;
+			}
+			.studio {
+                padding: 10px 11px 6px;
+                position: absolute;
+                font-size: 31px;
+                top: 105px;
+                right: 36px;
+                background: linear-gradient(to bottom, #b33030 55%, rgb(186 27 27 / 70%));
+            }
 		}
 	}
+	
+	&.c爱情 {
+		.icon.heart {
+			display: block;
+		}
+		.tag {
+			background: #fb90b6;
 
-	&.c魔幻 {
-		&.cA, &.cC {
+		}
+		.combos {
+		background: rgba(139,0,39,0.15);
+		}
+		.sep {
+			color: #fe99bc;
+			border-color: #fe99bc;
+		}
+		
+		&.cA {
 			.description {
-				background: linear-gradient(to top, purple 55%, rgba(145, 17, 17, 0.5));
-				border-top: 3px solid violet;
+				background: linear-gradient(to top, #e46d8f 55%, rgba(227, 79, 121, 0.5));
+				border-top: 3px solid #ff83a3;
+			}
+			.icon {
+				width: 91px;
+				position: absolute;
+				right: 45px;
+				top: 45px;
+				}
+			.cost {
+				font-weight: 400;
+				font-size: 48px;
+				position: absolute;
+				right: 65px;
+				top: 50px;
+			}
+			.studio {
+                position: absolute;
+                top: 100px;
+                padding: 31px 18px 11px;
+                right: 61px;
+                background: linear-gradient(to bottom, #dc3770, rgb(228 40 106 / 70%));
 			}
 		}
 		&.cB {
 			.description {
-				background: linear-gradient(to right, purple 55%, rgba(145, 17, 17, 0.5));
-				border-right: 3px solid violet;
+				background: linear-gradient(to right, #e46d8f 55%, rgba(227, 79, 121, 0.5));
+				border-right: 3px solid #ff83a3;
 			}
+			.icon {
+				width: 73px;
+				position: absolute;
+				right: 40px;
+				top: 42px;
+			}
+			.cost {
+				font-weight: 400;
+				font-size: 39px;
+				position: absolute;
+				right: 55px;
+				top: 48px;
+			}			
+			.studio {
+                padding: 23.5px 13px 7px;
+                position: absolute;
+                font-size: 33px;
+                top: 88px;
+                right: 52px;
+                background: linear-gradient(to bottom, #de4077, rgb(228 40 106 / 70%));
+            }
+		}
+		&.cC {
+			.description {
+				background: linear-gradient(to top, #e46d8f 55%, rgba(227, 79, 121, 0.5));
+				border-top: 3px solid #ff83a3;
+				padding-left: 0px !important;
+			}
+			.icon {
+				width: 70px;
+				position: absolute;
+				right: 29px;
+				top: 26px;
+			}
+			.cost {
+				font-weight: 400;
+				font-size: 35px;
+				position: absolute;
+				right: 54px;
+				top: 33px;
+			}
+			.studio {
+                padding: 25px 12px 6px;
+                position: absolute;
+                font-size: 31px;
+                top: 69px;
+                right: 41px;
+                background: linear-gradient(to bottom, #de4077, rgb(228 40 106 / 70%));
+            }
 		}
 	}
 
-	&.cB .container {
-		flex-direction: row-reverse;
-		.text-Anime {
+	&.c治愈 {
+		.icon.leaf {
 			display: block;
 		}
-		.tags {
-			margin-top: 10px;
-			display: none;
-			text-align: left;
+		.tag {
+			background: #7ac369;
+
+		}
+		.sep {
+			color: #50bd79;
+			border-color: #50bd79;
 		}
 		.description {
-			padding: 20px 0 0 20px;
-			width: 30%;
-			.tags {
-				display: block;
+			background: linear-gradient(to top, #4b9b60 55%, rgba(98, 160, 114, 0.5));
+			border-top: 3px solid #50bd79;
+		}
+		
+		&.cA {
+			.icon {
+				width: 91px;
+				position: absolute;
+				right: 45px;
+				top: 37px;
+				}
+			.cost {
+				font-weight: 400;
+				font-size: 48px;
+				position: absolute;
+				right: 65px;
+				top: 50px;
+			}
+			.studio {
+                position: absolute;
+                top: 104px;
+                padding: 30px 18px 11px;
+                right: 60px;
+                background: linear-gradient(to bottom, #16741d, rgb(21 132 28 / 70%));
 			}
 		}
-		.combos {
-			background: none;
-			text-align: right;
-		    flex-direction: row-reverse;
+		&.cB {
+			.description {
+				background: linear-gradient(to right, #4b9b60 55%, rgba(98, 160, 114, 0.5));
+				border-right: 3px  solid #50bd79;
+			}
+			.icon {
+				width: 73px;
+				position: absolute;
+				right: 40px;
+				top: 35px;
+			}
+			.cost {
+				font-weight: 400;
+				font-size: 39px;
+				position: absolute;
+				right: 53px;
+				top: 48px;
+			}
+			.studio {
+                 padding: 22px 12px 7px;
+                position: absolute;
+                font-size: 33px;
+                top: 92px;
+                right: 53px;
+                background: linear-gradient(to bottom, #16741d, rgb(21 132 28 / 70%));
+            }
+		}
+		&.cC {
+			.description {
+				padding-left: 0px !important;
+			}
+			.icon {
+				width: 70px;
+				position: absolute;
+				right: 29px;
+				top: 19px;
+			}
+			.cost {
+				font-weight: 400;
+				font-size: 35px;
+				position: absolute;
+				right: 54px;
+				top: 33px;
+			}
+			.studio {
+				padding: 25px 10px 5px;
+                position: absolute;
+                font-size: 31px;
+                top: 69px;
+                right: 41px;
+                background: linear-gradient(to bottom, #16741d, rgb(21 132 28 / 70%));
+            }
 		}
 	}
+
+	&.c推理 {
+		.icon.rect {
+			display: block;
+		}
+		.tag {
+			background: #4e8be7;
+
+		}
+		.sep {
+			color: #5b81c7;
+			border-color: #5b81c7;
+		}
+		.description {
+			background: linear-gradient(to top, #2e519f 55%, rgba(76, 85, 140, 0.5));
+			border-top: 3px solid #3962fa;
+		}
+		
+		&.cA {
+			.icon {
+				width: 93px;
+				position: absolute;
+				right: 45px;
+				top: 37px;
+				}
+			.cost {
+				font-weight: 400;
+				font-size: 49px;
+				position: absolute;
+				right: 65px;
+				top: 50px;
+			}
+			.studio {
+                position: absolute;
+                top: 102px;
+                padding: 30px 18px 12px;
+                right: 60px;
+                background: linear-gradient(to bottom, #1152b1, rgb(31 72 134 / 72%));
+			}
+		}
+		&.cB {
+			.description {
+				background: linear-gradient(to right, #2e519f 55%, rgba(76, 85, 140, 0.5));
+				border-right: 3px  solid #3962fa;
+			}
+			.icon {
+				width: 74px;
+				position: absolute;
+				right: 40px;
+				top: 35px;
+			}
+			.cost {
+				font-weight: 400;
+				font-size: 39px;
+				position: absolute;
+				right: 56px;
+				top: 48px;
+			}
+			.studio {
+                 padding: 22px 12px 7px;
+                position: absolute;
+                font-size: 33px;
+                top: 89px;
+                right: 53px;
+                background: linear-gradient(to bottom, #1152b1, rgb(31 72 134 / 72%));
+            }
+		}
+		&.cC {
+			.description {
+				padding-left: 0px !important;
+			}
+			.icon {
+				width: 69px;
+				position: absolute;
+				right: 29px;
+				top: 21px;
+			}
+			.cost {
+				font-weight: 400;
+				font-size: 35px;
+				position: absolute;
+				right: 54px;
+				top: 33px;
+			}
+			.studio {
+				padding: 25px 10px 5px;
+                position: absolute;
+                font-size: 31px;
+                top: 68px;
+                right: 41px;
+                background: linear-gradient(to bottom, #1152b1, rgb(31 72 134 / 72%));
+            }
+		}
+	}
+
+	&.c魔幻 {
+		.icon.star {
+			display: block;
+		}
+		.tag {
+			background: #9963c9;
+
+		}
+		.sep {
+			color: #b081d9;
+			border-color: #b081d9;
+		}
+		.description {
+			background: linear-gradient(to top, #6b2e9f 55%, rgba(111, 60, 163, 0.5));
+			border-top: 3px solid #9e2cff;
+		}
+		&.cA {
+			.icon {
+				width: 102px;
+				position: absolute;
+				right: 42px;
+				top: 34px;
+				}
+			.cost {
+				font-weight: 400;
+				font-size: 43px;
+				position: absolute;
+				right: 70px;
+				top: 58px;
+			}
+			.studio {
+				position: absolute;
+				top: 113px;
+				right: 66px;
+				background: linear-gradient(to bottom, #6d27a6, rgb(90 18 155 / 67%));
+			}
+		}
+		&.cB {
+			.description {
+				background: linear-gradient(to right, #6b2e9f 55%, rgba(111, 60, 163, 0.5));
+				border-right: 3px  solid #9e2cff;
+			}
+			.icon {
+				width: 84px;
+				position: absolute;
+				right: 35px;
+				top: 31px;
+			}
+			.cost {
+				font-weight: 400;
+				font-size: 36px;
+				position: absolute;
+				right: 59px;
+				top: 51px;
+			}
+			.studio {
+                padding: 20px 11px 8px;
+                position: absolute;
+                font-size: 33px;
+                top: 86px;
+                right: 55px;
+                background: linear-gradient(to bottom, #6d27a6, rgb(90 18 155 / 67%));
+            }
+		}
+		&.cC {
+			.description {
+				padding-left: 0px !important;
+			}
+			.icon {
+				width: 75px;
+				position: absolute;
+				right: 25px;
+				top: 18px;
+			}
+			.cost {
+				font-weight: 400;
+				font-size: 35px;
+				position: absolute;
+				right: 54px;
+				top: 33px;
+			}
+			.studio {
+    			padding: 10px 10px 7px;
+                position: absolute;
+                font-size: 32px;
+                top: 76px;
+                right: 41px;
+                background: linear-gradient(to bottom, #6d27a6, rgb(90 18 155 / 67%));
+            }
+		}
+	}
+
+
+
 	&.cA .container, &.cC .container {
 		flex-direction: column;
 		.description {
@@ -1541,15 +2080,13 @@ button.selected {
 				align-items: center;
 				.sep {
 					flex-grow: 1;
-					border-top: 1px solid white;
+					border-top: 1px solid;
 					margin: 0 20px;
 					line-height: 0;
 					text-align: right;
 			        padding-right: 50px;
 			       	max-width: 200px;
 			       	font-size: 24px;
-			       	color: #dc4949;
-			       	border-color: #dc4949;
 					position: relative;
 					span {
 						position: absolute;
@@ -1564,18 +2101,25 @@ button.selected {
 		.description {
 			flex-direction: column;
 			position: relative;
-			gap: 0;
+			gap: 0; 
 			height: 15%;
 			.basics {
 				position: absolute;
-				top: -50px;
+				top: -40px;
 			}
 			.combos {
 				margin: 0;
 				margin-top: 30px;
 				padding: 0;
+				background: none;
+				align-self: start;
+				margin-left: 15px;
 				.col {
+					margin: 0;
 					display: flex;
+					&:first-child {
+						display: none;
+					}
 				}
 				.cb {
 					display: inline;
@@ -1584,4 +2128,16 @@ button.selected {
 		}
 	}
 	
+}
+#j-skill {
+	padding: 20px;
+	text-align: center;
+	.text-Type {
+		margin-bottom: 20px;
+	}
+	.text-Description {
+		border: 1px solid white;
+		padding: 20px;
+		border-radius: 20px;
+	}
 }

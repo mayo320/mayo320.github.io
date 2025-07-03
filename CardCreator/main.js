@@ -289,6 +289,9 @@ function processJennifer(card, key) {
 
         return html; 
     }
+	else if (key === 'Studio') {
+		return text[0];
+	}
 	return text;
 }
 
