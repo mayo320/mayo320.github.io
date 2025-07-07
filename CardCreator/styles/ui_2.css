@@ -2271,3 +2271,18 @@ button.selected {
 #a4 {
 	background-color: white;
 }
+
+#j-trending .trending {
+	text-align: center;
+	padding-bottom: 70px;
+	font-size: 40px;
+}
+
+#j-trending .trending-img {
+	padding-left: 75px;
+	padding-top: 30px;
+	padding-bottom: 10px;
+	img {
+		height: 100px;
+	}
+}
