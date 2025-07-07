@@ -52,6 +52,7 @@ button.selected {
 	.proof-overlay {
 		.poker {display: none;}
 		.mini {display: none;}
+		.mini-h {display: none;}
 		.chit {display: none;}
 		.custom {display: none;}
 	}
@@ -62,6 +63,10 @@ button.selected {
 	&.mini {
 		width: 600px; height: 825px;
 		.proof-overlay .mini{display: block;}
+	}
+	&.mini-h {
+		width: 825px; height: 600px;
+		/* .proof-overlay .mini{display: block;} */
 	}
 	&.chit {
 		width: 300px; height: 300px;
@@ -91,6 +96,9 @@ button.selected {
 	}
 	&.mini {
 		width: 530px; height: 755px;
+	}
+	&.mini-h {
+		width: 755px; height: 530px;
 	}
 	&.chit {
 		width: 240px; height: 240px;
@@ -2051,6 +2059,102 @@ button.selected {
 		}
 	}
 
+	&.广告 {
+		.icon.circle {
+			display: block;
+		}
+		.text-Anime {
+            text-shadow: 0 0 20px rgba(167, 164, 123, 0.66);
+        }
+		.tag {
+			background: #f38d4a;
+
+		}
+		.sep {
+			color: #eaeaea;
+			border-color: #ffffff;
+		}
+		.description {
+			background: linear-gradient(to top, #ec9019 55%, rgb(217 148 69 / 50%));
+			border-top: 3px solid #faa836;
+		}
+		&.cA {
+			.icon {
+				width: 100px;
+				position: absolute;
+				right: 42px;
+				top: 34px;
+				}
+			.cost {
+				font-weight: 400;
+				font-size: 43px;
+				position: absolute;
+				right: 80px;
+				top: 58px;
+			}
+			.studio {
+				position: absolute;
+				top: 123px;
+				right: 56px;
+				background: linear-gradient(to bottom, #e57c18, rgb(202 153 61 / 70%));
+			}
+		}
+		&.cB {
+			.description {
+				background: linear-gradient(to right,#ec9019 55%, rgb(217 148 69 / 50%));
+				border-right: 3px  solid #faa836;
+			}
+			.icon {
+				width: 84px;
+				position: absolute;
+				right: 35px;
+				top: 31px;
+			}
+			.cost {
+				font-weight: 400;
+				font-size: 36px;
+				position: absolute;
+				right: 69px;
+				top: 51px;
+			}
+			.studio {
+				padding: 20px 11px 8px;
+				position: absolute;
+				font-size: 33px;
+				top: 96px;
+                right: 48px;
+				background: linear-gradient(to bottom, #e57c18, rgb(202 153 61 / 70%));
+			}
+		}
+		&.cC {
+			.description {
+				padding-left: 0px !important;
+			}
+			.icon {
+				width: 75px;
+				position: absolute;
+				right: 25px;
+				top: 18px;
+			}
+			.cost {
+				font-weight: 400;
+				font-size: 35px;
+				position: absolute;
+				right: 54px;
+				top: 33px;
+			}
+			.studio {
+                padding: 20px 10px 7px;
+                position: absolute;
+                font-size: 32px;
+                top: 76px;
+                right: 35px;
+				background: linear-gradient(to bottom, #e57c18, rgb(202 153 61 / 70%));
+			}
+		}
+	}
+
+
 
 
 	&.cA .container, &.cC .container {
@@ -2129,21 +2233,41 @@ button.selected {
 	}
 	
 }
+
 #j-skill {
 	padding: 20px;
 	text-align: center;
 	.text-Type {
 		margin-bottom: 20px;
 	}
-	.text-Description {
-		border: 1px solid white;
-		padding: 20px;
-		border-radius: 20px;
-	}
 }
 #j-board {
 	border: 3px solid gray;
 }
+
+#j-skill .skill-border {
+    height: calc(100% - 40px);
+    border: 1px solid white;
+    font-size: 40px;
+    padding-top: 120px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+#j-skill .skill-header {
+	padding-bottom: 30px;
+	font-size: 45px;
+    gap: 5px; 
+}
+
+#j-skill .separator {
+    margin: 0 5px; /* 调整连接符左右的间距 */
+    font-weight: bold; /* 加粗连接符 */
+}
+
 #a4 {
 	background-color: white;
 }
