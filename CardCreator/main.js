@@ -1,7 +1,7 @@
 var current_index = 0;
 var outfile_name = '';
 var unit_names_regex = '';
-var cur_card_mode = 'unit';
+var cur_view_index = 0;
 
 async function init() {
 	var views_btn_html = '';
@@ -11,13 +11,13 @@ async function init() {
 		}
 
 		views_btn_html += `
-			<button view='${data[i].key}' onclick="showView(this); createCardList('${data[i].key}');">${data[i].name}</button>
+			<button view='${data[i].key}' onclick="showView(this); createCardList('${i}');">${data[i].name}</button>
 		`
 	}
 
 	document.querySelector('#views-container').innerHTML = views_btn_html;
 	
-	createCardList(data[0].key);
+	createCardList(0);
 	// loadCard(data[0].decoded_data.length-1);
 	loadCard(0);
 
@@ -295,16 +295,16 @@ function processJennifer(card, key) {
 	return text;
 }
 
-function createCardList(item_key) {
-	const item = data.find((x) => x.key === item_key);
-	cur_card_mode = item_key;
+function createCardList(item_index) {
+	const item = data[item_index];
+	cur_view_index = item_index;
 	current_index = 0;
 
 	var cont = document.querySelector('#card-list');
 	var html = ''
 	for (let i in item.decoded_data) {
 		var unit = item.decoded_data[i];
-		if (item_key === 'card') {calculateUnitScores(unit);}
+		if (item.key === 'card') {calculateUnitScores(unit);}
 		
 		var score_html = ('score-Total' in unit) ? `<span class="subtext">(${unit['score-Total']})</span>` : ``;
 		html += `
@@ -389,12 +389,7 @@ function loadRowGeneric(gen_data) {
 }
 
 function loadCard(index) {
-	var item = {}
-	for (i in data) {
-		if (data[i].key === cur_card_mode) {
-			item = data[i];
-		}
-	}
+	var item = data[cur_view_index];
 	index = updateIndex(index, item.decoded_data);
 	const data_entry = item.decoded_data[index];
 	outfile_name = data_entry['Name'] + '[face,'+data_entry['Count']+']';
@@ -456,7 +451,7 @@ var a4_count = 0
 function exportA4() {
 	document.getElementById('a4').innerHTML = '';
 	current_index -= 1;
-	const item = data.find((x) => x.key === cur_card_mode);
+	const item = data[cur_view_index];
 	const cards_per_page = item.cards_per_page || 9;
 	var max_index = item.decoded_data.length;
 
@@ -467,7 +462,7 @@ function exportA4() {
 
 		if (a4_count + count > cards_per_page) {
 			// export paper
-			outfile_name = `a4-${cur_card_mode}-${current_index - 1}`;
+			outfile_name = `a4-${item.key}-${current_index - 1}`;
 			exportCard(document.getElementById('a4'));
 
 			current_index -= 1;
@@ -488,7 +483,7 @@ function exportA4() {
 				setTimeout(() => {
 					exportUnitA4();
 				}, 1300);
-			} else if (cur_card_mode === 'card') {
+			} else if (item.key === 'card') {
 				// export last paper
 				setTimeout(() => {
 					// Instructions front
@@ -502,13 +497,13 @@ function exportA4() {
 					}, 500);
 
 					setTimeout(() => {
-						outfile_name = `a4-${cur_card_mode}-${current_index}`;
+						outfile_name = `a4-${item.key}-${current_index}`;
 						exportCard(document.getElementById('a4'));
 					}, 1300);
 				}, 1300);
 			} else {
 				setTimeout(() => {
-					outfile_name = `a4-${cur_card_mode}-${current_index}`;
+					outfile_name = `a4-${item.key}-${current_index}`;
 					exportCard(document.getElementById('a4'));
 				}, 1300);
 			}
