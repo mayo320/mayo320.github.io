@@ -258,6 +258,29 @@ var data = [
 			}
 		],
 	},
+	{
+		key: 'j-board2',
+		name: 'Board 2',
+		overlay: 'custom',
+		cards_per_page: 1,
+		decoded_data: [
+			{
+				Name: 'Left',
+				Rank: 'X',
+				Count: 1,
+			},
+			{
+				Name: 'Mid',
+				Rank: 'X',
+				Count: 1,
+			},
+			{
+				Name: 'Right',
+				Rank: 'X',
+				Count: 1,
+			}
+		]
+	},
 
 	// For printing only
 	{

@@ -2248,6 +2248,22 @@ button.selected {
 #j-board {
 	border: 3px solid gray;
 }
+#j-board2 {
+	height: 3165px !important;
+	width: calc(5585px/3) !important;
+	img {
+		height: 100%;
+		/*position: absolute;
+		left: 0;
+		top: 0;*/
+	}
+	&.Mid img {
+		margin-left: calc(-5585px/3);
+	}
+	&.Right img {
+		margin-left: calc(-5585px/3*2);
+	}
+}
 
 #j-skill .skill-border {
     height: calc(100% - 40px);
