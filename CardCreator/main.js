@@ -28,7 +28,6 @@ async function init() {
 	document.querySelector('#views-container').innerHTML = views_btn_html;
 	
 	createCardList(0);
-	// loadCard(data[0].decoded_data.length-1);
 	loadCard(0);
 
 	unit_names_regex = `(${data[0].decoded_data.map((u)=>u['Name']).join('|')})`;
