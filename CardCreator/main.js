@@ -2,6 +2,16 @@ var current_index = 0;
 var outfile_name = '';
 var unit_names_regex = '';
 var cur_view_index = 0;
+var data = jen_data;
+
+function switchData(d) {
+	hideViews();
+	data = d;
+	init();
+	setTimeout(() => {
+		showView(document.querySelector(`button[view="${data[0].key}"]`));
+	}, 200);
+}
 
 async function init() {
 	var views_btn_html = '';
