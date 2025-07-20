@@ -1405,6 +1405,9 @@ button.selected {
 		text-align: right;
 		padding: 50px;
 	}
+	.text-Name.c-show {
+		display: none;
+	}
 
 	&.cA {
 		.text-Name {
@@ -1430,7 +1433,7 @@ button.selected {
             font-style: normal;
             margin-top: 5px;
             margin-left: 20px;
-            margin-right: 20px;
+            margin-right: 200px;
 		}
 		.skill-name {
 			display: flex;
