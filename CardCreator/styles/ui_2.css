@@ -2267,6 +2267,7 @@ button.selected {
 #j-skill {
 	padding: 20px;
 	text-align: center;
+	background: white;
 	.text-Type {
 		margin-bottom: 20px;
 	}
