@@ -1416,6 +1416,42 @@ button.selected {
 			font-size: 60px;
 			font-weight: 600;
 		}
+		.tags{
+			margin-bottom: -270px;
+        	z-index: 10;
+			margin-right: 8px;
+			.tag{
+				margin-bottom: 13px;
+			}
+		}
+		.skill {
+            font-size: 31px;
+            font-weight: 500;
+            font-style: normal;
+            margin-top: 5px;
+            margin-left: 20px;
+            margin-right: 20px;
+		}
+		.skill-name {
+			display: flex;
+			align-items: center;
+			.sep {
+				flex-grow: 1;
+				border-top: 1px solid;
+				margin: 0 20px;
+				line-height: 0;
+				text-align: right;
+				padding-right: 50px;
+				max-width: 200px;
+				font-size: 24px;
+				position: relative;
+				span {
+					position: absolute;
+					top: -2px;
+				}
+			}
+			margin-bottom: 5px;
+		}
 	}
 
 	&.cB .container {
@@ -1452,7 +1488,7 @@ button.selected {
 				display: block;
 			}
 			.tag{
-				margin-top: 15px;
+				margin-top: 5px;
 			}
 		}
 		.combos {
@@ -1467,14 +1503,16 @@ button.selected {
 			display: none;
 		}
 		.skill {
-			font-size: 31px;
+			font-size: 32px;
 			font-weight: 500;
 			font-style: normal;
-			margin-top: 10px;
 			margin-left: 10px;
 			margin-right: 20px;
+			margin-top: 14px;
+			margin-bottom: 20px;
 		}
 		.skill-name {
+			margin-bottom:10px;
 			display: flex;
 			align-items: center;
 		}
@@ -1482,15 +1520,12 @@ button.selected {
 
 	&.cC {
 		.text-Name {
-			font-weight: 600;
-			font-size: 21px;
-			margin-left: 20px;
-			position: absolute;
-			left:0px;
-			top:-200px;
-			display: block;
-			width: 10px;
+			display: none;
+			margin-left: 55px;
 			text-shadow: 0 0 5px black;
+			&.c-show {
+				display: block;
+			}
 		}
 		.text-Anime {
 			font-size: 48px;
@@ -1507,6 +1542,21 @@ button.selected {
 		text-align: right;
 		padding: 50px;
 		}
+		.skill {
+				font-size: 32px;
+				font-weight: 500;
+				font-style: normal;
+				margin-top: 5px;
+				margin-left: 20px;
+			}
+			.skill-name {
+				display: flex;
+				align-items: center;
+				.sep {
+					display: none;
+				}
+				margin-bottom: 5px;
+			}
 	}	
 
 	.cost {
@@ -2172,33 +2222,6 @@ button.selected {
 			.tags {
 				display: none;
 			}
-			.skill {
-				font-size: 32px;
-				font-weight: 500;
-				font-style: normal;
-				margin-top: 20px;
-				margin-left: 20px;
-			}
-			.skill-name {
-				display: flex;
-				align-items: center;
-				.sep {
-					flex-grow: 1;
-					border-top: 1px solid;
-					margin: 0 20px;
-					line-height: 0;
-					text-align: right;
-			        padding-right: 50px;
-			       	max-width: 200px;
-			       	font-size: 24px;
-					position: relative;
-					span {
-						position: absolute;
-						top: -2px;
-					}
-				}
-				margin-bottom: 5px;
-			}
 		}
 	}
 	&.cC .container {
@@ -2206,10 +2229,10 @@ button.selected {
 			flex-direction: column;
 			position: relative;
 			gap: 0; 
-			height: 15%;
+			height: auto;
 			.basics {
-				position: absolute;
-				top: -40px;
+				position: relative;
+				margin-top: -50px;
 			}
 			.combos {
 				margin: 0;
@@ -2247,7 +2270,7 @@ button.selected {
 
 #j-skill .skill-border {
     height: calc(100% - 40px);
-    border: 1px solid white;
+    border: 1px solid rgb(0, 0, 0);
     font-size: 40px;
     padding-top: 120px;
     padding-left: 50px;
@@ -2255,6 +2278,7 @@ button.selected {
     border-radius: 20px;
     box-sizing: border-box;
     margin-bottom: 20px;
+	color:black;
 }
 
 #j-skill .skill-header {
