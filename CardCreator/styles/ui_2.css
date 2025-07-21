@@ -1525,9 +1525,12 @@ button.selected {
 		.text-Name {
 			display: none;
 			margin-left: 55px;
-			text-shadow: 0 0 5px black;
+			margin-top: 10px;
+			font-size: 30px;
 			&.c-show {
 				display: block;
+                margin-top: 10px;
+                font-size: 30px;
 			}
 		}
 		.text-Anime {
@@ -1709,7 +1712,7 @@ button.selected {
 		}
 		&.cC {
 			.description {
-				background: linear-gradient(to top, #880f0f 55%, rgba(145, 17, 17, 0.5));
+				background: linear-gradient(to top, #880f0f 25%, rgba(145, 17, 17, 0.5));
 				border-top: 3px solid #b10000;
 				padding-left: 0px !important;
 			}
@@ -1808,7 +1811,7 @@ button.selected {
 		}
 		&.cC {
 			.description {
-				background: linear-gradient(to top, #e46d8f 55%, rgba(227, 79, 121, 0.5));
+				background: linear-gradient(to top, #e46d8f 25%, rgba(227, 79, 121, 0.5));
 				border-top: 3px solid #ff83a3;
 				padding-left: 0px !important;
 			}
@@ -1905,6 +1908,7 @@ button.selected {
 		&.cC {
 			.description {
 				padding-left: 0px !important;
+				background: linear-gradient(to top, #4b9b60 25%, rgba(98, 160, 114, 0.5));
 			}
 			.icon {
 				width: 70px;
@@ -1999,6 +2003,7 @@ button.selected {
 		&.cC {
 			.description {
 				padding-left: 0px !important;
+				background: linear-gradient(to top, #2e519f 25%, rgba(76, 85, 140, 0.5));
 			}
 			.icon {
 				width: 69px;
@@ -2091,6 +2096,7 @@ button.selected {
 		&.cC {
 			.description {
 				padding-left: 0px !important;
+				background: linear-gradient(to top, #6b2e9f 25%, rgba(111, 60, 163, 0.5));
 			}
 			.icon {
 				width: 75px;
@@ -2186,6 +2192,7 @@ button.selected {
 		&.cC {
 			.description {
 				padding-left: 0px !important;
+				background: linear-gradient(to top, #ec9019 25%, rgb(217 148 69 / 50%));
 			}
 			.icon {
 				width: 75px;
@@ -2237,6 +2244,7 @@ button.selected {
 			position: relative;
 			gap: 0; 
 			height: auto;
+			padding-bottom: 20px;
 			.basics {
 				position: relative;
 				margin-top: -50px;

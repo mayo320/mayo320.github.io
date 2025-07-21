@@ -274,13 +274,18 @@ function processJennifer(card, key) {
 					<span>&#x2726;</span>
 				</div>
 			</div>
-			<div>${parts[1]}</div>
+  ${parts[1] ? `<div>${parts[1]}</div>` : ''} 
 		`;
 			
 		return html;
 	}
 	else if (key === 'Name'){
-		html = text.replace(/\s*\(.*\)/, ""); 
+		html = text.replace(/\s*\(.*\)/, "");
+		if ('Rank' in card && card['Rank'] == 'C') {
+			if (card['Skill'] != '') {
+				html = `<div style="text-align: right">${html}</div>`;
+			}
+		}
 		return html;
 	}
 	else if (key.includes('Combo')) {
