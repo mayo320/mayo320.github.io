@@ -593,13 +593,18 @@ button.selected {
 	z-index: 9;
 }
 #a4 {
-	width: calc(2265px);
-	height: calc(3165px);
-	/*Bleed: 20px: 20/2265 = 0.88% */
-	/*In inches: 0.88%*7.5in = 0.066in */
-	/*padding: 20px; */
-	background: black;
+	/* 7.5in by 10.5in config (a4 with 0.25 by 0.5 inch padding) */
+	/* width: calc(2265px);
+	height: calc(3165px); */
 
+	/* 8.5in by 11in config (a4 with 0.01 by 0.01 inch padding) */
+	width: calc(2565px);
+	height: calc(3320px);
+	padding: 30px;
+	box-sizing: border-box;
+	overflow: hidden;
+
+	background-color: white;
 	position: absolute;
 	left: -5000px;
 	top: -5000px;
@@ -611,15 +616,38 @@ button.selected {
 		.corner {
 			position: absolute;
 			width: 10px; height: 10px;
+			z-index: 11;
+			
+			&.top {top: 0; border-top: 1px solid white;}
+			&.left {left: 0; border-left: 1px solid white;}
+			&.bottom {bottom: 0; border-bottom: 1px solid white;}
+			&.right {right: 0; border-right: 1px solid white;}
 		}
-		.top {top: 0; border-top: 1px solid white;}
-		.left {left: 0; border-left: 1px solid white;}
-		.bottom {bottom: 0; border-bottom: 1px solid white;}
-		.right {right: 0; border-right: 1px solid white;}
+		.guideline {
+			position: absolute;
+			background-color: gray;
+			&.hor {
+				height: 2px;
+				width: 5000px;
+				left: -200px;
+			}
+			&.ver {
+				width: 2px;
+				height: 5000px;
+				top: -200px;
+			}
+			&.top {top: 0;}
+			&.left {left: 0;}
+			&.bottom {bottom: 0;}
+			&.right {right: 0;}
+		}
 	}
 	canvas {
 		margin: 0px;
 		background: gray;
+		position: absolute;
+		top: 0; left: 0;
+		z-index: 10;
 		&:before {
 			content: 'ss';
 		}
@@ -2284,19 +2312,26 @@ button.selected {
 	border: 3px solid gray;
 }
 #j-board2 {
-	height: 3165px !important;
-	width: calc(5585px/3) !important;
+	/* The view port which the image will be rendered */
+	height: calc(6550px/2) !important;
+	width: calc(4033px/2) !important;
 	img {
-		height: 100%;
-		/*position: absolute;
-		left: 0;
-		top: 0;*/
+		/* The actual image resolution */
+		height: 6550px;
+		width: 4033px;
 	}
-	&.Mid img {
-		margin-left: calc(-5585px/3);
+	&.Pt1 img {
+		margin: 0;
 	}
-	&.Right img {
-		margin-left: calc(-5585px/3*2);
+	&.Pt2 img {
+		margin-left: calc(-4033px/2);
+	}
+	&.Pt3 img {
+		margin-top: calc(-6550px/2);
+	}
+	&.Pt4 img {
+		margin-left: calc(-4033px/2);
+		margin-top: calc(-6550px/2);
 	}
 }
 
@@ -2322,10 +2357,6 @@ button.selected {
 #j-skill .separator {
     margin: 0 5px; /* 调整连接符左右的间距 */
     font-weight: bold; /* 加粗连接符 */
-}
-
-#a4 {
-	background-color: white;
 }
 
 #j-trending .trending {

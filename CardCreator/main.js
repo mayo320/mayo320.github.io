@@ -48,6 +48,11 @@ function exportCardAddA4(element, count) {
 		corner.classList = 'corner ' + dir;
 		el.appendChild(corner);
 	}
+	const addGuide = function(el, dir) {
+		var guide = document.createElement('div');
+		guide.classList = 'guideline ' + dir;
+		el.appendChild(guide);
+	}
 
 	html2canvas(element, {
 		useCORS: true,
@@ -66,12 +71,17 @@ function exportCardAddA4(element, count) {
 
 			var destDiv = document.createElement('div');
 			destDiv.classList = 'container';
-			destDiv.width = canvas.width;
-			destDiv.height = canvas.height;
+			destDiv.style.width = `${canvas.width}px`;
+			destDiv.style.height = `${canvas.height}px`;
 			addCorner(destDiv, 'top left');
 			addCorner(destDiv, 'top right');
 			addCorner(destDiv, 'bottom left');
 			addCorner(destDiv, 'bottom right');
+			
+			addGuide(destDiv, 'hor top');
+			addGuide(destDiv, 'hor bottom');
+			addGuide(destDiv, 'ver left');
+			addGuide(destDiv, 'ver right');
 
 			destDiv.appendChild(destCanvas);
 			document.getElementById('a4').appendChild(destDiv);
